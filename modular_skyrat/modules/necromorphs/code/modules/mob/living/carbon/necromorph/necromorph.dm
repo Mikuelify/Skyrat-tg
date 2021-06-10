@@ -5,10 +5,6 @@ Do we add BIOMASS in future for Marker Controller
 - Abilities
 - Necromorph Stats
 */
-
-
-#define ROLE_NECROMORPH 	"Necromorph"
-
 /mob/living/carbon/necromorph
 	name = "necromorph"
 	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/48x48necros.dmi'

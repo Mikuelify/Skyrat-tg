@@ -57,8 +57,8 @@
 
 
 
-#define PLACEMENT_FLOOR	"floor"
-#define PLACEMENT_WALL	"wall"
+//#define PLACEMENT_FLOOR	"floor"
+//#define PLACEMENT_WALL	"wall"
 
 //Necromorph species
 #define SPECIES_NECROMORPH 	"Necromorph"
