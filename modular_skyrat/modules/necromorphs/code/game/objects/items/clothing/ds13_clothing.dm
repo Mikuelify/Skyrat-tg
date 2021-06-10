@@ -1,4 +1,4 @@
-/obj/item/clothing/under/rank/research/arumashi/officer
+/obj/item/clothing/under/rank/research/arumashi/
 	name = "USG Arumashi Science Officer Uniform"
 	desc = "A robust uniform worn by Armadyne corporate."
 	icon_state = "ds_chief_sci_officer"

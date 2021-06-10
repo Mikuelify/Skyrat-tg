@@ -22,14 +22,3 @@
 	pressure_resistance = 200 //Because big, stompy xenos should not be blown around like paper.
 	butcher_results = list(/obj/item/food/meat/slab/xeno = 20, /obj/item/stack/sheet/animalhide/xeno = 3)
 
-
-/* /mob/living/carbon/alien/humanoid/drone/Initialize()
-	AddAbility(new/obj/effect/proc_holder/alien/evolve(null))
-	. = ..()
-
-/mob/living/carbon/alien/humanoid/drone/create_internal_organs()
-	internal_organs += new /obj/item/organ/alien/plasmavessel/large
-	internal_organs += new /obj/item/organ/alien/resinspinner
-	internal_organs += new /obj/item/organ/alien/acid
-	..()
- */

@@ -1,6 +1,3 @@
-//Changelings in their true form.
-//Massive health and damage, but move slowly.
-
 /mob/living/simple_animal/hostile/necromorph/slasher
 	name = "necroslasher"
 	real_name = "Necromorph"
