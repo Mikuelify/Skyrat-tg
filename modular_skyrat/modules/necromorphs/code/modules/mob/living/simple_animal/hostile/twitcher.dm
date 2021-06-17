@@ -10,7 +10,7 @@
 	desc = "Holy shit, what the fuck is that thing?!"
 	speak_emote = list("says with one of its faces")
 	emote_hear = list("says with one of its faces")
-	icon = 'modular_skyrat/modules/ds13/icons/mob/necromorph/brute.dmi'
+	icon = 'modular_skyrat/modules/ds13/icons/mob/necromorph/twitcher.dmi'
 	icon_state = "brute-d"
 	icon_living = "brute-d"
 	icon_dead = "brute-d-cut"

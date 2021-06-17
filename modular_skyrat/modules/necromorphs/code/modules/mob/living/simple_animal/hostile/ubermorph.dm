@@ -17,10 +17,10 @@
 	icon_gib = "syndicate_gib"
 	mob_biotypes = MOB_ORGANIC
 	speed = 1
-	a_intent = "harm"
+//	a_intent = "harm"
 	stop_automated_movement = 1
 	status_flags = CANPUSH
-	ventcrawler = 2
+//	ventcrawler = 2
 	see_in_dark = 8
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
