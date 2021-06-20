@@ -62,7 +62,7 @@ GLOBAL_LIST_INIT(slasher, list(
 	marker_spawnable = FALSE
 	preference_settable = FALSE
 
-/mob/living/carbon/alien/create_internal_organs()
+/mob/living/carbon/necromorph/create_internal_organs()
 	internal_organs += new /obj/item/organ/brain/alien
 	internal_organs += new /obj/item/organ/alien/hivenode
 	internal_organs += new /obj/item/organ/tongue/alien
@@ -145,7 +145,7 @@ Dodge is a skill that requires careful timing, but if used correctly, it can all
 /*
 	Abilities
 */
-/atom/movable/proc/slasher_charge(var/mob/living/A)
+/* /atom/movable/proc/slasher_charge(var/mob/living/A)
 	set name = "Charge"
 	set category = "Abilities"
 
@@ -166,9 +166,9 @@ Dodge is a skill that requires careful timing, but if used correctly, it can all
 			else
 				H.play_species_audio(src, SOUND_SHOUT, VOLUME_HIGH, 1, 3)
 		shake_animation(30)
+ */
 
-
-/atom/movable/proc/slasher_charge_enhanced(var/mob/living/A)
+/* /atom/movable/proc/slasher_charge_enhanced(var/mob/living/A)
 	set name = "Charge"
 	set category = "Abilities"
 
@@ -188,27 +188,27 @@ Dodge is a skill that requires careful timing, but if used correctly, it can all
 			else
 				H.play_species_audio(src, SOUND_SHOUT, VOLUME_HIGH, 1, 3)
 		shake_animation(30)
+ */
 
-
-/mob/living/proc/slasher_dodge()
+/* /mob/living/proc/slasher_dodge()
 	set name = "Dodge"
 	set category = "Abilities"
 
 
 	.= dodge_ability(_duration = SLASHER_DODGE_DURATION, _cooldown = 6 SECONDS, _power = SLASHER_DODGE_EVASION)
+ */
 
-
-/mob/living/proc/slasher_dodge_enhanced()
+/* /mob/living/proc/slasher_dodge_enhanced()
 	set name = "Dodge"
 	set category = "Abilities"
 
 
 	.= dodge_ability(_duration = SLASHER_DODGE_DURATION, _cooldown = 5 SECONDS, _power = SLASHER_DODGE_EVASION*1.2)
 
-/*
+/* */
 	Slashers have a special charge impact. Each of their blade arms gets a free hit on impact with the primary target
 */
-/datum/species/necromorph/slasher/charge_impact(var/datum/extension/charge/charge)
+/* /datum/species/necromorph/slasher/charge_impact(var/datum/extension/charge/charge)
 	if (charge.last_target_type == CHARGE_TARGET_PRIMARY && isliving(charge.last_obstacle))
 		var/mob/living/carbon/human/H = charge.user
 		var/mob/living/L = charge.last_obstacle
@@ -229,19 +229,19 @@ Dodge is a skill that requires careful timing, but if used correctly, it can all
 		return FALSE
 	else
 		return ..()
+ */
 
 
 
 
 
-
-//Special death condition: Slashers die when they lose both blade arms
+/* //Special death condition: Slashers die when they lose both blade arms
 /datum/species/necromorph/slasher/handle_death_check(var/mob/living/carbon/human/H)
 	.=..()
 	if (!.)
 		if (!H.has_organ(BP_L_ARM) && !H.has_organ(BP_R_ARM))
 			return TRUE
-
+ */
 
 
 #undef SLASHER_DODGE_EVASION

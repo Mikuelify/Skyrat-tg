@@ -2,13 +2,13 @@
 //Changelings in their true form.
 //Massive health and damage, but move slowly.
 
-/mob/living/simple_animal/hostile/necrolurker
-	name = "lurker"
-	real_name = "lurker"
+/mob/living/simple_animal/hostile/necroinfector
+	name = "Infector"
+	real_name = "Infector"
 	desc = "Holy shit, what the fuck is that thing?!"
 	speak_emote = list("says with one of its faces")
 	emote_hear = list("says with one of its faces")
-	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/lurker.dmi'
+	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/infector.dmi'
 	icon_state = "examples-tentacles"
 	icon_living = "brute-d"
 	icon_dead = "torso_lying"

@@ -10,7 +10,7 @@
 	desc = "Holy shit, what the fuck is that thing?!"
 	speak_emote = list("says with one of its faces")
 	emote_hear = list("says with one of its faces")
-	icon = 'modular_skyrat/modules/ds13/icons/mob/necromorph/ubermorph.dmi'
+	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/ubermorph.dmi'
 	icon_state = "ubermorph"
 	icon_living = "ubermorph"
 	icon_dead = "torso"
