@@ -5,9 +5,9 @@ Do we add BIOMASS in future for Marker Controller
 - Abilities
 - Necromorph Stats
 */
-/mob/living/carbon/necromorph
-	name = "necromorph"
-	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/48x48necros.dmi'
+/mob/living/carbon/human/necromorph_carbon
+	name = "Necromorph Carbon"
+	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher/fleshy.dmi'
 	//gender = FEMALE //All xenos are girls!!
 	dna = null
 	faction = list(ROLE_NECROMORPH)
@@ -53,12 +53,6 @@ Do we add BIOMASS in future for Marker Controller
 	. = ..()
 
 /mob/living/carbon/necromorph/create_internal_organs()
-	internal_organs += new /obj/item/organ/brain/alien
-	internal_organs += new /obj/item/organ/alien/hivenode
-	internal_organs += new /obj/item/organ/tongue/alien
-	internal_organs += new /obj/item/organ/eyes/night_vision/alien
-	internal_organs += new /obj/item/organ/liver/alien
-	internal_organs += new /obj/item/organ/ears
 	..()
 
 
