@@ -26,5 +26,22 @@
 	},
 	"[scss]": {
 		"editor.rulers": [80]
-	}
+	},
+	"favorites.resources": [
+		"modular_skyrat\\modules\\biohazard_blob",
+		"code\\game\\objects\\items\\flamethrower.dm",
+		"code\\game\\objects\\items\\body_egg.dm",
+		"code\\game\\objects\\items\\manuals.dm",
+		"code\\game\\objects\\items\\secret_documents.dm",
+		"code\\modules\\clothing\\outfits",
+		"code\\modules\\projectiles\\guns\\energy\\laser_gatling.dm",
+		"code\\modules\\clothing\\suits\\_suits.dm",
+		"code\\modules\\clothing\\suits\\armor.dm",
+		"code\\modules\\clothing\\suits\\utility.dm",
+		"code\\modules\\clothing\\suits\\bio.dm",
+		"modular_skyrat\\modules\\sec_haul",
+		"modular_skyrat\\modules\\hev_suit\\code\\hev_suit.dm",
+		"code\\modules\\clothing\\spacesuits\\hardsuit.dm",
+		"code\\modules\\clothing\\spacesuits\\miscellaneous.dm"
+	]
 }
