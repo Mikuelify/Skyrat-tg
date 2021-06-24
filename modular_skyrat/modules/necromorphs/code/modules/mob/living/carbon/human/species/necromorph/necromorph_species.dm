@@ -1,10 +1,11 @@
 
 /datum/species/necromorph
-	name = "Necromorph"
-	id = "necromorph"
+	name = SPECIES_NECROMORPH
+	id = SPECIES_NECROMORPH
 	sexes = 0
 	default_color = "4B4B4B"
 	var/info_text = "You are a <span class='danger'>Vampire</span>. You will slowly but constantly lose blood if outside of a coffin. If inside a coffin, you will slowly heal. You may gain more blood by grabbing a live victim and using your drain ability."
+
 
 	species_traits = list(MUTCOLORS,EYECOLOR,LIPS,HAS_FLESH,HAS_BONE,NO_SLIP_WHEN_WALKING)
 	inherent_traits = list(
@@ -28,16 +29,18 @@
 	//default_mutant_bodyparts = list("necromorph_hair" = ACC_RANDOM)
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 	limbs_icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher/fleshy.dmi'
-	//eyes_icon = 'modular_skyrat/modules/customization/icons/mob/species/necromorph_eyes.dmi'
+	var/icon_template = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/48x48necros.dmi'
 
-	//Icon details. null out all of these, maybe someday they can be done
-	deform 			=   null
-	preview_icon 	= 	null
-	husk_icon 		=   null
-	damage_overlays =   null
-	damage_mask 	=   null
-	blood_mask 		=   null
+	mutant_organs = list(
+		/obj/item/organ/brain/necromorph,
+		/obj/item/organ/eyes/night_vision/necromorph,
+		/obj/item/organ/lungs/necromorph,
+		/obj/item/organ/heart/necromorph,
+		/obj/item/organ/liver/necromorph,
+		/obj/item/organ/tongue/necromorph
+	)
 
+	limbs_id = "human"
 
 /* 	mutantbrain = /obj/item/organ/brain/necromorph
 	mutanteyes = /obj/item/organ/eyes/night_vision/necromorph
@@ -48,28 +51,26 @@
 
 	//Single iconstates. These are somewhat of a hack
 	var/single_icon = FALSE
-	icon_template = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/48x48necros.dmi'
 	var/icon_normal = "slasher_d"
-	//icon_lying = "slasher_d_lying"
 	var/icon_dead = "slasher_d_dead"
 
-	bodypart_overides = list(
+/* 	bodypart_overides = list(
 	    BP_CHEST =  list("path" = /obj/item/organ/external/chest/simple, "height" = new /vector2(1,1.65)),
 	    BP_HEAD =   list("path" = /obj/item/organ/external/head/simple, "height" = new /vector2(1.65,1.85)),
 	    BP_L_ARM =  list("path" = /obj/item/organ/external/arm/simple, "height" = new /vector2(0.8,1.60)),
 	    BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right/simple, "height" = new /vector2(0.8,1.60)),
 		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/simple, "height" = new /vector2(0,1)),
 	    BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/simple, "height" = new /vector2(0,1))
-	)
-
-/* 	bodypart_overides = list(
-		BODY_ZONE_L_ARM = /obj/item/bodypart/l_arm,\
-		BODY_ZONE_R_ARM = /obj/item/bodypart/r_arm,\
-		BODY_ZONE_HEAD = /obj/item/bodypart/head,\
-		BODY_ZONE_L_LEG = /obj/item/bodypart/l_leg,\
-		BODY_ZONE_R_LEG = /obj/item/bodypart/r_leg,\
-		BODY_ZONE_CHEST = list("path" = /obj/item/organ/external/chest/simple, "height" = new /vector2(1,1.65))
 	) */
+
+	default_mutant_bodyparts = list(
+		BODY_ZONE_L_ARM = list("path" = /obj/item/organ/external/arm/simple, "height" = new /vector2(0.8,1.60)),
+		BODY_ZONE_R_ARM = list("path" = /obj/item/organ/external/arm/right/simple, "height" = new /vector2(0.8,1.60)),
+		BODY_ZONE_HEAD = list("path" = /obj/item/organ/external/head/simple, "height" = new /vector2(1.65,1.85)),
+		BODY_ZONE_L_LEG = list("path" = /obj/item/organ/external/leg/simple, "height" = new /vector2(0,1)),
+		BODY_ZONE_R_LEG = list("path" = /obj/item/organ/external/leg/right/simple, "height" = new /vector2(0,1)),
+		BODY_ZONE_CHEST = list("path" = /obj/item/organ/external/chest/simple, "height" = new /vector2(1,1.65))
+	)
 
 /obj/item/organ/tongue/necromorph
 	name = "internal vocal sacs"
@@ -104,8 +105,6 @@
 //	breathing_organ = null //This is autoset to lungs in the parent if they exist.
 	//We want it to be unset but we stil want to have our useless lungs
 
-/datum/species/necromorph/get_icobase(var/mob/living/carbon/human/H)
-	return icon_template //We don't need to duplicate the same dmi path twice
 
 /* /datum/species/necromorph/get_random_name()
 	return "[src.name] [rand(0,999)]" */
@@ -128,7 +127,7 @@
 		QDEL_NULL(batform) */
 
 
-/datum/species/necromorph/get_random_features()
+/* /datum/species/necromorph/get_random_features()
 	var/list/returned = MANDATORY_FEATURE_LIST
 	var/main_color
 	var/random = rand(1,6)
@@ -149,7 +148,7 @@
 	returned["mcolor"] = main_color
 	returned["mcolor2"] = main_color
 	returned["mcolor3"] = main_color
-	return returned
+	return returned */
 
 /datum/species/necromorph/infectious/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	. = ..()

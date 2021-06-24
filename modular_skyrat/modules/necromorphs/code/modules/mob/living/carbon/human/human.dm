@@ -1,7 +1,8 @@
 /mob/living/carbon/human
-	name = "unknown"
-	real_name = "unknown"
-//	voice_name = "unknown"
-	icon = 'icons/mob/human.dmi'
-	icon_state = "body_m_s"
 
+	var/list/stance_limbs
+	var/list/grasp_limbs
+
+/mob/living/carbon/human/species/necromorph/New(var/new_loc, var/new_species = null)
+	grasp_limbs = list()
+	stance_limbs = list()

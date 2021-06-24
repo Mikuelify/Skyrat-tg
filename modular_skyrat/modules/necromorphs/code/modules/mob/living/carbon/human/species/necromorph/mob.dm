@@ -4,65 +4,65 @@
 
 `	I am well aware this is not how human mobs and species are supposed to be used
 */
-/mob/living/carbon/human/necromorph
+/mob/living/carbon/human/species/necromorph
 
 
 
 
 
-/mob/living/carbon/human/necromorph/divider/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_DIVIDER)
+/mob/living/carbon/human/species/necromorph/divider/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_DIVIDER)
 	..(new_loc, new_species)
 
 
-/mob/living/carbon/human/necromorph/spitter/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_SPITTER)
+/mob/living/carbon/human/species/necromorph/spitter/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_SPITTER)
 	..(new_loc, new_species)
 
-/mob/living/carbon/human/necromorph/puker/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_PUKER)
+/mob/living/carbon/human/species/necromorph/puker/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_PUKER)
 	..(new_loc, new_species)
 
 
 
-/mob/living/carbon/human/necromorph/tripod/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_TRIPOD)
+/mob/living/carbon/human/species/necromorph/tripod/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_TRIPOD)
 	..(new_loc, new_species)
 
-/mob/living/carbon/human/necromorph/twitcher/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_TWITCHER)
+/mob/living/carbon/human/species/necromorph/twitcher/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_TWITCHER)
 	..(new_loc, new_species)
 
 //Variants need their own mobtype
-/mob/living/carbon/human/necromorph/brute/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_BRUTE)
+/mob/living/carbon/human/species/necromorph/brute/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_BRUTE)
 	..(new_loc, new_species)
 
-/mob/living/carbon/human/necromorph/bruteflesh/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_BRUTE_FLESH)
+/mob/living/carbon/human/species/necromorph/bruteflesh/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_BRUTE_FLESH)
 	..(new_loc, new_species)
 
-/mob/living/carbon/human/necromorph/exploder/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_EXPLODER)
+/mob/living/carbon/human/species/necromorph/exploder/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_EXPLODER)
 	..(new_loc, new_species)
 
-/mob/living/carbon/human/necromorph/leaper/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_LEAPER)
+/mob/living/carbon/human/species/necromorph/leaper/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_LEAPER)
 	..(new_loc, new_species)
 
-/mob/living/carbon/human/necromorph/leaper/enhanced/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_LEAPER_ENHANCED)
+/mob/living/carbon/human/species/necromorph/leaper/enhanced/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_LEAPER_ENHANCED)
 	..(new_loc, new_species)
 
-/mob/living/carbon/human/necromorph/lurker/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_LURKER)
+/mob/living/carbon/human/species/necromorph/lurker/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_LURKER)
 	..(new_loc, new_species)
 
-/mob/living/carbon/human/necromorph/ubermorph/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_UBERMORPH)
+/mob/living/carbon/human/species/necromorph/ubermorph/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_UBERMORPH)
 	..(new_loc, new_species)
 
 
-/* /mob/living/carbon/human/necromorph/hunter/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_HUNTER)
+/* /mob/living/carbon/human/species/necromorph/hunter/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_HUNTER)
 	..(new_loc, new_species) */
 
-/mob/living/carbon/human/necromorph/update_icons()
+/mob/living/carbon/human/species/necromorph/update_icons()
 	.=..()
-	update_body(FALSE)
+	update_body(TRUE)
 
 
 
 #define DEBUG
 //Override all that complicated limb-displaying stuff, with singular icons
-/mob/living/carbon/human/necromorph/update_body(var/update_icons=1)
+/mob/living/carbon/human/species/necromorph/update_body(var/update_icons=1)
 	var/datum/species/necromorph/N = species
 
 
@@ -91,7 +91,7 @@
 	return FALSE
 
 /* //We'll check the species on the brain first, before the rest of the body
-/mob/living/carbon/human/is_necromorph()
+/mob/living/carbon/human/species/is_necromorph()
 	var/datum/species/S = get_mental_species_datum()
 	return S.is_necromorph() */
 
