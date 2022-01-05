@@ -8,8 +8,24 @@
 /datum/species/necromorph/slasher
 	name = SPECIES_NECROMORPH_SLASHER
 	id = SPECIES_NECROMORPH_SLASHER
-	icon_template = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher/fleshy.dmi'
+//	icon_template = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher/fleshy.dmi'
+	//eyes_icon = 'modular_skyrat/master_files/icons/mob/species/vox_eyes.dmi'
+	limbs_icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher/fleshy.dmi'
+//	mutant_bodyparts = list()
+	species_traits = list(
+		MUTCOLORS,
+		EYECOLOR,
+		LIPS,
+		HAS_FLESH,
+		HAS_BONE,
+		HAIR,
+		FACEHAIR
+	)
+	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	sexes = 0
+	mutanttongue = /obj/item/organ/tongue/zombie
+	damage_overlay_type = "xeno"
+//	mob_type = /mob/living/carbon/human/necromorph/slasher
 	single_icon = FALSE
 	attack_sound = 'sound/weapons/slice.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
@@ -45,43 +61,39 @@
 //	eyes_icon = 'modular_skyrat/master_files/icons/mob/species/skrell_eyes.dmi'
 
 	//Slashers hold their arms up in an overhead pose, so they override height too
-	mutant_bodyparts = list()
+
+	// default_mutant_bodyparts = list(
+	// BODY_ZONE_L_ARM =  list("path" = /obj/item/organ/external/arm/blade/slasher, "height" = new /vector2(1.6,2)),
+	// BODY_ZONE_R_ARM =  list("path" = /obj/item/organ/external/arm/blade/slasher/right, "height" = new /vector2(1.6,2))
+	// )
+
 	default_mutant_bodyparts = list(
-	BODY_ZONE_L_ARM =  list("path" = /obj/item/organ/external/arm/blade/slasher, "height" = new /vector2(1.6,2)),
-	BODY_ZONE_R_ARM =  list("path" = /obj/item/organ/external/arm/blade/slasher/right, "height" = new /vector2(1.6,2))
+		"tail" = "None",
+		"snout" = "None",
+		"ears" = "None",
+		"legs" = "Normal Legs",
+		"wings" = "None",
+		"taur" = "None",
+		"horns" = "None"
+	)
+	bodypart_overides = list(
+	BODY_ZONE_L_ARM = /obj/item/bodypart/l_arm/necromorph,\
+	BODY_ZONE_R_ARM = /obj/item/bodypart/r_arm/necromorph,\
+	BODY_ZONE_HEAD = /obj/item/bodypart/head/necromorph,\
+	BODY_ZONE_L_LEG = /obj/item/bodypart/l_leg/necromorph,\
+	BODY_ZONE_R_LEG = /obj/item/bodypart/r_leg/necromorph,\
+	BODY_ZONE_CHEST = /obj/item/bodypart/chest/necromorph)
+
+	mutant_bodyparts = list(
+	BP_L_ARM =  list("path" = /obj/item/organ/external/arm/blade, "height" = new /vector2(1.6,2)),
+	BP_R_ARM =  list("path" = /obj/item/organ/external/arm/blade/right, "height" = new /vector2(1.6,2))
 	)
 
-/*
-	Blade Arm
-*/
-/obj/item/organ/external/arm/blade/slasher
-	limb_height = new /vector2(1.6,2)	//Slashers hold their blade arms high
-
-/obj/item/organ/external/arm/blade/slasher/right
-	organ_tag = BP_R_ARM
-	name = "right arm"
-	icon_name = "r_arm"
-	body_part = ARM_RIGHT
-	joint = "right elbow"
-	amputation_point = "right shoulder"
-
-
-/*Roughly speaking, enhanced versions of necromorphs have:
-	250% biomass cost and max health
-	140% damage on attacks and abilites
-	80% windup and cooldown times, move and attack delays
-*/
-
-
-
-/* //Special death condition: Slashers die when they lose both blade arms
-/datum/species/necromorph/slasher/handle_death_check(var/mob/living/carbon/human/species/H)
-	.=..()
-	if (!.)
-		if (!H.has_organ(BP_L_ARM) && !H.has_organ(BP_R_ARM))
-			return TRUE
- */
-
-
+	// override_limb_types = list(
+	// BP_L_ARM =  list("path" = /obj/item/organ/external/arm/blade, "height" = new /vector2(1.6,2)),
+	// BP_R_ARM =  list("path" = /obj/item/organ/external/arm/blade/right, "height" = new /vector2(1.6,2))
+	// )
 #undef SLASHER_DODGE_EVASION
 #undef SLASHER_DODGE_DURATION
+/mob/living/carbon/human/species/necromorph
+	race = /datum/species/necromorph

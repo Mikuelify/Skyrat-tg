@@ -1,13 +1,71 @@
+
+
 /*
 	Code for the necromorph mob.
 	Most of this is a temporary hack because we don't have proper icons for parts.
 
 `	I am well aware this is not how human mobs and species are supposed to be used
 */
+
+/mob/living/carbon/necromorph/
+	name = "necromorph"
+	//icon_state = "necromorph"
+	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/48x48necros.dmi'
+	icon_state = "twitcher"
+
+/mob/living/carbon/necromorph/update_body() // we don't use the bodyparts or body layers for aliens.
+	return
+
+/mob/living/carbon/necromorph/update_body_parts()//we don't use the bodyparts layer for aliens.
+	return
+
+/mob/living/carbon/necromorph/Initialize()
+	add_verb(src, /mob/living/proc/mob_sleep)
+	add_verb(src, /mob/living/proc/toggle_resting)
+
+	create_bodyparts() //initialize bodyparts
+
+	create_internal_organs()
+
+	. = ..()
+
+
+///////////////////////////////////////////////////////
+
+
+/mob/living/carbon/human/species/necromorph/Initialize()
+	add_verb(src, /mob/living/proc/mob_sleep)
+	add_verb(src, /mob/living/proc/toggle_resting)
+
+	create_bodyparts() //initialize bodyparts
+
+	create_internal_organs()
+
+	ADD_TRAIT(src, TRAIT_CAN_STRIP, INNATE_TRAIT)
+	ADD_TRAIT(src, TRAIT_NEVER_WOUNDED, INNATE_TRAIT)
+	ADD_TRAIT(src, TRAIT_VENTCRAWLER_ALWAYS, INNATE_TRAIT)
+
+	. = ..()
+
 /mob/living/carbon/human/species/necromorph
 
+/*
+	Slasher Mob setup
+*/
+/mob/living/carbon/human/species/necromorph/slasher/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_SLASHER)
+	..(new_loc, new_species)
 
+/mob/living/carbon/human/species/necromorph/slasher_enhanced/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_SLASHER_ENHANCED)
+	..(new_loc, new_species)
 
+/* //A dummy version of slasher for target practise
+/mob/living/carbon/human/species/necromorph/slasher/dummy
+	status_flags = GODMODE|CANPUSH
+	virtual_mob = null
+
+/mob/living/carbon/human/species/necromorph/slasher/dummy/Initialize()
+	. = ..()
+	STOP_PROCESSING(SSmobs, src) */
 
 
 /mob/living/carbon/human/species/necromorph/divider/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_DIVIDER)

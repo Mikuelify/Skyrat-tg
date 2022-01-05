@@ -7,7 +7,25 @@
 
 /mob/living/carbon/necromorph/humanoid/slasher
 	name = "Slasher"
-	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/brute.dmi'
+	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher/fleshy.dmi'
+
+	bodyparts = list(
+		/obj/item/bodypart/chest/necromorph,
+		/obj/item/bodypart/head/necromorph,
+		/obj/item/bodypart/l_arm/necromorph,
+		/obj/item/bodypart/r_arm/necromorph,
+		/obj/item/bodypart/r_leg/necromorph,
+		/obj/item/bodypart/l_leg/necromorph,
+		)
+
+/mob/living/carbon/necromorph/humanoid/Initialize()
+	. = ..()
+	AddComponent(/datum/component/footstep, FOOTSTEP_MOB_CLAW, 0.5, -11)
+	AddElement(/datum/element/strippable, GLOB.strippable_alien_humanoid_items)
+
+
+
+
 	/* GLOBAL_LIST_INIT(slasher, list(
 	SOUND_ATTACK = list(list(
 		'/modular_skyrat/modules/necromorph/sound/effects/creatures/necromorph/slasher/slasher_attack_1.ogg',
@@ -42,3 +60,4 @@
 	SOUND_SPEECH = list(list(
 		'/modular_skyrat/modules/necromorph/sound/effects/creatures/necromorph/slasher/slasher_speech_1.ogg',
 		'/modular_skyrat/modules/necromorph/sound/effects/creatures/necromorph/slasher/slasher_speech_2.ogg'), 100, 0)
+*/

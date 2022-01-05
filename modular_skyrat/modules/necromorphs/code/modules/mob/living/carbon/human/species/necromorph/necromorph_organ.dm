@@ -85,34 +85,6 @@
 	// HUD element variable, see organ_icon.dm get_damage_hud_image()
 	var/image/hud_damage_image
 
-/obj/item/organ/necromorph/external/arm/blade
-	/* limb_height = new /vector2(1.6,2)	//Slashers hold their blade arms high
-	organ_tag = BP_L_ARM
-	name = "left blade"
-	icon_name = "l_arm"
-	max_damage = 60
-	min_broken_damage = 40
-	w_class = ITEM_SIZE_NORMAL
-	body_part = ARM_LEFT
-	parent_organ = BODY_ZONE_CHEST
-	joint = "left elbow"
-	amputation_point = "left shoulder"
-	tendon_name = "palmaris longus tendon"
-	artery_name = "basilic vein"
-	arterial_bleed_severity = 0.75
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE
-	base_miss_chance = 10 */
-
-/obj/item/organ/necromorph/external/arm/blade/right
-/* 	organ_tag = BP_R_ARM
-	name = "right arm"
-	icon_name = "r_arm"
-	body_part = ARM_RIGHT
-	joint = "right elbow"
-	amputation_point = "right shoulder" */
-
-
-
 
 //Giant limbs
 //---------------
@@ -217,3 +189,95 @@
 ///obj/item/organ/liver/necromorph
 
 ///obj/item/organ/tongue/necromorph
+
+/obj/item/organ/tongue/necromorph
+	name = "internal vocal sacs"
+	desc = "An Strange looking sac."
+	icon = 'modular_skyrat/modules/necromorphs/icons/obj/necromorph_organ.dmi'
+	icon_state = "tongue"
+	taste_sensitivity = 5
+	var/static/list/languages_possible_necromorph = typecacheof(list(
+		/datum/language/common,
+		/datum/language/uncommon,
+		/datum/language/draconic,
+		/datum/language/codespeak,
+		/datum/language/monkey,
+		/datum/language/narsie,
+		/datum/language/machine,
+		/datum/language/slime,
+		/datum/language/beachbum,
+		/datum/language/aphasia,
+		/datum/language/piratespeak,
+		/datum/language/moffic,
+		/datum/language/sylvan,
+		/datum/language/shadowtongue,
+		/datum/language/terrum,
+		/datum/language/vox,
+		/datum/language/dwarf,
+		/datum/language/nekomimetic,
+//		/datum/language/necromorph,
+	))
+/obj/item/organ/heart/necromorph
+	name = "necromorphian Heart"
+	icon = 'modular_skyrat/modules/necromorphs/icons/obj/necromorph_organ.dmi'
+	icon_state = "heart"
+
+/obj/item/organ/brain/necromorph
+	name = "spongy brain"
+	icon = 'modular_skyrat/modules/necromorphs/icons/obj/necromorph_organ.dmi'
+	icon_state = "brain2"
+
+/obj/item/organ/eyes/night_vision/necromorph
+	name = "undead eyes"
+	desc = "Somewhat counterintuitively, these half-rotten eyes actually have superior vision to those of a living human."
+	icon = 'modular_skyrat/modules/necromorphs/icons/obj/necromorph_organ.dmi'
+	icon_state = "eyes"
+	flash_protect = FLASH_PROTECTION_SENSITIVE
+
+/obj/item/organ/lungs/necromorph
+	name = "necromorph lungs"
+	icon = 'modular_skyrat/modules/necromorphs/icons/obj/necromorph_organ.dmi'
+	icon_state = "lungs"
+	safe_toxins_max = 40
+	safe_co2_max = 40
+
+	cold_message = "You can't stand the freezing cold with every breath you take!"
+	cold_level_1_threshold = 248
+	cold_level_2_threshold = 220
+	cold_level_3_threshold = 170
+	cold_level_1_damage = COLD_GAS_DAMAGE_LEVEL_2 //Keep in mind with gas damage levels, you can set these to be negative, if you want someone to heal, instead.
+	cold_level_2_damage = COLD_GAS_DAMAGE_LEVEL_2
+	cold_level_3_damage = COLD_GAS_DAMAGE_LEVEL_3
+	cold_damage_type = BRUTE
+
+
+	hot_message = "You can't stand the searing heat with every breath you take!"
+	heat_level_1_threshold = 318
+	heat_level_2_threshold = 348
+	heat_level_3_threshold = 1000
+	heat_level_1_damage = HEAT_GAS_DAMAGE_LEVEL_2
+	heat_level_2_damage = HEAT_GAS_DAMAGE_LEVEL_2
+	heat_level_3_damage = HEAT_GAS_DAMAGE_LEVEL_3
+	heat_damage_type = BURN
+
+/obj/item/organ/liver/necromorph
+	name = "necromorph liver"
+	icon_state = "liver"
+	icon = 'modular_skyrat/modules/necromorphs/icons/obj/necromorph_organ.dmi'
+	alcohol_tolerance = 5
+	toxTolerance = 10 //can shrug off up to 10u of toxins.
+	toxLethality = 0.8 * LIVER_DEFAULT_TOX_LETHALITY //20% less damage than a normal liver
+
+/obj/item/organ/external/arm/blade/
+	name = "hydraulic pump engine"
+	desc = "An electronic device that handles the hydraulic pumps, powering one's robotic limbs."
+	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher/fleshy.dmi'
+	icon_state = "l_arm"
+	limb_height = new /vector2(1.6,2)	//Slashers hold their blade arms high
+
+/obj/item/organ/external/arm/blade/right
+	icon_state = "r_arm"
+/obj/item/organ/external/arm/blade/slasher
+	limb_height = new /vector2(1.6,2)	//Slashers hold their blade arms high
+
+/obj/item/organ/external/arm/blade/slasher/right
