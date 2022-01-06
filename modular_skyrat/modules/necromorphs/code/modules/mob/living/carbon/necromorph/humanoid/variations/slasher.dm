@@ -18,11 +18,14 @@
 		/obj/item/bodypart/l_leg/necromorph,
 		)
 
+
 /mob/living/carbon/necromorph/humanoid/Initialize()
 	. = ..()
 	AddComponent(/datum/component/footstep, FOOTSTEP_MOB_CLAW, 0.5, -11)
 	AddElement(/datum/element/strippable, GLOB.strippable_alien_humanoid_items)
 
+/mob/living/carbon/necromorph/humanoid/update_body_parts()
+	. = ..()
 
 
 

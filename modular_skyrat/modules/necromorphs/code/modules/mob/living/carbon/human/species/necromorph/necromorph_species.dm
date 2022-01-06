@@ -3,6 +3,7 @@
 	name = SPECIES_NECROMORPH
 	id = SPECIES_NECROMORPH
 	sexes = TRUE
+	can_have_genitals = FALSE
 	default_color = "#FFF"
 	var/info_text = "You are a <span class='danger'>Vampire</span>. You will slowly but constantly lose blood if outside of a coffin. If inside a coffin, you will slowly heal. You may gain more blood by grabbing a live victim and using your drain ability."
 	mutant_bodyparts = list()
@@ -39,7 +40,6 @@
 //	limbs_icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher/fleshy.dmi'
 //	var/icon_template = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/48x48necros.dmi'
 
-
 /////////////////////////////////////////////////////////////////////////////
 ////////////////////////// ORGANS FOR ALL SUBTYPES //////////////////////////
 /////////////////////////////////////////////////////////////////////////////
@@ -72,12 +72,20 @@
 	BODY_ZONE_CHEST = /obj/item/bodypart/chest/necromorph
 	)
 
+	mutant_bodyparts = list(
+	BODY_ZONE_L_ARM = /obj/item/bodypart/l_arm/necromorph,\
+	BODY_ZONE_R_ARM = /obj/item/bodypart/r_arm/necromorph,\
+	BODY_ZONE_HEAD = /obj/item/bodypart/head/necromorph,\
+	BODY_ZONE_L_LEG = /obj/item/bodypart/l_leg/necromorph,\
+	BODY_ZONE_R_LEG = /obj/item/bodypart/r_leg/necromorph,\
+	BODY_ZONE_CHEST = /obj/item/bodypart/chest/necromorph
+	)
 /////////////////////////////////////////////////////////////////////////////
 
 
 
-/datum/species/necromorph/New()
-	.=..()
+// /datum/species/necromorph/New()
+// 	.=..()
 //	breathing_organ = null //This is autoset to lungs in the parent if they exist.
 	//We want it to be unset but we stil want to have our useless lungs
 

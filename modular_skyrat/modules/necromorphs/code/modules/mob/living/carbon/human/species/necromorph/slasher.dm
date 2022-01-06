@@ -10,7 +10,7 @@
 	id = SPECIES_NECROMORPH_SLASHER
 //	icon_template = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher/fleshy.dmi'
 	//eyes_icon = 'modular_skyrat/master_files/icons/mob/species/vox_eyes.dmi'
-	limbs_icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher/fleshy.dmi'
+//	limbs_icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher/fleshy.dmi'
 //	mutant_bodyparts = list()
 	species_traits = list(
 		MUTCOLORS,
@@ -26,7 +26,7 @@
 	mutanttongue = /obj/item/organ/tongue/zombie
 	damage_overlay_type = "xeno"
 //	mob_type = /mob/living/carbon/human/necromorph/slasher
-	single_icon = FALSE
+//	single_icon = FALSE
 	attack_sound = 'sound/weapons/slice.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
 	attack_verb = "slash"
@@ -76,6 +76,7 @@
 		"taur" = "None",
 		"horns" = "None"
 	)
+
 	bodypart_overides = list(
 	BODY_ZONE_L_ARM = /obj/item/bodypart/l_arm/necromorph,\
 	BODY_ZONE_R_ARM = /obj/item/bodypart/r_arm/necromorph,\
@@ -95,5 +96,3 @@
 	// )
 #undef SLASHER_DODGE_EVASION
 #undef SLASHER_DODGE_DURATION
-/mob/living/carbon/human/species/necromorph
-	race = /datum/species/necromorph

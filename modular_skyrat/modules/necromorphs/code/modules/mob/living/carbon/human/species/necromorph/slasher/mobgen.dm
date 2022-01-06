@@ -1,2 +1,0 @@
-#define SLASHER_NAKED_CHANCE	50
-

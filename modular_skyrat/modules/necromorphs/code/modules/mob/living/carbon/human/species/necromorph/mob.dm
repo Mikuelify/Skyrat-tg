@@ -12,12 +12,14 @@
 	//icon_state = "necromorph"
 	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/48x48necros.dmi'
 	icon_state = "twitcher"
+	//race = /datum/species/necromorph
+	var/use_singleIcon = FALSE
 
-/mob/living/carbon/necromorph/update_body() // we don't use the bodyparts or body layers for aliens.
-	return
+// /mob/living/carbon/necromorph/update_body() // we don't use the bodyparts or body layers for aliens.
+// 	return
 
-/mob/living/carbon/necromorph/update_body_parts()//we don't use the bodyparts layer for aliens.
-	return
+// /mob/living/carbon/necromorph/update_body_parts()//we don't use the bodyparts layer for aliens.
+// 	return
 
 /mob/living/carbon/necromorph/Initialize()
 	add_verb(src, /mob/living/proc/mob_sleep)
@@ -31,7 +33,11 @@
 
 
 ///////////////////////////////////////////////////////
+/mob/living/carbon/human/species/necromorph
+	race = /datum/species/necromorph
 
+/mob/living/carbon/human/species/necromorph/New(var/new_loc, var/new_species = SPECIES_NECROMORPH)
+	..(new_loc, new_species)
 
 /mob/living/carbon/human/species/necromorph/Initialize()
 	add_verb(src, /mob/living/proc/mob_sleep)
@@ -47,26 +53,20 @@
 
 	. = ..()
 
-/mob/living/carbon/human/species/necromorph
 
 /*
 	Slasher Mob setup
 */
+/mob/living/carbon/human/species/necromorph/slasher
+	race = /datum/species/necromorph/slasher
+
 /mob/living/carbon/human/species/necromorph/slasher/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_SLASHER)
 	..(new_loc, new_species)
 
 /mob/living/carbon/human/species/necromorph/slasher_enhanced/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_SLASHER_ENHANCED)
 	..(new_loc, new_species)
 
-/* //A dummy version of slasher for target practise
-/mob/living/carbon/human/species/necromorph/slasher/dummy
-	status_flags = GODMODE|CANPUSH
-	virtual_mob = null
-
-/mob/living/carbon/human/species/necromorph/slasher/dummy/Initialize()
-	. = ..()
-	STOP_PROCESSING(SSmobs, src) */
-
+/////////////////////////////////////////////////////////////
 
 /mob/living/carbon/human/species/necromorph/divider/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_DIVIDER)
 	..(new_loc, new_species)
@@ -77,8 +77,6 @@
 
 /mob/living/carbon/human/species/necromorph/puker/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_PUKER)
 	..(new_loc, new_species)
-
-
 
 /mob/living/carbon/human/species/necromorph/tripod/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_TRIPOD)
 	..(new_loc, new_species)
@@ -112,35 +110,29 @@
 /* /mob/living/carbon/human/species/necromorph/hunter/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_HUNTER)
 	..(new_loc, new_species) */
 
-/mob/living/carbon/human/species/necromorph/update_icons()
-	.=..()
-	update_body(TRUE)
+// #define DEBUG
+// //Override all that complicated limb-displaying stuff, with singular icons
+// /mob/living/carbon/human/species/necromorph/update_body(var/update_icons=1)
+// 	var/datum/species/necromorph/N = species
 
 
+// 	if (!istype(N))
+// 		return
 
-#define DEBUG
-//Override all that complicated limb-displaying stuff, with singular icons
-/mob/living/carbon/human/species/necromorph/update_body(var/update_icons=1)
-	var/datum/species/necromorph/N = species
+// 	//If single icon is turned off, do the normal thing
+// 	if (!N.single_icon)
+// 		return ..()
 
+// 	stand_icon = N.icon_template
+// 	icon = stand_icon
 
-	if (!istype(N))
-		return
+// 	if (stat == DEAD)
+// 		icon_state = N.icon_dead
 
-	//If single icon is turned off, do the normal thing
-	if (!N.single_icon)
-		return ..()
-/*
-	stand_icon = N.icon_template
-	icon = stand_icon
-
-	if (stat == DEAD)
-		icon_state = N.icon_dead
-
-	else if (lying)
-		icon_state = N.icon_lying
-	else
-		icon_state = N.icon_normal */
+// 	else if (lying)
+// 		icon_state = N.icon_lying
+// 	else
+// 		icon_state = N.icon_normal
 
 
 

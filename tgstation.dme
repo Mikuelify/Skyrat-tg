@@ -4321,7 +4321,6 @@
 #include "modular_skyrat\modules\necromorphs\code\game\objects\items\clothing\ds13_clothing.dm"
 #include "modular_skyrat\modules\necromorphs\code\game\objects\structure\decorative.dm"
 #include "modular_skyrat\modules\necromorphs\code\modules\mob\mob_defines.dm"
-#include "modular_skyrat\modules\necromorphs\code\modules\mob\living\carbon\carbon_defines.dm"
 #include "modular_skyrat\modules\necromorphs\code\modules\mob\living\carbon\bodyparts\head.dm"
 #include "modular_skyrat\modules\necromorphs\code\modules\mob\living\carbon\bodyparts\necromorph_bodyparts.dm"
 #include "modular_skyrat\modules\necromorphs\code\modules\mob\living\carbon\human\species\necromorph\mob.dm"
