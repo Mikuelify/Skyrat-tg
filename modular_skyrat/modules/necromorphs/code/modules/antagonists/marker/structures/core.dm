@@ -90,7 +90,7 @@
 
 /obj/structure/marker/special/core/update_overlays()
 	. = ..()
-	var/mutable_appearance/marker_overlay = mutable_appearance('modular_skyrat/modules/necromorphs/icons/obj/marker_normal.dmi', "marker_normal_dormant")
+	var/mutable_appearance/marker_overlay = mutable_appearance('modular_skyrat/modules/necromorphs/icons/obj/marker_giant.dmi', "marker_giant_anim")
 	. += marker_overlay
 	. += mutable_appearance('modular_skyrat/modules/necromorphs/icons/obj/marker_giant.dmi', "marker_giant_active")
 

@@ -1,7 +1,7 @@
 /obj/structure/marker/special/node
 	name = "marker node"
 	icon = 'icons/mob/blob.dmi'
-	icon_state = "blank_blob"
+	icon_state = "blob_node_overlay"
 	desc = "A large, pulsating yellow mass."
 	max_integrity = MARKER_NODE_MAX_HP
 	health_regen = MARKER_NODE_HP_REGEN
