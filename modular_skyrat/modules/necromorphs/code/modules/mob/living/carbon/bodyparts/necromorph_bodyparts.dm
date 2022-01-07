@@ -3,7 +3,7 @@
 	name = BODY_ZONE_CHEST
 	desc = "It's impolite to stare at a person's chest."
 	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher/fleshy.dmi'
-	icon_state = "torso"
+	icon_state = "slasher_chest_m"
 	max_damage = 250 //SKYRAT EDIT CHANGE: max_damage = 200
 	body_zone = BODY_ZONE_CHEST
 	body_part = CHEST
@@ -29,7 +29,7 @@
 		be possessed by the devil? This arm appears to be possessed by no \
 		one though."
 	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher/fleshy.dmi'
-	icon_state = "l_arm"
+	icon_state = "slasher_l_arm"
 	attack_verb_continuous = list("slaps", "punches")
 	attack_verb_simple = list("slap", "punch")
 	//max_damage = 50 //ORIGINAL
@@ -51,7 +51,7 @@
 	desc = "Over 87% of humans are right handed. That figure is much lower \
 		among humans missing their right arm."
 	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher/fleshy.dmi'
-	icon_state = "r_arm"
+	icon_state = "slasher_r_arm"
 	attack_verb_continuous = list("slaps", "punches")
 	attack_verb_simple = list("slap", "punch")
 	//max_damage = 50 //ORIGINAL
@@ -73,7 +73,7 @@
 	desc = "Some athletes prefer to tie their left shoelaces first for good \
 		luck. In this instance, it probably would not have helped."
 	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher/fleshy.dmi'
-	icon_state = "l_leg"
+	icon_state = "slasher_l_leg"
 	attack_verb_continuous = list("kicks", "stomps")
 	attack_verb_simple = list("kick", "stomp")
 	//max_damage = 50 //ORIGINAL
@@ -94,7 +94,7 @@
 		The hokey pokey has certainly changed a lot since space colonisation."
 	// alternative spellings of 'pokey' are available
 	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher/fleshy.dmi'
-	icon_state = "r_leg"
+	icon_state = "slasher_r_leg"
 	attack_verb_continuous = list("kicks", "stomps")
 	attack_verb_simple = list("kick", "stomp")
 	//max_damage = 50 //ORIGINAL

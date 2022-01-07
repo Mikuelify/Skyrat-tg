@@ -7,8 +7,9 @@
 
 /mob/living/carbon/necromorph/humanoid/slasher
 	name = "Slasher"
-	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher/fleshy.dmi'
-
+	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher.dmi'
+	icon_state = "slasher_d"
+	varient = "slasher"
 	bodyparts = list(
 		/obj/item/bodypart/chest/necromorph,
 		/obj/item/bodypart/head/necromorph,
@@ -18,14 +19,6 @@
 		/obj/item/bodypart/l_leg/necromorph,
 		)
 
-
-/mob/living/carbon/necromorph/humanoid/Initialize()
-	. = ..()
-	AddComponent(/datum/component/footstep, FOOTSTEP_MOB_CLAW, 0.5, -11)
-	AddElement(/datum/element/strippable, GLOB.strippable_alien_humanoid_items)
-
-/mob/living/carbon/necromorph/humanoid/update_body_parts()
-	. = ..()
 
 
 

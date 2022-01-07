@@ -2,7 +2,7 @@
 	name = BODY_ZONE_HEAD
 	desc = "Didn't make sense not to live for fun, your brain gets smart but your head gets dumb."
 	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher/fleshy.dmi'
-	icon_state = "head"
+	icon_state = "slasher_head_m"
 	max_damage = 250 //SKYRAT EDIT CHANGE: max_damage = 200
 	body_zone = BODY_ZONE_HEAD
 	body_part = HEAD

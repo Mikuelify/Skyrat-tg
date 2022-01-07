@@ -1,40 +1,16 @@
 
 
+///////////////////////////////////////////////////////
 /*
-	Code for the necromorph mob.
+	Code for the necromorph species.
 	Most of this is a temporary hack because we don't have proper icons for parts.
 
 `	I am well aware this is not how human mobs and species are supposed to be used
 */
-
-/mob/living/carbon/necromorph/
-	name = "necromorph"
-	//icon_state = "necromorph"
-	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/48x48necros.dmi'
-	icon_state = "twitcher"
-	//race = /datum/species/necromorph
-	var/use_singleIcon = FALSE
-
-// /mob/living/carbon/necromorph/update_body() // we don't use the bodyparts or body layers for aliens.
-// 	return
-
-// /mob/living/carbon/necromorph/update_body_parts()//we don't use the bodyparts layer for aliens.
-// 	return
-
-/mob/living/carbon/necromorph/Initialize()
-	add_verb(src, /mob/living/proc/mob_sleep)
-	add_verb(src, /mob/living/proc/toggle_resting)
-
-	create_bodyparts() //initialize bodyparts
-
-	create_internal_organs()
-
-	. = ..()
-
-
 ///////////////////////////////////////////////////////
 /mob/living/carbon/human/species/necromorph
 	race = /datum/species/necromorph
+	name = "Necromorph"
 
 /mob/living/carbon/human/species/necromorph/New(var/new_loc, var/new_species = SPECIES_NECROMORPH)
 	..(new_loc, new_species)
@@ -59,6 +35,44 @@
 */
 /mob/living/carbon/human/species/necromorph/slasher
 	race = /datum/species/necromorph/slasher
+
+/mob/living/carbon/human/species/necromorph/slasher
+
+/mob/living/carbon/human/species/necromorph/divider
+	race = /datum/species/necromorph/divider
+/mob/living/carbon/human/species/necromorph/exploder
+	race = /datum/species/necromorph/exploder
+/mob/living/carbon/human/species/necromorph/leaper
+	race = /datum/species/necromorph/leaper
+/mob/living/carbon/human/species/necromorph/puker
+	race = /datum/species/necromorph/puker
+/mob/living/carbon/human/species/necromorph/spitter
+	race = /datum/species/necromorph/spitter
+/mob/living/carbon/human/species/necromorph/tripod
+	race = /datum/species/necromorph/tripod
+/mob/living/carbon/human/species/necromorph/ubermorph
+	race = /datum/species/necromorph/ubermorph
+/mob/living/carbon/human/species/necromorph/brute
+	race = /datum/species/necromorph/brute
+	name = "Brute" //SPECIES_NECROMORPH_BRUTE
+	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/brute.dmi'
+	//status_flags = CANUNCONSCIOUS|CANPUSH|NOPAIN
+	maxHealth = 400
+	health = 450
+	icon_state = "brute-d"
+	//icon_living = "brute-d"
+	//icon_lying = "brute-d-dead"//Temporary icon so its not invisible lying down
+	//icon_dead = "brute-d-dead"
+	mob_size = MOB_SIZE_LARGE
+	layer = LARGE_MOB_LAYER //above most mobs, but below speechbubbles
+	melee_damage_lower = 30
+	melee_damage_upper = 40
+	see_in_dark = 8
+	pixel_x = -16
+	base_pixel_x = -16
+	//biomass = 350
+	pressure_resistance = 200 //Because big, stompy xenos should not be blown around like paper.
+	butcher_results = list(/obj/item/food/meat/slab/xeno = 20, /obj/item/stack/sheet/animalhide/xeno = 3)
 
 /mob/living/carbon/human/species/necromorph/slasher/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_SLASHER)
 	..(new_loc, new_species)
@@ -148,3 +162,4 @@
 
 /datum/species/necromorph/is_necromorph()
 	return TRUE
+
