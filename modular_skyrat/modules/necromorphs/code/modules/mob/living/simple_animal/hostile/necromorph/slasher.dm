@@ -7,8 +7,13 @@
 	icon_living = "slasher_d"
 	icon_dead = "slasher_d_dead"
 	icon_gib = "syndicate_gib"
-	gender = FEMALE
-
+	pass_flags = PASSBLOB
+	faction = list(ROLE_NECROMORPH)
+	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
+	sentience_type = SENTIENCE_HUMANOID
+	dodging = TRUE
+	footstep_type = FOOTSTEP_MOB_SHOE
+	robust_searching = 1
 	mob_biotypes = MOB_ORGANIC
 	butcher_results = list(/obj/item/food/meat/slab/xeno = 4,
 							/obj/item/stack/sheet/animalhide/xeno = 1)
@@ -54,3 +59,16 @@
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
 	speak_emote = list("hisses")
+
+	///When a target is found, will the mob attempt to charge at it's target?
+
+	///Tracks if the target is actively charging.
+	charge_state = TRUE
+	///In a charge, how many tiles will the charger travel?
+	charge_distance = 3
+	///How often can the charging mob actually charge? Effects the cooldown between charges.
+	charge_frequency = 6 SECONDS
+	///If the mob is charging, how long will it stun it's target on success, and itself on failure?
+	knockdown_time = 3 SECONDS
+	///Declares a cooldown for potential charges right off the bat.
+

@@ -43,9 +43,9 @@
 	if (!extension_base_type)
 		extension_base_type = extension_type
 	if(!ispath(extension_base_type, /datum/extension))
-//		CRASH("Invalid base type: Expected /datum/extension, was [log_info_line(extension_base_type)]")
+		CRASH("Invalid base type: Expected /datum/extension, was [extension_base_type]")
 	if(!ispath(extension_type, extension_base_type))
-//		CRASH("Invalid extension type: Expected [extension_base_type], was [log_info_line(extension_type)]")
+		CRASH("Invalid extension type: Expected [extension_base_type], was [extension_type]")
 	var/datum/extension/existing_extension = LAZYACCESS(source.extensions, extension_base_type)
 	if(istype(existing_extension) && !(existing_extension.flags & EXTENSION_FLAG_MULTIPLE_INSTANCES))
 		qdel(existing_extension)

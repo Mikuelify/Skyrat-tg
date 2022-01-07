@@ -109,35 +109,36 @@
 	BP_R_ARM =  list("path" = /obj/item/organ/external/arm/blade/right, "height" = new /vector2(1.6,2))
 	)
 
+
 	species_audio = list(
-		SOUND_ATTACK = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_attack_1.ogg',
-		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_attack_2.ogg',
-		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_attack_3.ogg',
-		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_attack_4.ogg',
-		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_attack_5.ogg',
-		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_attack_6.ogg',
-		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_attack_7.ogg'),
-		SOUND_DEATH = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_death_1.ogg',
-		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_death_2.ogg',
-		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_death_3.ogg',
-		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_death_4.ogg'),
-		SOUND_PAIN = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_pain_1.ogg',
-		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_pain_2.ogg',
-		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_pain_3.ogg',
-		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_pain_4.ogg',
-		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_pain_5.ogg',
-		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_pain_6.ogg'),
-		SOUND_SHOUT = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_shout_1.ogg',
-		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_shout_2.ogg',
-		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_shout_3.ogg',
-		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_shout_4.ogg'),
-		SOUND_SHOUT_LONG = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_shout_long_1.ogg',
-		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_shout_long_2.ogg',
-		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_shout_long_3.ogg',
-		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_shout_long_4.ogg'),
-		SOUND_SPEECH = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_speech_1.ogg',
-		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_speech_2.ogg')
-		)
+	SOUND_ATTACK = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_attack_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_attack_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_attack_3.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_attack_4.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_attack_5.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_attack_6.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_attack_7.ogg'),
+	SOUND_DEATH = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_death_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_death_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_death_3.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_death_4.ogg'),
+	SOUND_PAIN = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_pain_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_pain_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_pain_3.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_pain_4.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_pain_5.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_pain_6.ogg'),
+	SOUND_SHOUT = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_shout_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_shout_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_shout_3.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_shout_4.ogg'),
+	SOUND_SHOUT_LONG = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_shout_long_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_shout_long_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_shout_long_3.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_shout_long_4.ogg'),
+	SOUND_SPEECH = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_speech_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_speech_2.ogg')
+	)
 
 
 

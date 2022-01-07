@@ -40,3 +40,5 @@ GLOBAL_LIST_INIT(ccw_dir, list( // ccw_dir[dir] = counter-clockwise rotation of 
 "10" = "southwest",
 "16" = "up",
 "32" = "down")) */
+
+GLOBAL_LIST_EMPTY(markerstart)
