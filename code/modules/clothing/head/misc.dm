@@ -6,7 +6,7 @@
 	desc = "It's good to be emperor."
 	inhand_icon_state = "that"
 	flags_inv = 0
-	armor = list(MELEE = 30, BULLET = 15, LASER = 30, ENERGY = 40, BOMB = 25, BIO = 0, RAD = 0, FIRE = 50, ACID = 50)
+	armor = list(MELEE = 30, BULLET = 15, LASER = 30, ENERGY = 40, BOMB = 25, BIO = 0, FIRE = 50, ACID = 50)
 	strip_delay = 80
 
 /obj/item/clothing/head/spacepolice
@@ -186,7 +186,7 @@
 		to_chat(user, span_boldnotice("You can no longer speak like a pirate."))
 
 /obj/item/clothing/head/pirate/armored
-	armor = list(MELEE = 30, BULLET = 50, LASER = 30,ENERGY = 40, BOMB = 30, BIO = 30, RAD = 30, FIRE = 60, ACID = 75)
+	armor = list(MELEE = 30, BULLET = 50, LASER = 30,ENERGY = 40, BOMB = 30, BIO = 30, FIRE = 60, ACID = 75)
 	strip_delay = 40
 	equip_delay_other = 20
 
@@ -203,7 +203,7 @@
 	dynamic_hair_suffix = ""
 
 /obj/item/clothing/head/bandana/armored
-	armor = list(MELEE = 30, BULLET = 50, LASER = 30,ENERGY = 40, BOMB = 30, BIO = 30, RAD = 30, FIRE = 60, ACID = 75)
+	armor = list(MELEE = 30, BULLET = 50, LASER = 30,ENERGY = 40, BOMB = 30, BIO = 30, FIRE = 60, ACID = 75)
 	strip_delay = 40
 	equip_delay_other = 20
 
@@ -247,7 +247,6 @@
 	name = "xenos helmet"
 	icon_state = "xenos"
 	inhand_icon_state = "xenos_helm"
-	mutant_variants = NONE //SKYRAT EDIT ADDITION
 	desc = "A helmet made out of chitinous alien hide."
 	clothing_flags = SNUG_FIT
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT
@@ -300,6 +299,7 @@
 	flags_inv = HIDEHAIR|HIDEFACE|HIDEEARS
 	dog_fashion = null
 	greyscale_colors = "#13d968#ffffff"
+	flags_1 = IS_PLAYER_COLORABLE_1
 
 /obj/item/clothing/head/sombrero/shamebrero
 	name = "shamebrero"
@@ -308,6 +308,7 @@
 	desc = "Once it's on, it never comes off."
 	dog_fashion = null
 	greyscale_colors = "#d565d3#f8db18"
+	flags_1 = IS_PLAYER_COLORABLE_1
 
 /obj/item/clothing/head/sombrero/shamebrero/Initialize()
 	. = ..()
@@ -316,7 +317,10 @@
 /obj/item/clothing/head/flatcap
 	name = "flat cap"
 	desc = "A working man's cap."
-	icon_state = "flat_cap"
+	icon_state = "beret_flat"
+	greyscale_config = /datum/greyscale_config/beret
+	greyscale_config_worn = /datum/greyscale_config/beret/worn
+	greyscale_colors = "#8F7654"
 	inhand_icon_state = "detective"
 
 /obj/item/clothing/head/hunter
@@ -325,7 +329,7 @@
 	icon_state = "cowboy"
 	worn_icon_state = "hunter"
 	inhand_icon_state = "hunter"
-	armor = list(MELEE = 5, BULLET = 5, LASER = 5, ENERGY = 15, BOMB = 0, BIO = 0, RAD = 0, FIRE = 0, ACID = 0)
+	armor = list(MELEE = 5, BULLET = 5, LASER = 5, ENERGY = 15, BOMB = 0, BIO = 0, FIRE = 0, ACID = 0)
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 
 /obj/item/clothing/head/cone
@@ -343,7 +347,6 @@
 	attack_verb_simple = list("warn", "caution", "smash")
 	resistance_flags = NONE
 	dynamic_hair_suffix = ""
-	mutant_variants = NONE // SKYRAT EDIT ADD
 
 /obj/item/clothing/head/santa
 	name = "santa hat"
@@ -388,7 +391,7 @@
 	name = "crown"
 	desc = "A crown fit for a king, a petty king maybe."
 	icon_state = "crown"
-	armor = list(MELEE = 15, BULLET = 0, LASER = 0,ENERGY = 10, BOMB = 0, BIO = 0, RAD = 0, FIRE = 100, ACID = 50, WOUND = 5)
+	armor = list(MELEE = 15, BULLET = 0, LASER = 0,ENERGY = 10, BOMB = 0, BIO = 0, FIRE = 100, ACID = 50, WOUND = 5)
 	resistance_flags = FIRE_PROOF
 	dynamic_hair_suffix = ""
 
@@ -435,6 +438,9 @@
 	name = "french beret"
 	desc = "A quality beret, infused with the aroma of chain-smoking, wine-swilling Parisians. You feel less inclined to engage in military conflict, for some reason."
 	icon_state = "beret"
+	greyscale_config = /datum/greyscale_config/beret
+	greyscale_config_worn = /datum/greyscale_config/beret/worn
+	greyscale_colors = "#972A2A"
 	dynamic_hair_suffix = ""
 
 /obj/item/clothing/head/frenchberet/equipped(mob/M, slot)
@@ -515,7 +521,7 @@
 	desc = "A cap for a party coordinator, stylish!."
 	icon_state = "capcap"
 	inhand_icon_state = "that"
-	armor = list(MELEE = 25, BULLET = 15, LASER = 25, ENERGY = 35, BOMB = 25, BIO = 0, RAD = 0, FIRE = 50, ACID = 50)
+	armor = list(MELEE = 25, BULLET = 15, LASER = 25, ENERGY = 35, BOMB = 25, BIO = 0, FIRE = 50, ACID = 50)
 
 /obj/item/clothing/head/jackbros
 	name = "frosty hat"
@@ -535,5 +541,11 @@
 	desc = "Worn by the finest of CentCom commanders. Inside the lining of the cap, lies two faint initials."
 	inhand_icon_state = "that"
 	flags_inv = 0
-	armor = list(MELEE = 30, BULLET = 15, LASER = 30, ENERGY = 40, BOMB = 25, BIO = 0, RAD = 0, FIRE = 50, ACID = 50)
+	armor = list(MELEE = 30, BULLET = 15, LASER = 30, ENERGY = 40, BOMB = 25, BIO = 0, FIRE = 50, ACID = 50)
 	strip_delay = (8 SECONDS)
+
+/obj/item/clothing/head/human_leather
+	name = "human skin hat"
+	desc = "This will scare them. All will know my power."
+	icon_state = "human_leather"
+	inhand_icon_state = "human_leather"

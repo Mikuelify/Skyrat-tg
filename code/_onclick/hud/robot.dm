@@ -300,6 +300,12 @@
 	icon_state = "[base_icon_state]_[robot?.lamp_enabled ? "on" : "off"]"
 	return ..()
 
+/atom/movable/screen/robot/lamp/Destroy()
+	if(robot)
+		robot.lampButton = null
+		robot = null
+	return ..()
+
 /atom/movable/screen/robot/modPC
 	name = "Modular Interface"
 	icon_state = "template"
@@ -311,6 +317,12 @@
 		return
 	robot.modularInterface?.interact(robot)
 
+/atom/movable/screen/robot/modPC/Destroy()
+	if(robot)
+		robot.interfaceButton = null
+		robot = null
+	return ..()
+
 /atom/movable/screen/robot/alerts
 	name = "Alert Panel"
 	icon = 'icons/hud/screen_ai.dmi'
@@ -321,4 +333,4 @@
 	if(.)
 		return
 	var/mob/living/silicon/robot/borgo = usr
-	borgo.robot_alerts()
+	borgo.alert_control.ui_interact(borgo)

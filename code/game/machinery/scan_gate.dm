@@ -1,6 +1,5 @@
 #define SCANGATE_NONE "Off"
 #define SCANGATE_MINDSHIELD "Mindshield"
-#define SCANGATE_NANITES "Nanites"
 #define SCANGATE_DISEASE "Disease"
 #define SCANGATE_GUNS "Guns"
 #define SCANGATE_WANTED "Wanted"
@@ -30,6 +29,8 @@
 #define SCANGATE_SYNTHLIZ "synthliz"
 #define SCANGATE_SYNTHMAMMAL "synthmammal"
 #define SCANGATE_SYNTHHUMAN "synthhuman"
+#define SCANGATE_TESHARI "teshari"
+#define SCANGATE_HEMOPHAGE "hemophage"
 
 #define SCANGATE_GENDER "Gender"
 //SKYRAT EDIT END - MORE SCANNER GATE OPTIONS
@@ -52,8 +53,6 @@
 	var/scangate_mode = SCANGATE_NONE
 	///Is searching for a disease, what severity is enough to trigger the gate?
 	var/disease_threshold = DISEASE_SEVERITY_MINOR
-	///If scanning for a nanite strain, what cloud is it looking for?
-	var/nanite_cloud = 1
 	///If scanning for a specific species, what species is it looking for?
 	var/detect_species = SCANGATE_HUMAN
 	///Flips all scan results for inverse scanning. Signals if scan returns false.
@@ -69,14 +68,14 @@
 	var/detect_gender = "male" //SKYRAT EDIT - MORE SCANNER GATE OPTIONS
 
 
-/obj/machinery/scanner_gate/Initialize()
+/obj/machinery/scanner_gate/Initialize(mapload)
 	. = ..()
 	wires = new /datum/wires/scanner_gate(src)
 	set_scanline("passive")
 	var/static/list/loc_connections = list(
 		COMSIG_ATOM_ENTERED = .proc/on_entered,
 	)
-	AddElement(/datum/element/connect_loc, src, loc_connections)
+	AddElement(/datum/element/connect_loc, loc_connections)
 
 /obj/machinery/scanner_gate/Destroy()
 	qdel(wires)
@@ -121,7 +120,7 @@
 		else
 			to_chat(user, span_warning("You try to lock [src] with [W], but nothing happens."))
 	else
-		if(!locked && default_deconstruction_screwdriver(user, "scangate_open", "scangate", W))
+		if(!locked && default_deconstruction_screwdriver(user, "[initial(icon_state)]_open", initial(icon_state), W))
 			return
 		if(panel_open && is_wire_tool(W))
 			wires.interact(user)
@@ -151,14 +150,6 @@
 		if(SCANGATE_MINDSHIELD)
 			if(HAS_TRAIT(M, TRAIT_MINDSHIELD))
 				beep = TRUE
-		if(SCANGATE_NANITES)
-			if(SEND_SIGNAL(M, COMSIG_HAS_NANITES))
-				if(nanite_cloud)
-					var/datum/component/nanites/nanites = M.GetComponent(/datum/component/nanites)
-					if(nanites && nanites.cloud_id == nanite_cloud)
-						beep = TRUE
-				else
-					beep = TRUE
 		if(SCANGATE_DISEASE)
 			if(iscarbon(M))
 				var/mob/living/carbon/C = M
@@ -212,6 +203,10 @@
 						scan_species = /datum/species/robotic/synthetic_mammal
 					if(SCANGATE_SYNTHHUMAN)
 						scan_species = /datum/species/robotic/synthetic_human
+					if(SCANGATE_TESHARI)
+						scan_species = /datum/species/teshari
+					if(SCANGATE_HEMOPHAGE)
+						scan_species = /datum/species/hemophage
 					//SKYRAT EDIT END - MORE SCANNER GATE OPTIONS
 				if(is_species(H, scan_species))
 					beep = TRUE
@@ -243,11 +238,13 @@
 		beep = !beep
 	if(beep)
 		alarm_beep()
+		SEND_SIGNAL(src, COMSIG_SCANGATE_PASS_TRIGGER, M)
 		if(!ignore_signals)
 			color = wires.get_color_of_wire(WIRE_ACCEPT)
 			var/obj/item/assembly/assembly = wires.get_attached(color)
 			assembly?.activate()
 	else
+		SEND_SIGNAL(src, COMSIG_SCANGATE_PASS_NO_TRIGGER, M)
 		if(!ignore_signals)
 			color = wires.get_color_of_wire(WIRE_DENY)
 			var/obj/item/assembly/assembly = wires.get_attached(color)
@@ -278,7 +275,6 @@
 	data["locked"] = locked
 	data["scan_mode"] = scangate_mode
 	data["reverse"] = reverse
-	data["nanite_cloud"] = nanite_cloud
 	data["disease_threshold"] = disease_threshold
 	data["target_species"] = detect_species
 	data["target_nutrition"] = detect_nutrition
@@ -305,10 +301,6 @@
 		if("set_disease_threshold")
 			var/new_threshold = params["new_threshold"]
 			disease_threshold = new_threshold
-			. = TRUE
-		if("set_nanite_cloud")
-			var/new_cloud = text2num(params["new_cloud"])
-			nanite_cloud = clamp(round(new_cloud, 1), 1, 100)
 			. = TRUE
 		//Some species are not scannable, like abductors (too unknown), androids (too artificial) or skeletons (too magic)
 		if("set_target_species")
@@ -346,7 +338,6 @@
 
 #undef SCANGATE_NONE
 #undef SCANGATE_MINDSHIELD
-#undef SCANGATE_NANITES
 #undef SCANGATE_DISEASE
 #undef SCANGATE_GUNS
 #undef SCANGATE_WANTED
@@ -376,6 +367,8 @@
 #undef SCANGATE_SYNTHLIZ
 #undef SCANGATE_SYNTHMAMMAL
 #undef SCANGATE_SYNTHHUMAN
+#undef SCANGATE_TESHARI
+#undef SCANGATE_HEMOPHAGE
 
 #undef SCANGATE_GENDER
 //SKYRAT EDIT END - MORE SCANNER GATE OPTIONS

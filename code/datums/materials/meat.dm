@@ -1,5 +1,3 @@
-//SKYRAT EDIT REMOVAL BEGIN
-/*
 ///It's gross, gets the name of it's owner, and is all kinds of fucked up
 /datum/material/meat
 	name = "meat"
@@ -12,7 +10,7 @@
 	value_per_unit = 0.05
 	beauty_modifier = -0.3
 	strength_modifier = 0.7
-	armor_modifiers = list(MELEE = 0.3, BULLET = 0.3, LASER = 1.2, ENERGY = 1.2, BOMB = 0.3, BIO = 0, RAD = 0.7, FIRE = 1, ACID = 1)
+	armor_modifiers = list(MELEE = 0.3, BULLET = 0.3, LASER = 1.2, ENERGY = 1.2, BOMB = 0.3, BIO = 0, FIRE = 1, ACID = 1)
 	item_sound_override = 'sound/effects/meatslap.ogg'
 	turf_sound_override = FOOTSTEP_MEAT
 	texture_layer_icon_state = "meat"
@@ -33,9 +31,6 @@
 	var/nutriment_count = 3 * (amount / MINERAL_MATERIAL_AMOUNT)
 	var/oil_count = 2 * (amount / MINERAL_MATERIAL_AMOUNT)
 	source.AddComponent(/datum/component/edible, list(/datum/reagent/consumable/nutriment = nutriment_count, /datum/reagent/consumable/cooking_oil = oil_count), null, RAW | MEAT | GROSS, null, 30, list("Fleshy"))
-*/
-//SKYRAT EDIT REMOVAL END
-
 
 /datum/material/meat/mob_meat
 	init_flags = MATERIAL_INIT_BESPOKE

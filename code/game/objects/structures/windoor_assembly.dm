@@ -27,9 +27,9 @@
 	var/facing = "l" //Does the windoor open to the left or right?
 	var/secure = FALSE //Whether or not this creates a secure windoor
 	var/state = "01" //How far the door assembly has progressed
-	CanAtmosPass = ATMOS_PASS_PROC
+	can_atmos_pass = ATMOS_PASS_PROC
 
-/obj/structure/windoor_assembly/Initialize(loc, set_dir)
+/obj/structure/windoor_assembly/Initialize(mapload, loc, set_dir)
 	. = ..()
 	if(set_dir)
 		setDir(set_dir)
@@ -39,10 +39,10 @@
 		COMSIG_ATOM_EXIT = .proc/on_exit,
 	)
 
-	AddElement(/datum/element/connect_loc, src, loc_connections)
+	AddElement(/datum/element/connect_loc, loc_connections)
 
 /obj/structure/windoor_assembly/Destroy()
-	density = FALSE
+	set_density(FALSE)
 	air_update_turf(TRUE, FALSE)
 	return ..()
 
@@ -55,10 +55,10 @@
 	icon_state = "[facing]_[secure ? "secure_" : ""]windoor_assembly[state]"
 	return ..()
 
-/obj/structure/windoor_assembly/CanAllowThrough(atom/movable/mover, turf/target)
+/obj/structure/windoor_assembly/CanAllowThrough(atom/movable/mover, border_dir)
 	. = ..()
 
-	if(get_dir(loc, target) == dir)
+	if(border_dir == dir)
 		return
 
 	if(istype(mover, /obj/structure/window))
@@ -68,19 +68,25 @@
 	if(istype(mover, /obj/structure/windoor_assembly) || istype(mover, /obj/machinery/door/window))
 		return valid_window_location(loc, mover.dir, is_fulltile = FALSE)
 
-/obj/structure/windoor_assembly/CanAtmosPass(turf/T)
+/obj/structure/windoor_assembly/can_atmos_pass(turf/T, vertical = FALSE)
 	if(get_dir(loc, T) == dir)
 		return !density
 	else
-		return 1
+		return TRUE
 
-/obj/structure/windoor_assembly/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/windoor_assembly/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
+
+	if(leaving.movement_type & PHASING)
+		return
+
+	if(leaving == src)
+		return // Let's not block ourselves.
 
 	if (leaving.pass_flags & pass_flags_self)
 		return
 
-	if (get_dir(loc, new_location) == dir && density)
+	if (direction == dir && density)
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
@@ -99,10 +105,12 @@
 				if(W.use_tool(src, user, 40, volume=50))
 					to_chat(user, span_notice("You disassemble the windoor assembly."))
 					var/obj/item/stack/sheet/rglass/RG = new (get_turf(src), 5)
-					RG.add_fingerprint(user)
+					if (!QDELETED(RG))
+						RG.add_fingerprint(user)
 					if(secure)
 						var/obj/item/stack/rods/R = new (get_turf(src), 4)
-						R.add_fingerprint(user)
+						if (!QDELETED(R))
+							R.add_fingerprint(user)
 					qdel(src)
 				return
 
@@ -237,7 +245,7 @@
 					ae.forceMove(drop_location())
 
 			else if(istype(W, /obj/item/pen))
-				var/t = stripped_input(user, "Enter the name for the door.", name, created_name,MAX_NAME_LEN)
+				var/t = tgui_input_text(user, "Enter the name for the door", "Windoor Renaming", created_name, MAX_NAME_LEN)
 				if(!t)
 					return
 				if(!in_range(src, usr) && loc != usr)
@@ -258,7 +266,7 @@
 
 				if(W.use_tool(src, user, 40, volume=100) && electronics)
 
-					density = TRUE //Shouldn't matter but just incase
+					set_density(TRUE) //Shouldn't matter but just incase
 					to_chat(user, span_notice("You finish the windoor."))
 
 					if(secure)
@@ -270,7 +278,7 @@
 							windoor.icon_state = "rightsecureopen"
 							windoor.base_state = "rightsecure"
 						windoor.setDir(dir)
-						windoor.density = FALSE
+						windoor.set_density(FALSE)
 
 						if(electronics.one_access)
 							windoor.req_one_access = electronics.accesses
@@ -293,7 +301,7 @@
 							windoor.icon_state = "rightopen"
 							windoor.base_state = "right"
 						windoor.setDir(dir)
-						windoor.density = FALSE
+						windoor.set_density(FALSE)
 
 						if(electronics.one_access)
 							windoor.req_one_access = electronics.accesses

@@ -16,7 +16,7 @@
 	var/obj/machinery/teleport/station/power_station
 	var/calibrated = FALSE//Calibration prevents mutation
 
-/obj/machinery/teleport/hub/Initialize()
+/obj/machinery/teleport/hub/Initialize(mapload)
 	. = ..()
 	link_power_station()
 
@@ -68,26 +68,32 @@
 	var/obj/machinery/computer/teleporter/com = power_station.teleporter_console
 	if (QDELETED(com))
 		return
-	if (QDELETED(com.target))
-		com.target = null
+	var/atom/target
+	if(com.target_ref)
+		target = com.target_ref.resolve()
+	if (!target)
+		com.target_ref = null
 		visible_message(span_alert("Cannot authenticate locked on coordinates. Please reinstate coordinate matrix."))
 		return
 	if (ismovable(M))
-		if(do_teleport(M, com.target, channel = TELEPORT_CHANNEL_BLUESPACE))
+		if(do_teleport(M, target, channel = TELEPORT_CHANNEL_BLUESPACE))
 			use_power(5000)
 			if(!calibrated && prob(30 - ((accuracy) * 10))) //oh dear a problem
 				if(ishuman(M))//don't remove people from the round randomly you jerks
 					var/mob/living/carbon/human/human = M
 					/* - SKRYAT EDIT CHANGE ORIGINAL
 					if(!(human.mob_biotypes & (MOB_ROBOTIC|MOB_MINERAL|MOB_UNDEAD|MOB_SPIRIT)))
-						if(human.dna && human.dna.species.id != "fly")
+						var/datum/species/species_to_transform = /datum/species/fly
+						if(SSevents.holidays && SSevents.holidays[MOTH_WEEK])
+							species_to_transform = /datum/species/moth
+						if(human.dna && human.dna.species.id != initial(species_to_transform.id))
 							to_chat(M, span_hear("You hear a buzzing in your ears."))
-							human.set_species(/datum/species/fly)
-							log_game("[human] ([key_name(human)]) was turned into a fly person")
-					human.apply_effect((rand(120 - accuracy * 40, 180 - accuracy * 60)), EFFECT_IRRADIATE, 0)
+							human.set_species(species_to_transform)
+							log_game("[human] ([key_name(human)]) was turned into a [initial(species_to_transform.name)] through [src].")
+
 					*/ //SKYRAT EDIT REMOVAL END
 					//SKRYAT EDIT CHANGE BEGIN
-					to_chat(human, "<span class='danger'>Your limbs lose molecular cohesion as you teleport!</span>")
+					to_chat(human, span_danger("Your limbs lose molecular cohesion as you teleport!"))
 					var/list/bodyparts_dismember = list()
 					var/rad_mod = 0
 					for(var/obj/item/bodypart/BP in human.bodyparts)
@@ -102,7 +108,6 @@
 						BP.dismember()
 						bodyparts_dismember.Remove(BP) //GC optimisation
 						qdel(BP)
-					human.apply_effect((rand(480 + rad_mod - accuracy * 40, 880 + rad_mod - accuracy * 60)), EFFECT_IRRADIATE, 0)
 					//SKYRAT EDIT CHANGE END
 			calibrated = FALSE
 	return
@@ -114,7 +119,7 @@
 /obj/machinery/teleport/hub/proc/is_ready()
 	. = !panel_open && !(machine_stat & (BROKEN|NOPOWER)) && power_station && power_station.engaged && !(power_station.machine_stat & (BROKEN|NOPOWER))
 
-/obj/machinery/teleport/hub/syndicate/Initialize()
+/obj/machinery/teleport/hub/syndicate/Initialize(mapload)
 	. = ..()
 	var/obj/item/stock_parts/matter_bin/super/super_bin = new(src)
 	LAZYADD(component_parts, super_bin)
@@ -135,7 +140,7 @@
 	var/list/linked_stations = list()
 	var/efficiency = 0
 
-/obj/machinery/teleport/station/Initialize()
+/obj/machinery/teleport/station/Initialize(mapload)
 	. = ..()
 	link_console_and_hub()
 
@@ -210,7 +215,7 @@
 /obj/machinery/teleport/station/proc/toggle(mob/user)
 	if(machine_stat & (BROKEN|NOPOWER) || !teleporter_hub || !teleporter_console )
 		return
-	if (teleporter_console.target)
+	if (teleporter_console.target_ref?.resolve())
 		if(teleporter_hub.panel_open || teleporter_hub.machine_stat & (BROKEN|NOPOWER))
 			to_chat(user, span_alert("The teleporter hub isn't responding."))
 		else
@@ -218,6 +223,7 @@
 			use_power(5000)
 			to_chat(user, span_notice("Teleporter [engaged ? "" : "dis"]engaged!"))
 	else
+		teleporter_console.target_ref = null
 		to_chat(user, span_alert("No target detected."))
 		engaged = FALSE
 	teleporter_hub.update_appearance()

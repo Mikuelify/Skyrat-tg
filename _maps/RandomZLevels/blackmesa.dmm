@@ -1,9 +1,9 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "ab" = (
-/obj/effect/mob_spawn/human/scientist,
 /obj/structure/railing{
 	dir = 1
 	},
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "ad" = (
@@ -71,7 +71,7 @@
 	pixel_x = -4;
 	pixel_y = 9
 	},
-/obj/item/kitchen/knife/plastic,
+/obj/item/knife/plastic,
 /turf/open/floor/iron/green,
 /area/awaymission/black_mesa)
 "aF" = (
@@ -96,11 +96,6 @@
 	},
 /turf/open/floor/plating/beach/sand,
 /area/awaymission/black_mesa)
-"aP" = (
-/obj/structure/chair/office,
-/obj/effect/mob_spawn/human/scientist,
-/turf/open/floor/iron/textured_large,
-/area/awaymission/black_mesa)
 "aQ" = (
 /obj/machinery/light/cold{
 	dir = 4
@@ -110,7 +105,7 @@
 	},
 /area/awaymission/black_mesa)
 "aR" = (
-/obj/effect/spawner/randomsnackvend,
+/obj/effect/spawner/random/vending/snackvend,
 /turf/open/floor/iron/green/side{
 	dir = 8
 	},
@@ -157,7 +152,7 @@
 /obj/structure/chair/office{
 	dir = 1
 	},
-/obj/effect/mob_spawn/human/black_mesa,
+/obj/effect/mob_spawn/ghost_role/human/black_mesa,
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa)
 "bx" = (
@@ -171,6 +166,8 @@
 	dir = 8
 	},
 /obj/structure/table,
+/obj/item/stack/sheet/plasteel,
+/obj/item/stack/sheet/plasteel,
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "bE" = (
@@ -190,7 +187,7 @@
 /area/awaymission/black_mesa)
 "bU" = (
 /obj/structure/chair/office,
-/obj/effect/mob_spawn/human/black_mesa,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa)
 "bW" = (
@@ -207,7 +204,7 @@
 /obj/structure/chair/office{
 	dir = 4
 	},
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/wood/parquet,
 /area/awaymission/black_mesa)
 "cb" = (
@@ -273,11 +270,21 @@
 	},
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
+"cZ" = (
+/obj/structure/rack/shelf,
+/obj/item/stack/sheet/rglass,
+/obj/item/stack/sheet/rglass,
+/obj/item/stack/sheet/rglass,
+/obj/item/stack/sheet/rglass,
+/obj/item/stack/sheet/rglass,
+/obj/item/stack/sheet/rglass,
+/turf/open/floor/circuit,
+/area/awaymission/black_mesa)
 "db" = (
 /obj/structure/chair/office{
 	dir = 1
 	},
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/ghost_role/human/black_mesa,
 /turf/open/floor/iron/smooth,
 /area/awaymission/black_mesa)
 "dc" = (
@@ -287,8 +294,13 @@
 /obj/effect/turf_decal/stripes{
 	dir = 1
 	},
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/iron/textured,
+/area/awaymission/black_mesa)
+"df" = (
+/obj/structure/lattice/catwalk,
+/mob/living/simple_animal/hostile/blackmesa/hecu/ranged/smg,
+/turf/open/floor/plating,
 /area/awaymission/black_mesa)
 "dh" = (
 /obj/structure/table,
@@ -370,14 +382,14 @@
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
 "ek" = (
-/obj/effect/spawner/randomcolavend,
+/obj/effect/spawner/random/vending/colavend,
 /turf/open/floor/carpet/blue,
 /area/awaymission/black_mesa)
 "el" = (
 /obj/structure/chair/office{
 	dir = 4
 	},
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "ep" = (
@@ -392,8 +404,8 @@
 /obj/item/storage/firstaid/advanced,
 /obj/item/storage/firstaid/advanced,
 /obj/item/storage/firstaid/advanced,
-/obj/item/storage/firstaid/tactical,
 /obj/item/reagent_containers/hypospray/medipen/stimulants,
+/obj/item/storage/firstaid/expeditionary,
 /turf/open/floor/iron/smooth,
 /area/awaymission/black_mesa)
 "et" = (
@@ -423,6 +435,11 @@
 /obj/structure/spacevine,
 /mob/living/simple_animal/hostile/venus_human_trap,
 /turf/open/floor/engine,
+/area/awaymission/black_mesa)
+"eL" = (
+/obj/structure/rack/shelf,
+/obj/item/gun/ballistic/automatic/submachine_gun/mp40,
+/turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
 "eM" = (
 /obj/machinery/light/cold{
@@ -482,6 +499,12 @@
 "fs" = (
 /obj/machinery/light/cold,
 /turf/open/floor/mineral/titanium,
+/area/awaymission/black_mesa)
+"fu" = (
+/obj/structure/rack/shelf,
+/obj/item/reagent_containers/hypospray/medipen/stimulants,
+/obj/item/ammo_box/magazine/smgm45,
+/turf/open/floor/iron/smooth,
 /area/awaymission/black_mesa)
 "fx" = (
 /obj/structure/table,
@@ -582,7 +605,7 @@
 /area/awaymission/black_mesa)
 "gh" = (
 /obj/structure/lattice/catwalk,
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/plating,
 /area/awaymission/black_mesa)
 "gj" = (
@@ -593,7 +616,7 @@
 /turf/open/chasm,
 /area/awaymission/black_mesa)
 "gk" = (
-/obj/effect/spawner/randomcolavend,
+/obj/effect/spawner/random/vending/colavend,
 /turf/open/floor/iron/smooth,
 /area/awaymission/black_mesa)
 "gn" = (
@@ -646,11 +669,11 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/stripes,
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/plating/ice,
 /area/awaymission/black_mesa)
 "gM" = (
-/obj/effect/mob_spawn/human/black_mesa/hecu,
+/obj/effect/mob_spawn/ghost_role/human/black_mesa/hecu,
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "gN" = (
@@ -700,10 +723,20 @@
 /obj/machinery/door/airlock/science/glass,
 /turf/open/floor/iron/smooth,
 /area/awaymission/black_mesa)
+"hj" = (
+/obj/structure/lattice/catwalk,
+/mob/living/simple_animal/hostile/blackmesa/hecu/ranged,
+/turf/open/floor/plating,
+/area/awaymission/black_mesa)
 "hn" = (
 /obj/structure/closet/crate/bin,
 /obj/item/ammo_box/magazine/multi_sprite/g17,
 /turf/open/floor/iron/smooth_large,
+/area/awaymission/black_mesa)
+"hq" = (
+/obj/structure/closet/crate/large,
+/obj/item/stack/sheet/plasteel,
+/turf/open/floor/plating/cobblestone,
 /area/awaymission/black_mesa)
 "hu" = (
 /obj/structure/chair/sofa/bench/right{
@@ -724,7 +757,7 @@
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
 "hH" = (
-/obj/effect/spawner/randomsnackvend,
+/obj/effect/spawner/random/vending/snackvend,
 /turf/open/floor/iron/smooth,
 /area/awaymission/black_mesa)
 "hO" = (
@@ -732,6 +765,10 @@
 	dir = 4
 	},
 /turf/open/floor/mineral/titanium/white,
+/area/awaymission/black_mesa)
+"hP" = (
+/obj/item/stack/sheet/plasteel,
+/turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "hU" = (
 /obj/machinery/light/cold{
@@ -743,10 +780,10 @@
 /turf/open/space/basic,
 /area/awaymission/black_mesa)
 "hY" = (
-/obj/machinery/light/cold{
-	dir = 4
+/obj/effect/turf_decal/stripes{
+	dir = 5
 	},
-/mob/living/simple_animal/hostile/blackmesa/sec,
+/obj/structure/barricade/sandbags,
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "im" = (
@@ -758,6 +795,10 @@
 /turf/open/floor/iron/dark/side{
 	dir = 1
 	},
+/area/awaymission/black_mesa)
+"io" = (
+/mob/living/simple_animal/hostile/blackmesa/sec,
+/turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
 "is" = (
 /obj/structure/railing{
@@ -982,7 +1023,7 @@
 /turf/open/floor/mineral/titanium/white,
 /area/awaymission/black_mesa)
 "kk" = (
-/obj/effect/spawner/randomsnackvend,
+/obj/effect/spawner/random/vending/snackvend,
 /obj/structure/railing{
 	dir = 1
 	},
@@ -1064,14 +1105,20 @@
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
 "kM" = (
-/obj/machinery/suit_storage_unit/hev,
-/obj/structure/window/plasma/reinforced/spawner/west,
-/obj/structure/window/plasma/reinforced/spawner/east,
-/obj/structure/window/plasma/reinforced/spawner,
+/obj/structure/window/reinforced/plasma/spawner/west,
+/obj/structure/window/reinforced/plasma/spawner/east,
+/obj/machinery/suit_storage_unit{
+	icon_state = "open"
+	},
 /turf/open/floor/plating,
 /area/awaymission/black_mesa)
 "kN" = (
 /turf/open/floor/iron/smooth_large,
+/area/awaymission/black_mesa)
+"kP" = (
+/obj/structure/rack/shelf,
+/obj/item/stack/sheet/plasteel,
+/turf/open/floor/circuit,
 /area/awaymission/black_mesa)
 "kT" = (
 /obj/effect/turf_decal/trimline/brown/filled/line{
@@ -1112,6 +1159,10 @@
 	dir = 4
 	},
 /turf/open/floor/iron/textured_large,
+/area/awaymission/black_mesa)
+"lk" = (
+/obj/structure/table,
+/turf/open/floor/plating,
 /area/awaymission/black_mesa)
 "ln" = (
 /obj/effect/turf_decal/trimline/darkblue/filled/corner{
@@ -1195,7 +1246,7 @@
 	},
 /area/awaymission/black_mesa)
 "lX" = (
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/iron/smooth_large{
 	icon_state = "damaged2"
 	},
@@ -1217,6 +1268,14 @@
 "mj" = (
 /obj/machinery/door/airlock,
 /turf/open/floor/iron/smooth,
+/area/awaymission/black_mesa)
+"mn" = (
+/obj/machinery/light/cold{
+	dir = 1
+	},
+/obj/item/knife/combat/marksman,
+/obj/structure/table,
+/turf/open/floor/plating,
 /area/awaymission/black_mesa)
 "mo" = (
 /obj/machinery/computer{
@@ -1261,6 +1320,11 @@
 /obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa)
+"mE" = (
+/obj/structure/lattice/catwalk,
+/obj/structure/barricade/sandbags,
+/turf/open/floor/plating,
+/area/awaymission/black_mesa)
 "mG" = (
 /obj/machinery/door/airlock,
 /turf/open/floor/iron/dark/yellow,
@@ -1294,12 +1358,11 @@
 /obj/structure/toilet{
 	dir = 8
 	},
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/mineral/titanium/blue,
 /area/awaymission/black_mesa)
 "mV" = (
-/obj/structure/rack/shelf,
-/obj/item/melee/baton/loaded,
+/obj/structure/barricade/sandbags,
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "mY" = (
@@ -1529,7 +1592,7 @@
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
 "oO" = (
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/bluespace,
 /area/awaymission/black_mesa)
 "oP" = (
@@ -1704,6 +1767,11 @@
 	},
 /turf/open/floor/iron/dark/blue,
 /area/awaymission/black_mesa)
+"qO" = (
+/obj/structure/table,
+/obj/item/knife/combat/marksman,
+/turf/open/floor/iron/textured,
+/area/awaymission/black_mesa)
 "qT" = (
 /obj/machinery/door/airlock/multi_tile/metal,
 /turf/open/floor/iron/textured_large,
@@ -1762,6 +1830,11 @@
 /area/awaymission/black_mesa)
 "rm" = (
 /turf/open/indestructible/permalube,
+/area/awaymission/black_mesa)
+"ro" = (
+/obj/structure/lattice/catwalk,
+/obj/machinery/porta_turret/black_mesa,
+/turf/open/floor/plating,
 /area/awaymission/black_mesa)
 "rq" = (
 /obj/effect/turf_decal/trimline/darkblue/filled/line{
@@ -1825,7 +1898,7 @@
 /obj/structure/chair{
 	dir = 1
 	},
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/iron/green,
 /area/awaymission/black_mesa)
 "rT" = (
@@ -1838,9 +1911,8 @@
 /obj/machinery/suit_storage_unit{
 	icon_state = "open"
 	},
-/obj/structure/window/plasma/reinforced/spawner/west,
-/obj/structure/window/plasma/reinforced/spawner/east,
-/obj/structure/window/plasma/reinforced/spawner,
+/obj/structure/window/reinforced/plasma/spawner/west,
+/obj/structure/window/reinforced/plasma/spawner/east,
 /turf/open/floor/plating,
 /area/awaymission/black_mesa)
 "rZ" = (
@@ -1964,8 +2036,13 @@
 /turf/open/floor/plating,
 /area/awaymission/black_mesa)
 "tk" = (
-/obj/machinery/light/cold,
 /obj/structure/rack/shelf,
+/obj/item/ammo_box/magazine/mp40,
+/obj/item/ammo_box/magazine/mp40,
+/obj/item/ammo_box/magazine/mp40,
+/obj/item/ammo_box/magazine/mp40,
+/obj/item/ammo_box/magazine/mp40,
+/obj/item/ammo_box/magazine/mp40,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
 "tm" = (
@@ -2035,6 +2112,7 @@
 /obj/item/gun_maintenance_supplies,
 /obj/item/gun_maintenance_supplies,
 /obj/item/gun_maintenance_supplies,
+/obj/item/stack/sheet/plasteel,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
 "tS" = (
@@ -2195,10 +2273,6 @@
 /obj/structure/microscope,
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa)
-"vg" = (
-/obj/machinery/nanite_chamber,
-/turf/open/floor/iron/textured_large,
-/area/awaymission/black_mesa)
 "vh" = (
 /obj/effect/gibspawner/human/bodypartless,
 /turf/open/floor/iron/smooth_large,
@@ -2252,7 +2326,7 @@
 /turf/open/floor/iron,
 /area/awaymission/black_mesa)
 "vy" = (
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "vz" = (
@@ -2353,7 +2427,7 @@
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
 "wV" = (
-/obj/machinery/portable_atmospherics/canister/stimulum,
+/obj/machinery/portable_atmospherics/canister/nitrium,
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "wX" = (
@@ -2454,11 +2528,6 @@
 /area/awaymission/black_mesa)
 "xK" = (
 /turf/closed/wall,
-/area/awaymission/black_mesa)
-"xN" = (
-/obj/structure/rack/shelf,
-/obj/item/gun/ballistic/automatic/submachine_gun/ppsh/modern,
-/turf/open/floor/iron/smooth,
 /area/awaymission/black_mesa)
 "xP" = (
 /obj/effect/turf_decal/trimline/darkblue/filled/line{
@@ -2564,6 +2633,11 @@
 /obj/structure/filingcabinet/chestdrawer,
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa)
+"zq" = (
+/obj/structure/rack/shelf,
+/obj/item/ammo_box/magazine/smgm45,
+/turf/open/floor/iron/smooth,
+/area/awaymission/black_mesa)
 "zx" = (
 /obj/effect/turf_decal/stripes{
 	dir = 8
@@ -2591,8 +2665,11 @@
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
 "zJ" = (
-/obj/machinery/porta_turret/black_mesa,
-/turf/open/floor/plating,
+/obj/effect/turf_decal/stripes{
+	dir = 6
+	},
+/obj/structure/barricade/sandbags,
+/turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "zM" = (
 /obj/machinery/light/cold{
@@ -2617,8 +2694,8 @@
 /area/awaymission/black_mesa/outside)
 "Aa" = (
 /obj/structure/rack/shelf,
-/obj/item/ammo_box/magazine/ppsh,
 /obj/item/reagent_containers/hypospray/medipen/stimulants,
+/obj/item/ammo_box/magazine/m50,
 /turf/open/floor/iron/smooth,
 /area/awaymission/black_mesa)
 "Af" = (
@@ -2749,8 +2826,13 @@
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
 "BI" = (
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/circuit,
+/area/awaymission/black_mesa)
+"BJ" = (
+/obj/structure/closet/crate/bin,
+/obj/item/knife/combat/marksman,
+/turf/open/floor/carpet/blue,
 /area/awaymission/black_mesa)
 "BL" = (
 /obj/structure/table,
@@ -2813,6 +2895,7 @@
 "Cu" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/lattice/catwalk,
+/obj/machinery/porta_turret/black_mesa,
 /turf/open/floor/plating,
 /area/awaymission/black_mesa)
 "Cz" = (
@@ -2835,7 +2918,7 @@
 /turf/open/floor/iron/dark,
 /area/awaymission/black_mesa)
 "CH" = (
-/obj/effect/spawner/structure/window/plasma/reinforced,
+/obj/effect/spawner/structure/window/reinforced/plasma,
 /turf/open/floor/plating,
 /area/awaymission/black_mesa)
 "CJ" = (
@@ -2895,7 +2978,7 @@
 /obj/effect/turf_decal/stripes{
 	dir = 1
 	},
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "Dt" = (
@@ -2954,7 +3037,7 @@
 /obj/structure/chair/office{
 	dir = 4
 	},
-/obj/effect/mob_spawn/human/black_mesa/guard,
+/obj/effect/mob_spawn/ghost_role/human/black_mesa/guard,
 /turf/open/floor/iron/dark/blue,
 /area/awaymission/black_mesa)
 "DX" = (
@@ -3015,7 +3098,7 @@
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa)
 "Ey" = (
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa)
 "EA" = (
@@ -3062,7 +3145,7 @@
 /turf/open/floor/iron,
 /area/awaymission/black_mesa)
 "Ff" = (
-/obj/effect/mob_spawn/human/black_mesa,
+/obj/effect/mob_spawn/ghost_role/human/black_mesa,
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa)
 "Fi" = (
@@ -3093,6 +3176,12 @@
 	dir = 1
 	},
 /obj/structure/chair/sofa/bench/right,
+/turf/open/floor/iron/smooth_large,
+/area/awaymission/black_mesa)
+"Fs" = (
+/obj/effect/turf_decal/trimline/darkblue/filled/line,
+/obj/machinery/light/cold,
+/obj/effect/random_mob_placer/xen,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
 "Fu" = (
@@ -3132,7 +3221,7 @@
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
 "FL" = (
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/plating/cobblestone,
 /area/awaymission/black_mesa/outside)
 "FM" = (
@@ -3252,7 +3341,7 @@
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
 "GM" = (
-/obj/effect/spawner/randomcolavend,
+/obj/effect/spawner/random/vending/colavend,
 /turf/open/floor/iron/green/side{
 	dir = 8
 	},
@@ -3316,6 +3405,13 @@
 /obj/structure/closet/crate/large,
 /obj/item/stack/telecrystal/twenty,
 /turf/open/floor/iron/smooth_large,
+/area/awaymission/black_mesa)
+"Hp" = (
+/obj/machinery/light/cold{
+	dir = 8
+	},
+/obj/structure/barricade/sandbags,
+/turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa)
 "Hr" = (
 /obj/machinery/door/airlock/science,
@@ -3383,7 +3479,7 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/stripes,
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "HP" = (
@@ -3392,10 +3488,6 @@
 	},
 /obj/machinery/porta_turret/black_mesa,
 /turf/open/floor/iron/smooth_large,
-/area/awaymission/black_mesa)
-"HU" = (
-/obj/machinery/nanite_programmer,
-/turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa)
 "Ia" = (
 /obj/effect/turf_decal/trimline/brown/filled/line{
@@ -3477,18 +3569,19 @@
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
 "II" = (
-/obj/machinery/atmospherics/components/unary/tank,
+/obj/machinery/atmospherics/components/tank,
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa)
 "IN" = (
-/mob/living/simple_animal/hostile/biohazard_blob/centaur,
-/turf/open/floor/wood/parquet,
+/obj/structure/barricade/sandbags,
+/turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa)
 "IQ" = (
 /obj/structure/table,
 /obj/structure/sign/warning/nosmoking/circle{
 	pixel_y = 32
 	},
+/obj/item/stack/sheet/plasteel,
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa)
 "IR" = (
@@ -3544,7 +3637,7 @@
 /area/awaymission/black_mesa)
 "Jr" = (
 /obj/structure/rack/shelf,
-/obj/item/ammo_box/magazine/ppsh,
+/obj/item/ammo_box/magazine/m50,
 /turf/open/floor/iron/smooth,
 /area/awaymission/black_mesa)
 "Js" = (
@@ -3585,9 +3678,8 @@
 /obj/machinery/suit_storage_unit{
 	icon_state = "open"
 	},
-/obj/structure/window/plasma/reinforced/spawner/east,
-/obj/structure/window/plasma/reinforced/spawner/west,
-/obj/structure/window/plasma/reinforced/spawner,
+/obj/structure/window/reinforced/plasma/spawner/east,
+/obj/structure/window/reinforced/plasma/spawner/west,
 /turf/open/floor/plating,
 /area/awaymission/black_mesa)
 "JH" = (
@@ -3684,7 +3776,7 @@
 /turf/open/floor/plating,
 /area/awaymission/black_mesa)
 "Kv" = (
-/obj/machinery/atmospherics/components/unary/tank,
+/obj/machinery/atmospherics/components/tank,
 /turf/open/floor/plating,
 /area/awaymission/black_mesa)
 "KA" = (
@@ -3715,7 +3807,7 @@
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa)
 "KK" = (
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/plating{
 	icon_state = "titanium_dam1"
 	},
@@ -3745,6 +3837,11 @@
 /obj/item/raw_anomaly_core/bluespace,
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
+"Lf" = (
+/obj/structure/closet/crate/large,
+/obj/item/stack/sheet/plasteel,
+/turf/open/floor/plating,
+/area/awaymission/black_mesa)
 "Lg" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/window/reinforced/spawner/north,
@@ -3766,7 +3863,7 @@
 /obj/structure/chair/office{
 	dir = 8
 	},
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "Ln" = (
@@ -3820,7 +3917,7 @@
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "LN" = (
-/obj/machinery/atmospherics/components/unary/tank,
+/obj/machinery/atmospherics/components/tank,
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "LP" = (
@@ -3849,10 +3946,6 @@
 "Md" = (
 /turf/open/floor/iron/dark/side,
 /area/awaymission/black_mesa)
-"Mf" = (
-/obj/machinery/nanite_program_hub,
-/turf/open/floor/iron/textured_large,
-/area/awaymission/black_mesa)
 "Mg" = (
 /obj/effect/turf_decal/trimline/green/filled/corner{
 	dir = 4
@@ -3868,6 +3961,11 @@
 	dir = 10
 	},
 /turf/open/floor/mineral/titanium,
+/area/awaymission/black_mesa)
+"Mm" = (
+/obj/structure/closet/wardrobe,
+/obj/item/stack/sheet/plasteel,
+/turf/open/floor/iron/dark/yellow,
 /area/awaymission/black_mesa)
 "Mp" = (
 /obj/structure/lattice/catwalk,
@@ -4073,7 +4171,7 @@
 /area/awaymission/black_mesa)
 "OB" = (
 /obj/effect/turf_decal/stripes,
-/obj/machinery/atmospherics/components/unary/tank,
+/obj/machinery/atmospherics/components/tank,
 /turf/open/floor/plating,
 /area/awaymission/black_mesa)
 "OC" = (
@@ -4131,7 +4229,7 @@
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "OS" = (
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
 "OT" = (
@@ -4190,9 +4288,14 @@
 /mob/living/simple_animal/hostile/blackmesa/xen/nihilanth,
 /turf/open/floor/engine,
 /area/awaymission/black_mesa/outside)
+"Ps" = (
+/obj/structure/rack/shelf,
+/obj/item/ammo_box/magazine/multi_sprite/g17,
+/turf/open/floor/wood/parquet,
+/area/awaymission/black_mesa)
 "Pv" = (
 /obj/structure/spacevine,
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/ghost_role/human/black_mesa,
 /turf/open/floor/engine,
 /area/awaymission/black_mesa)
 "Pz" = (
@@ -4231,11 +4334,6 @@
 	},
 /obj/item/folder/blue,
 /turf/open/floor/iron/dark,
-/area/awaymission/black_mesa)
-"PR" = (
-/obj/structure/table,
-/obj/item/grenade/gas_crystal,
-/turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa)
 "PS" = (
 /obj/structure/toilet{
@@ -4345,12 +4443,12 @@
 /obj/structure/chair/office{
 	dir = 8
 	},
-/obj/effect/mob_spawn/human/black_mesa/hecu,
+/obj/effect/mob_spawn/ghost_role/human/black_mesa/hecu,
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "QR" = (
-/obj/effect/mob_spawn/human/scientist,
 /obj/effect/gibspawner/human/bodypartless,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
 "QS" = (
@@ -4363,6 +4461,10 @@
 /turf/open/floor/iron/stairs/left{
 	dir = 1
 	},
+/area/awaymission/black_mesa)
+"QW" = (
+/mob/living/simple_animal/hostile/blackmesa/sec/ranged,
+/turf/open/floor/wood/parquet,
 /area/awaymission/black_mesa)
 "QX" = (
 /obj/structure/chair/office{
@@ -4389,10 +4491,10 @@
 /area/awaymission/black_mesa)
 "Ro" = (
 /obj/structure/rack/shelf,
-/obj/item/storage/firstaid/regular,
 /obj/machinery/light/cold{
 	dir = 4
 	},
+/obj/item/storage/firstaid/regular,
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "Rt" = (
@@ -4465,12 +4567,7 @@
 /area/awaymission/black_mesa)
 "Sh" = (
 /obj/structure/rack/shelf,
-/obj/item/ammo_box/magazine/mp40,
-/obj/item/ammo_box/magazine/mp40,
-/obj/item/ammo_box/magazine/mp40,
-/obj/item/ammo_box/magazine/mp40,
-/obj/item/ammo_box/magazine/mp40,
-/obj/item/ammo_box/magazine/mp40,
+/obj/item/storage/firstaid/regular,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
 "Sm" = (
@@ -4556,9 +4653,11 @@
 /turf/open/floor/iron/smooth,
 /area/awaymission/black_mesa)
 "Tq" = (
-/obj/structure/rack/shelf,
-/obj/item/storage/firstaid/tactical,
-/turf/open/floor/circuit,
+/obj/machinery/light/cold,
+/obj/item/stack/sheet/mineral/sandbags{
+	amount = 50
+	},
+/turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa)
 "Tt" = (
 /obj/structure/lattice/catwalk,
@@ -4578,6 +4677,19 @@
 /area/awaymission/black_mesa)
 "Tv" = (
 /turf/open/floor/circuit/red,
+/area/awaymission/black_mesa)
+"Tw" = (
+/obj/structure/closet/crate/large,
+/obj/item/stack/sheet/plasteel,
+/turf/open/floor/iron/smooth,
+/area/awaymission/black_mesa)
+"Tx" = (
+/obj/machinery/light/cold{
+	dir = 1
+	},
+/obj/item/gun/ballistic/automatic/pistol/g17,
+/obj/structure/table,
+/turf/open/floor/plating,
 /area/awaymission/black_mesa)
 "Ty" = (
 /obj/structure/table,
@@ -4612,7 +4724,7 @@
 /obj/item/storage/firstaid/advanced,
 /obj/item/storage/firstaid/advanced,
 /obj/item/storage/firstaid/advanced,
-/obj/item/storage/firstaid/tactical,
+/obj/item/storage/firstaid/expeditionary,
 /turf/open/floor/iron/smooth,
 /area/awaymission/black_mesa)
 "TX" = (
@@ -4679,7 +4791,7 @@
 /area/awaymission/black_mesa)
 "UB" = (
 /obj/structure/rack/shelf,
-/obj/item/gun/ballistic/automatic/submachine_gun/mp40,
+/obj/item/melee/baton/security,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
 "UC" = (
@@ -4695,7 +4807,7 @@
 /turf/open/floor/iron/dark,
 /area/awaymission/black_mesa)
 "UF" = (
-/obj/effect/spawner/randomcolavend,
+/obj/effect/spawner/random/vending/colavend,
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "UG" = (
@@ -4756,6 +4868,12 @@
 	dir = 10
 	},
 /turf/open/floor/iron/textured,
+/area/awaymission/black_mesa)
+"Vd" = (
+/obj/structure/window/reinforced/plasma/spawner/west,
+/obj/structure/window/reinforced/plasma/spawner/east,
+/obj/machinery/suit_storage_unit/centcom,
+/turf/open/floor/plating,
 /area/awaymission/black_mesa)
 "Ve" = (
 /turf/open/floor/iron/textured,
@@ -4851,7 +4969,7 @@
 /turf/open/floor/iron/smooth,
 /area/awaymission/black_mesa)
 "VT" = (
-/obj/effect/spawner/randomsnackvend,
+/obj/effect/spawner/random/vending/snackvend,
 /turf/open/floor/carpet/blue,
 /area/awaymission/black_mesa)
 "VX" = (
@@ -4940,7 +5058,7 @@
 /obj/structure/chair/sofa/bench{
 	dir = 4
 	},
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/iron/smooth,
 /area/awaymission/black_mesa)
 "WO" = (
@@ -4957,14 +5075,14 @@
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa)
 "WV" = (
-/obj/effect/mob_spawn/human/scientist,
 /obj/item/ammo_box/magazine/multi_sprite/g17,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/plating{
 	icon_state = "titanium_dam2"
 	},
 /area/awaymission/black_mesa)
 "Xa" = (
-/obj/effect/spawner/structure/window/shuttle,
+/obj/effect/spawner/structure/window/reinforced/shuttle,
 /turf/open/floor/plating,
 /area/awaymission/black_mesa)
 "Xc" = (
@@ -4986,6 +5104,11 @@
 	},
 /turf/open/floor/plating,
 /area/awaymission/black_mesa)
+"Xh" = (
+/obj/structure/table,
+/obj/item/stack/sheet/plasteel,
+/turf/open/floor/iron/smooth_large,
+/area/awaymission/black_mesa)
 "Xi" = (
 /obj/effect/turf_decal/trimline/darkblue/filled/corner{
 	dir = 8
@@ -4998,6 +5121,12 @@
 	},
 /obj/structure/chair/sofa/bench/right,
 /turf/open/floor/iron/textured_large,
+/area/awaymission/black_mesa)
+"Xq" = (
+/obj/structure/table,
+/obj/item/folder/red,
+/obj/item/knife/combat/marksman,
+/turf/open/floor/iron/smooth,
 /area/awaymission/black_mesa)
 "Xr" = (
 /obj/machinery/chem_heater,
@@ -5066,6 +5195,11 @@
 	dir = 8
 	},
 /turf/open/floor/iron/dark,
+/area/awaymission/black_mesa)
+"XS" = (
+/obj/structure/closet/crate/large,
+/obj/item/stack/sheet/plasteel,
+/turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "XU" = (
 /obj/structure/cable,
@@ -5276,7 +5410,7 @@
 /area/awaymission/black_mesa)
 "Zx" = (
 /obj/structure/railing,
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/corpse/human/scientist,
 /turf/open/floor/engine,
 /area/awaymission/black_mesa)
 "Zy" = (
@@ -5292,7 +5426,7 @@
 /turf/open/floor/mineral/titanium,
 /area/awaymission/black_mesa)
 "ZF" = (
-/obj/effect/mob_spawn/human/scientist,
+/obj/effect/mob_spawn/ghost_role/human/black_mesa,
 /turf/open/floor/engine,
 /area/awaymission/black_mesa)
 "ZH" = (
@@ -13172,7 +13306,7 @@ rz
 No
 Yr
 jM
-xN
+Jr
 UL
 Ak
 UL
@@ -13868,8 +14002,8 @@ ct
 ct
 ct
 Ve
-Ve
-TQ
+mV
+IN
 Yr
 Yr
 TQ
@@ -14125,7 +14259,7 @@ ct
 ct
 gN
 ct
-Ve
+mV
 Ph
 Yr
 Yr
@@ -14382,8 +14516,8 @@ Ve
 Ve
 Ve
 Ve
-Ve
-TQ
+mV
+IN
 hx
 hx
 TQ
@@ -14427,17 +14561,17 @@ TQ
 TQ
 TQ
 TQ
-TQ
-TQ
-An
-TQ
-TQ
-TQ
-TQ
-TQ
+IN
 TQ
 An
 TQ
+IN
+TQ
+TQ
+TQ
+TQ
+Hp
+IN
 TQ
 TQ
 TQ
@@ -14445,7 +14579,7 @@ TQ
 TQ
 TQ
 An
-TQ
+IN
 TQ
 TQ
 Yr
@@ -14457,7 +14591,7 @@ rz
 No
 Yr
 jM
-Aa
+fu
 UL
 oH
 UL
@@ -14646,7 +14780,7 @@ CL
 TQ
 Ve
 ct
-ct
+XS
 ct
 ct
 ct
@@ -14678,6 +14812,7 @@ Ve
 TQ
 jd
 CL
+mE
 CL
 CL
 CL
@@ -14687,6 +14822,13 @@ CL
 CL
 CL
 CL
+mE
+df
+CL
+CL
+CL
+mE
+hj
 CL
 CL
 CL
@@ -14694,16 +14836,8 @@ CL
 CL
 CL
 CL
-CL
-CL
-CL
-CL
-CL
-CL
-CL
-CL
-CL
-CL
+mE
+ro
 TQ
 Yr
 Yr
@@ -14714,7 +14848,7 @@ rz
 No
 Yr
 UL
-Jr
+zq
 UL
 Aj
 UL
@@ -14935,6 +15069,8 @@ Ve
 TQ
 Yr
 TQ
+IN
+GB
 TQ
 TQ
 TQ
@@ -14943,6 +15079,13 @@ TQ
 TQ
 TQ
 TQ
+IN
+TQ
+TQ
+TQ
+TQ
+IN
+IN
 TQ
 TQ
 TQ
@@ -14950,16 +15093,7 @@ TQ
 TQ
 TQ
 TQ
-TQ
-TQ
-TQ
-TQ
-TQ
-TQ
-TQ
-TQ
-TQ
-TQ
+IN
 CL
 TQ
 TQ
@@ -14971,7 +15105,7 @@ rz
 No
 Yr
 UL
-Jr
+zq
 UL
 Aj
 UL
@@ -15228,7 +15362,7 @@ rz
 No
 Yr
 UL
-Jr
+zq
 UL
 nD
 UL
@@ -15485,7 +15619,7 @@ rz
 No
 Yr
 jM
-Aa
+fu
 UL
 oH
 UL
@@ -15664,7 +15798,7 @@ Yr
 TQ
 Qe
 Ve
-Ve
+Qe
 Ve
 ct
 Ve
@@ -15677,7 +15811,7 @@ ct
 ct
 ct
 ct
-ct
+XS
 Ve
 kD
 jh
@@ -16182,7 +16316,7 @@ Ve
 Ve
 ct
 Ve
-TQ
+GB
 CL
 hx
 TQ
@@ -16439,7 +16573,7 @@ Ve
 Ve
 Ve
 Ve
-OV
+Tq
 Yr
 Yr
 TQ
@@ -16690,13 +16824,13 @@ rz
 No
 Yr
 TQ
-aG
+hY
+mV
+mV
 Ve
-Ve
-Qe
-Ve
-Pz
-GB
+mV
+zJ
+IN
 Yr
 Yr
 iJ
@@ -16977,7 +17111,7 @@ tU
 TQ
 Ve
 Ve
-ct
+XS
 Ve
 Ve
 Ve
@@ -17489,8 +17623,8 @@ Yr
 Yr
 Yr
 iJ
-TQ
-Ve
+IN
+mV
 Ve
 ct
 ct
@@ -17746,7 +17880,7 @@ No
 No
 Yr
 Yr
-TQ
+IN
 Qe
 Ve
 ct
@@ -18340,10 +18474,10 @@ No
 No
 Yr
 Nj
-Tq
+kP
 Nj
 fe
-Tq
+fe
 Yr
 No
 No
@@ -18523,7 +18657,7 @@ TQ
 Ve
 Ve
 Fu
-ct
+XS
 TQ
 CH
 TQ
@@ -18597,9 +18731,9 @@ Yr
 Yr
 Yr
 TQ
+YI
 TQ
-TQ
-TQ
+YI
 TQ
 Yr
 Yr
@@ -19310,6 +19444,8 @@ TQ
 TQ
 TQ
 TQ
+IN
+GB
 TQ
 TQ
 TQ
@@ -19320,15 +19456,13 @@ TQ
 TQ
 TQ
 TQ
+IN
+bO
 TQ
 TQ
 TQ
 TQ
-TQ
-TQ
-TQ
-TQ
-TQ
+IN
 CL
 TQ
 TQ
@@ -19369,7 +19503,7 @@ TQ
 Yr
 TQ
 TQ
-TQ
+YI
 TQ
 TQ
 Yr
@@ -19567,6 +19701,13 @@ CL
 CL
 CL
 CL
+mE
+CL
+CL
+CL
+CL
+CL
+mE
 CL
 CL
 CL
@@ -19578,14 +19719,7 @@ CL
 CL
 CL
 CL
-CL
-CL
-CL
-CL
-CL
-CL
-CL
-CL
+mE
 Cu
 TQ
 Yr
@@ -19624,11 +19758,11 @@ Yr
 Yr
 Yr
 Yr
+YI
 TQ
 TQ
 TQ
-TQ
-TQ
+YI
 Yr
 Yr
 Yr
@@ -19830,19 +19964,19 @@ TQ
 TQ
 TQ
 TQ
+IN
+TQ
+af
+GB
+TQ
+TQ
 TQ
 TQ
 af
 TQ
 TQ
 TQ
-TQ
-TQ
-af
-TQ
-TQ
-TQ
-TQ
+IN
 af
 TQ
 Yr
@@ -19881,10 +20015,10 @@ No
 No
 No
 Yr
-Tq
 fe
+cZ
 Nj
-Tq
+kP
 Nj
 Yr
 No
@@ -24130,7 +24264,7 @@ Ve
 Ve
 Ve
 Ve
-ct
+XS
 Ve
 Ve
 Ve
@@ -34671,7 +34805,7 @@ ba
 ba
 ba
 ba
-EA
+hq
 ba
 ak
 ak
@@ -35306,7 +35440,7 @@ Ve
 SJ
 zz
 zz
-IN
+zz
 zz
 Yr
 No
@@ -35562,7 +35696,7 @@ Ve
 Ve
 Yr
 zz
-zz
+QW
 zz
 zz
 Yr
@@ -35819,8 +35953,8 @@ Ve
 pZ
 Yr
 RQ
-RQ
-RQ
+Ps
+Ps
 ML
 Yr
 No
@@ -36056,7 +36190,7 @@ UL
 AX
 AX
 UL
-AX
+Xq
 AX
 UL
 AX
@@ -37641,7 +37775,7 @@ rz
 No
 Yr
 PV
-Du
+Lf
 Yr
 No
 rz
@@ -38120,7 +38254,7 @@ No
 No
 Yr
 TQ
-Ve
+hP
 Ve
 TQ
 Yr
@@ -44776,7 +44910,7 @@ Zv
 Zv
 Ny
 kN
-oM
+Xh
 oM
 FK
 Yr
@@ -45275,7 +45409,7 @@ rz
 No
 Yr
 TQ
-aP
+bU
 iX
 ts
 pA
@@ -45771,7 +45905,7 @@ UL
 UL
 UL
 UL
-FA
+Tw
 FA
 kN
 kN
@@ -47157,8 +47291,8 @@ rz
 No
 Yr
 Ve
-Ro
-mV
+Nd
+Ve
 Ro
 Yr
 rm
@@ -47929,7 +48063,7 @@ No
 Yr
 tR
 kN
-ng
+kN
 UB
 Yr
 rm
@@ -48555,7 +48689,7 @@ rz
 No
 Yr
 Az
-Az
+qO
 co
 fx
 fx
@@ -51796,7 +51930,7 @@ xx
 qm
 UL
 FA
-oi
+FA
 UL
 xx
 FA
@@ -52305,7 +52439,7 @@ Gp
 xx
 UL
 UL
-oi
+FA
 FA
 xx
 UL
@@ -53465,7 +53599,7 @@ mJ
 Yr
 nQ
 nQ
-nQ
+Mm
 nQ
 vo
 Yr
@@ -53774,9 +53908,9 @@ Yr
 ql
 TQ
 kx
-Mf
-HU
-vg
+TQ
+TQ
+TQ
 TQ
 TQ
 An
@@ -54754,7 +54888,7 @@ UL
 kN
 ld
 kN
-kN
+ld
 ts
 TQ
 TQ
@@ -54866,7 +55000,7 @@ cH
 PM
 cb
 JH
-Ve
+hP
 Ve
 JH
 ys
@@ -55011,7 +55145,7 @@ UL
 UL
 lG
 UL
-kN
+ld
 OR
 TQ
 Ve
@@ -55268,7 +55402,7 @@ kN
 kN
 ld
 kN
-kN
+ld
 ts
 TQ
 TQ
@@ -55802,7 +55936,7 @@ No
 No
 No
 Yr
-Ug
+BJ
 VL
 VL
 XK
@@ -56291,7 +56425,7 @@ Yr
 kN
 nr
 Ve
-hY
+Nd
 Ve
 Ve
 Yr
@@ -56335,7 +56469,7 @@ kN
 UL
 kN
 cw
-kN
+io
 ha
 Yr
 No
@@ -56850,7 +56984,7 @@ UL
 kN
 Yr
 kN
-ha
+eL
 Yr
 No
 No
@@ -57069,7 +57203,7 @@ Yr
 No
 No
 Yr
-Ve
+Vd
 Ve
 Ve
 Ve
@@ -59442,7 +59576,7 @@ Yr
 Fo
 UL
 UL
-Pb
+Fs
 Yr
 Yr
 Yr
@@ -60744,7 +60878,7 @@ Yr
 PL
 PL
 ar
-PR
+Jn
 TQ
 bW
 ts
@@ -65353,7 +65487,7 @@ rz
 rz
 No
 Yr
-zJ
+lk
 TQ
 TQ
 rl
@@ -65615,7 +65749,7 @@ YI
 TQ
 QV
 Qv
-Jz
+Qv
 Yr
 No
 rz
@@ -65867,7 +66001,7 @@ rz
 rz
 No
 Yr
-ur
+Tx
 TQ
 TQ
 lc
@@ -66381,9 +66515,9 @@ rz
 rz
 No
 Yr
-ur
+mn
 TQ
-YI
+TQ
 ge
 Qv
 Qv
@@ -66895,7 +67029,7 @@ rz
 rz
 No
 Yr
-zJ
+lk
 TQ
 YI
 ge

@@ -12,10 +12,14 @@
 	var/obj/item/charging = null
 	var/recharge_coeff = 1
 	var/using_power = FALSE //Did we put power into "charging" last process()?
+	///Did we finish recharging the currently inserted item?
+	var/finished_recharging = FALSE
 
 	var/static/list/allowed_devices = typecacheof(list(
+		/obj/item/stock_parts/cell/microfusion, //SKYRAT EDIT ADDITION
+		/obj/item/gun/microfusion, // SKYRAT EDIT ADDITION
 		/obj/item/gun/energy,
-		/obj/item/melee/baton,
+		/obj/item/melee/baton/security,
 		/obj/item/ammo_box/magazine/recharge,
 		/obj/item/modular_computer))
 
@@ -45,11 +49,12 @@
 	charging = new_charging
 	if (new_charging)
 		START_PROCESSING(SSmachines, src)
-		use_power = ACTIVE_POWER_USE
+		update_use_power(ACTIVE_POWER_USE)
+		finished_recharging = FALSE
 		using_power = TRUE
 		update_appearance()
 	else
-		use_power = IDLE_POWER_USE
+		update_use_power(IDLE_POWER_USE)
 		using_power = FALSE
 		update_appearance()
 
@@ -83,6 +88,19 @@
 					to_chat(user, span_notice("Your gun has no external power connector."))
 					return 1
 
+			//SKYRAT EDIT ADDITION
+			if (istype(G, /obj/item/gun/microfusion))
+				var/obj/item/gun/microfusion/microfusion_gun = G
+				if(microfusion_gun.cell?.chargerate <= 0)
+					to_chat(user, span_notice("[microfusion_gun] cannot be recharged!"))
+					return TRUE
+
+			if(istype(G, /obj/item/stock_parts/cell/microfusion))
+				var/obj/item/stock_parts/cell/microfusion/inserting_cell = G
+				if(inserting_cell.chargerate <= 0)
+					to_chat(user, span_notice("[inserting_cell] cannot be recharged!"))
+					return TRUE
+			//SKYRAT EDIT END
 			if(!user.transferItemToLoc(G, src))
 				return 1
 			setCharging(G)
@@ -146,6 +164,11 @@
 				using_power = TRUE
 			update_appearance()
 			return
+		if(!using_power && !finished_recharging) //Inserted thing is at max charge/ammo, notify those around us
+			finished_recharging = TRUE
+			playsound(src, 'sound/machines/ping.ogg', 30, TRUE)
+			say("[charging] has finished recharging!")
+
 	else
 		return PROCESS_KILL
 
@@ -159,10 +182,10 @@
 			if(E.cell)
 				E.cell.emp_act(severity)
 
-		else if(istype(charging, /obj/item/melee/baton))
-			var/obj/item/melee/baton/B = charging
-			if(B.cell)
-				B.cell.charge = 0
+		else if(istype(charging, /obj/item/melee/baton/security))
+			var/obj/item/melee/baton/security/batong = charging
+			if(batong.cell)
+				batong.cell.charge = 0
 
 /obj/machinery/recharger/update_appearance(updates)
 	. = ..()
@@ -175,6 +198,7 @@
 	. = ..()
 	if(machine_stat & (NOPOWER|BROKEN) || !anchored)
 		return
+
 	if(panel_open)
 		. += mutable_appearance(icon, "[base_icon_state]-open", alpha = src.alpha)
 		return
@@ -183,6 +207,7 @@
 		. += mutable_appearance(icon, "[base_icon_state]-empty", alpha = src.alpha)
 		. += emissive_appearance(icon, "[base_icon_state]-empty", alpha = src.alpha)
 		return
+
 	if(using_power)
 		. += mutable_appearance(icon, "[base_icon_state]-charging", alpha = src.alpha)
 		. += emissive_appearance(icon, "[base_icon_state]-charging", alpha = src.alpha)

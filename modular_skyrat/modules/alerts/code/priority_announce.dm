@@ -15,7 +15,7 @@
 		announcement += "<h1 class='alert'>Priority Announcement</h1>"
 		if (title && length(title) > 0)
 			announcement += "<br><h2 class='alert'>[html_encode(title)]</h2>"
-	else if(type == "Captain")
+	else if(type == JOB_CAPTAIN)
 		announcement += "<h1 class='alert'>Captain Announces</h1>"
 		GLOB.news_network.SubmitArticle(html_encode(text), "Captain's Announcement", "Station Announcements", null)
 
@@ -60,7 +60,7 @@
 	SScommunications.send_message(M)
 
 ///This proc sends an announcement to all currently playing mobs. Use alert to send a more ominious BEEP. Generally used for updating people on minor things, such as CME locaiton. Use priority_announce for large announcements.
-/proc/minor_announce(message, title = "Attention:", alert, html_encode = TRUE, sound)
+/proc/minor_announce(message, title = "Attention:", alert, html_encode = TRUE, sound, override_volume = FALSE)
 	if(!message)
 		return
 
@@ -70,13 +70,13 @@
 
 	for(var/mob/M in GLOB.player_list)
 		if(!isnewplayer(M) && M.can_hear())
-			to_chat(M, "<span class='minorannounce'><font color = red>[title]</font color><BR>[message]</span><BR>")
+			to_chat(M, span_minorannounce("<font color = red>[title]</font color><BR>[message]</span><BR>"))
 
 	if(sound)
 		if(SSstation.announcer.event_sounds[sound])
 			var/list/picked = SSstation.announcer.event_sounds[sound]
 			sound = pick(picked)
-		alert_sound_to_playing(sound)
+		alert_sound_to_playing(sound, override_volume = override_volume)
 
 	if(alert)
 		alert_sound_to_playing(sound('modular_skyrat/modules/alerts/sound/alert1.ogg'))

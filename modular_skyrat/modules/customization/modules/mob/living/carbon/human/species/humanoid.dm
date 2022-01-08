@@ -1,7 +1,7 @@
 /datum/species/humanoid
 	name = "Humanoid"
-	id = "humanoid"
-	default_color = "4B4B4B"
+	id = SPECIES_HUMANOID
+	default_color = "#4B4B4B"
 	species_traits = list(MUTCOLORS,
 		EYECOLOR,
 		LIPS,
@@ -27,4 +27,4 @@
 	)
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 	payday_modifier = 0.75
-	limbs_id = "human"
+	limbs_id = SPECIES_HUMAN

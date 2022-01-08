@@ -139,7 +139,6 @@ GLOBAL_LIST_INIT(common_loot, list( //common: basic items
 		/obj/item/wrench = 100
 	) = 200,
 	list( //Stuff you'd get elsewhere but they're not that good
-		/obj/item/beacon = 50,
 		/obj/item/binoculars = 50,
 		/obj/item/bodybag = 200,
 		/obj/item/clothing/gloves/radio = 25,
@@ -296,8 +295,8 @@ GLOBAL_LIST_INIT(common_loot, list( //common: basic items
 		/obj/item/instrument/violin = 1
 	) = 50,
 	list( //Unimportant clothing
-		/obj/item/clothing/accessory/fan_clown_pin = 25,
-		/obj/item/clothing/accessory/fan_mime_pin = 25,
+		/obj/item/clothing/accessory/clown_enjoyer_pin = 25,
+		/obj/item/clothing/accessory/mime_fan_pin = 25,
 		/obj/item/clothing/accessory/lawyers_badge = 5,
 		/obj/item/clothing/accessory/waistcoat = 25,
 		/obj/item/clothing/ears/headphones = 5,

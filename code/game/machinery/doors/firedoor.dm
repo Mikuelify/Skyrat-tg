@@ -17,16 +17,18 @@
 	explosion_block = 1
 	safe = FALSE
 	layer = BELOW_OPEN_DOOR_LAYER
-	closingLayer = BELOW_OPEN_DOOR_LAYER //SKYRAT EDIT CHANGE - AESTHETICS - ORIGINAL: CLOSED_FIREDOOR_LAYER
+	closingLayer = CLOSED_FIREDOOR_LAYER
 	assemblytype = /obj/structure/firelock_frame
-	armor = list(MELEE = 10, BULLET = 30, LASER = 20, ENERGY = 20, BOMB = 30, BIO = 100, RAD = 100, FIRE = 95, ACID = 70)
+	armor = list(MELEE = 10, BULLET = 30, LASER = 20, ENERGY = 20, BOMB = 30, BIO = 100, FIRE = 95, ACID = 70)
 	interaction_flags_machine = INTERACT_MACHINE_WIRES_IF_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN_SILICON | INTERACT_MACHINE_REQUIRES_SILICON | INTERACT_MACHINE_OPEN
 	var/nextstate = null
 	var/boltslocked = TRUE
 	var/list/affecting_areas
 	var/being_held_open = FALSE
+	var/knock_sound = 'sound/effects/glassknock.ogg'
+	var/bash_sound = 'sound/effects/glassbash.ogg'
 
-/obj/machinery/door/firedoor/Initialize()
+/obj/machinery/door/firedoor/Initialize(mapload)
 	. = ..()
 	CalculateAffectingAreas()
 
@@ -37,26 +39,28 @@
 	else if(!welded)
 		. += span_notice("It is closed, but could be <b>pried</b> open.")
 		. += span_notice("Hold the firelock temporarily open by prying it with <i>left-click</i> and standing next to it.")
-		. += span_notice("Prying by <i>right-clicking</i> the firelock will open it permanently.")
+		//. += span_notice("Prying by <i>right-clicking</i> the firelock will open it permanently.") SKYRAT EDIT REMOVAL
 		. += span_notice("Deconstruction would require it to be <b>welded</b> shut.")
 	else if(boltslocked)
 		. += span_notice("It is <i>welded</i> shut. The floor bolts have been locked by <b>screws</b>.")
 	else
 		. += span_notice("The bolt locks have been <i>unscrewed</i>, but the bolts themselves are still <b>wrenched</b> to the floor.")
 
+/* //SKYRAT EDIT REMOVAL BEGIN
 /obj/machinery/door/firedoor/proc/CalculateAffectingAreas()
 	remove_from_areas()
 	affecting_areas = get_adjacent_open_areas(src) | get_area(src)
 	for(var/I in affecting_areas)
 		var/area/A = I
 		LAZYADD(A.firedoors, src)
+*/ //SKYRAT EDIT END
 
 /obj/machinery/door/firedoor/closed
 	icon_state = "door_closed"
 	density = TRUE
 
+/* //SKYRAT EDIT REMOVAL BEGIN
 //see also turf/AfterChange for adjacency shennanigans
-
 /obj/machinery/door/firedoor/proc/remove_from_areas()
 	if(affecting_areas)
 		for(var/I in affecting_areas)
@@ -67,6 +71,7 @@
 	remove_from_areas()
 	affecting_areas.Cut()
 	return ..()
+*/ //SKYRAT EDIT REMOVAL END
 
 /obj/machinery/door/firedoor/Bumped(atom/movable/AM)
 	if(panel_open || operating)
@@ -82,7 +87,7 @@
 	. = ..()
 	INVOKE_ASYNC(src, .proc/latetoggle)
 
-/* /obj/machinery/door/firedoor/attack_hand(mob/user, list/modifiers)
+/obj/machinery/door/firedoor/attack_hand(mob/living/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -90,9 +95,14 @@
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
 
-	user.visible_message("<span class='notice'>[user] bangs on \the [src].</span>", \
-		"<span class='notice'>You bang on \the [src].</span>")
-	playsound(loc, 'sound/effects/glassknock.ogg', 10, FALSE, frequency = 32000) */ // SKYRAT EDIT CHANGE - MOVED TO modular_skyrat\master_files\game\machinery\doors\firedoor.dm
+	if(!user.combat_mode)
+		user.visible_message(span_notice("[user] knocks on [src]."), \
+			span_notice("You knock on [src]."))
+		playsound(src, knock_sound, 50, TRUE)
+	else
+		user.visible_message(span_warning("[user] bashes [src]!"), \
+			span_warning("You bash [src]!"))
+		playsound(src, bash_sound, 100, TRUE)
 
 /obj/machinery/door/firedoor/attackby(obj/item/C, mob/user, params)
 	add_fingerprint(user)
@@ -121,7 +131,7 @@
 			return
 	return ..()
 
-/obj/machinery/door/firedoor/try_to_activate_door(mob/user)
+/obj/machinery/door/firedoor/try_to_activate_door(mob/user, access_bypass = FALSE)
 	return
 
 /obj/machinery/door/firedoor/try_to_weld(obj/item/weldingtool/W, mob/user)
@@ -204,9 +214,11 @@
 		if("closing")
 			flick("door_closing", src)
 
+/*SKYRAT EDIT REMOVAL
 /obj/machinery/door/firedoor/update_icon_state()
 	. = ..()
 	icon_state = "[base_icon_state]_[density ? "closed" : "open"]"
+*/
 
 /obj/machinery/door/firedoor/update_overlays()
 	. = ..()
@@ -255,36 +267,38 @@
 	icon = 'icons/obj/doors/edge_Doorfire.dmi'
 	can_crush = FALSE
 	flags_1 = ON_BORDER_1
-	CanAtmosPass = ATMOS_PASS_PROC
-	glass = FALSE
+	can_atmos_pass = ATMOS_PASS_PROC
 
 /obj/machinery/door/firedoor/border_only/closed
 	icon_state = "door_closed"
-	opacity = TRUE
 	density = TRUE
 
-/obj/machinery/door/firedoor/border_only/Initialize()
+/obj/machinery/door/firedoor/border_only/Initialize(mapload)
 	. = ..()
 
 	var/static/list/loc_connections = list(
 		COMSIG_ATOM_EXIT = .proc/on_exit,
 	)
 
-	AddElement(/datum/element/connect_loc, src, loc_connections)
+	AddElement(/datum/element/connect_loc, loc_connections)
 
-/obj/machinery/door/firedoor/border_only/CanAllowThrough(atom/movable/mover, turf/target)
+/obj/machinery/door/firedoor/border_only/CanAllowThrough(atom/movable/mover, border_dir)
 	. = ..()
-	if(!(get_dir(loc, target) == dir)) //Make sure looking at appropriate border
+	if(!(border_dir == dir)) //Make sure looking at appropriate border
 		return TRUE
 
-/obj/machinery/door/firedoor/border_only/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/machinery/door/firedoor/border_only/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
+	if(leaving.movement_type & PHASING)
+		return
+	if(leaving == src)
+		return // Let's not block ourselves.
 
-	if(get_dir(leaving.loc, new_location) == dir && density)
+	if(direction == dir && density)
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
-/obj/machinery/door/firedoor/border_only/CanAtmosPass(turf/T)
+/obj/machinery/door/firedoor/border_only/can_atmos_pass(turf/T, vertical = FALSE)
 	if(get_dir(loc, T) == dir)
 		return !density
 	else

@@ -28,7 +28,7 @@
 
 /mob/living/simple_animal/parrot
 	name = "parrot"
-	desc = "The parrot squawks, \"It's a Parrot! BAWWK!\"" //'
+	desc = "The parrot squawks, \"They're a Parrot! BAWWK!\"" //'
 	icon = 'icons/mob/animal.dmi'
 	icon_state = "parrot_fly"
 	icon_living = "parrot_fly"
@@ -42,7 +42,7 @@
 	speak = list("Hi!","Hello!","Cracker?","BAWWWWK george mellons griffing me!")
 	speak_emote = list("squawks","says","yells")
 	emote_hear = list("squawks.","bawks!")
-	emote_see = list("flutters its wings.")
+	emote_see = list("flutters their wings.")
 
 	speak_chance = 1 //1% (1 in 100) chance every tick; So about once per 150 seconds, assuming an average tick is 1.5s
 	turns_per_move = 5
@@ -108,7 +108,7 @@
 	var/obj/item/held_item = null
 
 
-/mob/living/simple_animal/parrot/Initialize()
+/mob/living/simple_animal/parrot/Initialize(mapload)
 	. = ..()
 	if(!ears)
 		var/headset = pick(/obj/item/radio/headset/headset_sec, \
@@ -133,7 +133,10 @@
 /mob/living/simple_animal/parrot/examine(mob/user)
 	. = ..()
 	if(stat)
-		. += pick("This parrot is no more.", "This is a late parrot.", "This is an ex-parrot.")
+		if(HAS_TRAIT(user, TRAIT_NAIVE))
+			. += pick("It seems tired and shagged out after a long squawk.", "It seems to be pining for the fjords.", "It's resting. It's a beautiful bird. Lovely plumage.")
+		else
+			. += pick("This parrot is no more.","This is a late parrot.","This is an ex-parrot.")
 
 /mob/living/simple_animal/parrot/death(gibbed)
 	if(held_item)
@@ -156,6 +159,7 @@
 	. += "Held Item: [held_item]"
 	. += "Combat mode: [combat_mode ? "On" : "Off"]"
 
+/* SKYRAT EDIT - MOVED TO modular_skyrat/modules/poly_commands
 /mob/living/simple_animal/parrot/Hear(message, atom/movable/speaker, message_langs, raw_message, radio_freq, list/spans, list/message_mods = list())
 	. = ..()
 	if(speaker != src && prob(50)) //Dont imitate ourselves
@@ -165,6 +169,7 @@
 			speech_buffer |= html_decode(raw_message)
 	if(speaker == src && !client) //If a parrot squawks in the woods and no one is around to hear it, does it make a sound? This code says yes!
 		return message
+*/
 
 /mob/living/simple_animal/parrot/radio(message, list/message_mods = list(), list/spans, language) //literally copied from human/radio(), but there's no other way to do this. at least it's better than it used to be.
 	. = ..()
@@ -842,8 +847,7 @@ GLOBAL_LIST_INIT(strippable_parrot_items, create_strippable_list(list(
 		pixel_x = initial(pixel_x)
 		pixel_y = initial(pixel_y)
 
-
-
+/* SKYRAT EDIT - MOVED TO modular_skyrat/modules/poly_commands/parrot.dm
 /mob/living/simple_animal/parrot/proc/perch_on_human(mob/living/carbon/human/H)
 	if(!H)
 		return
@@ -854,7 +858,7 @@ GLOBAL_LIST_INIT(strippable_parrot_items, create_strippable_list(list(
 		icon_state = icon_sit
 		parrot_state = PARROT_PERCH
 		to_chat(src, span_notice("You sit on [H]'s shoulder."))
-
+*/
 
 /mob/living/simple_animal/parrot/proc/toggle_mode()
 	set name = "Toggle mode"
@@ -879,7 +883,7 @@ GLOBAL_LIST_INIT(strippable_parrot_items, create_strippable_list(list(
 /mob/living/simple_animal/parrot/poly
 	name = "Poly"
 	desc = "Poly the Parrot. An expert on quantum cracker theory."
-	speak = list("Poly wanna cracker!", ":e Check the crystal, you chucklefucks!",":e Wire the solars, you lazy bums!",":e WHO TOOK THE DAMN HARDSUITS?",":e OH GOD ITS ABOUT TO DELAMINATE CALL THE SHUTTLE")
+	speak = list("Poly wanna cracker!", ":e Check the crystal, you chucklefucks!",":e Wire the solars, you lazy bums!",":e WHO TOOK THE DAMN MODSUITS?",":e OH GOD ITS ABOUT TO DELAMINATE CALL THE SHUTTLE")
 	gold_core_spawnable = NO_SPAWN
 	speak_chance = 3
 	var/memory_saved = FALSE
@@ -887,7 +891,7 @@ GLOBAL_LIST_INIT(strippable_parrot_items, create_strippable_list(list(
 	var/longest_survival = 0
 	var/longest_deathstreak = 0
 
-/mob/living/simple_animal/parrot/poly/Initialize()
+/mob/living/simple_animal/parrot/poly/Initialize(mapload)
 	ears = new /obj/item/radio/headset/headset_eng(src)
 	available_channels = list(":e")
 	Read_Memory()
@@ -973,10 +977,11 @@ GLOBAL_LIST_INIT(strippable_parrot_items, create_strippable_list(list(
 	color = "#FFFFFF77"
 	speak_chance = 20
 	status_flags = GODMODE
+	sentience_type = SENTIENCE_BOSS //This is so players can't mindswap into ghost poly to become a literal god
 	incorporeal_move = INCORPOREAL_MOVE_BASIC
 	butcher_results = list(/obj/item/ectoplasm = 1)
 
-/mob/living/simple_animal/parrot/poly/ghost/Initialize()
+/mob/living/simple_animal/parrot/poly/ghost/Initialize(mapload)
 	memory_saved = TRUE //At this point nothing is saved
 	. = ..()
 

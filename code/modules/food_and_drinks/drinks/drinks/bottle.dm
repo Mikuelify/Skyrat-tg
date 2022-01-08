@@ -15,7 +15,7 @@
 	volume = 100
 	force = 15 //Smashing bottles over someone's head hurts.
 	throwforce = 15
-	inhand_icon_state = "broken_beer" //Generic held-item sprite until unique ones are made.
+	inhand_icon_state = "beer" //Generic held-item sprite until unique ones are made.
 	lefthand_file = 'icons/mob/inhands/misc/food_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/food_righthand.dmi'
 	isGlass = TRUE
@@ -23,10 +23,6 @@
 	age_restricted = TRUE // wrryy can't set an init value to see if foodtype contains ALCOHOL so here we go
 	///Directly relates to the 'knockdown' duration. Lowered by armor (i.e. helmets)
 	var/bottle_knockdown_duration = 1.3 SECONDS
-
-/obj/item/reagent_containers/food/drinks/bottle/update_overlays()
-	. = ..()
-	. += "[initial(icon_state)]shine"
 
 /obj/item/reagent_containers/food/drinks/bottle/small
 	name = "small glass bottle"
@@ -112,8 +108,7 @@
 	if(affecting == BODY_ZONE_HEAD && istype(target, /mob/living/carbon/))
 		head_attack_message = " on the head"
 		if(armor_duration)
-			//living_target.apply_effect(min(armor_duration, 200) , EFFECT_KNOCKDOWN)
-			living_target.StaminaKnockdown(20, TRUE) //SKYRAT EDIT CHANGE - ORIGINAL ABOVE
+			living_target.apply_effect(min(armor_duration, 200) , EFFECT_KNOCKDOWN)
 
 	//Display an attack message.
 	if(target != user)
@@ -145,16 +140,44 @@
 	throw_speed = 3
 	throw_range = 5
 	w_class = WEIGHT_CLASS_TINY
-	inhand_icon_state = "beer"
+	inhand_icon_state = "broken_beer"
+	lefthand_file = 'icons/mob/inhands/misc/food_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/misc/food_righthand.dmi'
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb_continuous = list("stabs", "slashes", "attacks")
 	attack_verb_simple = list("stab", "slash", "attack")
 	sharpness = SHARP_EDGED
 	var/static/icon/broken_outline = icon('icons/obj/drinks.dmi', "broken")
 
-/obj/item/broken_bottle/Initialize()
+/obj/item/broken_bottle/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/butchering, 200, 55)
+
+/obj/item/reagent_containers/food/drinks/bottle/beer
+	name = "space beer"
+	desc = "Beer. In space."
+	icon_state = "beer"
+	volume = 30
+	list_reagents = list(/datum/reagent/consumable/ethanol/beer = 30)
+	foodtype = GRAIN | ALCOHOL
+	custom_price = PAYCHECK_EASY
+
+/obj/item/reagent_containers/food/drinks/bottle/beer/almost_empty
+	list_reagents = list(/datum/reagent/consumable/ethanol/beer = 1)
+
+/obj/item/reagent_containers/food/drinks/bottle/beer/light
+	name = "Carp Lite"
+	desc = "Brewed with \"Pure Ice Asteroid Spring Water\"."
+	list_reagents = list(/datum/reagent/consumable/ethanol/beer/light = 30)
+
+/obj/item/reagent_containers/food/drinks/bottle/ale
+	name = "Magm-Ale"
+	desc = "A true dorf's drink of choice."
+	icon_state = "alebottle"
+	volume = 30
+	list_reagents = list(/datum/reagent/consumable/ethanol/ale = 30)
+	foodtype = GRAIN | ALCOHOL
+	custom_price = PAYCHECK_EASY
 
 /obj/item/reagent_containers/food/drinks/bottle/gin
 	name = "Griffeater gin"
@@ -293,7 +316,7 @@
 	icon_state = "absinthebottle"
 	list_reagents = list(/datum/reagent/consumable/ethanol/absinthe = 100)
 
-/obj/item/reagent_containers/food/drinks/bottle/absinthe/Initialize()
+/obj/item/reagent_containers/food/drinks/bottle/absinthe/Initialize(mapload)
 	. = ..()
 	redact()
 
@@ -301,7 +324,7 @@
 	// There was a large fight in the coderbus about a player reference
 	// in absinthe. Ergo, this is why the name generation is now so
 	// complicated. Judge us kindly.
-	var/shortname = pickweight(
+	var/shortname = pick_weight(
 		list("T&T" = 1, "A&A" = 1, "Generic" = 1))
 	var/fullname
 	switch(shortname)
@@ -372,7 +395,7 @@
 	icon_state = "sakebottle"
 	list_reagents = list(/datum/reagent/consumable/ethanol/sake = 100)
 
-/obj/item/reagent_containers/food/drinks/bottle/sake/Initialize()
+/obj/item/reagent_containers/food/drinks/bottle/sake/Initialize(mapload)
 	. = ..()
 	if(prob(10))
 		name = "Fluffy Tail Sake"
@@ -388,6 +411,25 @@
 	desc = "A bottle of pure Fernet Bronca, produced in Cordoba Space Station"
 	icon_state = "fernetbottle"
 	list_reagents = list(/datum/reagent/consumable/ethanol/fernet = 100)
+
+/obj/item/reagent_containers/food/drinks/bottle/bitters
+	name = "Andromeda Bitters"
+	desc = "An aromatic addition to any drink. Made in New Trinidad, now and forever."
+	icon_state = "bitters_bottle"
+	volume = 30
+	list_reagents = list(/datum/reagent/consumable/ethanol/bitters = 30)
+
+/obj/item/reagent_containers/food/drinks/bottle/curacao
+	name = "Beekhof Blauw Curaçao"
+	desc = "Still produced on the island of Curaçao, after all these years."
+	icon_state = "curacao_bottle"
+	list_reagents = list(/datum/reagent/consumable/ethanol/curacao = 100)
+
+/obj/item/reagent_containers/food/drinks/bottle/navy_rum
+	name = "Pride of the Union Navy-Strength Rum"
+	desc = "Ironically named, given it's made in Bermuda."
+	icon_state = "navy_rum_bottle"
+	list_reagents = list(/datum/reagent/consumable/ethanol/navy_rum = 100)
 
 //////////////////////////JUICES AND STUFF ///////////////////////
 
@@ -490,8 +532,59 @@
 	name = "Eau d' Dandy Brut Champagne"
 	desc = "Finely sourced from only the most pretentious French vineyards."
 	icon_state = "champagne_bottle"
+	base_icon_state = "champagne_bottle"
+	reagent_flags = TRANSPARENT
+	spillable = FALSE
 	isGlass = TRUE
 	list_reagents = list(/datum/reagent/consumable/ethanol/champagne = 100)
+
+
+/obj/item/reagent_containers/food/drinks/bottle/champagne/attack_self(mob/user)
+	if(spillable)
+		return ..()
+	balloon_alert(user, "fiddling with cork...")
+	if(do_after(user, 1 SECONDS, src))
+		return pop_cork(user)
+
+/obj/item/reagent_containers/food/drinks/bottle/champagne/update_icon_state()
+	. = ..()
+	if(spillable)
+		icon_state = "[base_icon_state]_popped"
+	else
+		icon_state = base_icon_state
+
+/obj/item/reagent_containers/food/drinks/bottle/champagne/proc/pop_cork(mob/user)
+	user.visible_message(span_danger("[user] loosens the cork of [src] causing it to pop out of the bottle with great force."), \
+		span_nicegreen("You elegantly loosen the cork of [src] causing it to pop out of the bottle with great force."))
+	reagents.flags |= OPENCONTAINER
+	playsound(src, 'sound/items/champagne_pop.ogg', 70, TRUE)
+	spillable = TRUE
+	update_appearance()
+	var/obj/projectile/bullet/reusable/champagne_cork/popped_cork = new (get_turf(src))
+	popped_cork.firer =  user
+	popped_cork.fired_from = src
+	popped_cork.fire(dir2angle(user.dir) + rand(-30, 30))
+
+/obj/projectile/bullet/reusable/champagne_cork
+	name = "champagne cork"
+	icon = 'icons/obj/drinks.dmi'
+	icon_state = "champagne_cork"
+	hitsound = 'sound/weapons/genhit.ogg'
+	damage = 10
+	sharpness = NONE
+	impact_effect_type = null
+	ricochets_max = 3
+	ricochet_chance = 70
+	ricochet_decay_damage = 1
+	ricochet_incidence_leeway = 0
+	range = 7
+	knockdown = 2 SECONDS
+	ammo_type = /obj/item/trash/champagne_cork
+
+/obj/item/trash/champagne_cork
+	name = "champagne cork"
+	icon = 'icons/obj/drinks.dmi'
+	icon_state = "champagne_cork"
 
 /obj/item/reagent_containers/food/drinks/bottle/blazaam
 	name = "Ginbad's Blazaam"
@@ -602,7 +695,7 @@
 	var/fermentation_time_remaining /// for partial fermentation
 	var/fermentation_timer /// store the timer id of fermentation
 
-/obj/item/reagent_containers/food/drinks/bottle/pruno/Initialize()
+/obj/item/reagent_containers/food/drinks/bottle/pruno/Initialize(mapload)
 	. = ..()
 	RegisterSignal(src, COMSIG_MOVABLE_MOVED, .proc/check_fermentation)
 
@@ -633,6 +726,7 @@
 /obj/item/reagent_containers/food/drinks/bottle/pruno/proc/do_fermentation()
 	fermentation_time_remaining = null
 	fermentation_timer = null
+	reagents.remove_reagent(/datum/reagent/consumable/prunomix, 50)
 	if(prob(10))
 		reagents.add_reagent(/datum/reagent/toxin/bad_food, 15) // closest thing we have to botulism
 		reagents.add_reagent(/datum/reagent/consumable/ethanol/pruno, 35)

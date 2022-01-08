@@ -210,7 +210,7 @@
 /datum/disease/advance/proc/Refresh(new_name = FALSE)
 	GenerateProperties()
 	AssignProperties()
-	if(processing && symptoms && symptoms.len)
+	if(processing && symptoms?.len)
 		for(var/datum/symptom/S in symptoms)
 			S.Start(src)
 			S.on_stage_change(src)
@@ -238,7 +238,7 @@
 // Assign the properties that are in the list.
 /datum/disease/advance/proc/AssignProperties()
 
-	if(properties && properties.len)
+	if(properties?.len)
 		if(properties["stealth"] >= 2)
 			visibility_flags |= HIDDEN_SCANNER
 		else
@@ -308,7 +308,7 @@
 
 // Will generate a random cure, the more resistance the symptoms have, the harder the cure.
 /datum/disease/advance/proc/GenerateCure()
-	if(properties && properties.len)
+	if(properties?.len)
 		var/res = clamp(properties["resistance"] - (symptoms.len / 2), 1, advance_cures.len)
 		if(res == oldres)
 			return
@@ -362,7 +362,7 @@
 				L += "[S.id]N"
 			else
 				L += S.id
-		L = sortList(L) // Sort the list so it doesn't matter which order the symptoms are in.
+		L = sort_list(L) // Sort the list so it doesn't matter which order the symptoms are in.
 		var/result = jointext(L, ":")
 		id = result
 	return id
@@ -451,7 +451,7 @@
 	symptoms += SSdisease.list_symptoms.Copy()
 	do
 		if(user)
-			var/symptom = input(user, "Choose a symptom to add ([i] remaining)", "Choose a Symptom") in sortList(symptoms, /proc/cmp_typepaths_asc)
+			var/symptom = tgui_input_list(user, "Choose a symptom to add ([i] remaining)", "Choose a Symptom", sort_list(symptoms, /proc/cmp_typepaths_asc))
 			if(isnull(symptom))
 				return
 			else if(istext(symptom))
@@ -465,7 +465,7 @@
 
 	if(D.symptoms.len > 0)
 
-		var/new_name = stripped_input(user, "Name your new disease.", "New Name")
+		var/new_name = tgui_input_text(user, "Name your new disease", "New Name", max_length = MAX_NAME_LEN)
 		if(!new_name)
 			return
 		D.Refresh()
@@ -473,12 +473,11 @@
 		D.name = new_name //Updates our copy
 
 		var/list/targets = list("Random")
-		targets += sortNames(GLOB.human_list)
-		var/target = input(user, "Pick a viable human target for the disease.", "Disease Target") as null|anything in targets
-
-		var/mob/living/carbon/human/H
-		if(!target)
+		targets += sort_names(GLOB.human_list)
+		var/target = tgui_input_list(user, "Viable human target", "Disease Target", targets)
+		if(isnull(target))
 			return
+		var/mob/living/carbon/human/H
 		if(target == "Random")
 			for(var/human in shuffle(GLOB.human_list))
 				H = human

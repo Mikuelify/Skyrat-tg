@@ -5,6 +5,11 @@
 
 /datum/antagonist/ert
 	name = "Emergency Response Officer"
+	can_elimination_hijack = ELIMINATION_PREVENT
+	show_in_antagpanel = FALSE
+	show_to_ghosts = TRUE
+	antag_moodlet = /datum/mood_event/focused
+	suicide_cry = "FOR NANOTRASEN!!"
 	var/datum/team/ert/ert_team
 	var/leader = FALSE
 	var/datum/outfit/outfit = /datum/outfit/centcom/ert/security
@@ -15,10 +20,9 @@
 	var/rip_and_tear = FALSE
 	var/equip_ert = TRUE
 	var/forge_objectives_for_ert = TRUE
-	can_elimination_hijack = ELIMINATION_PREVENT
-	show_in_antagpanel = FALSE
-	show_to_ghosts = TRUE
-	antag_moodlet = /datum/mood_event/focused
+	/// Typepath indicating the kind of job datum this ert member will have.
+	var/ert_job_path = /datum/job/ert_generic
+
 
 /datum/antagonist/ert/on_gain()
 	if(random_names)
@@ -48,7 +52,7 @@
 	outfit = /datum/outfit/centcom/centcom_official
 
 /datum/antagonist/ert/official/greet()
-	to_chat(owner, "<span class='warningplain'><B><font size=3 color=red>You are a CentCom Official.</font></B></span>")
+	. = ..()
 	if (ert_team)
 		to_chat(owner, "<span class='warningplain'>Central Command is sending you to [station_name()] with the task: [ert_team.mission.explanation_text]</span>")
 	else
@@ -155,6 +159,7 @@
 	plasmaman_outfit = /datum/outfit/plasmaman/centcom_intern
 	random_names = FALSE
 	role = "Intern"
+	suicide_cry = "FOR MY INTERNSHIP!!"
 
 /datum/antagonist/ert/intern/leader
 	name = "CentCom Head Intern"
@@ -239,13 +244,12 @@
 
 /datum/antagonist/ert/families
 	name = "Space Police Responder"
-	antag_hud_type = ANTAG_HUD_SPACECOP
 	antag_hud_name = "hud_spacecop"
+	suicide_cry = "FOR THE SPACE POLICE!!"
 
 /datum/antagonist/ert/families/apply_innate_effects(mob/living/mob_override)
 	..()
 	var/mob/living/M = mob_override || owner.current
-	add_antag_hud(antag_hud_type, antag_hud_name, M)
 	if(M.hud_used)
 		var/datum/hud/H = M.hud_used
 		var/atom/movable/screen/wanted/giving_wanted_lvl = new /atom/movable/screen/wanted()
@@ -257,31 +261,31 @@
 
 /datum/antagonist/ert/families/remove_innate_effects(mob/living/mob_override)
 	var/mob/living/M = mob_override || owner.current
-	remove_antag_hud(antag_hud_type, M)
 	if(M.hud_used)
 		var/datum/hud/H = M.hud_used
 		H.infodisplay -= H.wanted_lvl
 		QDEL_NULL(H.wanted_lvl)
 	..()
-
+// SKYRAT EDIT START
 /datum/antagonist/ert/families/greet()
-	var/missiondesc =  "<span class='warningplain'><B><font size=6 color=red>You are the [name].</font></B>"
-	missiondesc += "<BR><B><font size=5 color=red>You are NOT a Nanotrasen Employee. You work for the local government.</font></B>"
+	. = ..()
+	var/missiondesc
+	missiondesc += "<BR><B><font size=5 color=red>You are NOT a Nanotrasen Employee. You work for Sol Gov.</font></B>"
 	missiondesc += "<BR><B><font size=5 color=red>You are NOT a deathsquad. You are here to help innocents escape violence, criminal activity, and other dangerous things.</font></B>"
-	missiondesc += "<BR>After an uptick in gang violence on [station_name()], you are responding to emergency calls from the station for immediate SSC Police assistance!\n"
+	missiondesc += "<BR>You are responding to emergency calls from the station for immediate SolFed Police assistance!\n"
 	missiondesc += "<BR><B>Your Mission</B>:"
 	missiondesc += "<BR> <B>1.</B> Serve the public trust."
 	missiondesc += "<BR> <B>2.</B> Protect the innocent."
 	missiondesc += "<BR> <B>3.</B> Uphold the law."
-	missiondesc += "<BR> <B>4.</B> Find the Undercover Cops."
-	missiondesc += "<BR> <B>5.</B> Detain Nanotrasen Security personnel if they harm any citizen."
-	missiondesc += "<BR> You can <B>see gangsters</B> using your <B>special sunglasses</B>.</span>"
+	missiondesc += "<BR> <B>4.</B> Contact whoever called 911 and assist in resolving the matter."
+	missiondesc += "<BR> <B>5.</B> Protect, ensure, and uphold the rights of Sol Federation citizens on board [station_name()]."
 	to_chat(owner,missiondesc)
 	var/policy = get_policy(ROLE_FAMILIES)
 	if(policy)
 		to_chat(owner, policy)
 	var/mob/living/M = owner.current
 	M.playsound_local(M, 'sound/effects/families_police.ogg', 100, FALSE, pressure_affected = FALSE, use_reverb = FALSE)
+// SKYRAT EDIT END
 
 /datum/antagonist/ert/families/undercover_cop
 	name = "Undercover Cop"
@@ -344,10 +348,30 @@
 	outfit = /datum/outfit/families_police/beatcop/fbi
 
 /datum/antagonist/ert/families/beatcop/military
-	name = "Space Military"
+	name = "National Guard" // SKYRAT EDIT original: Space Military
 	role = "Sergeant"
 	outfit = /datum/outfit/families_police/beatcop/military
 
 /datum/antagonist/ert/families/beatcop/military/New()
 	. = ..()
 	name_source = GLOB.commando_names
+
+/datum/antagonist/ert/marine
+	name = "Marine Commander"
+	outfit = /datum/outfit/centcom/ert/marine
+	role = "Commander"
+
+/datum/antagonist/ert/marine/security
+	name = "Marine Heavy"
+	outfit = /datum/outfit/centcom/ert/marine/security
+	role = "Trooper"
+
+/datum/antagonist/ert/marine/engineer
+	name = "Marine Engineer"
+	outfit = /datum/outfit/centcom/ert/marine/engineer
+	role = "Engineer"
+
+/datum/antagonist/ert/marine/medic
+	name = "Marine Medic"
+	outfit = /datum/outfit/centcom/ert/marine/medic
+	role = "Medical Officer"

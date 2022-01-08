@@ -1,7 +1,7 @@
 /datum/species/vulpkanin
 	name = "Vulpkanin"
-	id = "vulpkanin"
-	default_color = "4B4B4B"
+	id = SPECIES_VULP
+	default_color = "#4B4B4B"
 	species_traits = list(
 		MUTCOLORS,
 		EYECOLOR,
@@ -23,13 +23,14 @@
 		"legs" = "Normal Legs"
 	)
 	attack_verb = "slash"
+	attack_effect = ATTACK_EFFECT_CLAW
 	attack_sound = 'sound/weapons/slash.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
 	liked_food = GROSS | MEAT | FRIED
 	payday_modifier = 0.75
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 	limbs_icon = 'modular_skyrat/master_files/icons/mob/species/mammal_parts_greyscale.dmi'
-	limbs_id = "mammal"
+	limbs_id = SPECIES_MAMMAL
 
 /datum/species/vulpkanin/get_random_features()
 	var/list/returned = MANDATORY_FEATURE_LIST
@@ -39,20 +40,20 @@
 	//Choose from a variety of mostly brightish, animal, matching colors
 	switch(random)
 		if(1)
-			main_color = "FA0"
-			second_color = "FD4"
+			main_color = "#FFAA00"
+			second_color = "#FFDD44"
 		if(2)
-			main_color = "F83"
-			second_color = "FA3"
+			main_color = "#FF8833"
+			second_color = "#FFAA33"
 		if(3)
-			main_color = "FC2"
-			second_color = "FD8"
+			main_color = "#FFCC22"
+			second_color = "#FFDD88"
 		if(4)
-			main_color = "F80"
-			second_color = "FFF"
+			main_color = "#FF8800"
+			second_color = "#FFFFFF"
 		if(5)
-			main_color = "999"
-			second_color = "EEE"
+			main_color = "#999999"
+			second_color = "#EEEEEE"
 	returned["mcolor"] = main_color
 	returned["mcolor2"] = second_color
 	returned["mcolor3"] = second_color

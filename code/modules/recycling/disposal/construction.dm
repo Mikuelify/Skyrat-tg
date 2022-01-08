@@ -17,7 +17,7 @@
 	. = ..()
 	if(isnull(.))
 		return
-	density = anchorvalue ? initial(pipe_type.density) : FALSE
+	set_density(anchorvalue ? initial(pipe_type.density) : FALSE)
 
 /obj/structure/disposalconstruct/Initialize(mapload, _pipe_type, _dir = SOUTH, flip = FALSE, obj/make_from)
 	. = ..()
@@ -116,7 +116,7 @@
 		var/ispipe = is_pipe() // Indicates if we should change the level of this pipe
 
 		var/turf/T = get_turf(src)
-		if(T.intact && isfloorturf(T))
+		if(T.underfloor_accessibility < UNDERFLOOR_INTERACTABLE && isfloorturf(T))
 			var/obj/item/crowbar/held_crowbar = user.is_holding_item_of_type(/obj/item/crowbar)
 			if(!held_crowbar || !T.crowbar_act(user, held_crowbar))
 				to_chat(user, span_warning("You can only attach the [pipename] if the floor plating is removed!"))

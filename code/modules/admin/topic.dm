@@ -277,18 +277,6 @@
 		switch(href_list["simplemake"])
 			if("observer")
 				M.change_mob_type( /mob/dead/observer , null, null, delmob )
-			if("drone")
-				M.change_mob_type( /mob/living/carbon/alien/humanoid/drone , null, null, delmob )
-			if("hunter")
-				M.change_mob_type( /mob/living/carbon/alien/humanoid/hunter , null, null, delmob )
-			if("queen")
-				M.change_mob_type( /mob/living/carbon/alien/humanoid/royal/queen , null, null, delmob )
-			if("praetorian")
-				M.change_mob_type( /mob/living/carbon/alien/humanoid/royal/praetorian , null, null, delmob )
-			if("sentinel")
-				M.change_mob_type( /mob/living/carbon/alien/humanoid/sentinel , null, null, delmob )
-			if("larva")
-				M.change_mob_type( /mob/living/carbon/alien/larva , null, null, delmob )
 			if("human")
 				var/posttransformoutfit = usr.client.robust_dress_shop()
 				if (!posttransformoutfit)
@@ -296,42 +284,10 @@
 				var/mob/living/carbon/human/newmob = M.change_mob_type( /mob/living/carbon/human , null, null, delmob )
 				if(posttransformoutfit && istype(newmob))
 					newmob.equipOutfit(posttransformoutfit)
-			if("slime")
-				M.change_mob_type( /mob/living/simple_animal/slime , null, null, delmob )
-			if("adultslime")
-				var/mob/living/simple_animal/slime/baby_slime = M.change_mob_type( /mob/living/simple_animal/slime , null, null, delmob )
-				baby_slime.amount_grown = SLIME_EVOLUTION_THRESHOLD
-				baby_slime.Evolve()
 			if("monkey")
 				M.change_mob_type( /mob/living/carbon/human/species/monkey , null, null, delmob )
 			if("robot")
 				M.change_mob_type( /mob/living/silicon/robot , null, null, delmob )
-			if("cat")
-				M.change_mob_type( /mob/living/simple_animal/pet/cat , null, null, delmob )
-			if("runtime")
-				M.change_mob_type( /mob/living/simple_animal/pet/cat/runtime , null, null, delmob )
-			if("corgi")
-				M.change_mob_type( /mob/living/simple_animal/pet/dog/corgi , null, null, delmob )
-			if("ian")
-				M.change_mob_type( /mob/living/simple_animal/pet/dog/corgi/ian , null, null, delmob )
-			if("pug")
-				M.change_mob_type( /mob/living/simple_animal/pet/dog/pug , null, null, delmob )
-			if("crab")
-				M.change_mob_type( /mob/living/simple_animal/crab , null, null, delmob )
-			if("coffee")
-				M.change_mob_type( /mob/living/simple_animal/crab/coffee , null, null, delmob )
-			if("parrot")
-				M.change_mob_type( /mob/living/simple_animal/parrot , null, null, delmob )
-			if("polyparrot")
-				M.change_mob_type( /mob/living/simple_animal/parrot/poly , null, null, delmob )
-			if("constructjuggernaut")
-				M.change_mob_type( /mob/living/simple_animal/hostile/construct/juggernaut , null, null, delmob )
-			if("constructartificer")
-				M.change_mob_type( /mob/living/simple_animal/hostile/construct/artificer , null, null, delmob )
-			if("constructwraith")
-				M.change_mob_type( /mob/living/simple_animal/hostile/construct/wraith , null, null, delmob )
-			if("shade")
-				M.change_mob_type( /mob/living/simple_animal/shade , null, null, delmob )
 
 	else if(href_list["boot2"])
 		if(!check_rights(R_ADMIN))
@@ -523,7 +479,7 @@
 		for (var/rule in subtypesof(/datum/dynamic_ruleset/roundstart))
 			var/datum/dynamic_ruleset/roundstart/newrule = new rule()
 			roundstart_rules[newrule.name] = newrule
-		var/added_rule = input(usr,"What ruleset do you want to force? This will bypass threat level and population restrictions.", "Rigging Roundstart", null) as null|anything in sortList(roundstart_rules)
+		var/added_rule = input(usr,"What ruleset do you want to force? This will bypass threat level and population restrictions.", "Rigging Roundstart", null) as null|anything in sort_list(roundstart_rules)
 		if (added_rule)
 			GLOB.dynamic_forced_roundstart_ruleset += roundstart_rules[added_rule]
 			log_admin("[key_name(usr)] set [added_rule] to be a forced roundstart ruleset.")
@@ -597,46 +553,6 @@
 		message_admins("[key_name(usr)] set 'forced_threat_level' to [GLOB.dynamic_forced_threat_level].")
 		dynamic_mode_options(usr)
 
-	else if(href_list["monkeyone"])
-		if(!check_rights(R_SPAWN))
-			return
-
-		var/mob/living/carbon/human/H = locate(href_list["monkeyone"])
-		if(!istype(H))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human.", confidential = TRUE)
-			return
-
-		log_admin("[key_name(usr)] attempting to monkeyize [key_name(H)].")
-		message_admins(span_adminnotice("[key_name_admin(usr)] attempting to monkeyize [key_name_admin(H)]."))
-		H.monkeyize()
-
-	else if(href_list["humanone"])
-		if(!check_rights(R_SPAWN))
-			return
-
-		var/mob/living/carbon/human/Mo = locate(href_list["humanone"])
-		if(!ismonkey(Mo))
-			to_chat(usr, "This can only be used on monkeys.", confidential = TRUE)
-			return
-
-		log_admin("[key_name(usr)] attempting to humanize [key_name(Mo)].")
-		message_admins(span_adminnotice("[key_name_admin(usr)] attempting to humanize [key_name_admin(Mo)]."))
-		Mo.humanize()
-
-	else if(href_list["corgione"])
-		if(!check_rights(R_SPAWN))
-			return
-
-		var/mob/living/carbon/human/H = locate(href_list["corgione"])
-		if(!istype(H))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human.", confidential = TRUE)
-			return
-
-		log_admin("[key_name(usr)] attempting to corgize [key_name(H)].")
-		message_admins(span_adminnotice("[key_name_admin(usr)] attempting to corgize [key_name_admin(H)]."))
-		H.corgize()
-
-
 	else if(href_list["forcespeech"])
 		if(!check_rights(R_FUN))
 			return
@@ -668,7 +584,14 @@
 		if(tgui_alert(usr, "Send [key_name(M)] to Prison?", "Message", list("Yes", "No")) != "Yes")
 			return
 
+		/// SKYRAT EDIT START - Immersion-friendly Admin Prison
+		var/datum/effect_system/spark_spread/quantum/sparks = new
+		sparks.set_up(10, 1, M)
+		sparks.attach(M.loc)
+		sparks.start()
 		M.forceMove(pick(GLOB.prisonwarp))
+		/// SKYRAT EDIT END
+
 		to_chat(M, span_adminnotice("You have been sent to Prison!"), confidential = TRUE)
 
 		log_admin("[key_name(usr)] has sent [key_name(M)] to Prison!")
@@ -820,9 +743,11 @@
 		if(!check_rights(R_SPAWN))
 			return
 
-		var/mob/living/carbon/human/H = locate(href_list["makeai"])
-		if(!istype(H))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human.", confidential = TRUE)
+		var/mob/our_mob = locate(href_list["makeai"])
+		if(!istype(our_mob))
+			return
+		if(isAI(our_mob))
+			to_chat(usr, "That's already an AI.", confidential = TRUE)
 			return
 
 		var/move = TRUE
@@ -831,68 +756,25 @@
 				return
 			if("No")
 				move = FALSE
-		if(QDELETED(H))
+		if(QDELETED(our_mob))
 			to_chat(usr, span_danger("Subject was deleted already. Transform canceled."))
 			return
-		message_admins(span_danger("Admin [key_name_admin(usr)] AIized [key_name_admin(H)]!"))
-		log_admin("[key_name(usr)] AIized [key_name(H)].")
-		H.AIize(TRUE, H.client, move)
-
-	else if(href_list["makealien"])
-		if(!check_rights(R_SPAWN))
-			return
-
-		var/mob/living/carbon/human/H = locate(href_list["makealien"])
-		if(!istype(H))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human.", confidential = TRUE)
-			return
-
-		usr.client.cmd_admin_alienize(H)
-
-	else if(href_list["makeslime"])
-		if(!check_rights(R_SPAWN))
-			return
-
-		var/mob/living/carbon/human/H = locate(href_list["makeslime"])
-		if(!istype(H))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human.", confidential = TRUE)
-			return
-
-		usr.client.cmd_admin_slimeize(H)
-
-	else if(href_list["makeblob"])
-		if(!check_rights(R_SPAWN))
-			return
-
-		var/mob/living/carbon/human/H = locate(href_list["makeblob"])
-		if(!istype(H))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human.", confidential = TRUE)
-			return
-
-		usr.client.cmd_admin_blobize(H)
-
+		message_admins(span_danger("Admin [key_name_admin(usr)] AIized [key_name_admin(our_mob)]!"))
+		log_admin("[key_name(usr)] AIized [key_name(our_mob)].")
+		our_mob.AIize(TRUE, our_mob.client, move)
 
 	else if(href_list["makerobot"])
 		if(!check_rights(R_SPAWN))
 			return
 
-		var/mob/living/carbon/human/H = locate(href_list["makerobot"])
-		if(!istype(H))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human.", confidential = TRUE)
+		var/mob/our_mob = locate(href_list["makerobot"])
+		if(!istype(our_mob))
+			return
+		if(iscyborg(our_mob))
+			to_chat(usr, "That's already a cyborg.", confidential = TRUE)
 			return
 
-		usr.client.cmd_admin_robotize(H)
-
-	else if(href_list["makeanimal"])
-		if(!check_rights(R_SPAWN))
-			return
-
-		var/mob/M = locate(href_list["makeanimal"])
-		if(isnewplayer(M))
-			to_chat(usr, "This cannot be used on instances of type /mob/dead/new_player.", confidential = TRUE)
-			return
-
-		usr.client.cmd_admin_animalize(M)
+		usr.client.cmd_admin_robotize(our_mob)
 
 	else if(href_list["adminplayeropts"])
 		var/mob/M = locate(href_list["adminplayeropts"])
@@ -902,18 +784,7 @@
 		if(!isobserver(usr) && !check_rights(R_ADMIN))
 			return
 
-		var/atom/movable/AM = locate(href_list["adminplayerobservefollow"])
-
-		var/client/C = usr.client
-		var/can_ghost = TRUE
-		if(!isobserver(usr))
-			can_ghost = C.admin_ghost()
-
-		if(!can_ghost)
-			return
-		var/mob/dead/observer/A = C.mob
-		A.ManualFollow(AM)
-
+		usr.client?.admin_follow(locate(href_list["adminplayerobservefollow"]))
 	else if(href_list["admingetmovable"])
 		if(!check_rights(R_ADMIN))
 			return
@@ -925,6 +796,8 @@
 
 	else if(href_list["adminplayerobservecoodjump"])
 		if(!isobserver(usr) && !check_rights(R_ADMIN))
+			return
+		if(isnewplayer(usr))
 			return
 
 		var/x = text2num(href_list["X"])
@@ -963,7 +836,7 @@
 
 		//Job + antagonist
 		if(M.mind)
-			special_role_description = "Role: <b>[M.mind.assigned_role]</b>; Antagonist: <font color='red'><b>"
+			special_role_description = "Role: <b>[M.mind.assigned_role.title]</b>; Antagonist: <font color='red'><b>"
 			var/i = 0
 			for(var/datum/antagonist/A in M.mind.antag_datums)
 				special_role_description += "[A.name]"
@@ -1013,9 +886,10 @@
 
 		var/Add = href_list["addjobslot"]
 
-		for(var/datum/job/job in SSjob.occupations)
+		for(var/datum/job/job as anything in SSjob.joinable_occupations)
 			if(job.title == Add)
 				job.total_positions += 1
+				log_job_debug("[key_name(usr)] added a slot to [job.title]")
 				break
 
 		src.manage_free_slots()
@@ -1027,13 +901,14 @@
 
 		var/Add = href_list["customjobslot"]
 
-		for(var/datum/job/job in SSjob.occupations)
+		for(var/datum/job/job as anything in SSjob.joinable_occupations)
 			if(job.title == Add)
 				var/newtime = null
 				newtime = input(usr, "How many jebs do you want?", "Add wanted posters", "[newtime]") as num|null
 				if(!newtime)
 					to_chat(src.owner, "Setting to amount of positions filled for the job", confidential = TRUE)
 					job.total_positions = job.current_positions
+					log_job_debug("[key_name(usr)] set the job cap for [job.title] to [job.total_positions]")
 					break
 				job.total_positions = newtime
 
@@ -1045,9 +920,10 @@
 
 		var/Remove = href_list["removejobslot"]
 
-		for(var/datum/job/job in SSjob.occupations)
+		for(var/datum/job/job as anything in SSjob.joinable_occupations)
 			if(job.title == Remove && job.total_positions - job.current_positions > 0)
 				job.total_positions -= 1
+				log_job_debug("[key_name(usr)] removed a slot from [job.title]")
 				break
 
 		src.manage_free_slots()
@@ -1058,9 +934,10 @@
 
 		var/Unlimit = href_list["unlimitjobslot"]
 
-		for(var/datum/job/job in SSjob.occupations)
+		for(var/datum/job/job as anything in SSjob.joinable_occupations)
 			if(job.title == Unlimit)
 				job.total_positions = -1
+				log_job_debug("[key_name(usr)] removed the limit from [job.title]")
 				break
 
 		src.manage_free_slots()
@@ -1071,9 +948,10 @@
 
 		var/Limit = href_list["limitjobslot"]
 
-		for(var/datum/job/job in SSjob.occupations)
+		for(var/datum/job/job as anything in SSjob.joinable_occupations)
 			if(job.title == Limit)
 				job.total_positions = job.current_positions
+				log_job_debug("[key_name(usr)] set the limit for [job.title] to [job.total_positions]")
 				break
 
 		src.manage_free_slots()
@@ -1112,6 +990,22 @@
 		SSblackbox.record_feedback("amount", "admin_cookies_spawned", 1)
 		to_chat(H, span_adminnotice("Your prayers have been answered!! You received the <b>best [new_item.name]!</b>"), confidential = TRUE)
 		SEND_SOUND(H, sound('sound/effects/pray_chaplain.ogg'))
+
+	else if (href_list["adminpopup"])
+		if (!check_rights(R_ADMIN))
+			return
+
+		var/message = input(owner, "As well as a popup, they'll also be sent a message to reply to. What do you want that to be?", "Message") as text|null
+		if (!message)
+			to_chat(owner, span_notice("Popup cancelled."))
+			return
+
+		var/client/target = locate(href_list["adminpopup"])
+		if (!istype(target))
+			to_chat(owner, span_notice("The mob doesn't exist anymore!"))
+			return
+
+		give_admin_popup(target, owner, message)
 
 	else if(href_list["adminsmite"])
 		if(!check_rights(R_ADMIN|R_FUN))
@@ -1469,7 +1363,7 @@
 		var/list/available_channels = list()
 		for(var/datum/newscaster/feed_channel/F in GLOB.news_network.network_channels)
 			available_channels += F.channel_name
-		src.admincaster_feed_channel.channel_name = adminscrub(input(usr, "Choose receiving Feed Channel.", "Network Channel Handler") in sortList(available_channels) )
+		src.admincaster_feed_channel.channel_name = adminscrub(input(usr, "Choose receiving Feed Channel.", "Network Channel Handler") in sort_list(available_channels) )
 		src.access_news_network()
 
 	else if(href_list["ac_set_new_message"])
@@ -1526,7 +1420,7 @@
 			already_wanted = 1
 
 		if(already_wanted)
-			src.admincaster_wanted_message.criminal  = GLOB.news_network.wanted_issue.criminal
+			src.admincaster_wanted_message.criminal = GLOB.news_network.wanted_issue.criminal
 			src.admincaster_wanted_message.body = GLOB.news_network.wanted_issue.body
 		src.admincaster_screen = 14
 		src.access_news_network()
@@ -1704,7 +1598,7 @@
 		if(!check_rights(R_ADMIN))
 			return
 		var/list/type_choices = typesof(/datum/station_goal)
-		var/picked = tgui_input_list(usr, "Choose goal type",, type_choices)
+		var/picked = tgui_input_list(usr, "Choose goal type", "Station Goal", type_choices)
 		if(!picked)
 			return
 		var/datum/station_goal/G = new picked()
@@ -1720,6 +1614,58 @@
 		message_admins("[key_name(usr)] created \"[G.name]\" station goal.")
 		GLOB.station_goals += G
 		modify_goals()
+
+	else if(href_list["change_lag_switch"])
+		if(!check_rights(R_ADMIN))
+			return
+
+		switch(href_list["change_lag_switch"])
+			if("ALL_ON")
+				SSlag_switch.set_all_measures(TRUE)
+				log_admin("[key_name(usr)] turned all Lag Switch measures ON.")
+				message_admins("[key_name_admin(usr)] turned all Lag Switch measures ON.")
+			if("ALL_OFF")
+				SSlag_switch.set_all_measures(FALSE)
+				log_admin("[key_name(usr)] turned all Lag Switch measures OFF.")
+				message_admins("[key_name_admin(usr)] turned all Lag Switch measures OFF.")
+			else
+				var/switch_index = text2num(href_list["change_lag_switch"])
+				if(!SSlag_switch.set_measure(switch_index, !LAZYACCESS(SSlag_switch.measures, switch_index)))
+					to_chat(src, span_danger("Something went wrong when trying to toggle that Lag Switch. Check runtimes for more info."), confidential = TRUE)
+				else
+					log_admin("[key_name(usr)] turned a Lag Switch measure at index ([switch_index]) [LAZYACCESS(SSlag_switch.measures, switch_index) ? "ON" : "OFF"]")
+					message_admins("[key_name_admin(usr)] turned a Lag Switch measure [LAZYACCESS(SSlag_switch.measures, switch_index) ? "ON" : "OFF"]")
+
+		src.show_lag_switch_panel()
+
+	else if(href_list["change_lag_switch_option"])
+		if(!check_rights(R_ADMIN))
+			return
+
+		switch(href_list["change_lag_switch_option"])
+			if("CANCEL")
+				if(SSlag_switch.cancel_auto_enable_in_progress())
+					log_admin("[key_name(usr)] canceled the automatic Lag Switch activation in progress.")
+					message_admins("[key_name_admin(usr)] canceled the automatic Lag Switch activation in progress.")
+				return // return here to avoid (re)rendering the panel for this case
+			if("TOGGLE_AUTO")
+				SSlag_switch.toggle_auto_enable()
+				log_admin("[key_name(usr)] toggled automatic Lag Switch activation [SSlag_switch.auto_switch ? "ON" : "OFF"].")
+				message_admins("[key_name_admin(usr)] toggled automatic Lag Switch activation [SSlag_switch.auto_switch ? "ON" : "OFF"].")
+			if("NUM")
+				var/new_num = input("Enter new threshold value:", "Num") as null|num
+				if(!isnull(new_num))
+					SSlag_switch.trigger_pop = new_num
+					log_admin("[key_name(usr)] set the Lag Switch automatic trigger pop to [new_num].")
+					message_admins("[key_name_admin(usr)] set the Lag Switch automatic trigger pop to [new_num].")
+			if("SLOWCOOL")
+				var/new_num = input("Enter new cooldown in seconds:", "Num") as null|num
+				if(!isnull(new_num))
+					SSlag_switch.change_slowmode_cooldown(new_num)
+					log_admin("[key_name(usr)] set the Lag Switch slowmode cooldown to [new_num] seconds.")
+					message_admins("[key_name_admin(usr)] set the Lag Switch slowmode cooldown to [new_num] seconds.")
+
+		src.show_lag_switch_panel()
 
 	else if(href_list["viewruntime"])
 		var/datum/error_viewer/error_viewer = locate(href_list["viewruntime"])
@@ -1938,6 +1884,17 @@
 		var/admin_key = href_list["unbanadminkey"]
 		unban(ban_id, player_key, player_ip, player_cid, role, page, admin_key)
 
+	else if(href_list["rebanid"])
+		var/ban_id = href_list["rebanid"]
+		var/player_key = href_list["rebankey"]
+		var/player_ip = href_list["rebanip"]
+		var/player_cid = href_list["rebancid"]
+		var/role = href_list["rebanrole"]
+		var/page = href_list["rebanpage"]
+		var/admin_key = href_list["rebanadminkey"]
+		var/applies_to_admins = href_list["applies_to_admins"]
+		reban(ban_id, applies_to_admins, player_key, player_ip, player_cid, role, page, admin_key)
+
 	else if(href_list["unbanlog"])
 		var/ban_id = href_list["unbanlog"]
 		ban_log(ban_id)
@@ -1995,9 +1952,6 @@
 		poll_option_parse_href(href_list, poll, option)
 
 	else if(href_list["admincommend"])
-		if(!SSticker.IsRoundInProgress())
-			to_chat(usr, span_warning("The round must be in progress to use this!"))
-			return
 		var/mob/heart_recepient = locate(href_list["admincommend"])
 		if(!heart_recepient?.ckey)
 			to_chat(usr, span_warning("This mob either no longer exists or no longer is being controlled by someone!"))
@@ -2005,9 +1959,9 @@
 
 		switch(tgui_alert(usr, "Would you like the effects to apply immediately or at the end of the round? Applying them now will make it clear it was an admin commendation.", "<3?", list("Apply now", "Apply at round end", "Cancel")))
 			if("Apply now")
-				usr.nominate_heart(heart_recepient, instant = TRUE)
+				heart_recepient.receive_heart(usr, instant = TRUE)
 			if("Apply at round end")
-				usr.nominate_heart(heart_recepient)
+				heart_recepient.receive_heart(usr)
 			else
 				return
 
@@ -2028,3 +1982,24 @@
 		if(!check_rights(R_ADMIN))
 			return
 		GLOB.interviews.ui_interact(usr)
+
+	else if(href_list["del_tag"])
+		if(!check_rights(R_ADMIN))
+			return
+		var/datum/datum_to_remove = locate(href_list["del_tag"])
+		if(!datum_to_remove)
+			return
+		return remove_tagged_datum(datum_to_remove)
+
+	else if(href_list["show_tags"])
+		if(!check_rights(R_ADMIN))
+			return
+		return display_tags()
+
+	else if(href_list["mark_datum"])
+		if(!check_rights(R_ADMIN))
+			return
+		var/datum/datum_to_mark = locate(href_list["mark_datum"])
+		if(!datum_to_mark)
+			return
+		return usr.client?.mark_datum(datum_to_mark)

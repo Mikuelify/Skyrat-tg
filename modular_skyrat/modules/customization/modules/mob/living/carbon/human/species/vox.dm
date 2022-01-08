@@ -1,11 +1,12 @@
 /datum/species/vox
 	// Bird-like humanoids
 	name = "Vox"
-	id = "vox"
+	id = SPECIES_VOX
 	eyes_icon = 'modular_skyrat/master_files/icons/mob/species/vox_eyes.dmi'
 	limbs_icon = 'modular_skyrat/master_files/icons/mob/species/vox_parts_greyscale.dmi'
-	say_mod = "shrieks"
-	default_color = "00FF00"
+	say_mod = "skrees"
+	default_color = "#00FF00"
+	can_augment = FALSE
 	species_traits = list(
 		MUTCOLORS,
 		EYECOLOR,
@@ -21,7 +22,7 @@
 		TRAIT_CAN_STRIP
 	)
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
-	mutantlungs = /obj/item/organ/lungs/vox
+	mutantlungs = /obj/item/organ/lungs/nitrogen/vox
 	mutantbrain = /obj/item/organ/brain/vox
 	breathid = "n2"
 	mutant_bodyparts = list()
@@ -32,6 +33,7 @@
 		"spines" = ACC_RANDOM
 	)
 	attack_verb = "slash"
+	attack_effect = ATTACK_EFFECT_CLAW
 	attack_sound = 'sound/weapons/slash.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
 	liked_food = MEAT | FRIED
@@ -39,13 +41,14 @@
 	outfit_important_for_life = /datum/outfit/vox
 	species_language_holder = /datum/language_holder/vox
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
-	learnable_languages = list(/datum/language/common, /datum/language/vox)
+	learnable_languages = list(/datum/language/common, /datum/language/vox, /datum/language/schechi)
 
-/datum/species/vox/before_equip_job(datum/job/J, mob/living/carbon/human/H, visualsOnly = FALSE)
+/datum/species/vox/pre_equip_species_outfit(datum/job/job, mob/living/carbon/human/equipping, visuals_only)
+	. = ..()
 	var/datum/outfit/vox/O = new /datum/outfit/vox
-	H.equipOutfit(O, visualsOnly)
-	H.internal = H.get_item_for_held_index(2)
-	H.update_internals_hud_icon(1)
+	equipping.equipOutfit(O, visuals_only)
+	equipping.internal = equipping.get_item_for_held_index(2)
+	equipping.update_internals_hud_icon(1)
 
 /datum/species/vox/random_name(gender,unique,lastname)
 	if(unique)
@@ -60,9 +63,9 @@
 
 /datum/species/vox/get_random_features()
 	var/list/returned = MANDATORY_FEATURE_LIST
-	returned["mcolor"] = pick("7D8", "7DA", "7CD", "7DC")
-	returned["mcolor2"] = pick("ED8", "EC8")
-	returned["mcolor3"] = pick("222", "4EF", "4FB", "84F", "323")
+	returned["mcolor"] = pick("#77DD88", "#77DDAA", "#77CCDD", "#77DDCC")
+	returned["mcolor2"] = pick("#EEDD88", "#EECC88")
+	returned["mcolor3"] = pick("#222222", "#44EEFF", "#44FFBB", "#8844FF", "#332233")
 	return returned
 
 /datum/species/vox/get_random_body_markings(list/passed_features)

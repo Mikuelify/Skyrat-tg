@@ -19,23 +19,17 @@ GLOBAL_LIST_EMPTY(total_extraction_beacons)
 
 /obj/item/extraction_pack/attack_self(mob/user)
 	var/list/possible_beacons = list()
-	for(var/B in GLOB.total_extraction_beacons)
-		var/obj/structure/extraction_point/EP = B
-		if(EP.beacon_network in beacon_networks)
-			possible_beacons += EP
-
-	if(!possible_beacons.len)
+	for(var/obj/structure/extraction_point/extraction_point as anything in GLOB.total_extraction_beacons)
+		if(extraction_point.beacon_network in beacon_networks)
+			possible_beacons += extraction_point
+	if(!length(possible_beacons))
 		to_chat(user, span_warning("There are no extraction beacons in existence!"))
 		return
-
 	else
-		var/A
-
-		A = input("Select a beacon to connect to", "Balloon Extraction Pack", A) as null|anything in sortNames(possible_beacons)
-
-		if(!A)
+		var/chosen_beacon = tgui_input_list(user, "Beacon to connect to", "Balloon Extraction Pack", sort_names(possible_beacons))
+		if(isnull(chosen_beacon))
 			return
-		beacon = A
+		beacon = chosen_beacon
 		to_chat(user, span_notice("You link the extraction pack to the beacon system."))
 
 /obj/item/extraction_pack/afterattack(atom/movable/A, mob/living/carbon/human/user, flag, params)
@@ -83,7 +77,7 @@ GLOBAL_LIST_EMPTY(total_extraction_beacons)
 					M.buckled.unbuckle_mob(M, TRUE) // Unbuckle them to prevent anchoring problems
 			else
 				A.set_anchored(TRUE)
-				A.density = FALSE
+				A.set_density(FALSE)
 			var/obj/effect/extraction_holder/holder_obj = new(A.loc)
 			holder_obj.appearance = A.appearance
 			A.forceMove(holder_obj)
@@ -113,7 +107,7 @@ GLOBAL_LIST_EMPTY(total_extraction_beacons)
 			if(ishuman(A))
 				var/mob/living/carbon/human/L = A
 				L.SetUnconscious(0)
-				L.drowsyness = 0
+				L.set_drowsyness(0)
 				L.SetSleeping(0)
 			sleep(30)
 			var/list/flooring_near_beacon = list()
@@ -134,7 +128,7 @@ GLOBAL_LIST_EMPTY(total_extraction_beacons)
 			sleep(4)
 			holder_obj.cut_overlay(balloon3)
 			A.set_anchored(FALSE) // An item has to be unanchored to be extracted in the first place.
-			A.density = initial(A.density)
+			A.set_density(initial(A.density))
 			animate(holder_obj, pixel_z = 0, time = 5)
 			sleep(5)
 			A.forceMove(holder_obj.loc)
@@ -163,14 +157,14 @@ GLOBAL_LIST_EMPTY(total_extraction_beacons)
 	density = FALSE
 	var/beacon_network = "station"
 
-/obj/structure/extraction_point/Initialize()
+/obj/structure/extraction_point/Initialize(mapload)
 	. = ..()
 	name += " ([rand(100,999)]) ([get_area_name(src, TRUE)])"
 	GLOB.total_extraction_beacons += src
 
 /obj/structure/extraction_point/Destroy()
 	GLOB.total_extraction_beacons -= src
-	..()
+	return ..()
 
 /obj/effect/extraction_holder
 	name = "extraction holder"
@@ -182,7 +176,7 @@ GLOBAL_LIST_EMPTY(total_extraction_beacons)
 		var/mob/living/L = A
 		if(L.stat != DEAD)
 			return TRUE
-	for(var/thing in A.GetAllContents())
+	for(var/thing in A.get_all_contents())
 		if(isliving(A))
 			var/mob/living/L = A
 			if(L.stat != DEAD)

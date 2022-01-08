@@ -39,6 +39,7 @@
 	special_x_dimension = TRUE
 	//default_color = DEFAULT_SKIN_OR_PRIMARY //This is the price we're paying for sheaths
 	relevent_layers = list(BODY_BEHIND_LAYER, BODY_FRONT_LAYER)
+	genetic = TRUE
 	var/can_have_sheath = TRUE
 
 /datum/sprite_accessory/genital/penis/is_hidden(mob/living/carbon/human/H, obj/item/bodypart/HD)
@@ -118,6 +119,7 @@
 	special_x_dimension = TRUE
 	default_color = DEFAULT_SKIN_OR_PRIMARY
 	relevent_layers = list(BODY_ADJ_LAYER, BODY_BEHIND_LAYER)
+	genetic = TRUE
 	var/has_size = TRUE
 
 /datum/sprite_accessory/genital/testicles/is_hidden(mob/living/carbon/human/H, obj/item/bodypart/HD)
@@ -164,8 +166,9 @@
 	associated_organ_slot = ORGAN_SLOT_VAGINA
 	key = "vagina"
 	always_color_customizable = TRUE
-	default_color = "fcc"
+	default_color = "#FFCCCC"
 	relevent_layers = list(BODY_FRONT_LAYER)
+	genetic = TRUE
 	var/alt_aroused = TRUE
 
 /datum/sprite_accessory/genital/vagina/is_hidden(mob/living/carbon/human/H, obj/item/bodypart/HD)
@@ -226,6 +229,7 @@
 	organ_type = /obj/item/organ/genital/womb
 	associated_organ_slot = ORGAN_SLOT_WOMB
 	key = "womb"
+	genetic = TRUE
 
 /datum/sprite_accessory/genital/womb/none
 	icon_state = "none"
@@ -238,6 +242,28 @@
 	name = "Normal"
 	color_src = null
 
+/datum/sprite_accessory/genital/anus
+	organ_type = /obj/item/organ/genital/anus
+	associated_organ_slot = ORGAN_SLOT_ANUS
+	key = "anus"
+	genetic = TRUE
+
+/datum/sprite_accessory/genital/anus/is_hidden(mob/living/carbon/human/owner, obj/item/bodypart/bodypart)
+	if(owner.underwear != "Nude" && !(owner.underwear_visibility & UNDERWEAR_HIDE_UNDIES))
+		return TRUE
+	. = ..()
+
+/datum/sprite_accessory/genital/anus/none
+	icon_state = "none"
+	name = "None"
+	factual = FALSE
+	color_src = null
+
+/datum/sprite_accessory/genital/anus/normal
+	icon_state = "anus"
+	name = "Anus"
+	color_src = null
+
 /datum/sprite_accessory/genital/breasts
 	icon = 'modular_skyrat/master_files/icons/mob/sprite_accessory/genitals/breasts_onmob.dmi'
 	organ_type = /obj/item/organ/genital/breasts
@@ -248,6 +274,7 @@
 	relevent_layers = list(BODY_BEHIND_LAYER, BODY_FRONT_LAYER)
 	uses_skintones = TRUE
 	genital_location = CHEST
+	genetic = TRUE
 
 /datum/sprite_accessory/genital/breasts/is_hidden(mob/living/carbon/human/H, obj/item/bodypart/HD)
 	if(H.undershirt != "Nude" && !(H.underwear_visibility & UNDERWEAR_HIDE_SHIRT))

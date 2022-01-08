@@ -147,7 +147,7 @@
 	if(HAS_TRAIT(user, TRAIT_CLUMSY)) //clumsy
 		return TRUE
 	if(user.mind)
-		if(user.mind.assigned_role == "Clown") //traitor clowns can use this, even though they're technically not clumsy
+		if(is_clown_job(user.mind.assigned_role)) //traitor clowns can use this, even though they're technically not clumsy
 			return TRUE
 		if(user.mind.has_antag_datum(/datum/antagonist/nukeop/clownop)) //clown ops aren't clumsy by default and technically don't have an assigned role of "Clown", but come on, they're basically clowns
 			return TRUE
@@ -261,15 +261,12 @@
 			pin_owner = null
 			owned = FALSE
 			return
-		var/transaction_amount = input(user, "Insert valid deposit amount for gun purchase", "Money Deposit") as null|num
-		if(transaction_amount < 1)
-			to_chat(user, span_warning("ERROR: Invalid amount designated."))
-			return
-		if(!transaction_amount)
+		var/transaction_amount = tgui_input_number(user, "Insert valid deposit amount for gun purchase", "Money Deposit", 1, 10000, 1)
+		if(isnull(transaction_amount))
 			return
 		pin_owner = id
 		owned = TRUE
-		payment_amount = transaction_amount
+		payment_amount = round(transaction_amount)
 		gun_owners += user
 		to_chat(user, span_notice("You link the card to the firing pin."))
 

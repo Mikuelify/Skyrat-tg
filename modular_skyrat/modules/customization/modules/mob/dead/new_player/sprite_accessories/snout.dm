@@ -3,11 +3,12 @@
 	generic = "Snout"
 	icon = 'modular_skyrat/master_files/icons/mob/sprite_accessory/lizard_snouts.dmi'
 	var/use_muzzled_sprites = TRUE
-	recommended_species = list("synthmammal", "mammal", "lizard", "unathi", "ashlizard", "silverlizard")
+	recommended_species = list(SPECIES_SYNTHMAMMAL, SPECIES_MAMMAL, SPECIES_LIZARD, SPECIES_UNATHI, SPECIES_LIZARD_ASH, SPECIES_LIZARD_SILVER)
 	relevent_layers = list(BODY_ADJ_LAYER, BODY_FRONT_LAYER)
+	genetic = TRUE
 
 /datum/sprite_accessory/snouts/is_hidden(mob/living/carbon/human/H, obj/item/bodypart/HD)
-	if((H.wear_mask && (H.wear_mask.flags_inv & HIDEFACE)) || (H.head && (H.head.flags_inv & HIDEFACE)) || !HD)
+	if((H.wear_mask && (H.wear_mask.flags_inv & HIDESNOUT)) || (H.head && (H.head.flags_inv & HIDESNOUT)) || !HD)
 		return TRUE
 	return FALSE
 
@@ -20,20 +21,24 @@
 /datum/sprite_accessory/snouts/mammal
 	icon = 'modular_skyrat/master_files/icons/mob/sprite_accessory/snouts.dmi'
 	color_src = USE_MATRIXED_COLORS
-	recommended_species = list("synthmammal", "mammal", "humanoid")
+	recommended_species = list(SPECIES_SYNTHMAMMAL, SPECIES_MAMMAL, SPECIES_HUMANOID)
 
 /datum/sprite_accessory/snouts/mammal/vulpkanin
-	recommended_species = list("synthmammal", "mammal", "vulpkanin", "humanoid")
+	recommended_species = list(SPECIES_SYNTHMAMMAL, SPECIES_MAMMAL, SPECIES_VULP, SPECIES_HUMANOID)
 
 /datum/sprite_accessory/snouts/mammal/tajaran
-	recommended_species = list("synthmammal", "mammal", "tajaran", "humanoid")
+	recommended_species = list(SPECIES_SYNTHMAMMAL, SPECIES_MAMMAL, SPECIES_TAJARAN, SPECIES_HUMANOID)
 
 /datum/sprite_accessory/snouts/mammal/akula
-	recommended_species = list("synthmammal", "mammal", "akula", "aquatic", "humanoid")
+	recommended_species = list(SPECIES_SYNTHMAMMAL, SPECIES_MAMMAL, SPECIES_AKULA, SPECIES_AQUATIC, SPECIES_HUMANOID)
 
 /datum/sprite_accessory/snouts/mammal/bird
 	name = "Beak"
 	icon_state = "bird"
+
+/datum/sprite_accessory/snouts/mammal/birdsmall
+	name = "Beak (small)"
+	icon_state = "birdsmall"
 
 /datum/sprite_accessory/snouts/mammal/bigbeak
 	name = "Big Beak"
@@ -60,7 +65,7 @@
 	name = "Horn"
 	icon_state = "rhino"
 	extra = TRUE
-	extra = MUTCOLORS3
+	extra_color_src = MUTCOLORS3
 
 /datum/sprite_accessory/snouts/mammal/rodent
 	name = "Rodent"
@@ -200,7 +205,7 @@
 	name = "Horn (Top)"
 	icon_state = "frhino"
 	extra = TRUE
-	extra = MUTCOLORS3
+	extra_color_src = MUTCOLORS3
 
 /datum/sprite_accessory/snouts/mammal/fhusky
 	name = "Husky (Top)"

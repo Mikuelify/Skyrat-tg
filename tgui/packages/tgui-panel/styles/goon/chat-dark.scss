@@ -311,7 +311,7 @@ em {
   font-weight: bold;
 }
 
-.say, .emote, .infoplain, .oocplain, .warningplain {
+.say, .emote, .infoplain, .oocplain, .warningplain, .mentor {
 }
 
 .deadsay {
@@ -367,6 +367,10 @@ em {
 
 .syndradio {
   color: #8f4a4b;
+}
+
+.gangradio {
+  color: #ac2ea1;
 }
 
 .centcomradio {
@@ -809,6 +813,30 @@ em {
   }
 }
 
+.doyourjobidiot {
+  color: #c51e1e;
+  text-shadow: 0 0 4px #e22525;
+  font-size: 125%;
+  font-weight: bold;
+  animation: flashingfuckingwarning 250ms infinite;
+}
+
+@keyframes flashingfuckingwarning {
+  0% {
+    color: #c51e1e;
+    text-shadow: 0 0 4px #c51e1e;
+  }
+
+  50% {
+    color: #e22525;
+    text-shadow: 0 0 8px #e22525;
+  }
+
+  100% {
+    color: #c51e1e;
+    text-shadow: 0 0 4px #c51e1e;
+  }
+}
 // SKYRAT ADDITION END
 
 .phobia {
@@ -937,3 +965,35 @@ em {
 .mentor         {color: #8a2be2;}
 .looc         {color: #d8b555;}
 .rlooc          {color: #b09448;}
+
+.examine_block {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(55, 55, 55, 0.33);
+  margin: 7px 4px;
+  padding: 8px 12px;
+  max-width: 550px;
+}
+
+.examine_block hr {
+  border: none;
+  background: #222;
+  height: 1px;
+  margin: 8px 16px 8px 16px;
+}
+
+.userlove	{
+  color: #FF1493;
+  font-style: italic;
+  font-weight: bold;
+  text-shadow: 0 0 6px #ff6dbc;
+}
+
+.crossooc {
+  color: #9f6efc;
+  font-weight: bold;
+}
+
+.crossasay {
+  color: #ff0000;
+  font-weight: bold;
+}

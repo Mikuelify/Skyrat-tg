@@ -10,6 +10,7 @@
 	icon = 'icons/obj/monitors.dmi' //ICON OVERRIDEN IN SKYRAT AESTHETICS - SEE MODULE
 	icon_state = "fire_bitem"
 	result_path = /obj/machinery/firealarm
+	pixel_shift = 26
 
 /obj/machinery/firealarm
 	name = "fire alarm"
@@ -18,7 +19,7 @@
 	icon_state = "fire0"
 	max_integrity = 250
 	integrity_failure = 0.4
-	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 100, RAD = 100, FIRE = 90, ACID = 30)
+	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 100, FIRE = 90, ACID = 30)
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 2
 	active_power_usage = 6
@@ -39,15 +40,12 @@
 	//Has this firealarm been triggered by its enviroment?
 	var/triggered = FALSE
 
+/* SKYRAT EDIT REMOVAL
 /obj/machinery/firealarm/Initialize(mapload, dir, building)
 	. = ..()
-	if(dir)
-		src.setDir(dir)
 	if(building)
 		buildstage = 0
 		panel_open = TRUE
-		pixel_x = (dir & 3)? 0 : (dir == 4 ? -24 : 24)
-		pixel_y = (dir & 3)? (dir ==1 ? -24 : 24) : 0
 	update_appearance()
 	myarea = get_area(src)
 	LAZYADD(myarea.firealarms, src)
@@ -55,10 +53,12 @@
 	AddElement(/datum/element/atmos_sensitive, mapload)
 	RegisterSignal(SSsecurity_level, COMSIG_SECURITY_LEVEL_CHANGED, .proc/check_security_level)
 
+
 /obj/machinery/firealarm/Destroy()
 	myarea.firereset(src)
 	LAZYREMOVE(myarea.firealarms, src)
 	return ..()
+*/
 
 /obj/machinery/firealarm/update_icon_state()
 	if(panel_open)
@@ -79,31 +79,31 @@
 	if(is_station_level(z))
 		. += "fire_[SSsecurity_level.current_level]"
 		. += mutable_appearance(icon, "fire_[SSsecurity_level.current_level]")
-		. += emissive_appearance(icon, "fire_[SSsecurity_level.current_level]")
+		. += emissive_appearance(icon, "fire_[SSsecurity_level.current_level]", alpha = src.alpha)
 	else
 		. += "fire_[SEC_LEVEL_GREEN]"
 		. += mutable_appearance(icon, "fire_[SEC_LEVEL_GREEN]")
-		. += emissive_appearance(icon, "fire_[SEC_LEVEL_GREEN]")
+		. += emissive_appearance(icon, "fire_[SEC_LEVEL_GREEN]", alpha = src.alpha)
 
 	var/area/area = get_area(src)
 
 	if(!detecting || !area.fire)
 		. += "fire_off"
 		. += mutable_appearance(icon, "fire_off")
-		. += emissive_appearance(icon, "fire_off")
+		. += emissive_appearance(icon, "fire_off", alpha = src.alpha)
 	else if(obj_flags & EMAGGED)
 		. += "fire_emagged"
 		. += mutable_appearance(icon, "fire_emagged")
-		. += emissive_appearance(icon, "fire_emagged")
+		. += emissive_appearance(icon, "fire_emagged", alpha = src.alpha)
 	else
 		. += "fire_on"
 		. += mutable_appearance(icon, "fire_on")
-		. += emissive_appearance(icon, "fire_on")
+		. += emissive_appearance(icon, "fire_on", alpha = src.alpha)
 
 	if(!panel_open && detecting && triggered) //It just looks horrible with the panel open
 		. += "fire_detected"
 		. += mutable_appearance(icon, "fire_detected")
-		. += emissive_appearance(icon, "fire_detected") //Pain
+		. += emissive_appearance(icon, "fire_detected", alpha = src.alpha) //Pain
 
 /obj/machinery/firealarm/emp_act(severity)
 	. = ..()
@@ -124,6 +124,7 @@
 							span_notice("You emag [src], disabling its thermal sensors."))
 	playsound(src, "sparks", 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 
+/* SKYRAT EDIT REMOVAL
 /obj/machinery/firealarm/should_atmos_process(datum/gas_mixture/air, exposed_temperature)
 	return (exposed_temperature > T0C + 200 || exposed_temperature < BODYTEMP_COLD_DAMAGE_LIMIT) && !(obj_flags & EMAGGED) && !machine_stat
 
@@ -143,6 +144,7 @@
 		triggered = FALSE
 		myarea.triggered_firealarms -= 1
 		update_appearance()
+*/
 
 /**
  * Signal handler for checking if we should update fire alarm appearance accordingly to a newly set security level
@@ -157,6 +159,7 @@
 	if(is_station_level(z))
 		update_appearance()
 
+/*SKYRAT EDIT REMOVAL
 /obj/machinery/firealarm/proc/alarm(mob/user)
 	if(!is_operational || !COOLDOWN_FINISHED(src, last_alarm))
 		return
@@ -178,13 +181,15 @@
 
 /obj/machinery/firealarm/attack_hand(mob/user, list/modifiers)
 	if(buildstage != 2)
-		return ..()
+		return
+	. = ..()
 	add_fingerprint(user)
 	var/area/area = get_area(src)
 	if(area.fire)
 		reset(user)
 	else
 		alarm(user)
+*/
 
 /obj/machinery/firealarm/attack_ai(mob/user)
 	return attack_hand(user)
@@ -192,6 +197,7 @@
 /obj/machinery/firealarm/attack_robot(mob/user)
 	return attack_hand(user)
 
+/*SKYRAT EDIT REMOVAL
 /obj/machinery/firealarm/attackby(obj/item/tool, mob/living/user, params)
 	add_fingerprint(user)
 
@@ -205,13 +211,13 @@
 	if(panel_open)
 
 		if(tool.tool_behaviour == TOOL_WELDER && !user.combat_mode)
-			if(obj_integrity < max_integrity)
+			if(atom_integrity < max_integrity)
 				if(!tool.tool_start_check(user, amount=0))
 					return
 
 				to_chat(user, span_notice("You begin repairing [src]..."))
 				if(tool.use_tool(src, user, 40, volume=50))
-					obj_integrity = max_integrity
+					atom_integrity = max_integrity
 					to_chat(user, span_notice("You repair [src]."))
 			else
 				to_chat(user, span_warning("[src] is already in good condition!"))
@@ -296,6 +302,7 @@
 					return
 
 	return ..()
+*/
 
 /obj/machinery/firealarm/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)
 	if((buildstage == 0) && (the_rcd.upgrade & RCD_UPGRADE_SIMPLE_CIRCUITS))
@@ -315,7 +322,7 @@
 /obj/machinery/firealarm/take_damage(damage_amount, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, attack_dir)
 	. = ..()
 	if(.) //damage received
-		if(obj_integrity > 0 && !(machine_stat & BROKEN) && buildstage != 0)
+		if(atom_integrity > 0 && !(machine_stat & BROKEN) && buildstage != 0)
 			if(prob(33))
 				alarm()
 
@@ -324,12 +331,14 @@
 		deconstruct()
 	..()
 
-/obj/machinery/firealarm/obj_break(damage_flag)
+/* SKYRAT EDIT REMOVAL
+/obj/machinery/firealarm/atom_break(damage_flag)
 	if(buildstage == 0) //can't break the electronics if there isn't any inside.
 		return
 	. = ..()
 	if(.)
 		LAZYREMOVE(myarea.firealarms, src)
+*/
 
 /obj/machinery/firealarm/deconstruct(disassembled = TRUE)
 	if(!(flags_1 & NODECONSTRUCT_1))
@@ -368,20 +377,7 @@
 	detecting = !detecting
 	to_chat(user, span_notice("You [ detecting ? "enable" : "disable" ] [src]'s detecting unit!"))
 
-/obj/machinery/firealarm/directional/north
-	pixel_y = 26
-
-/obj/machinery/firealarm/directional/south
-	dir = NORTH
-	pixel_y = -26
-
-/obj/machinery/firealarm/directional/east
-	dir = WEST
-	pixel_x = 26
-
-/obj/machinery/firealarm/directional/west
-	dir = EAST
-	pixel_x = -26
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/firealarm, 26)
 
 /*
  * Return of Party button

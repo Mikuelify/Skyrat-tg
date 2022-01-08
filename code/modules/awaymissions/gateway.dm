@@ -25,9 +25,14 @@ GLOBAL_LIST_EMPTY(gateway_destinations)
 		. = "Connection desynchronized. Recalibration in progress."
 
 /* Check if the movable is allowed to arrive at this destination (exile implants mostly) */
+/** SKYRAT EDIT - CYBORGS CANT USE GETWAY
 /datum/gateway_destination/proc/incoming_pass_check(atom/movable/AM)
 	return TRUE
-
+**/
+// Just a reminder that the home gateway overrides this proc so if a borg someone finds themself in an away mission they can still leave
+/datum/gateway_destination/proc/incoming_pass_check(atom/movable/AM)
+	return !iscyborg(AM)
+// SKYRAT EDIT - END
 /* Get the actual turf we'll arrive at */
 /datum/gateway_destination/proc/get_target_turf()
 	CRASH("get target turf not implemented for this destination type")
@@ -187,7 +192,7 @@ GLOBAL_LIST_EMPTY(gateway_destinations)
 		return
 	//SKYRAT EDIT END
 
-/obj/machinery/gateway/Initialize()
+/obj/machinery/gateway/Initialize(mapload)
 	generate_destination()
 	update_appearance()
 	portal_visuals = new
@@ -211,7 +216,7 @@ GLOBAL_LIST_EMPTY(gateway_destinations)
 	target = null
 	dest.deactivate(src)
 	QDEL_NULL(portal)
-	use_power = IDLE_POWER_USE
+	update_use_power(IDLE_POWER_USE)
 	update_appearance()
 	portal_visuals.reset_visuals()
 
@@ -239,7 +244,7 @@ GLOBAL_LIST_EMPTY(gateway_destinations)
 	target.activate(destination)
 	portal_visuals.setup_visuals(target)
 	generate_bumper()
-	use_power = ACTIVE_POWER_USE
+	update_use_power(ACTIVE_POWER_USE)
 	update_appearance()
 
 /obj/machinery/gateway/proc/Transfer(atom/movable/AM)
@@ -253,7 +258,7 @@ GLOBAL_LIST_EMPTY(gateway_destinations)
 	destination_type = /datum/gateway_destination/gateway/home
 	destination_name = "Home Gateway"
 
-/obj/machinery/gateway/centerstation/Initialize()
+/obj/machinery/gateway/centerstation/Initialize(mapload)
 	. = ..()
 	if(!GLOB.the_gateway)
 		GLOB.the_gateway = src

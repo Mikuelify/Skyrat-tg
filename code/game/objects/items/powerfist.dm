@@ -12,7 +12,7 @@
 	throwforce = 10
 	throw_range = 7
 	w_class = WEIGHT_CLASS_NORMAL
-	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 100, ACID = 40)
+	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, FIRE = 100, ACID = 40)
 	resistance_flags = FIRE_PROOF
 	var/click_delay = 1.5
 	var/fisto_setting = 1
@@ -89,7 +89,7 @@
 		target.visible_message(span_danger("[user]'s powerfist lets out a dull thunk as [user.p_they()] punch[user.p_es()] [target.name]!"), \
 			span_userdanger("[user]'s punches you!"))
 		return
-	if(gasused.total_moles() < gasperfist * fisto_setting)
+	if(!molar_cmp_equals(gasused.total_moles(), gasperfist * fisto_setting))
 		to_chat(user, span_warning("\The [src]'s piston-ram lets out a weak hiss, it needs more gas!"))
 		playsound(loc, 'sound/weapons/punch4.ogg', 50, TRUE)
 		target.apply_damage((force / 2), BRUTE)

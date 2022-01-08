@@ -24,7 +24,7 @@ RLD
 	w_class = WEIGHT_CLASS_NORMAL
 	custom_materials = list(/datum/material/iron=100000)
 	req_access_txt = "11"
-	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 100, ACID = 50)
+	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, FIRE = 100, ACID = 50)
 	resistance_flags = FIRE_PROOF
 	var/datum/effect_system/spark_spread/spark_system
 	var/matter = 0
@@ -186,6 +186,8 @@ RLD
 	return .
 
 /obj/item/construction/proc/range_check(atom/A, mob/user)
+	if(A.z != user.z)
+		return
 	if(!(A in view(7, get_turf(user))))
 		to_chat(user, span_warning("The \'Out of Range\' light on [src] blinks red."))
 		return FALSE
@@ -270,48 +272,61 @@ GLOBAL_VAR_INIT(icon_holographic_window, init_holographic_window())
 
 	return getHologramIcon(grille_icon)
 
+/obj/item/construction/rcd/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/openspace_item_click_handler)
+
+/obj/item/construction/rcd/handle_openspace_click(turf/target, mob/user, proximity_flag, click_parameters)
+	if(proximity_flag)
+		mode = construction_mode
+		rcd_create(target, user)
+
 /obj/item/construction/rcd/ui_action_click(mob/user, actiontype)
 	if (!COOLDOWN_FINISHED(src, destructive_scan_cooldown))
 		to_chat(user, span_warning("[src] lets out a low buzz."))
 		return
 
 	COOLDOWN_START(src, destructive_scan_cooldown, RCD_DESTRUCTIVE_SCAN_COOLDOWN)
+	rcd_scan(src)
 
-	playsound(src, 'sound/items/rcdscan.ogg', 50, vary = TRUE, pressure_affected = FALSE)
+/**
+ * Global proc that generates RCD hologram in a range.
+ *
+ * Arguments:
+ * * source - The atom the scans originate from
+ * * scan_range - The range of turfs we grab from the source
+ * * fade_time - The time for RCD holograms to fade
+ */
+/proc/rcd_scan(atom/source, scan_range = RCD_DESTRUCTIVE_SCAN_RANGE, fade_time = RCD_HOLOGRAM_FADE_TIME)
+	playsound(source, 'sound/items/rcdscan.ogg', 50, vary = TRUE, pressure_affected = FALSE)
 
-	var/turf/source_turf = get_turf(src)
-	for (var/turf/open/surrounding_turf in RANGE_TURFS(RCD_DESTRUCTIVE_SCAN_RANGE, source_turf))
+	var/turf/source_turf = get_turf(source)
+	for(var/turf/open/surrounding_turf in RANGE_TURFS(scan_range, source_turf))
 		var/rcd_memory = surrounding_turf.rcd_memory
-		if (!rcd_memory)
+		if(!rcd_memory)
 			continue
 
 		var/skip_to_next_turf = FALSE
 
-		#if MIN_COMPILER_VERSION >= 514
-		#warn Please replace the loop below this warning with an `as anything` loop.
-		#endif
 
-		for (var/_content_of_turf in surrounding_turf.contents)
-			// `as anything` doesn't play well on 513 with special lists such as contents.
-			// When the minimum version is raised to 514, upgrade this to `as anything`.
-			var/atom/content_of_turf = _content_of_turf
+		for(var/atom/content_of_turf as anything in surrounding_turf.contents)
 			if (content_of_turf.density)
 				skip_to_next_turf = TRUE
 				break
 
-		if (skip_to_next_turf)
+		if(skip_to_next_turf)
 			continue
 
 		var/hologram_icon
-		switch (rcd_memory)
-			if (RCD_MEMORY_WALL)
+		switch(rcd_memory)
+			if(RCD_MEMORY_WALL)
 				hologram_icon = GLOB.icon_holographic_wall
-			if (RCD_MEMORY_WINDOWGRILLE)
+			if(RCD_MEMORY_WINDOWGRILLE)
 				hologram_icon = GLOB.icon_holographic_window
 
-		var/obj/effect/rcd_hologram/hologram = new (surrounding_turf)
+		var/obj/effect/rcd_hologram/hologram = new(surrounding_turf)
 		hologram.icon = hologram_icon
-		animate(hologram, alpha = 0, time = RCD_HOLOGRAM_FADE_TIME, easing = CIRCULAR_EASING | EASE_IN)
+		animate(hologram, alpha = 0, time = fade_time, easing = CIRCULAR_EASING | EASE_IN)
 
 /obj/effect/rcd_hologram
 	name = "hologram"
@@ -476,7 +491,21 @@ GLOBAL_VAR_INIT(icon_holographic_window, init_holographic_window())
 		"External" = get_airlock_image(/obj/machinery/door/airlock/external),
 		"External Maintenance" = get_airlock_image(/obj/machinery/door/airlock/maintenance/external),
 		"Airtight Hatch" = get_airlock_image(/obj/machinery/door/airlock/hatch),
-		"Maintenance Hatch" = get_airlock_image(/obj/machinery/door/airlock/maintenance_hatch)
+//SKYRAT EDIT BEGIN//
+		"Maintenance Hatch" = get_airlock_image(/obj/machinery/door/airlock/maintenance_hatch),
+		"Corporate" = get_airlock_image(/obj/machinery/door/airlock/corporate),
+		"Service" = get_airlock_image(/obj/machinery/door/airlock/service),
+		"Bathroom" = get_airlock_image(/obj/machinery/door/airlock/bathroom),
+		"Psychologist" = get_airlock_image(/obj/machinery/door/airlock/psych),
+		"Asylum" = get_airlock_image(/obj/machinery/door/airlock/asylum),
+		"Captain" = get_airlock_image(/obj/machinery/door/airlock/captain),
+		"Head of Personnel" = get_airlock_image(/obj/machinery/door/airlock/hop),
+		"Head of Security" = get_airlock_image(/obj/machinery/door/airlock/hos),
+		"Chief Medical Officer" = get_airlock_image(/obj/machinery/door/airlock/cmo),
+		"Chief Engineer" = get_airlock_image(/obj/machinery/door/airlock/ce),
+		"Research Director" = get_airlock_image(/obj/machinery/door/airlock/rd),
+		"Quartermaster" = get_airlock_image(/obj/machinery/door/airlock/qm)
+//SKYRAT EDIT END//
 	)
 
 	var/list/glass_choices = list(
@@ -492,7 +521,16 @@ GLOBAL_VAR_INIT(icon_holographic_window, init_holographic_window())
 		"Mining" = get_airlock_image(/obj/machinery/door/airlock/mining/glass),
 		"Maintenance" = get_airlock_image(/obj/machinery/door/airlock/maintenance/glass),
 		"External" = get_airlock_image(/obj/machinery/door/airlock/external/glass),
-		"External Maintenance" = get_airlock_image(/obj/machinery/door/airlock/maintenance/external/glass)
+//SKYRAT EDIT BEGIN//
+		"External Maintenance" = get_airlock_image(/obj/machinery/door/airlock/maintenance/external/glass),
+		"Corporate" = get_airlock_image(/obj/machinery/door/airlock/corporate/glass),
+		"Service" = get_airlock_image(/obj/machinery/door/airlock/service/glass),
+		"Head of Security" = get_airlock_image(/obj/machinery/door/airlock/hos/glass),
+		"Chief Medical Officer" = get_airlock_image(/obj/machinery/door/airlock/cmo/glass),
+		"Chief Engineer" = get_airlock_image(/obj/machinery/door/airlock/ce/glass),
+		"Research Director" = get_airlock_image(/obj/machinery/door/airlock/rd/glass),
+		"Quartermaster" = get_airlock_image(/obj/machinery/door/airlock/qm/glass)
+//SKYRAT EDIT END//
 	)
 
 	var/airlockcat = show_radial_menu(user, remote_anchor || src, solid_or_glass_choices, custom_check = CALLBACK(src, .proc/check_menu, user, remote_anchor), require_near = remote_anchor ? FALSE : TRUE, tooltips = TRUE)
@@ -533,6 +571,32 @@ GLOBAL_VAR_INIT(icon_holographic_window, init_holographic_window())
 						airlock_type = /obj/machinery/door/airlock/hatch
 					if("Maintenance Hatch")
 						airlock_type = /obj/machinery/door/airlock/maintenance_hatch
+//SKYRAT EDIT BEGIN//
+					if("Corporate")
+						airlock_type = /obj/machinery/door/airlock/corporate
+					if("Service")
+						airlock_type = /obj/machinery/door/airlock/service
+					if("Bathroom")
+						airlock_type = /obj/machinery/door/airlock/bathroom
+					if("Psychologist")
+						airlock_type = /obj/machinery/door/airlock/psych
+					if("Asylum")
+						airlock_type = /obj/machinery/door/airlock/asylum
+					if("Captain")
+						airlock_type = /obj/machinery/door/airlock/captain
+					if("Head of Personnel")
+						airlock_type = /obj/machinery/door/airlock/hop
+					if("Head of Security")
+						airlock_type = /obj/machinery/door/airlock/hos
+					if("Chief Medical Officer")
+						airlock_type = /obj/machinery/door/airlock/cmo
+					if("Chief Engineer")
+						airlock_type = /obj/machinery/door/airlock/ce
+					if("Research Director")
+						airlock_type = /obj/machinery/door/airlock/rd
+					if("Quartermaster")
+						airlock_type = /obj/machinery/door/airlock/qm
+//SKYRAT EDIT END//
 				airlock_glass = FALSE
 			else
 				airlock_type = /obj/machinery/door/airlock
@@ -568,6 +632,22 @@ GLOBAL_VAR_INIT(icon_holographic_window, init_holographic_window())
 						airlock_type = /obj/machinery/door/airlock/external/glass
 					if("External Maintenance")
 						airlock_type = /obj/machinery/door/airlock/maintenance/external/glass
+//SKYRAT EDIT BEGIN//
+					if("Corporate")
+						airlock_type = /obj/machinery/door/airlock/corporate/glass
+					if("Service")
+						airlock_type = /obj/machinery/door/airlock/service/glass
+					if("Head of Security")
+						airlock_type = /obj/machinery/door/airlock/hos/glass
+					if("Chief Medical Officer")
+						airlock_type = /obj/machinery/door/airlock/cmo/glass
+					if("Chief Engineer")
+						airlock_type = /obj/machinery/door/airlock/ce/glass
+					if("Research Director")
+						airlock_type = /obj/machinery/door/airlock/rd/glass
+					if("Quartermaster")
+						airlock_type = /obj/machinery/door/airlock/qm/glass
+//SKYRAT EDIT END//
 				airlock_glass = TRUE
 			else
 				airlock_type = /obj/machinery/door/airlock/glass
@@ -643,7 +723,7 @@ GLOBAL_VAR_INIT(icon_holographic_window, init_holographic_window())
 	playsound(src.loc, 'sound/machines/click.ogg', 50, TRUE)
 	return TRUE
 
-/obj/item/construction/rcd/Initialize()
+/obj/item/construction/rcd/Initialize(mapload)
 	. = ..()
 	airlock_electronics = new(src)
 	airlock_electronics.name = "Access Control"
@@ -741,7 +821,7 @@ GLOBAL_VAR_INIT(icon_holographic_window, init_holographic_window())
 	. = ..()
 	mode = construction_mode
 	rcd_create(A, user)
-	return FALSE
+	return TRUE
 
 /obj/item/construction/rcd/pre_attack_secondary(atom/target, mob/living/user, params)
 	. = ..()
@@ -765,16 +845,16 @@ GLOBAL_VAR_INIT(icon_holographic_window, init_holographic_window())
 	. = ..()
 	if(has_ammobar)
 		var/ratio = CEILING((matter / max_matter) * ammo_sections, 1)
-		. += "[icon_state]_charge[ratio]"
+		if(ratio > 0)
+			. += "[icon_state]_charge[ratio]"
 
-/obj/item/construction/rcd/Initialize()
+/obj/item/construction/rcd/Initialize(mapload)
 	. = ..()
 	update_appearance()
 
 /obj/item/construction/rcd/borg
 	no_ammo_message = "<span class='warning'>Insufficient charge.</span>"
 	desc = "A device used to rapidly build walls and floors."
-	canRturf = TRUE
 	banned_upgrades = RCD_UPGRADE_SILO_LINK
 	var/energyfactor = 72
 
@@ -872,6 +952,10 @@ GLOBAL_VAR_INIT(icon_holographic_window, init_holographic_window())
 		pre_attack_secondary(target, user)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
+/obj/item/construction/rcd/arcd/handle_openspace_click(turf/target, mob/user, proximity_flag, click_parameters)
+	if(ranged && range_check(target, user))
+		mode = construction_mode
+		rcd_create(target, user)
 
 /obj/item/construction/rcd/arcd/rcd_create(atom/A, mob/user)
 	. = ..()
@@ -1033,7 +1117,7 @@ GLOBAL_VAR_INIT(icon_holographic_window, init_holographic_window())
 			if(useResource(launchcost, user))
 				activate()
 				to_chat(user, span_notice("You fire a glowstick!"))
-				var/obj/item/flashlight/glowstick/G  = new /obj/item/flashlight/glowstick(start)
+				var/obj/item/flashlight/glowstick/G = new /obj/item/flashlight/glowstick(start)
 				G.color = color_choice
 				G.set_light_color(G.color)
 				G.throw_at(A, 9, 3, user)

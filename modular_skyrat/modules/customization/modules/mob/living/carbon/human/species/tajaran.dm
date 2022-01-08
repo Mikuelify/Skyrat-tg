@@ -1,7 +1,8 @@
 /datum/species/tajaran
 	name = "Tajaran"
-	id = "tajaran"
-	default_color = "4B4B4B"
+	id = SPECIES_TAJARAN
+	default_color = "#4B4B4B"
+	say_mod = "meows"
 	species_traits = list(
 		MUTCOLORS,
 		EYECOLOR,
@@ -23,13 +24,14 @@
 		"legs" = "Normal Legs"
 	)
 	attack_verb = "slash"
+	attack_effect = ATTACK_EFFECT_CLAW
 	attack_sound = 'sound/weapons/slash.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
 	liked_food = GROSS | MEAT | FRIED
 	payday_modifier = 0.75
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 	limbs_icon = 'modular_skyrat/master_files/icons/mob/species/mammal_parts_greyscale.dmi'
-	limbs_id = "mammal"
+	limbs_id = SPECIES_MAMMAL
 
 /datum/species/tajaran/get_random_features()
 	var/list/returned = MANDATORY_FEATURE_LIST
@@ -39,20 +41,20 @@
 	//Choose from a variety of mostly coldish, animal, matching colors
 	switch(random)
 		if(1)
-			main_color = "BA8"
-			second_color = "AA9"
+			main_color = "#BBAA88"
+			second_color = "#AAAA99"
 		if(2)
-			main_color = "776"
-			second_color = "887"
+			main_color = "#777766"
+			second_color = "#888877"
 		if(3)
-			main_color = "A98"
-			second_color = "AA9"
+			main_color = "#AA9988"
+			second_color = "#AAAA99"
 		if(4)
-			main_color = "EED"
-			second_color = "FEE"
+			main_color = "#EEEEDD"
+			second_color = "#FFEEEE"
 		if(5)
-			main_color = "DC9"
-			second_color = "DCA"
+			main_color = "#DDCC99"
+			second_color = "#DDCCAA"
 	returned["mcolor"] = main_color
 	returned["mcolor2"] = second_color
 	returned["mcolor3"] = second_color

@@ -30,8 +30,7 @@
 
 	var/list/vines = list()
 
-
-/obj/structure/alien/resin/flower_bud/Initialize()
+/obj/structure/alien/resin/flower_bud/Initialize(mapload)
 	. = ..()
 	countdown = new(src)
 	var/list/anchors = list()
@@ -78,7 +77,7 @@
 	var/static/list/loc_connections = list(
 		COMSIG_ATOM_ENTERED = .proc/on_entered,
 	)
-	AddElement(/datum/element/connect_loc, src, loc_connections)
+	AddElement(/datum/element/connect_loc, loc_connections)
 
 /obj/effect/ebeam/vine/proc/on_entered(datum/source, atom/movable/AM)
 	SIGNAL_HANDLER
@@ -108,13 +107,13 @@
 	health_doll_icon = "venus_human_trap"
 	mob_biotypes = MOB_ORGANIC | MOB_PLANT
 	layer = SPACEVINE_MOB_LAYER
-	health = 40 //SKYRAT EDIT CHANGE
-	maxHealth = 40 //SKYRAT EDIT CHANGE
+	health = 60 //SKYRAT EDIT CHANGE
+	maxHealth = 60 //SKYRAT EDIT CHANGE
 	ranged = TRUE
 	harm_intent_damage = 5
 	obj_damage = 60
-	melee_damage_lower = 20 //SKYRAT EDIT CHANGE - Original: 25
-	melee_damage_upper = 20 //SKYRAT EDIT CHANGE - Original: 25
+	melee_damage_lower = 25
+	melee_damage_upper = 25
 	combat_mode = TRUE
 	//del_on_death = TRUE //SKYRAT EDIT REMOVAL
 	flip_on_death = TRUE
@@ -123,24 +122,24 @@
 	deathsound = 'sound/creatures/venus_trap_death.ogg'
 	attack_sound = 'sound/creatures/venus_trap_hit.ogg'
 	unsuitable_heat_damage = 5 //note that venus human traps do not take cold damage, only heat damage- this is because space vines can cause hull breaches
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_plas" = 0, "max_plas" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	unsuitable_atmos_damage = 0
 	/// copied over from the code from eyeballs (the mob) to make it easier for venus human traps to see in kudzu that doesn't have the transparency mutation
 	sight = SEE_SELF|SEE_MOBS|SEE_OBJS|SEE_TURFS
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
 	faction = list("hostile","vines","plants")
 	initial_language_holder = /datum/language_holder/venus
+	unique_name = TRUE
 	/// A list of all the plant's vines
 	var/list/vines = list()
 	/// The maximum amount of vines a plant can have at one time
 	var/max_vines = 4
 	/// How far away a plant can attach a vine to something
-	var/vine_grab_distance = 4 //SKYRAT EDIT - Original 5
+	var/vine_grab_distance = 5
 	/// Whether or not this plant is ghost possessable
 	var/playable_plant = TRUE
 
 	ghost_controllable = TRUE //SKYRAT EDIT ADDITION
-
 
 /mob/living/simple_animal/hostile/venus_human_trap/Life(delta_time = SSMOBS_DT, times_fired)
 	. = ..()
@@ -165,7 +164,7 @@
 			return
 	if(get_dist(src,the_target) > vine_grab_distance || vines.len >= max_vines)
 		return
-	for(var/turf/T in getline(src,target))
+	for(var/turf/T in get_line(src,target))
 		if (T.density)
 			return
 		for(var/obj/O in T)
@@ -235,6 +234,8 @@
  * * datum/beam/vine - The vine to be removed from the list.
  */
 /mob/living/simple_animal/hostile/venus_human_trap/proc/remove_vine(datum/beam/vine)
+	SIGNAL_HANDLER
+
 	vines -= vine
 
 //SKYRAT EDIT ADDITION

@@ -34,16 +34,16 @@
 	/// Whether to allow players to toggle the water reclaimer.
 	var/can_toggle_refill = TRUE
 
-/obj/machinery/shower/Initialize()
+/obj/machinery/shower/Initialize(mapload)
 	. = ..()
 	create_reagents(reagent_capacity)
 	reagents.add_reagent(reagent_id, reagent_capacity)
-	soundloop = new(list(src), FALSE)
+	soundloop = new(src, FALSE)
 	AddComponent(/datum/component/plumbing/simple_demand)
 	var/static/list/loc_connections = list(
 		COMSIG_ATOM_ENTERED = .proc/on_entered,
 	)
-	AddElement(/datum/element/connect_loc, src, loc_connections)
+	AddElement(/datum/element/connect_loc, loc_connections)
 
 /obj/machinery/shower/examine(mob/user)
 	. = ..()
@@ -78,13 +78,20 @@
 	else
 		return ..()
 
+//SKYRAT EDIT ADDITION
+/obj/machinery/shower/plunger_act(obj/item/plunger/P, mob/living/user, reinforced)
+	if(do_after(user, 3 SECONDS, src))
+		reagents.remove_any(reagents.total_volume)
+		balloon_alert(user, "reservoir emptied")
+//SKYRAT EDIT END
+
 /obj/machinery/shower/multitool_act(mob/living/user, obj/item/I)
 	. = ..()
 	if(. || !can_toggle_refill)
 		return
 
 	can_refill = !can_refill
-	to_chat(user, "<span class=notice>You [can_refill ? "en" : "dis"]able the shower's water recycler.</span>")
+	to_chat(user, span_notice("You [can_refill ? "en" : "dis"]able the shower's water recycler."))
 	playsound(src, 'sound/machines/click.ogg', 20, TRUE)
 	return TRUE
 
@@ -143,8 +150,7 @@
 		wash_atom(AM)
 
 /obj/machinery/shower/proc/wash_atom(atom/target)
-	target.wash(CLEAN_RAD | CLEAN_TYPE_WEAK) // Clean radiation non-instantly
-	target.wash(CLEAN_WASH)
+	target.wash(CLEAN_RAD | CLEAN_WASH)
 	SEND_SIGNAL(target, COMSIG_ADD_MOOD_EVENT, "shower", /datum/mood_event/nice_shower)
 	reagents.expose(target, (TOUCH), SHOWER_EXPOSURE_MULTIPLIER * SHOWER_SPRAY_VOLUME / max(reagents.total_volume, SHOWER_SPRAY_VOLUME))
 	if(isliving(target))
@@ -203,7 +209,7 @@
 		return
 	return ..()
 
-/obj/structure/showerframe/Initialize()
+/obj/structure/showerframe/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/simple_rotation, ROTATION_ALTCLICK | ROTATION_CLOCKWISE | ROTATION_COUNTERCLOCKWISE | ROTATION_VERBS, null, CALLBACK(src, .proc/can_be_rotated))
 

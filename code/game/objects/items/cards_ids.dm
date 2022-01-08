@@ -33,39 +33,6 @@
 	user.visible_message(span_suicide("[user] begins to swipe [user.p_their()] neck with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
 	return BRUTELOSS
 
-/obj/item/card/data
-	name = "data card"
-	desc = "A plastic magstripe card for simple and speedy data storage and transfer. This one has a stripe running down the middle."
-	icon_state = "data_1"
-	obj_flags = UNIQUE_RENAME
-	var/function = "storage"
-	var/data = "null"
-	var/special = null
-	inhand_icon_state = "card-id"
-	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
-	var/detail_color = COLOR_ASSEMBLY_ORANGE
-
-/obj/item/card/data/Initialize()
-	.=..()
-	update_appearance()
-
-/obj/item/card/data/update_overlays()
-	. = ..()
-	if(detail_color == COLOR_FLOORTILE_GRAY)
-		return
-	var/mutable_appearance/detail_overlay = mutable_appearance('icons/obj/card.dmi', "[icon_state]-color")
-	detail_overlay.color = detail_color
-	. += detail_overlay
-
-/obj/item/card/data/full_color
-	desc = "A plastic magstripe card for simple and speedy data storage and transfer. This one has the entire card colored."
-	icon_state = "data_2"
-
-/obj/item/card/data/disk
-	desc = "A plastic magstripe card for simple and speedy data storage and transfer. This one inexplicibly looks like a floppy disk."
-	icon_state = "data_3"
-
 /*
  * ID CARDS
  */
@@ -80,7 +47,7 @@
 	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
 	slot_flags = ITEM_SLOT_ID
-	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 100, ACID = 100)
+	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, FIRE = 100, ACID = 100)
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 
 	/// Cached icon that has been built for this card. Intended for use in chat.
@@ -412,7 +379,7 @@
 	if(Adjacent(user))
 		var/minor
 		if(registered_name && registered_age && registered_age < AGE_MINOR)
-			minor = " <b>(MINOR)</b>"
+			minor = " <b>[registered_age]</b>" //SKYRAT EDIT CHANGE
 		user.visible_message(span_notice("[user] shows you: [icon2html(src, viewers(user))] [src.name][minor]."), span_notice("You show \the [src.name][minor]."))
 	add_fingerprint(user)
 
@@ -492,7 +459,7 @@
 		to_chat(user, span_warning("[src] doesn't have a linked account to deposit into!"))
 		return FALSE
 
-	if (!money || !money.len)
+	if (!money || !length(money))
 		return FALSE
 
 	var/total = 0
@@ -522,49 +489,38 @@
 	. = FALSE
 	var/datum/bank_account/old_account = registered_account
 
-	var/new_bank_id = input(user, "Enter your account ID number.", "Account Reclamation", 111111) as num | null
-
-	if (isnull(new_bank_id))
+	var/new_bank_id = tgui_input_number(user, "Enter your account ID number", "Account Reclamation", 111111, 999999, 111111)
+	if(isnull(new_bank_id))
 		return
-
 	if(!alt_click_can_use_id(user))
 		return
-	if(!new_bank_id || new_bank_id < 111111 || new_bank_id > 999999)
-		to_chat(user, span_warning("The account ID number needs to be between 111111 and 999999."))
-		return
-	if (registered_account && registered_account.account_id == new_bank_id)
+	if(registered_account && registered_account.account_id == new_bank_id)
 		to_chat(user, span_warning("The account ID was already assigned to this card."))
 		return
-
-	var/datum/bank_account/B = SSeconomy.bank_accounts_by_id["[new_bank_id]"]
-	if(B)
-		if (old_account)
-			old_account.bank_cards -= src
-
-		B.bank_cards += src
-		registered_account = B
-		to_chat(user, span_notice("The provided account has been linked to this ID card."))
-
-		return TRUE
-
-	to_chat(user, span_warning("The account ID number provided is invalid."))
-	return
+	var/datum/bank_account/account = SSeconomy.bank_accounts_by_id["[new_bank_id]"]
+	if(isnull(account))
+		to_chat(user, span_warning("The account ID number provided is invalid."))
+		return
+	if(old_account)
+		old_account.bank_cards -= src
+	account.bank_cards += src
+	registered_account = account
+	to_chat(user, span_notice("The provided account has been linked to this ID card."))
+	return TRUE
 
 /obj/item/card/id/AltClick(mob/living/user)
 	if(!alt_click_can_use_id(user))
 		return
-
 	if(!registered_account)
 		set_new_account(user)
 		return
-
 	if (registered_account.being_dumped)
 		registered_account.bank_card_talk(span_warning("内部服务器错误"), TRUE)
 		return
-
-	var/amount_to_remove =  FLOOR(input(user, "How much do you want to withdraw? Current Balance: [registered_account.account_balance]", "Withdraw Funds", 5) as num|null, 1)
-
-	if(!amount_to_remove || amount_to_remove < 0)
+	var/amount_to_remove = round(tgui_input_number(user, "How much do you want to withdraw?", "Withdraw Funds", 1, registered_account.account_balance, 1))
+	if(isnull(amount_to_remove))
+		return
+	if(amount_to_remove < 1 || amount_to_remove > registered_account.account_balance)
 		return
 	if(!alt_click_can_use_id(user))
 		return
@@ -613,7 +569,7 @@
 	return msg
 
 /obj/item/card/id/GetAccess()
-	return access
+	return access.Copy()
 
 /obj/item/card/id/GetID()
 	return src
@@ -645,6 +601,10 @@
 		assignment_string = " ([assignment])"
 
 	name = "[name_string][assignment_string]"
+
+/// Returns the trim assignment name.
+/obj/item/card/id/proc/get_trim_assignment()
+	return trim?.assignment || assignment
 
 /obj/item/card/id/away
 	name = "\proper a perfectly generic identification card"
@@ -697,7 +657,7 @@
 	var/department_name = ACCOUNT_CIV_NAME
 	registered_age = null
 
-/obj/item/card/id/departmental_budget/Initialize()
+/obj/item/card/id/departmental_budget/Initialize(mapload)
 	. = ..()
 	var/datum/bank_account/B = SSeconomy.get_dep_account(department_ID)
 	if(B)
@@ -766,7 +726,7 @@
 	var/intern_threshold = (CONFIG_GET(number/use_low_living_hour_intern_hours) * 60) || (CONFIG_GET(number/use_exp_restrictions_heads_hours) * 60) || INTERN_THRESHOLD_FALLBACK_HOURS * 60
 	var/playtime = user.client.get_exp_living(pure_numeric = TRUE)
 
-	if((intern_threshold >= playtime) && (user.mind?.assigned_role in SSjob.station_jobs))
+	if((intern_threshold >= playtime) && (user.mind?.assigned_role.title in SSjob.station_jobs))
 		is_intern = TRUE
 		update_label()
 		return
@@ -810,7 +770,7 @@
 			var/obj/item/modular_computer/tablet/slot_holder = slot.holder
 			UnregisterSignal(slot_holder, list(COMSIG_ITEM_EQUIPPED, COMSIG_ITEM_DROPPED))
 
-	if(istype(loc, /obj/item/pda) || istype(OldLoc, /obj/item/storage/wallet))
+	if(istype(loc, /obj/item/pda) || istype(loc, /obj/item/storage/wallet))
 		RegisterSignal(loc, COMSIG_ITEM_EQUIPPED, .proc/update_intern_status)
 		RegisterSignal(loc, COMSIG_ITEM_DROPPED, .proc/remove_intern_status)
 
@@ -837,6 +797,15 @@
 		return
 
 	. += mutable_appearance(trim_icon_file, trim_icon_state)
+
+/obj/item/card/id/advanced/get_trim_assignment()
+	if(trim_assignment_override)
+		return trim_assignment_override
+	else if(ispath(trim))
+		var/datum/id_trim/trim_singleton = SSid_access.trim_singletons_by_path[trim]
+		return trim_singleton.assignment
+
+	return ..()
 
 /obj/item/card/id/advanced/silver
 	name = "silver identification card"
@@ -968,7 +937,7 @@
 	trim = /datum/id_trim/admin
 	wildcard_slots = WILDCARD_LIMIT_ADMIN
 
-/obj/item/card/id/advanced/debug/Initialize()
+/obj/item/card/id/advanced/debug/Initialize(mapload)
 	. = ..()
 	registered_account = SSeconomy.get_dep_account(ACCOUNT_CAR)
 
@@ -990,43 +959,51 @@
 	var/goal = 0
 	/// Number of gulag points earned.
 	var/points = 0
-	// SKYRAT EDIT: Start - Genpop IDs
-	access = list(ACCESS_ENTER_GENPOP)
-	var/sentence = 0	//When world.time is greater than this number, the card will have its ACCESS_ENTER_GENPOP access replaced with ACCESS_LEAVE_GENPOP the next time it's checked, unless this value is 0/null
-	var/crime= "\[REDACTED\]"
+	/// If the card has a timer set on it for temporary stay.
+	var/timed = FALSE
+	/// Time to assign to the card when they pass through the security gate.
+	var/time_to_assign
+	/// Time left on a card till they can leave.
+	var/time_left = 0
 
-/obj/item/card/id/advanced/prisoner/GetAccess()
-	if((sentence && world.time >= sentence) || (goal && points >= goal))
-		access = list(ACCESS_LEAVE_GENPOP)
-	return ..()
+/obj/item/card/id/advanced/prisoner/attackby(obj/item/card/id/C, mob/user)
+	..()
+	var/list/id_access = C.GetAccess()
+	if(!(ACCESS_BRIG in id_access))
+		return
+	if(timed)
+		timed = FALSE
+		time_to_assign = initial(time_to_assign)
+		registered_name = initial(registered_name)
+		STOP_PROCESSING(SSobj, src)
+		to_chat(user, "Restating prisoner ID to default parameters.")
+		return
+	var/choice = tgui_input_number(user, "Sentence time in seconds", "Sentencing")
+	if(isnull(time_to_assign) || !user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
+		return
+	time_to_assign = round(choice)
+	to_chat(user, "You set the sentence time to [time_to_assign] seconds.")
+	timed = TRUE
+
+/obj/item/card/id/advanced/prisoner/proc/start_timer()
+	say("Sentence started, welcome to the corporate rehabilitation center!")
+	START_PROCESSING(SSobj, src)
 
 /obj/item/card/id/advanced/prisoner/examine(mob/user)
 	. = ..()
-	if(sentence && world.time < sentence)
-		to_chat(user, "<span class='notice'>You're currently serving a sentence for [crime]. <b>[DisplayTimeText(sentence - world.time)]</b> left.</span>")
-	else if(goal)
-		to_chat(user, "<span class='notice'>You have accumulated [points] out of the [goal] points you need for freedom.</span>")
-	else if(!sentence)
-		to_chat(user, "<span class='warning'>You are currently serving a permanent sentence for [crime].</span>")
-	else
-		to_chat(user, "<span class='notice'>Your sentence is up! You're free!</span>")
-
-/obj/item/card/id/advanced/prisoner/process()
-	if(!sentence)
-		STOP_PROCESSING(SSobj, src)
-		return
-	if(world.time >= sentence)
-		if(prob(90))
-			playsound(loc, 'sound/machines/ping.ogg', 50, 1)
-			if(isliving(loc))
-				to_chat(loc, "<span class='boldnotice'>[src]</span><span class='notice'> buzzes: You have served your sentence! You may now exit prison through the turnstiles and collect your belongings.</span>")
+	if(timed)
+		if(time_left <= 0)
+			. += span_notice("The digital timer on the card has zero seconds remaining. You leave a changed man, but a free man nonetheless.")
 		else
-			playsound(loc, 'modular_skyrat/modules/mapping/code/quest_succeeded.ogg', 50, 1)
-			if(isliving(loc))
-				to_chat(loc, "<span class='boldnotice'>[src]</span><span class='notice'><b>Quest Completed!</b> <i>Serve your prison sentence</i>. You may now leave the prison through the turnstiles and return this ID to the locker to retrieve your belongings.</span>")
+			. += span_notice("The digital timer on the card has [time_left] seconds remaining. Don't do the crime if you can't do the time.")
+
+/obj/item/card/id/advanced/prisoner/process(delta_time)
+	if(!timed)
+		return
+	time_left -= delta_time
+	if(time_left <= 0)
+		say("Sentence time has been served. Thank you for your cooperation in our corporate rehabilitation program!")
 		STOP_PROCESSING(SSobj, src)
-	return
-	// SKYRAT EDIT: End - Genpop IDs
 
 /obj/item/card/id/advanced/prisoner/attack_self(mob/user)
 	to_chat(usr, span_notice("You have accumulated [points] out of the [goal] points you need for freedom."))
@@ -1082,7 +1059,7 @@
 
 /obj/item/card/id/advanced/chameleon
 	name = "agent card"
-	desc = "A highly advanced chameleon ID card. Touch this card on another ID card to choose which accesses to copy."
+	desc = "A highly advanced chameleon ID card. Touch this card on another ID card or player to choose which accesses to copy. Has special magnetic properties which force it to the front of wallets."
 	trim = /datum/id_trim/chameleon
 	wildcard_slots = WILDCARD_LIMIT_CHAMELEON
 
@@ -1093,8 +1070,9 @@
 	/// Weak ref to the ID card we're currently attempting to steal access from.
 	var/datum/weakref/theft_target
 
-/obj/item/card/id/advanced/chameleon/Initialize()
+/obj/item/card/id/advanced/chameleon/Initialize(mapload)
 	. = ..()
+
 	var/datum/action/item_action/chameleon/change/id/chameleon_card_action = new(src)
 	chameleon_card_action.chameleon_type = /obj/item/card/id/advanced
 	chameleon_card_action.chameleon_name = "ID Card"
@@ -1104,13 +1082,63 @@
 	theft_target = null
 	. = ..()
 
-/obj/item/card/id/advanced/chameleon/afterattack(obj/item/O, mob/user, proximity)
+/obj/item/card/id/advanced/chameleon/afterattack(atom/target, mob/user, proximity)
 	if(!proximity)
 		return
-	if(istype(O, /obj/item/card/id))
-		theft_target = WEAKREF(O)
+
+	if(istype(target, /obj/item/card/id))
+		theft_target = WEAKREF(target)
 		ui_interact(user)
 		return
+
+	return ..()
+
+/obj/item/card/id/advanced/chameleon/pre_attack_secondary(atom/target, mob/living/user, params)
+	// If we're attacking a human, we want it to be covert. We're not ATTACKING them, we're trying
+	// to sneakily steal their accesses by swiping our agent ID card near them. As a result, we
+	// return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN to cancel any part of the following the attack chain.
+	if(istype(target, /mob/living/carbon/human))
+		to_chat(user, "<span class='notice'>You covertly start to scan [target] with \the [src], hoping to pick up a wireless ID card signal...</span>")
+
+		if(!do_mob(user, target, 2 SECONDS))
+			to_chat(user, "<span class='notice'>The scan was interrupted.</span>")
+			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+		var/mob/living/carbon/human/human_target = target
+
+		var/list/target_id_cards = human_target.get_all_contents_type(/obj/item/card/id)
+
+		if(!length(target_id_cards))
+			to_chat(user, "<span class='notice'>The scan failed to locate any ID cards.</span>")
+			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+		var/selected_id = pick(target_id_cards)
+		to_chat(user, "<span class='notice'>You successfully sync your [src] with \the [selected_id].</span>")
+		theft_target = WEAKREF(selected_id)
+		ui_interact(user)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	if(istype(target, /obj/item))
+		var/obj/item/target_item = target
+
+		to_chat(user, "<span class='notice'>You covertly start to scan [target] with your [src], hoping to pick up a wireless ID card signal...</span>")
+
+		var/list/target_id_cards = target_item.get_all_contents_type(/obj/item/card/id)
+
+		var/target_item_id = target_item.GetID()
+
+		if(target_item_id)
+			target_id_cards |= target_item_id
+
+		if(!length(target_id_cards))
+			to_chat(user, "<span class='notice'>The scan failed to locate any ID cards.</span>")
+			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+		var/selected_id = pick(target_id_cards)
+		to_chat(user, "<span class='notice'>You successfully sync your [src] with \the [selected_id].</span>")
+		theft_target = WEAKREF(selected_id)
+		ui_interact(user)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	return ..()
 
@@ -1126,6 +1154,33 @@
 	data["accessFlagNames"] = SSid_access.access_flag_string_by_flag
 	data["accessFlags"] = SSid_access.flags_by_access
 	return data
+
+/obj/item/card/id/advanced/chameleon/ui_host(mob/user)
+	// Hook our UI to the theft target ID card for UI state checks.
+	return theft_target?.resolve()
+
+/obj/item/card/id/advanced/chameleon/ui_state(mob/user)
+	return GLOB.always_state
+
+/obj/item/card/id/advanced/chameleon/ui_status(mob/user)
+	var/target = theft_target?.resolve()
+
+	if(!target)
+		return UI_CLOSE
+
+	var/status = min(
+		ui_status_user_strictly_adjacent(user, target),
+		ui_status_user_is_advanced_tool_user(user),
+		max(
+			ui_status_user_is_conscious_and_lying_down(user),
+			ui_status_user_is_abled(user, target),
+		),
+	)
+
+	if(status < UI_INTERACTIVE)
+		return UI_CLOSE
+
+	return status
 
 /obj/item/card/id/advanced/chameleon/ui_data(mob/user)
 	var/list/data = list()
@@ -1207,7 +1262,7 @@
 			return
 		if(popup_input == "Forge/Reset")
 			if(!forged)
-				var/input_name = stripped_input(user, "What name would you like to put on this card? Leave blank to randomise.", "Agent card name", registered_name ? registered_name : (ishuman(user) ? user.real_name : user.name), MAX_NAME_LEN)
+				var/input_name = tgui_input_text(user, "What name would you like to put on this card? Leave blank to randomise.", "Agent card name", registered_name ? registered_name : (ishuman(user) ? user.real_name : user.name), MAX_NAME_LEN)
 				input_name = sanitize_name(input_name)
 				if(!input_name)
 					// Invalid/blank names give a randomly generated one.
@@ -1234,18 +1289,20 @@
 							var/fake_trim_name = "[trim.assignment] ([trim.trim_state])"
 							trim_list[fake_trim_name] = trim_path
 
-					var/selected_trim_path
-					selected_trim_path = input("Select trim to apply to your card.\nNote: This will not grant any trim accesses.", "Forge Trim", selected_trim_path) as null|anything in sortList(trim_list, /proc/cmp_typepaths_asc)
+					var/selected_trim_path = tgui_input_list(user, "Select trim to apply to your card.\nNote: This will not grant any trim accesses.", "Forge Trim", sort_list(trim_list, /proc/cmp_typepaths_asc))
 					if(selected_trim_path)
 						SSid_access.apply_trim_to_chameleon_card(src, trim_list[selected_trim_path])
 
-				var/target_occupation = stripped_input(user, "What occupation would you like to put on this card?\nNote: This will not grant any access levels.", "Agent card job assignment", assignment ? assignment : "Assistant", MAX_MESSAGE_LEN)
+				var/target_occupation = tgui_input_text(user, "What occupation would you like to put on this card?\nNote: This will not grant any access levels.", "Agent card job assignment", assignment ? assignment : "Assistant")
 				if(target_occupation)
 					assignment = target_occupation
 
-				var/new_age = input(user, "Choose the ID's age:\n([AGE_MIN]-[AGE_MAX])", "Agent card age") as num|null
+				var/new_age = tgui_input_number(user, "Choose the ID's age", "Agent card age", AGE_MIN, AGE_MAX, AGE_MIN)
 				if(new_age)
-					registered_age = max(round(text2num(new_age)), 0)
+					registered_age = round(new_age)
+
+				if(tgui_alert(user, "Activate wallet ID spoofing, allowing this card to force itself to occupy the visible ID slot in wallets?", "Wallet ID Spoofing", list("Yes", "No")) == "Yes")
+					ADD_TRAIT(src, TRAIT_MAGNETIC_ID_CARD, CHAMELEON_ITEM_TRAIT)
 
 				update_label()
 				update_icon()
@@ -1267,6 +1324,7 @@
 				registered_name = initial(registered_name)
 				assignment = initial(assignment)
 				SSid_access.remove_trim_from_chameleon_card(src)
+				REMOVE_TRAIT(src, TRAIT_MAGNETIC_ID_CARD, CHAMELEON_ITEM_TRAIT)
 				log_game("[key_name(user)] has reset \the [initial(name)] named \"[src]\" to default.")
 				update_label()
 				update_icon()
@@ -1279,11 +1337,20 @@
 	return ..()
 
 /// A special variant of the classic chameleon ID card which accepts all access.
+//SKYRAT EDIT BEGIN..
+
+#define WILDCARD_LIMIT_CHAMELEON_ADVANCED list( \
+	WILDCARD_NAME_CENTCOM = list(limit = 2, usage = list()), \
+	WILDCARD_NAME_SYNDICATE = list(limit = -1, usage = list()), \
+	WILDCARD_NAME_CAPTAIN = list(limit = -1, usage = list()) \
+)
+
 /obj/item/card/id/advanced/chameleon/black
 	icon_state = "card_black"
 	worn_icon_state = "card_black"
 	assigned_icon_state = "assigned_syndicate"
-	wildcard_slots = WILDCARD_LIMIT_GOLD
+	wildcard_slots = WILDCARD_LIMIT_CHAMELEON_ADVANCED
+//SKYRAT EDIT END
 
 /obj/item/card/id/advanced/engioutpost
 	registered_name = "George 'Plastic' Miller"

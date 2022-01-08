@@ -29,13 +29,13 @@
 /obj/item/laser_pointer/purple
 	pointer_icon_state = "purple_laser"
 
-/obj/item/laser_pointer/Initialize()
+/obj/item/laser_pointer/Initialize(mapload)
 	. = ..()
 	diode = new(src)
 	if(!pointer_icon_state)
 		pointer_icon_state = pick("red_laser","green_laser","blue_laser","purple_laser")
 
-/obj/item/laser_pointer/upgraded/Initialize()
+/obj/item/laser_pointer/upgraded/Initialize(mapload)
 	. = ..()
 	diode = new /obj/item/stock_parts/micro_laser/ultra
 
@@ -135,7 +135,8 @@
 
 	//catpeople
 	for(var/mob/living/carbon/human/H in view(1,targloc))
-		if(!isfelinid(H) || H.incapacitated() || H.is_blind())
+		//if(!isfelinid(H) || H.incapacitated() || H.is_blind())
+		if(!(isfelinid(H) || HAS_TRAIT(H, TRAIT_FELINE)) || H.incapacitated() || H.is_blind()) //SKYRAT EDIT - FELINE TRAIT
 			continue
 		if(user.body_position == STANDING_UP)
 			H.setDir(get_dir(H,targloc)) // kitty always looks at the light

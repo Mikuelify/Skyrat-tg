@@ -29,7 +29,7 @@
 	name = "Unica Six Revolver"
 	desc = "A retro high-powered autorevolver typically used by officers of the New Russia military. Uses .357 ammo."
 	item = /obj/item/gun/ballistic/revolver/mateba
-	cost = 11
+	cost = 13
 	surplus = 50
 
 /datum/uplink_item/dangerous/holocarp
@@ -82,6 +82,7 @@
 	item = /obj/item/book/granter/martial/cqc
 	cost = 23
 	surplus = 17
+
 // Removed from the uplink for the time being.
 /*datum/uplink_item/stealthy_weapons/cqcplus
 	name = "CQC+ Manual"
@@ -94,7 +95,7 @@
 /datum/uplink_item/stealthy_weapons/telescopicbaton
 	name = "Telescopic Baton"
 	desc = "A telescopic baton, exactly like the ones heads are issued. Good for knocking people down briefly."
-	item = /obj/item/melee/classic_baton/telescopic
+	item = /obj/item/melee/baton/telescopic
 	cost = 2
 	surplus = 0
 
@@ -121,6 +122,15 @@
 	item = /obj/item/radio/headset/chameleon/advanced
 	cost = 4 //Also a BIGBOY tool. Though inconvienent to wield, this allows the wearer to spy and interact with any one frequency they desire, even without the proper encryption key, along with flashbang protection and loudmode. Cannot breach syndiecomms by itself.
 
+/datum/uplink_item/stealthy_tools/syndieshotglasses
+	name = "Extra Large Syndicate Shotglasses"
+	desc = "These modified shot glasses can hold up to 50 units of booze while looking like a regular 15 unit model \
+	guaranteed to knock someone on their ass with a hearty dose of bacchus blessing. Look for the Snake underneath \
+	to tell these are the real deal. Box of 7."
+	item = /obj/item/storage/box/syndieshotglasses
+	cost = 2 //These are taken nearly exactly from Goon, very fun tool.
+	restricted_roles = list(JOB_BARTENDER)
+
 //EXPLOSIVES
 /datum/uplink_item/explosives/buzzkill_traitor
 	name = "Buzzkill Grenade Box"
@@ -129,12 +139,18 @@
 	item = /obj/item/storage/box/syndie_kit/bee_grenades
 	cost = 10
 
-
 /datum/uplink_item/explosives/viscerators_traitor
 	name = "Viscerator Delivery Grenade"
 	desc = "A unique grenade that deploys a swarm of viscerators upon activation, which will chase down and shred \
 			any non-operatives in the area."
 	item = /obj/item/grenade/spawnergrenade/manhacks
+	cost = 7
+	surplus = 35
+
+/datum/uplink_item/explosives/nukeop_traitor
+	name = "Nuclear Delivery Grenade"
+	desc = "A very confusing grenade containing 2 dehydrated nuclear operatives. Stand back when primed."
+	item = /obj/item/grenade/spawnergrenade/therealnuke
 	cost = 7
 	surplus = 35
 
@@ -181,6 +197,14 @@
 	item = /obj/item/syndie_glue
 	cost = 3
 
+/datum/uplink_item/device_tools/syndikush
+	name = "Syndikush Green Crack cart"
+	desc = "A cheap Chinese vape cart that contains a potent combination of THC and \
+			stimulants. Not made with real crack."
+	item = /obj/item/reagent_containers/vapecart/syndicate
+	cost = 5
+	surplus = 90
+
 //AMMO
 /datum/uplink_item/ammo/pistolaps_traitor
 	name = "9mm Stechkin APS Magazine"
@@ -208,37 +232,51 @@
 	item = /obj/item/ammo_box/magazine/smgm45/incen
 	cost = 2
 
+/datum/uplink_item/ammo/smgempty_traitor
+	name = "Empty .45 SMG Magazine"
+	desc = "An additional, empty 24-round .45 magazine suitable for use with the C-20r submachine gun.\
+			Ammunition not included."
+	item = /obj/item/ammo_box/magazine/smgm45/empty
+	cost = 1
+
 /datum/uplink_item/ammo/shotgun/buck_traitor
 	name = "12g Buckshot Drum"
 	desc = "An additional 8-round buckshot magazine for use with the Bulldog shotgun. Front towards enemy."
 	item = /obj/item/ammo_box/magazine/m12g
+	purchasable_from = ALL
 
 /datum/uplink_item/ammo/shotgun/dragon_traitor
 	name = "12g Dragon's Breath Drum"
 	desc = "An alternative 8-round dragon's breath magazine for use in the Bulldog shotgun. \
 			'I'm a fire starter, twisted fire starter!'"
 	item = /obj/item/ammo_box/magazine/m12g/dragon
+	purchasable_from = ALL
 
 /datum/uplink_item/ammo/shotgun/meteor_traitor
 	name = "12g Meteorslug Shells"
 	desc = "An alternative 8-round meteorslug magazine for use in the Bulldog shotgun. \
 		Great for blasting airlocks off their frames and knocking down enemies."
 	item = /obj/item/ammo_box/magazine/m12g/meteor
+	cost = 3
+	purchasable_from = ALL
 
 /datum/uplink_item/ammo/shotgun/slug_traitor
 	name = "12g Slug Drum"
 	desc = "An additional 8-round slug magazine for use with the Bulldog shotgun. \
 			Now 8 times less likely to shoot your pals."
-	cost = 3
 	item = /obj/item/ammo_box/magazine/m12g/slug
+	cost = 3
+	purchasable_from = ALL
+
+/datum/uplink_item/ammo/shotgun/empty_traitor
+	name = "Empty 12g Drum"
+	desc = "An empty 8-round magazine for use in the Bulldog shotgun. \
+			Ammunition not included."
+	cost = 1
+	item = /obj/item/ammo_box/magazine/m12g/empty
+	purchasable_from = ALL
 
 //SUITS
-/datum/uplink_item/suits/hardsuit/elite_traitor
-	name = "Elite Syndicate Hardsuit"
-	desc = "An upgraded, elite version of the Syndicate hardsuit. It features fireproofing, and also \
-			provides the user with superior armor and mobility compared to the standard Syndicate hardsuit."
-	item = /obj/item/clothing/suit/space/hardsuit/syndi/elite
-	cost = 10
 
 /datum/uplink_item/suits/standard_armor
 	name = "Standard Armor Vest"
@@ -253,7 +291,7 @@
 	cost = 1
 
 //HELMETS
-/datum/uplink_item/suits/hardsuit/swathelmet_traitor
+/datum/uplink_item/suits/swathelmet_traitor
 	name = "Syndicate Helmet"
 	desc = "An extremely robust, space-worthy helmet in a nefarious red and black stripe pattern."
 	item = /obj/item/clothing/head/helmet/swat
@@ -274,14 +312,14 @@
 	desc = "Recovered from an abandoned Nar'sie cult lair, two construct shells and a stash of empty soulstones was found. These were purified to prevent occult contamination and have been put in a belt so they may be used as an accessible source of disposable minions. The construct shells have been packaged into two beacons for rapid and portable deployment."
 	item = /obj/item/storage/box/syndie_kit/cultkitsr
 	cost = 15 //If used correctly, You actually get several servants or just get fucked over because no ghosts want to be a shade.
-	restricted_roles = list("Chaplain")
+	restricted_roles = list(JOB_CHAPLAIN)
 
 //LOADOUTS
 
 /datum/uplink_item/loadout_skyrat
 	category = "Loadout"
 	surplus = 0
-	cant_discount = TRUE //I honestly don't think discount is worth it for those things, sorry.
+	cant_discount = TRUE // I honestly don't think discount is worth it for those things, sorry.
 
 /datum/uplink_item/loadout_skyrat/recon
 	name = "Reconnaisance bundle"
@@ -331,12 +369,6 @@
 	item = /obj/item/storage/backpack/duffelbag/syndie/loadout/darklord
 	cost = 20
 
-/datum/uplink_item/loadout_skyrat/hunter
-	name = "Whaler bundle"
-	desc = "There’s no whales in space, but there sure are carp. Blend in with your prey and wield an impossibly effective high-power harpoon gun in this tribute to a tale told long ago."
-	item = /obj/item/storage/box/syndie_kit/loadout/hunter
-	cost = 20
-
 /datum/uplink_item/loadout_skyrat/bee
 	name = "Buzzy bundle"
 	desc = "Look bee-utiful in this extra specialized rapid attack kit, featuring unique armaments seen nowhere else and a bumble-y sense of style."
@@ -349,26 +381,38 @@
 	item = /obj/item/storage/backpack/duffelbag/syndie/loadout/cryomancer
 	cost = 20
 
+/datum/uplink_item/loadout_skyrat/doctordeath
+	name = "Doctor Death bundle"
+	desc = "Be your very own mad scientist with this toxic bundle! Warning, license void if poisons used on self. Read bottom of bag for more information."
+	item = /obj/item/storage/backpack/duffelbag/syndie/loadout/doctordeath
+	cost = 25
+
+/datum/uplink_item/loadout_skyrat/donkcoshill
+	name = "Donk Co. Shill bundle"
+	desc = "Love Donk Pockets? Want to shill Donk Co. Toys? This bundle is for you! Contains some DonkSoft guns, a vending machine, restocking units, and a box of Donk Pockets."
+	item = /obj/item/storage/backpack/duffelbag/syndie/loadout/donkshillkit
+	cost = 10
+
+/datum/uplink_item/loadout_skyrat/downtownspecial
+	name = "Downtown Special bundle"
+	desc = "Ayyy fuggedaboudit! This bundle contains everything to be your own one man mafioso. Including an icon of the Virgin Mary for your own authentic mafia nickname. Gang members not included."
+	item = /obj/item/storage/backpack/duffelbag/syndie/loadout/downtownspecial
+	cost = 25
+
+/datum/uplink_item/loadout_skyrat/ocelotfoxtrot
+	name = "Snake Eater bundle"
+	desc = "A kit themed around one certain gun spinning cat. Includes his famous colt special, and personalised ammo."
+	item = /obj/item/storage/box/syndie_kit/loadout/ocelotfoxtrot
+	cost = 15
+
 /datum/uplink_item/loadout_skyrat/nt_impostor
-	name = "Corporate Deceit Bundle"
+	name = "Corporate Deceit bundle"
 	desc = "Don the identities of the most powerful men and women in Nanotrasen, and pull strings from the shadows as you please with this specialized kit."
 	item = /obj/item/storage/box/syndie_kit/loadout/nt_impostor
 	cost = 20
 
 /datum/uplink_item/loadout_skyrat/lasermanbundle
-	name = "Laserman Bundle"
+	name = "Laserman bundle"
 	desc = "Themed after an infamous syndicate operative with a particular fighting style, this kit is both a fashionable throwback and a uniquely useful combative loadout."
 	item = /obj/item/storage/box/syndie_kit/loadout/lasermanbundle
 	cost = 20
-
-//Badass section down here
-/datum/uplink_item/loadout_skyrat/robohand
-	name = "Robohand Bundle"
-	desc = "Themed after the infamous terrorist(or not), Johnny Robohand. You have no reason to fail your objectives with this kit. The gun inside requires your arm to be robotic. \
-			It comes with a robotic replacement arm. Wake the fuck up, samurai."
-	item = /obj/item/storage/backpack/duffelbag/syndie/loadout/robohand
-	cost = 20
-
-/datum/uplink_item/loadout_skyrat/robohand/purchase(mob/user, datum/component/uplink/U)
-	. = ..()
-	notify_ghosts(message = "[user] has purchased the Johnny Robohand bundle, watch him be a badass!", ghost_sound = 'modular_skyrat/modules/3516/sound/wakeup.ogg', source = user) //Everyone needs to know he's a badass

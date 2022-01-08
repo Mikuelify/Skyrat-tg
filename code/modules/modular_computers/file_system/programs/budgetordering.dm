@@ -5,7 +5,6 @@
 	program_icon_state = "request"
 	extended_desc = "Nanotrasen Internal Requisition Network interface for supply purchasing using a department budget account."
 	requires_ntnet = TRUE
-	transfer_access = ACCESS_HEADS
 	usage_flags = PROGRAM_LAPTOP | PROGRAM_TABLET
 	size = 20
 	tgui_id = "NtosCargo"
@@ -73,7 +72,7 @@
 	var/obj/item/computer_hardware/card_slot/card_slot = computer.all_components[MC_CARD]
 	var/obj/item/card/id/id_card = card_slot?.GetID()
 	if(id_card?.registered_account)
-		if(ACCESS_HEADS in id_card.access)
+		if((ACCESS_HEADS in id_card.access) || (ACCESS_QM in id_card.access))
 			requestonly = FALSE
 			buyer = SSeconomy.get_dep_account(id_card.registered_account.account_job.paycheck_department)
 			can_approve_requests = TRUE
@@ -191,7 +190,7 @@
 			var/datum/supply_pack/pack = SSshuttle.supply_packs[id]
 			if(!istype(pack))
 				return
-			if((pack.hidden && (pack.contraband && !contraband) || pack.DropPodOnly))
+			if(pack.hidden || pack.contraband || pack.DropPodOnly || (pack.special && !pack.special_enabled))
 				return
 
 			var/name = "*None Provided*"
@@ -213,7 +212,7 @@
 					computer.say("No ID card detected.")
 					return
 				if(istype(id_card, /obj/item/card/id/departmental_budget))
-					computer.say("The [src] rejects [id_card].")
+					computer.say("[id_card] cannot be used to make purchases.")
 					return
 				account = id_card.registered_account
 				if(!istype(account))
@@ -222,7 +221,7 @@
 
 			var/reason = ""
 			if((requestonly && !self_paid) || !(card_slot?.GetID()))
-				reason = stripped_input("Reason:", name, "")
+				reason = tgui_input_text(usr, "Reason", name)
 				if(isnull(reason) || ..())
 					return
 

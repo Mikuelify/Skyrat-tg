@@ -56,3 +56,20 @@
 #define COMSIG_TURF_MOB_FALL "turf_mob_fall"
 ///from base of /obj/effect/abstract/liquid_turf/Initialize() (/obj/effect/abstract/liquid_turf/liquids)
 #define COMSIG_TURF_LIQUIDS_CREATION "turf_liquids_creation"
+
+// Firealarm signals
+/// /obj/machinery/firealarm/proc/trigger_effects(manual = FALSE)
+#define COMSIG_FIREALARM_TRIGGERED_ON "firealarm_triggered_on"
+#define COMSIG_FIREALARM_TRIGGER_DOORS "firealarm_trigger_doors"
+/// /obj/machinery/firealarm/proc/untrigger_effects()
+#define COMSIG_FIREALARM_TRIGGERED_OFF "firealarm_triggered_off"
+/// /obj/machinery/door/firedoor/proc/trigger_hot()
+#define COMSIG_FIREDOOR_CLOSED_FIRE "firedoor_closed_fire"
+
+//when someone casts their fishing rod
+#define COMSIG_START_FISHING "start_fishing"
+//when someone pulls back their fishing rod
+#define COMSIG_FINISH_FISHING "finish_fishing"
+
+/// From mob/living/*/set_combat_mode(): (new_state)
+#define COMSIG_LIVING_COMBAT_MODE_TOGGLE "living_combat_mode_toggle"

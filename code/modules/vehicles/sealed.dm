@@ -21,10 +21,10 @@
 		mob_try_enter(M)
 	return ..()
 
-/obj/vehicle/sealed/Exited(atom/movable/AM, atom/newLoc)
+/obj/vehicle/sealed/Exited(atom/movable/gone, direction)
 	. = ..()
-	if(ismob(AM))
-		remove_occupant(AM)
+	if(ismob(gone))
+		remove_occupant(gone)
 
 // so that we can check the access of the vehicle's occupants. Ridden vehicles do this in the riding component, but these don't have that
 /obj/vehicle/sealed/Bump(atom/A)
@@ -49,6 +49,11 @@
 		return FALSE
 	if(occupant_amount() >= max_occupants)
 		return FALSE
+	//SKYRAT EDIT ADDITION
+	if(HAS_TRAIT(M, TRAIT_OVERSIZED))
+		to_chat(M, span_warning("You are far too big for this!"))
+		return FALSE
+	//SKYRAT EDIT END
 	if(do_after(M, get_enter_delay(M), src, timed_action_flags = IGNORE_HELD_ITEM))
 		mob_enter(M)
 		return TRUE

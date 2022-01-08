@@ -29,7 +29,7 @@
 		for (var/V in O.vars)
 			names += V
 
-		names = sortList(names)
+		names = sort_list(names)
 
 		variable = input("Which var?", "Var") as null|anything in names
 	else
@@ -117,7 +117,7 @@
 			var/list/varsvars = vv_parse_text(O, new_value)
 			var/pre_processing = new_value
 			var/unique
-			if (varsvars && varsvars.len)
+			if (varsvars?.len)
 				unique = tgui_alert(usr, "Process vars unique to each instance, or same for all?", "Variable Association", list("Unique", "Same"))
 				if(unique == "Unique")
 					unique = TRUE

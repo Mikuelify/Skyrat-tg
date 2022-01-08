@@ -256,7 +256,9 @@
 
 /obj/effect/temp_visual/telekinesis
 	name = "telekinetic force"
-	icon_state = "empdisable"
+	//icon_state = "empdisable" //Non-Skyrat version
+	icon_state = "telekinesis_throw" //Skyrat edit, was "empdisable"
+	icon = 'modular_skyrat/master_files/icons/effects/tele_effects.dmi' //Skyrat Addition
 	duration = 5
 
 /obj/effect/temp_visual/emp
@@ -520,3 +522,12 @@
 
 /obj/effect/constructing_effect/proc/end()
 	qdel(src)
+
+/obj/effect/temp_visual/electricity
+	icon_state = "electricity3"
+	duration = 0.5 SECONDS
+
+/obj/effect/temp_visual/thunderbolt
+	icon_state = "thunderbolt"
+	icon = 'icons/effects/32x96.dmi'
+	duration = 0.6 SECONDS

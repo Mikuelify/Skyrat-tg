@@ -27,7 +27,7 @@
 	var/locked = TRUE //is the console locked? unlock with ID
 	var/usingBeacon = FALSE //is the console in beacon mode? exists to let beacon know when a pod may come in
 
-/obj/machinery/computer/cargo/express/Initialize()
+/obj/machinery/computer/cargo/express/Initialize(mapload)
 	. = ..()
 	packin_up()
 
@@ -201,7 +201,7 @@
 								continue
 							LAZYADD(empty_turfs, T)
 							CHECK_TICK
-						if(empty_turfs && empty_turfs.len)
+						if(empty_turfs?.len)
 							LZ = pick(empty_turfs)
 					if (SO.pack.get_cost() <= points_to_check && LZ)//we need to call the cost check again because of the CHECK_TICK call
 						TIMER_COOLDOWN_START(src, COOLDOWN_EXPRESSPOD_CONSOLE, 5 SECONDS)
@@ -220,7 +220,7 @@
 							continue
 						LAZYADD(empty_turfs, T)
 						CHECK_TICK
-					if(empty_turfs && empty_turfs.len)
+					if(empty_turfs?.len)
 						TIMER_COOLDOWN_START(src, COOLDOWN_EXPRESSPOD_CONSOLE, 10 SECONDS)
 						D.adjust_money(-(SO.pack.get_cost() * (0.72*MAX_EMAG_ROCKETS)))
 

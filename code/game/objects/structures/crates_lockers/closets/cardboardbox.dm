@@ -16,9 +16,12 @@
 	close_sound = 'sound/machines/cardboard_box.ogg'
 	open_sound_volume = 35
 	close_sound_volume = 35
+	has_closed_overlay = FALSE
+	door_anim_time = 0 // no animation
 	var/move_speed_multiplier = 1
 	var/move_delay = FALSE
 	var/egged = 0
+	can_install_electronics = FALSE
 
 /obj/structure/closet/cardboard/relaymove(mob/living/user, direction)
 	if(opened || move_delay || user.incapacitated() || !isturf(loc) || !has_gravity(loc))

@@ -6,7 +6,7 @@
 	base_icon_state = "lattice"
 	density = FALSE
 	anchored = TRUE
-	armor = list(MELEE = 50, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 80, ACID = 50)
+	armor = list(MELEE = 50, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, FIRE = 80, ACID = 50)
 	max_integrity = 50
 	layer = LATTICE_LAYER //under pipes
 	plane = FLOOR_PLANE
@@ -84,8 +84,6 @@
 /obj/structure/lattice/catwalk/deconstruction_hints(mob/user)
 	return span_notice("The supporting rods look like they could be <b>cut</b>.")
 
-//SKYRAT EDIT REMOVAL BEGIN - Moved To Modular
-/*
 /obj/structure/lattice/catwalk/Move()
 	var/turf/T = loc
 	for(var/obj/structure/cable/C in T)
@@ -97,8 +95,6 @@
 	for(var/obj/structure/cable/C in T)
 		C.deconstruct()
 	..()
-*/
-//SKYRAT EDIT REMOVAL END
 
 /obj/structure/lattice/lava
 	name = "heatproof support lattice"

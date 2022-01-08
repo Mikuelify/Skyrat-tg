@@ -16,8 +16,10 @@
 
 /obj/item/food/grown/tea/catnip
 	seed = /obj/item/seeds/tea/catnip
-	name = "Catnip buds"
+	name = "catnip buds"
 	icon = 'modular_skyrat/master_files/icons/obj/hydroponics/harvest.dmi'
 	icon_state = "catnip"
 	filling_color = "#4582B4"
 	grind_results = list(/datum/reagent/pax/catnip = 2, /datum/reagent/water = 1)
+	distill_reagent = /datum/reagent/consumable/pinkmilk //Don't ask, cats speak in poptart
+
