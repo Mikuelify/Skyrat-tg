@@ -112,12 +112,12 @@
 	if (istype(mountpoint, /atom/movable))
 		RegisterSignal(src, COMSIG_MOVABLE_MOVED, .proc/on_mountpoint_move)
 		RegisterSignal(src, COMSIG_MOVABLE_PRE_MOVE, .proc/on_premove)
-		GLOB.dir_set_event.register(A, src, /datum/extension/wallrun/proc/dir_set)
+		RegisterSignal(src, COMSIG_ATOM_DIR_CHANGE, .proc/dir_set)
 		RegisterSignal(src, COMSIG_MOVABLE_MOVED, .proc/on_move)
 		RegisterSignal(src, COMSIG_LIVING_DEATH, .proc/unmount_to_floor)
 
 	A.pass_flags |= passflag_delta
-	register_statmods()
+
 
 	mount_turf = get_mount_target_turf(A, target)
 
@@ -195,12 +195,12 @@
 /datum/extension/wallrun/proc/unmount(var/atom/target)
 	if (mountpoint)
 		if (istype(mountpoint, /atom/movable))
-			GLOB.moved_event.unregister(mountpoint, src, /datum/extension/wallrun/proc/on_mountpoint_move)
-		GLOB.destroyed_event.unregister(mountpoint, src, /datum/extension/wallrun/proc/unmount_to_floor)
-		GLOB.density_set_event.unregister(mountpoint, src, /datum/extension/wallrun/proc/on_density_set)
-		GLOB.pre_move_event.unregister(A, src, /datum/extension/wallrun/proc/on_premove)
-		GLOB.moved_event.unregister(A, src, /datum/extension/wallrun/proc/on_move)
-		RegisterSignal(src, COMSIG_MOB_DEATH, .proc/unmount_to_floor)
+		UnregisterSignal(src, COMSIG_MOVABLE_MOVED, .proc/on_mountpoint_move)
+		UnregisterSignal(src, COMSIG_MOVABLE_PRE_MOVE, .proc/on_premove)
+		UnregisterSignal(src, COMSIG_ATOM_DIR_CHANGE, .proc/dir_set)
+		UnregisterSignal(src, COMSIG_MOVABLE_MOVED, .proc/on_move)
+		UnregisterSignal(src, COMSIG_LIVING_DEATH, .proc/unmount_to_floor)
+
 
 
 
@@ -213,11 +213,11 @@
 /datum/extension/wallrun/proc/unmount_to_floor()
 	if (user && !user.stat)
 		user.visible_message("[A] climbs down from \the [mountpoint]")
-	UnregisterSignal(src, COMSIG_MOB_DEATH, .proc/unmount_to_floor)
+	UnregisterSignal(src, COMSIG_LIVING_DEATH, .proc/unmount_to_floor)
 
 	unmount_animation()
 	unmount()
-	unregister_statmods()
+
 
 //Called when unmounting as part of some other action, like performing a leap off a wall
 /datum/extension/wallrun/proc/unmount_silent()
@@ -234,8 +234,13 @@
 
 
 	A.animate_to_default(0)
-	unregister_statmods()
-	UnregisterSignal(src, COMSIG_MOB_DEATH, .proc/unmount_to_floor)
+	UnregisterSignal(src, COMSIG_MOVABLE_MOVED, .proc/on_mountpoint_move)
+	UnregisterSignal(src, COMSIG_MOVABLE_PRE_MOVE, .proc/on_premove)
+	UnregisterSignal(src, COMSIG_ATOM_DIR_CHANGE, .proc/dir_set)
+	UnregisterSignal(src, COMSIG_MOVABLE_MOVED, .proc/on_move)
+	UnregisterSignal(src, COMSIG_LIVING_DEATH, .proc/unmount_to_floor)
+
+
 
 
 /datum/extension/wallrun/proc/cache_data()
@@ -243,11 +248,11 @@
 	default_rotation = A.default_rotation
 	cached_alpha = A.default_alpha
 	cached_passflags = A.pass_flags
-	if (!(cached_passflags & PASS_FLAG_TABLE))
-		passflag_delta |= PASS_FLAG_TABLE
+	if (!(cached_passflags & PASSTABLE))
+		passflag_delta |= PASSTABLE
 
-	if (!(cached_passflags & PASS_FLAG_FLYING))
-		passflag_delta |= PASS_FLAG_FLYING
+	if (!(cached_passflags & FLYING))
+		passflag_delta |= FLYING
 
 	//Lets calculate the centre offset, once only
 	if (!centre_offset)
@@ -307,7 +312,7 @@
 
 
 	//Special behaviour for border items
-	if (target.atom_flags & ATOM_FLAG_CHECKS_BORDER)
+	if (target.flags_1 & ON_BORDER_1)
 		//In the case of border atoms, we want to get the tile on the OTHER side of the border from us
 		var/dir_to_us = get_dir(T, origin)
 		if (dir_to_us & target.dir)
@@ -354,7 +359,7 @@
 	//Special checks for mobs
 	if (isliving(target))
 		var/mob/living/LT = target
-		if (LT.mob_size < MOB_LARGE)
+		if (LT.mob_size < MOB_SIZE_LARGE)
 			return FALSE
 
 
@@ -376,22 +381,24 @@
 
 
 //Access Proc
-/*
+
 /atom/movable/proc/can_wallrun(var/error_messages = TRUE)
-	if (incapacitated())
-		return FALSE
+	// if(UNCONSCIOUS)
+	// 	return FALSE
+	// if(DEAD)
+	// 	return FALSE
 
 	var/datum/extension/wallrun/E = get_extension(src, /datum/extension/wallrun)
 	if(istype(E))
 		if (error_messages)
 			if (E.stopped_at)
-				to_chat(src, SPAN_NOTICE("[E.name] is cooling down. You can use it again in [E.get_cooldown_time() /10] seconds"))
+				to_chat(src, "[E.name] is cooling down. You can use it again in 60 seconds") //[E.get_cooldown_time() /10]
 			else
-				to_chat(src, SPAN_NOTICE("You're already wallrunning"))
+				to_chat(src, "You're already wallrunning")
 		return FALSE
 
 	return TRUE
-*/
+
 
 
 /*------------------------

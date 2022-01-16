@@ -152,6 +152,9 @@
 	)
 /////////////////////////////////////////////////////////////////////////////
 
+/datum/species/necromorph/proc/setup_movement(var/mob/living/carbon/human/H)
+	//H.slow_turning = slow_turning
+	//H.evasion = evasion
 
 // //Species level audio wrappers
 // //--------------------------------

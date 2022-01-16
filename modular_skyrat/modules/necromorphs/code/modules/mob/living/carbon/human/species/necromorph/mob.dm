@@ -68,6 +68,8 @@
 /mob/living/carbon/human/species/necromorph/slasher
 	race = /datum/species/necromorph/slasher
 
+
+
 /mob/living/carbon/human/species/necromorph/slasher
 
 /mob/living/carbon/human/species/necromorph/divider

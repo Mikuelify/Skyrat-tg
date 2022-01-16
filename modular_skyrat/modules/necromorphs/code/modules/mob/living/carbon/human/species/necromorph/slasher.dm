@@ -210,3 +210,17 @@ Fend automatically cancels when you perform a charge or a melee attack. Dodge wi
 
 #undef SLASHER_DODGE_EVASION
 #undef SLASHER_DODGE_DURATION
+
+
+/*---------------------
+	Wallcrawling
+-----------------------*/
+/datum/species/necromorph/slasher/setup_movement(var/mob/living/carbon/human/H)
+	set_extension(H, /datum/extension/wallrun/slasher)
+
+/datum/extension/wallrun/slasher/mount_to_atom(var/atom/target)
+	.=..()
+
+/datum/extension/wallrun/slasher/unmount()
+	.=..()
+
