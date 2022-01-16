@@ -27,10 +27,8 @@
 	remove_meter()
 	.=..()
 
-
 /datum/extension/resource/proc/setup_meter(var/target) //USED TO APPLY RESOURCE BAR TO HUD
 	return
-
 
 /datum/extension/resource/proc/remove_meter()
 	return
@@ -54,7 +52,7 @@
 /datum/extension/resource/proc/stop_processing()
 	STOP_PROCESSING(SSprocessing, src)
 
-/datum/extension/resource/can_stop_processing()
+/datum/extension/resource/proc/can_stop_processing()
 	.=TRUE
 	if (current_value < max_value)
 		return FALSE

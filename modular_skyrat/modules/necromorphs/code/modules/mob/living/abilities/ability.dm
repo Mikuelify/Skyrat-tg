@@ -14,7 +14,7 @@
 	var/persist = FALSE
 
 	//One of the INCAPACITATION_XXX defines, checked in can_use
-	var/incapacitation_flags = INCAPACITATION_DEFAULT
+	var/incapacitation_flags = UNCONSCIOUS
 
 	var/status
 	var/mob/living/user

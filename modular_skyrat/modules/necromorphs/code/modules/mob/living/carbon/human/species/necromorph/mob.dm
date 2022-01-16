@@ -21,7 +21,6 @@
 	create_bodyparts() //initialize bodyparts
 
 	create_internal_organs()
-	use_single_sprite()
 	ADD_TRAIT(src, TRAIT_CAN_STRIP, INNATE_TRAIT)
 	ADD_TRAIT(src, TRAIT_NEVER_WOUNDED, INNATE_TRAIT)
 	ADD_TRAIT(src, TRAIT_VENTCRAWLER_ALWAYS, INNATE_TRAIT)
@@ -33,45 +32,12 @@
 	// update_icons() //Handled in update_transform(), leaving this here as a reminder
 		update_transform()
 
-// /mob/living/carbon/human/species/necromorph/update_icons()
-// 	cut_overlays()
-// 	for(var/I in overlays_standing)
-// 		add_overlay(I)
-
-// /mob/living/carbon/human/species/necromorph/update_fire(fire_icon = "Generic_mob_burning")
-// 	remove_overlay(FIRE_LAYER)
-// 	if(on_fire || HAS_TRAIT(src, TRAIT_PERMANENTLY_ONFIRE))
-// 		var/mutable_appearance/new_fire_overlay = mutable_appearance('icons/mob/OnFire.dmi', fire_icon, -FIRE_LAYER)
-// 		new_fire_overlay.appearance_flags = RESET_COLOR
-// 		overlays_standing[FIRE_LAYER] = new_fire_overlay
-
-// 	apply_overlay(FIRE_LAYER)
-
-/mob/living/carbon/human/species/necromorph/proc/use_single_sprite()
-	var/mutable_appearance/simple_necromorph = null
-	if(dna?.species.id == SPECIES_NECROMORPH)
-		if(dna?.species.id == SPECIES_NECROMORPH_BRUTE)
-			var/necro_icon = "modular_skyrat/modules/necromorphs/icons/mob/necromorph/brute.dmi"
-			var/necro_icon_state = "brute-d"
-			remove_overlay(BODYPARTS_LAYER)
-			simple_necromorph = mutable_appearance(necro_icon, necro_icon_state, -BODYPARTS_LAYER)
-		overlays_standing[BODYPARTS_LAYER] = simple_necromorph
-		apply_overlay(BODYPARTS_LAYER)
-
-
-
-
 
 /*
 	Slasher Mob setup
 */
 /mob/living/carbon/human/species/necromorph/slasher
 	race = /datum/species/necromorph/slasher
-
-
-
-/mob/living/carbon/human/species/necromorph/slasher
-
 /mob/living/carbon/human/species/necromorph/divider
 	race = /datum/species/necromorph/divider
 /mob/living/carbon/human/species/necromorph/exploder
@@ -94,7 +60,6 @@
 	//status_flags = CANUNCONSCIOUS|CANPUSH|NOPAIN
 	maxHealth = 400
 	health = 450
-
 	//icon_living = "brute-d"
 	//icon_lying = "brute-d-dead"//Temporary icon so its not invisible lying down
 	//icon_dead = "brute-d-dead"
@@ -118,8 +83,6 @@
 
 /mob/living/carbon/human/species/necromorph/slasher_enhanced/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_SLASHER_ENHANCED)
 	..(new_loc, new_species)
-
-/////////////////////////////////////////////////////////////
 
 /mob/living/carbon/human/species/necromorph/divider/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_DIVIDER)
 	..(new_loc, new_species)
@@ -163,29 +126,26 @@
 /* /mob/living/carbon/human/species/necromorph/hunter/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_HUNTER)
 	..(new_loc, new_species) */
 
+/mob/living/carbon/human/necromorph/update_icons()
+	var/datum/species/necromorph/N = species
+	message_admins("[N] single_icon is set to [N.single_icon]")
+	.=..()
+	if(N.single_icon == TRUE)
+		update_body(TRUE)
+
+/*
 // #define DEBUG
-// //Override all that complicated limb-displaying stuff, with singular icons
-// /mob/living/carbon/human/species/necromorph/update_body(var/update_icons=1)
-// 	var/datum/species/necromorph/N = species
-
-
-// 	if (!istype(N))
-// 		return
-
-// 	//If single icon is turned off, do the normal thing
-// 	if (!N.single_icon)
-// 		return ..()
-
-// 	stand_icon = N.icon_template
-// 	icon = stand_icon
-
-// 	if (stat == DEAD)
-// 		icon_state = N.icon_dead
-
-// 	else if (lying)
-// 		icon_state = N.icon_lying
-// 	else
-// 		icon_state = N.icon_normal
+//Override all that complicated limb-displaying stuff, with singular icons
+/mob/living/carbon/human/species/necromorph/update_body(var/update_icons=1)
+	var/datum/species/necromorph/N = species
+	if (!istype(N))
+		return
+	//If single icon is turned off, do the normal thing
+	if (N.single_icon)
+		var/stand_icon = N.icon_template
+		icon = stand_icon
+..()
+*/
 
 
 

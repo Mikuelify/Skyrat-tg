@@ -1,4 +1,9 @@
 /datum/species
+	var/biomass	=	80	//How much biomass does it cost to spawn this (for necros) and how much does it yield when absorbed by a marker
+		//This is in kilograms, and is thus approximately the mass of an average human male adult
+	var/mass = 80	//Actual mass of the resulting mob
+
+
 	//Audio vars
 	var/step_volume = 30	//Base volume of ALL footstep sounds for this mob
 	var/step_range = -1		//Base volume of ALL footstep sounds for this mob. Each point of range adds or subtracts two tiles from the actual audio distance
@@ -9,6 +14,10 @@
 		//For example: (sound_1, sound_2 = 0.5) will result in sound_2 being played half as often as sound_1
 	var/list/speech_chance                    // The likelihood of a speech sound playing.
 	var/list/species_audio_volume = list()		//An associative list, in the format SOUND_TYPE = VOLUME_XXX. Values set here will override the volume of species audio files
+
+	var/list/locomotion_limbs = list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)	//What limbs does this species use to move? It goes slower when these are missing/broken/splinted
+
+
 
 /datum/species/proc/setup_defense(var/mob/living/carbon/human/H)
 
@@ -25,6 +34,8 @@
 		return TRUE
 	return FALSE
 
+/datum/species/proc/get_ability_descriptions()
+	return ""
 
 // /mob/living/carbon/human/play_species_audio(var/atom/source, audio_type, var/volume = VOLUME_MID, var/vary = TRUE, extrarange as num, falloff, var/is_global, var/frequency, var/is_ambiance = 0)
 

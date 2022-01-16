@@ -118,7 +118,7 @@
 		L = user
 		if (!mobile_windup)
 			L.face_atom(target)
-			L.disable(max_lifespan())
+			//L.disable(max_lifespan())
 		starting_locomotion_limbs = length(L.get_locomotion_limbs(FALSE))
 
 	if (_speed)
@@ -147,10 +147,11 @@
 
 		var/bad_speed_factor = 0.4
 		if (H)
-			bad_speed_factor = H.species.lying_speed_factor
+			//bad_speed_factor = H.species.lying_speed_factor
+
 
 		//If we're crawling, we have the worst speed
-		if (L.lying)
+		if (L.body_position == LYING_DOWN)
 			speed *= bad_speed_factor
 			lifespan /= bad_speed_factor
 		else if (H)
@@ -168,8 +169,8 @@
 	if (L)
 		var/num_legs = length(L.get_locomotion_limbs(FALSE))
 		if (num_legs < starting_locomotion_limbs)
-			if (trip)
-				L.trip()
+			//if (trip)
+				//L.trip()
 			return FALSE
 
 	return TRUE
@@ -179,9 +180,9 @@
 	//If we are currently wallcrawling, stop it
 	user.unmount_from_wall()
 	if (ishuman(user))
-		var/mob/living/carbon/human/H = user
-		cached_step_interval = H.step_interval
-		H.step_interval = src.step_interval
+	//	var/mob/living/carbon/human/H = user
+	//	cached_step_interval = H.step_interval
+	//	H.step_interval = src.step_interval
 	if (start_timer)
 		deltimer(start_timer)
 
@@ -189,7 +190,7 @@
 		if (isliving(user))
 			L = user
 			L.face_atom(target)
-			L.disable(max_lifespan())
+			//L.disable(max_lifespan())
 
 	if (!check_limbs(TRUE))
 		stop()
@@ -201,8 +202,8 @@
 		return FALSE
 
 	status = CHARGE_STATE_CHARGING
-	GLOB.bump_event.register(holder, src, /datum/extension/charge/proc/bump)
-	GLOB.moved_event.register(holder, src, /datum/extension/charge/proc/moved)
+	RegisterSignal(holder, src, COMSIG_MOVABLE_BUMP, .proc/bump)
+	RegisterSignal(holder, src, COMSIG_MOVABLE_MOVED, .proc/moved)
 
 	started_at = world.time
 
@@ -225,7 +226,7 @@
 	if (isnum(lifespan) && lifespan > 0)
 		lifespan_timer = addtimer(CALLBACK(src, .proc/stop_peter_out), lifespan, TIMER_STOPPABLE)
 
-	user.visible_message(SPAN_DANGER("[user] [verb_action] at [target]!"))
+	user.visible_message(span_danger("[user] [verb_action] at [target]!"))
 
 	walk_towards(holder, move_target, SPEED_TO_DELAY(speed))
 	user.charge_started(src)
@@ -238,11 +239,11 @@
 	if (isliving(user))
 		if (ishuman(user))
 			var/mob/living/carbon/human/H = user
-			H.step_interval = cached_step_interval
-		L.enable()
+			//H.step_interval = cached_step_interval
+		//L.enable()
 
-	GLOB.bump_event.unregister(holder, src, /datum/extension/charge/proc/bump)
-	GLOB.moved_event.unregister(holder, src, /datum/extension/charge/proc/moved)
+	UnregisterSignal(holder, src, COMSIG_MOVABLE_BUMP, .proc/bump)
+	UnregisterSignal(holder, src, COMSIG_MOVABLE_MOVED, .proc/moved)
 	walk(holder, 0)
 	stopped_at = world.time
 	if (lifespan_timer)
@@ -250,9 +251,9 @@
 
 	deltimer(nomove_timer)
 
-	if (blur)
-		user.filters.Remove(blur)
-		blur = null
+	//if (blur)
+		//user.filters.Remove(blur)
+		//blur = null
 
 	user.charge_ended(src)
 
@@ -265,7 +266,7 @@
 
 
 /datum/extension/charge/proc/finish_cooldown()
-	to_chat(user, SPAN_NOTICE("You are ready to [name] again")) //Use name here so i can reuse this for leaping
+	to_chat(user, span_notice("You are ready to [name] again")) //Use name here so i can reuse this for leaping
 	if (holder) //Apparently holder can be null here
 		remove_extension(holder, src.base_type)
 	else
@@ -383,14 +384,14 @@
 /datum/extension/charge/proc/get_total_power()
 	var/total = power
 	if (ismob(holder))
-		var/mob/M = holder
-		if (M.mob_size >= MOB_LARGE)
+		var/mob/living/M = holder
+		if (M.mob_size >= MOB_SIZE_LARGE)
 			total += 2
-		else if (M.mob_size >= MOB_MEDIUM)
+		else if (M.mob_size >= MOB_SIZE_HUMAN)
 			total += 1
-		else if (M.mob_size >= MOB_SMALL)
+		else if (M.mob_size >= MOB_SIZE_SMALL)
 			total += 0
-		else if (M.mob_size >= MOB_TINY)
+		else if (M.mob_size >= MOB_SIZE_TINY)
 			total += -1
 		else
 			total += -2
@@ -437,15 +438,15 @@
 	for (var/mob/M in range(TP, obstacle))
 		shake_camera(M,10*TP,2)
 
-	obstacle.shake_animation(8*TP)
+	//obstacle.shake_animation(8*TP)
 	if (isliving(holder))
 		//Damage the user and stun them
 
-		var/mob/living/L = holder
+		var/mob/living/carbon/L = holder
 		var/selfdamage = CHARGE_DAMAGE_BASE*TP + CHARGE_DAMAGE_DIST*distance_travelled
-		if (L.max_health)
-			selfdamage = min(L.max_health*0.15, selfdamage)
-		L.stunned = 0
+		if (L.maxHealth)
+			selfdamage = min(L.maxHealth*0.15, selfdamage)
+		L.incapacitated() == L.incapacitated(TRUE, TRUE)
 		L.take_overall_damage(selfdamage, 0,0,0, obstacle)
 		L.Stun(2*TP)
 	stop()
@@ -455,7 +456,7 @@
 /datum/extension/charge/proc/stop_peter_out()
 	if (isliving(holder))
 		var/mob/living/L = holder
-		L.stunned = 0
+		//L.stunned_mob = 0
 		peter_out_effects()
 	stop()
 
@@ -463,8 +464,8 @@
 //We have ended the charge by successfully reaching our intended target. This is ideal
 /datum/extension/charge/proc/stop_success()
 	if (isliving(holder))
-		var/mob/living/L = holder
-		L.stunned = 0
+		var/mob/living/carbon/L = holder
+		//L.stunned_mob = 0
 	var/TP = get_total_power()
 	//Screenshake everyone near the impact site
 	for (var/mob/M in range(TP))
@@ -525,11 +526,11 @@
 
 
 
-		L.launch_strike(src, CHARGE_DAMAGE_BASE*charge.power, L)
-		L.launch_strike(src, CHARGE_DAMAGE_BASE*charge_power, L)
+		//L.launch_strike(src, CHARGE_DAMAGE_BASE*charge.power, L)
+		//L.launch_strike(src, CHARGE_DAMAGE_BASE*charge_power, L)
 		//take_overall_damage((CHARGE_DAMAGE_BASE*power), 0,0,0, mover)
-	apply_effect(3*charge_power, STUN)
-	apply_push_impulse_from(charge.user, charge.user.mass*charge.force_multiplier, 0)
+	apply_effect(3*charge_power, Stun(20))
+	//apply_push_impulse_from(charge.user, charge.user.mass*charge.force_multiplier, 0)
 	return TRUE
 
 
@@ -590,7 +591,7 @@
 	return TRUE
 
 /mob/living/can_charge(var/atom/target, var/error_messages = TRUE)
-	if (incapacitated(INCAPACITATION_IMMOBILE))
+	if (incapacitated())
 		return FALSE
 
 	.=..()
@@ -603,7 +604,7 @@
 	return TRUE
 
 /mob/living/can_continue_charge(var/atom/target)
-	if (incapacitated(INCAPACITATION_IMMOBILE))
+	if (incapacitated())
 		return FALSE
 
 	return ..()

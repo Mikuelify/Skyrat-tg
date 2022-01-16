@@ -18,8 +18,8 @@
 
 	screen_loc = "CENTER,TOP"
 	plane = HUD_PLANE
-	layer = HUD_BASE_LAYER
-	icon = 'icons/hud/screen_health.dmi'
+	layer = ABOVE_HUD_PLANE
+	icon = 'modular_skyrat/modules/necromorphs/icons/hud/screen_health.dmi'
 	icon_state = "white"
 
 	var/total_value = 1
@@ -140,7 +140,7 @@
 	length = round(length)
 
 	//We must make sure it can fit on the client's screen
-	length = min(length, L.client.get_viewport_width() - margin)
+//	length = min(length, L.client.get_viewport_width() - margin)
 
 
 
@@ -149,7 +149,7 @@
 	var/x_scale = (length + margin) / WORLD_ICON_SIZE
 	var/matrix/M = matrix()
 	M.Scale(x_scale, 1)
-	animate(src, transform = M, time = 2 SECONDSS)
+	animate(src, transform = M, time = 2 SECONDS)
 	if (remaining_meter)
 		remaining_meter.update_total()
 	if (delta_meter)
@@ -237,8 +237,8 @@
 
 	screen_loc = "CENTER,TOP"
 	plane = HUD_PLANE
-	layer = HUD_ITEM_LAYER
-	icon = 'icons/hud/screen_health.dmi'
+	layer = HUD_PLANE
+	icon = 'modular_skyrat/modules/necromorphs/icons/hud/screen_health.dmi'
 	icon_state = "white_slim"
 	var/side = -1	//-1 = left, 1 = right
 
@@ -287,7 +287,7 @@
 	Health
 */
 /atom/movable/screen/meter_component/current
-	layer = HUD_ABOVE_ITEM_LAYER	//This must draw above the delta
+	layer = ABOVE_HUD_PLANE	//This must draw above the delta
 	color = COLOR_NT_RED
 	animate_time = 0.3 SECONDS
 
@@ -421,7 +421,7 @@
 */
 /atom/movable/screen/meter_component/text
 	icon_state = ""
-	layer = HUD_TEXT_LAYER
+	layer = HUD_PLANE
 
 /atom/movable/screen/meter_component/text/update_total(resize = FALSE)
 	if (parent)
@@ -452,7 +452,7 @@
 */
 /proc/add_resource_meter(var/target, var/subtype = /atom/movable/screen/meter/resource, var/datum/extension/resource/resource_datum, var/instant_update = TRUE)
 	var/list/data = get_hud_data_for_target(target)
-	to_chat(world, "Adding meter, for target [target] data: [dump_list(data)]")
+	//to_chat(world, "Adding meter, for target [target] data: [dump_list(data)]")
 	var/datum/hud/H = data["hud"]
 	var/mob/M = data["mob"]
 	var/atom/movable/screen/meter/resource/meter = new subtype(M, data["hud"], resource_datum)

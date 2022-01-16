@@ -195,7 +195,7 @@
 /datum/extension/wallrun/proc/unmount(var/atom/target)
 	if (mountpoint)
 		if (istype(mountpoint, /atom/movable))
-		UnregisterSignal(src, COMSIG_MOVABLE_MOVED, .proc/on_mountpoint_move)
+			UnregisterSignal(src, COMSIG_MOVABLE_MOVED, .proc/on_mountpoint_move)
 		UnregisterSignal(src, COMSIG_MOVABLE_PRE_MOVE, .proc/on_premove)
 		UnregisterSignal(src, COMSIG_ATOM_DIR_CHANGE, .proc/dir_set)
 		UnregisterSignal(src, COMSIG_MOVABLE_MOVED, .proc/on_move)

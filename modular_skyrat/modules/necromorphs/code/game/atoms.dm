@@ -13,3 +13,9 @@
 		return FALSE
 	return TRUE
 
+//Defined here for convenience
+/atom/proc/get_attack_speed_factor()
+	return TRUE
+
+/atom/proc/get_move_speed_factor()
+	return TRUE

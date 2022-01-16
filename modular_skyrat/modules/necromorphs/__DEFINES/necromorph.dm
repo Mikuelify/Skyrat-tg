@@ -140,3 +140,7 @@ This necromorph is capable of crawling along walls, over the heads of other crea
 
 
 #define SHARED_COOLDOWN_SHOT	(1.5 SECOND)
+
+
+//Takes a speed in metres per second, and outputs delay in deciseconds between each step to achieve that
+#define SPEED_TO_DELAY(speed) (10/speed)

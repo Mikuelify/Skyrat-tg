@@ -16,7 +16,7 @@
 	name = "Leap"
 	var/cached_pass_flags
 	var/cached_plane
-	var/extra_pass_flags = (PASS_FLAG_TABLE | PASS_FLAG_FLYING)
+	var/extra_pass_flags = (PASSTABLE | FLYING)
 	continue_check = FALSE	//We're not gonna be stopped if we die mid air, the leap continues til it impacts
 	blur_filter_strength = 4
 	var/wind_down_time = 0.5 SECONDS
