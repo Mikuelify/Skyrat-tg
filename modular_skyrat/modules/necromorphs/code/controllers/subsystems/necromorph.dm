@@ -35,7 +35,7 @@ SUBSYSTEM_DEF(necromorph)
 /datum/controller/subsystem/necromorph/stat_entry(msg)
 	return ("Click to debug!")
 
-
+/*
 /datum/controller/subsystem/necromorph/proc/join_necroqueue(mob/dead/observer/eye/signal/M)
 	if (is_marker_master(M))
 		//The master may not queue. They can still possess things if really needed though
@@ -110,7 +110,7 @@ SUBSYSTEM_DEF(necromorph)
 	//We will return the difference between last and current time. Eyes may do something with this
 	return (difference)
 
-
+*/
 
 
 /proc/add_massive_atom(var/atom/A)
@@ -141,6 +141,7 @@ SUBSYSTEM_DEF(necromorph)
 		return SSnecromorph.marker
 
 
+/*
 //Updates the energy holders of all necromorph players, refreshing their spell list
 /datum/controller/subsystem/necromorph/proc/update_all_ability_lists(var/clear = FALSE)
 	for (var/key in GLOB.players)
@@ -156,25 +157,22 @@ SUBSYSTEM_DEF(necromorph)
 		if (istype(S))
 			S.update_verbs()
 
-
+*/
 
 
 //Shard handling
 /datum/controller/subsystem/necromorph/proc/register_shard(var/obj/item/marker_shard/MS)
 	var/shardsbefore = shards.len
-
 	shards |= MS
 
 	//When the number of shards in the world switches between zero and nonzero, we update ability lists
-	if (shardsbefore == 0)
-		update_all_ability_lists()
-
+	//if(shardsbefore == 0)
+		//update_all_ability_lists()
 
 /datum/controller/subsystem/necromorph/proc/unregister_shard(var/obj/item/marker_shard/MS)
 	var/shardsbefore = shards.len
-
 	shards -= MS
-
 	//When the number of shards in the world switches between zero and nonzero, we update ability lists
-	if ((shardsbefore > 0) && (shards.len <= 0))
-		update_all_ability_lists()
+	//if((shardsbefore > 0) && (shards.len <= 0))
+		//update_all_ability_lists()
+

@@ -7,9 +7,9 @@
 */
 /datum/species/necromorph/divider_component
 	name = SPECIES_NECROMORPH_DIVIDER_COMPONENT
-	marker_spawnable = FALSE
-	spawner_spawnable = FALSE
-	preference_settable = TRUE
+	//marker_spawnable = FALSE
+	//spawner_spawnable = FALSE
+	//preference_settable = TRUE
 
 
 
@@ -18,9 +18,9 @@
 	Component Mobs
 */
 /mob/living/simple_animal/necromorph/divider_component
-	max_health = 35
-	icon = 'icons/mob/necromorph/divider/components_large.dmi'
-	var/leap_windup_time = 0.8 SECOND
+	maxHealth = 35
+	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/divider/components_large.dmi'
+	var/leap_windup_time = 0.8 SECONDS
 	var/leap_range = 6
 	var/leap_cooldown = 10 SECONDS
 	speed = 3
@@ -28,15 +28,16 @@
 	var/attack_state
 	pixel_x = -16
 	default_pixel_x = -16
-	evasion = 40
+	//evasion = 40
 
+/*
 /mob/living/simple_animal/necromorph/divider_component/do_attack_animation(var/atom/target)
 	flick(attack_state, src)
 	.=..()
-
+*/
 
 /mob/living/simple_animal/necromorph/divider_component/update_icon()
-	if (pass_flags & PASS_FLAG_FLYING)
+	if (pass_flags & FLYING)
 		icon_state = leap_state
 		return
 
@@ -44,9 +45,9 @@
 
 /mob/living/simple_animal/necromorph/divider_component/Initialize()
 	.=..()
-	dna = new()
-	dna.species = SPECIES_NECROMORPH_DIVIDER
-	add_modclick_verb(KEY_ALT, /mob/living/simple_animal/necromorph/divider_component/proc/leap)
+	//dna = new()
+	//dna.species = SPECIES_NECROMORPH_DIVIDER
+	//add_modclick_verb(KEY_ALT, /mob/living/simple_animal/necromorph/divider_component/proc/leap)
 	get_controlling_player()
 
 //Called when this atom starts charging at another, just before taking the first step
@@ -59,7 +60,7 @@
 
 
 /mob/living/simple_animal/necromorph/divider_component/proc/get_controlling_player()
-	SSnecromorph.fill_vessel_from_queue(src, SPECIES_NECROMORPH_DIVIDER_COMPONENT)
+	//SSnecromorph.fill_vessel_from_queue(src, SPECIES_NECROMORPH_DIVIDER_COMPONENT)
 
 /datum/extension/charge/leap/component
 	blur_filter_strength = 1
@@ -70,8 +71,8 @@
 	set category = "Abilities"
 
 	//Leap autotargets enemies within one tile of the clickpoint
-	if (!isliving(A))
-		A = autotarget_enemy_mob(A, 2, src, 999)
+	//if (!isliving(A))
+		//A = autotarget_enemy_mob(A, 2, src, 999)
 
 
 	if (!can_charge(A))

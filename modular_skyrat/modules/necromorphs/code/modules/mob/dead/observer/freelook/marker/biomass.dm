@@ -115,7 +115,7 @@
 //Absorbing dead humans
 //------------------------
 /datum/biomass_source/convergence
-	return
+
 
 
 //Todo here: Check if the human body is near enough to the marker, or some sort of corruption-corpse-deposit node
@@ -132,8 +132,8 @@
 
 	//Are we still near the marker?
 	if (get_dist(L, target) > 10)
-		for (var/obj/structure/corruption_node/maw/M in range(MAW_EAT_RANGE, L))
-			return ..()
+		//for (var/obj/structure/corruption_node/maw/M in range(MAW_EAT_RANGE, L))
+			//return ..()
 		return MASS_PAUSE
 
 	return ..()

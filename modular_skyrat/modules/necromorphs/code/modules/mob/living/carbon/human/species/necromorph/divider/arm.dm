@@ -23,20 +23,20 @@
 	speed = 2.25
 	melee_damage_lower = 2
 	melee_damage_upper = 3.5
-	attacktext = "scratched"
+	//attacktext = "scratched"
 	attack_sound = 'sound/weapons/bite.ogg'
 	leap_range = 5
 	health = 30
 
-	pain_sounds = list('sound/effects/creatures/necromorph/divider/component/arm_pain_1.ogg',
-	'sound/effects/creatures/necromorph/divider/component/arm_pain_2.ogg',
-	'sound/effects/creatures/necromorph/divider/component/arm_pain_3.ogg')
+	pain_sounds = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/component/arm_pain_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/component/arm_pain_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/component/arm_pain_3.ogg')
 
-	attack_sounds = list('sound/effects/creatures/necromorph/divider/component/arm_attack_1.ogg',
-	'sound/effects/creatures/necromorph/divider/component/arm_attack_2.ogg',
-	'sound/effects/creatures/necromorph/divider/component/arm_attack_3.ogg',
-	'sound/effects/creatures/necromorph/divider/component/arm_attack_4.ogg',
-	'sound/effects/creatures/necromorph/divider/component/arm_attack_5.ogg')
+	attack_sounds = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/component/arm_attack_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/component/arm_attack_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/component/arm_attack_3.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/component/arm_attack_4.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/component/arm_attack_5.ogg')
 
 	leap_state = "arm_leap"
 	attack_state = "arm_attack"
@@ -75,7 +75,7 @@
 	.=..()
 	if (.)
 		var/mob/living/victim = mountpoint
-		victim.lurch()
+		//victim.lurch()
 
 /* Debug verb, useful later
 /client/verb/head_and_dummy()

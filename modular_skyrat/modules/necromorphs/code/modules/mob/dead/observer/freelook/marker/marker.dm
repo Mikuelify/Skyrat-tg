@@ -60,7 +60,7 @@
 
 	visible_message("[src] starts to pulsate in a strange way...")
 	//Start spreading corruption
-	start_corruption()
+	//start_corruption()
 	update_icon()
 //	set_traumatic_sight(TRUE, 5) //Marker is pretty hard to look at.
 
@@ -98,6 +98,7 @@
 */
 
 /obj/machinery/marker/update_icon()
+	.=..()
 	if (player && active)
 		icon_state = "marker_giant_active_anim"
 		set_light(1, 1, 12, 2, COLOR_MARKER_RED)
@@ -118,7 +119,7 @@
 	set src in view()
 	set category = null
 
-	open_shop(usr)
+	//open_shop(usr)
 
 // Below is a check for intermittent "throbbing". If the check passes with all the conditions, it throbs. Please don't kill me. - Lion
 
@@ -187,6 +188,8 @@
 	if (!QDELETED(source))
 		qdel(source)
 
+/*
+
 /obj/machinery/marker/proc/become_master_signal(var/mob/M)
 	if(!active)
 		return
@@ -224,6 +227,8 @@
 		//Just vacate the player slot so someone else can join
 		player = null
 
+*/
+
 //This is defined at atom level to enable non-marker spawning systems in future
 /atom/proc/get_available_biomass()
 	return 0
@@ -252,21 +257,10 @@
 	return FALSE
 
 //Corruption Handling
-
+/*
 /obj/machinery/marker/proc/start_corruption()
 	set_extension(src, /datum/extension/corruption_source, 12)
-
-
-
-/obj/effect/landmark/marker/ishimura/Initialize()
-	SSnecromorph.marker_spawns_ishimura |= get_turf(src)
-	.=..()
-
-
-/obj/effect/landmark/marker/aegis/Initialize()
-	SSnecromorph.marker_spawns_aegis |= get_turf(src)
-	.=..()
-
+*/
 
 /obj/machinery/marker/proc/get_total_biomass()
 	if (unavailable_biomass == NONSENSICAL_VALUE)
@@ -337,8 +331,8 @@
 // /obj/machinery/marker/default_part_replacement(var/mob/user, var/obj/item/weapon/storage/part_replacer/R)
 // 	return
 
-/obj/machinery/marker/dismantle()
-	return
+///obj/machinery/marker/dismantle()
+	//return
 
 
 /proc/marker_active()

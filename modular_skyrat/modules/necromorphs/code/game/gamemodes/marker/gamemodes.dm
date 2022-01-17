@@ -15,8 +15,7 @@
 /datum/game_mode/marker/enemy_within
 
 /datum/game_mode/marker/enemy_within/get_marker_location()
-	return pick(SSnecromorph.marker_spawns_aegis)
-
+	return
 /datum/game_mode/marker
 	var/marker_setup_time = 60 MINUTES
 	var/marker_active = FALSE
@@ -65,7 +64,7 @@
 
 		//Alright pick them!
 		to_chat(M, "<span class='warning'>You have been selected to become the marker!</span>")
-		SSnecromorph.marker.become_master_signal(M)
+		//SSnecromorph.marker.become_master_signal(M)
 		return M
 
 	message_admins("No signals, unable to pick a marker player! The marker is now active and awaiting anyone who wishes to control it")

@@ -76,7 +76,7 @@
 
 /mob/living/carbon/human/species/necromorph/brute/Initialize()
 	. = ..()
-	mutable_appearance('modular_skyrat/modules/necromorphs/icons/mob/necromorph/brute.dmi', "brute-d")
+
 
 /mob/living/carbon/human/species/necromorph/slasher/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_SLASHER)
 	..(new_loc, new_species)
@@ -86,7 +86,6 @@
 
 /mob/living/carbon/human/species/necromorph/divider/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_DIVIDER)
 	..(new_loc, new_species)
-
 
 /mob/living/carbon/human/species/necromorph/spitter/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_SPITTER)
 	..(new_loc, new_species)
@@ -131,6 +130,7 @@
 	message_admins("[N] single_icon is set to [N.single_icon]")
 	.=..()
 	if(N.single_icon == TRUE)
+		message_admins("[N] single_icon is set to [N.single_icon]")
 		update_body(TRUE)
 
 /*
@@ -138,14 +138,17 @@
 //Override all that complicated limb-displaying stuff, with singular icons
 /mob/living/carbon/human/species/necromorph/update_body(var/update_icons=1)
 	var/datum/species/necromorph/N = species
-	if (!istype(N))
-		return
-	//If single icon is turned off, do the normal thing
-	if (N.single_icon)
-		var/stand_icon = N.icon_template
+	.=..()
+	if(N.single_icon)
+	var/stand_icon = N.icon_template
 		icon = stand_icon
-..()
+		mutable_appearance('modular_skyrat/modules/necromorphs/icons/mob/necromorph/brute.dmi', "brute-d")
+
+
+	//If single icon is turned off, do the normal thing
 */
+
+
 
 
 

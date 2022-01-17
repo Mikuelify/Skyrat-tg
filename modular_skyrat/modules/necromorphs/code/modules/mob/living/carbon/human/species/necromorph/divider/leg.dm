@@ -19,19 +19,19 @@
 	speed = 3
 	melee_damage_lower = 2
 	melee_damage_upper = 4
-	attacktext = "kicked"
+	//attacktext = "kicked"
 	attack_sound = 'sound/weapons/bite.ogg'
 	leap_cooldown = 4 SECONDS
 
-	pain_sounds = list('sound/effects/creatures/necromorph/divider/component/leg_pain_1.ogg',
-	'sound/effects/creatures/necromorph/divider/component/leg_pain_2.ogg',
-	'sound/effects/creatures/necromorph/divider/component/leg_pain_3.ogg',
-	'sound/effects/creatures/necromorph/divider/component/leg_pain_3.ogg')
+	pain_sounds = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/component/leg_pain_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/component/leg_pain_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/component/leg_pain_3.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/component/leg_pain_3.ogg')
 
-	attack_sounds = list('sound/effects/creatures/necromorph/divider/component/leg_attack_1.ogg',
-	'sound/effects/creatures/necromorph/divider/component/leg_attack_2.ogg',
-	'sound/effects/creatures/necromorph/divider/component/leg_attack_3.ogg',
-	'sound/effects/creatures/necromorph/divider/component/leg_attack_4.ogg')
+	attack_sounds = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/component/leg_attack_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/component/leg_attack_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/component/leg_attack_3.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/component/leg_attack_4.ogg')
 
 	leap_state = "leg_leap"
 	attack_state = "leg_attack"
@@ -43,9 +43,9 @@
 	.=TRUE
 	if (isliving(charge.last_obstacle))
 		var/mob/living/L = charge.last_obstacle
-		L.shake_animation(15)
+		//L.shake_animation(15)
 		shake_camera(L,10,6) //Smack
-		launch_strike(L, damage = 22, used_weapon = src, damage_flags = 0, armor_penetration = 10, damage_type = BRUTE, armor_type = "melee", target_zone = get_zone_sel(src), difficulty = 50)
+		//launch_strike(L, damage = 22, used_weapon = src, damage_flags = 0, armor_penetration = 10, damage_type = BRUTE, armor_type = "melee", target_zone = get_zone_sel(src), difficulty = 50)
 		//We are briefly stunned
 		Stun(1)
 
@@ -57,16 +57,16 @@
 	var/turf/epicentre = get_turf(charge.last_obstacle)
 	if (istype(charge.last_obstacle, /atom/movable))
 		var/atom/movable/AM = charge.last_obstacle
-		AM.apply_push_impulse_from(src, 40)
+		//AM.apply_push_impulse_from(src, 40)
 
 	//After getting kicked you stagger a bit
 	spawn(0.75 SECONDS)
 		if (isliving(charge.last_obstacle))
 			var/mob/living/L = charge.last_obstacle
-			L.lurch()
+		//	L.lurch()
 
 	spawn()
 		//And we ourselves also get knocked back
 		//We spawn it off to let the current stack finish first, otherwise we get hit twice
-		apply_push_impulse_from(epicentre, 20)
+		//apply_push_impulse_from(epicentre, 20)
 

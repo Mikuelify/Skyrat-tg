@@ -111,7 +111,7 @@
 	for (var/turf/T in affected_turfs)
 
 		for (var/atom/A in T.contents)
-			A.shake_animation(damage)	//Shake things!
+			A.shake_camera(damage)	//Shake things!
 
 			//Mobs take damage, with more if they're lying down
 			if (isliving(A))
@@ -175,7 +175,7 @@
 		if (T.density)
 			effective_power++
 		if (effective_power)
-			T.shake_animation(damage)	//Shake the turf itself
+			T.shake_camera(damage)	//Shake the turf itself
 			T.ex_act(4-effective_power, user)
 
 
@@ -205,7 +205,7 @@
 
 
 /datum/extension/slam/proc/finish_cooldown()
-	to_chat(user, SPAN_NOTICE("You are ready to [name] again")) //Use name here so i can reuse this for leaping
+	to_chat(user, span_notice("You are ready to [name] again")) //Use name here so i can reuse this for leaping
 	remove_extension(holder, /datum/extension/slam)
 
 

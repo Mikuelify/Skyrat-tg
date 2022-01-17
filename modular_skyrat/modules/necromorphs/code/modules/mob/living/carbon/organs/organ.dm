@@ -1,5 +1,4 @@
 /obj/item/organ
 	var/organ_tag = "organ"
+	var/parent_organ = null       // Organ holding this object.
 
-/obj/item/organ/external/proc/is_stump()
-	return 0

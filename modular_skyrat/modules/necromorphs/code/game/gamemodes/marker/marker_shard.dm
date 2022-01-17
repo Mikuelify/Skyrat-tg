@@ -49,7 +49,14 @@
 
 	SSnecromorph.register_shard(src)
 
-
+/obj/item/marker_shard/update_icon()
+	.=..()
+	if (active)
+		icon_state = "marker_shard_active"
+		set_light(1, 1, 8, 2, COLOR_MARKER_RED)
+	else
+		icon_state = "marker_shard_dormant"
+		set_light(0)
 
 /obj/item/marker_shard/Destroy()
 	SSnecromorph.unregister_shard(src)
@@ -66,7 +73,7 @@
 /obj/item/marker_shard/proc/activate()
 	active = TRUE
 	last_known_location = loc
-	GLOB.moved_event.register(src, src, .proc/moved)
+	RegisterSignal(src, COMSIG_MOVABLE_MOVED, .proc/moved)
 	attempt_deploy()
 	mass = mass_active
 	update_icon()
@@ -74,7 +81,7 @@
 /obj/item/marker_shard/proc/deactivate()
 	active = FALSE
 	mass = initial(mass)
-	GLOB.moved_event.unregister(src, src, .proc/moved)
+	UnregisterSignal(src, COMSIG_MOVABLE_MOVED, .proc/moved)
 	update_icon()
 
 /obj/item/marker_shard/proc/set_deploy_timer()
@@ -82,18 +89,47 @@
 	if (active)
 		deploy_timer = addtimer(CALLBACK(src, /obj/item/marker_shard/proc/attempt_deploy),  deploy_time, TIMER_STOPPABLE)
 
+//Whenever we move, reset the timer
+/obj/item/marker_shard/proc/moved(mob/user as mob, old_loc as turf)
+	last_moved = world.time
+	undeploy()
+	last_known_location = loc
+	set_deploy_timer()
+	try_sink()
+	//if (!isturf(loc))
+		//apply_debuff()
 
+
+/*
 /obj/item/marker_shard/proc/erode_corruption(var/strength)
-	for (var/obj/effect/vine/corruption/C in loc)
-		C.adjust_health(-strength)
+	//for (var/obj/effect/vine/corruption/C in loc)
+		//C.adjust_health(-strength)
+*/
 
-/obj/item/marker_shard/update_icon()
-	if (active)
-		icon_state = "marker_shard_active"
-		set_light(1, 1, 8, 2, COLOR_MARKER_RED)
+
+/obj/item/marker_shard/proc/try_sink()
+	//Doesnt happen if held or in containers
+	if (isturf(loc))
+
+
+		var/turf/T = loc
+		//Can only sink into corruption which is 25% health or more
+		//if (!turf_corrupted(T, FALSE, 0.25))
+			//return
+
+		//Don't sink while being thrown or moved with kinesis
+		if (pass_flags & FLYING)
+			return
+
+		sink()
+
+	//To prevent exploiting, if the shard is inside something being pulled around (locker, backpack, etc) by a non unitologist, it tumbles out
 	else
-		icon_state = "marker_shard_dormant"
-		set_light(0)
+		var/atom/A = get_toplevel_atom()
+		if (A != src && isobj(A) && prob(20))
+			//tumble()
+			var/turf/T = get_turf(src)
+			T.visible_message(span_notice("\The [src] tumbles out of \the [A]"))
 
 /obj/item/marker_shard/proc/sink()
 	if (istype(loc, /turf))
@@ -118,6 +154,12 @@
 
 	deployed = TRUE
 	sink()
-	CS = set_extension(src, /datum/extension/corruption_source, corruption_range, corruption_speed, corruption_falloff, corruption_limit)
+	//CS = set_extension(src, /datum/extension/corruption_source, corruption_range, corruption_speed, corruption_falloff, corruption_limit)
 
 
+/obj/item/marker_shard/proc/undeploy()
+	anchored = FALSE
+	alpha = 255
+	//Remove our source, this will cause any vines we spread to lose their source
+	//They will attempt to connect to another source in range, and if that fails, will start dying off
+	//remove_extension(src, /datum/extension/corruption_source)
