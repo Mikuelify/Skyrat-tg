@@ -39,7 +39,6 @@
 		FACEHAIR
 	)
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
-	sexes = 0
 
 /*
 	Slasher variant. Damage Calculation and Effects
@@ -56,7 +55,6 @@
 	Slasher variant. Traits
 */
 
-	species_traits = list(HAS_FLESH, HAS_BONE)
 	inherent_traits = list(
 		TRAIT_ADVANCEDTOOLUSER,
 		TRAIT_CAN_STRIP,

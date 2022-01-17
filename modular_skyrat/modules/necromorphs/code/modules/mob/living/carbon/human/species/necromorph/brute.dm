@@ -34,7 +34,7 @@
 	)
 
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
-	sexes = 0
+
 
 /*
 	Slasher variant. Damage Calculation and Effects
@@ -48,7 +48,6 @@
 	armor = 55
 	attack_effect = ATTACK_EFFECT_CLAW
 
-	species_traits = list(HAS_FLESH, HAS_BONE)
 	inherent_traits = list(
 		TRAIT_ADVANCEDTOOLUSER,
 		TRAIT_CAN_STRIP,
