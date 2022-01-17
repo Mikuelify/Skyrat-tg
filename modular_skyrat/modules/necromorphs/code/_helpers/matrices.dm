@@ -123,7 +123,7 @@
 
 
 	//Lets handle clients too
-	var/mob/living/L
+	//var/mob/living/L
 	//var/vector2/client_pixel_delta
 	var/vector2/cached_client_pixels
 

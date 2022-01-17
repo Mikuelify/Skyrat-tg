@@ -17,8 +17,8 @@
 	desc = "Help on playing marker!"
 
 /atom/movable/screen/marker/marker_help/Click()
-	if(ismarkerovermind(usr))
-		var/mob/camera/marker/B = usr
+	//if(ismarkerovermind(usr))
+		//var/mob/camera/marker/B = usr
 		//B.marker_help()
 
 /atom/movable/screen/marker/jump_to_node
@@ -129,8 +129,8 @@
 	desc = "Swaps a node and your core for [MARKER_POWER_RELOCATE_COST] resources."
 
 /atom/movable/screen/marker/relocate_core/Click()
-	if(ismarkerovermind(usr))
-		var/mob/camera/marker/B = usr
+	//if(ismarkerovermind(usr))
+		//var/mob/camera/marker/B = usr
 		//B.relocate_core()
 
 /datum/hud/marker_overmind/New(mob/owner)

@@ -24,7 +24,7 @@
 //Species level audio wrappers
 //--------------------------------
 /datum/species/proc/get_species_audio(var/audio_type)
-	var/list/L = species_audio[audio_type]
+	//var/list/L = species_audio[audio_type]
 	return null
 
 /datum/species/proc/play_species_audio(var/atom/source, audio_type, vol as num, vary, extrarange as num, falloff, var/is_global, var/frequency, var/is_ambiance = 0)

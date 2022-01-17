@@ -4,10 +4,10 @@
 	Limb Code
 */
 /obj/item/organ/external/arm/right/simple/divider
-	can_regrow = FALSE
+	//can_regrow = FALSE
 
 /obj/item/organ/external/arm/simple/divider
-	can_regrow = FALSE
+	//can_regrow = FALSE
 
 
 /*
@@ -73,8 +73,8 @@
 
 /datum/extension/mount/parasite/arm/Process()
 	.=..()
-	if (.)
-		var/mob/living/victim = mountpoint
+	//if (.)
+		//var/mob/living/victim = mountpoint
 		//victim.lurch()
 
 /* Debug verb, useful later

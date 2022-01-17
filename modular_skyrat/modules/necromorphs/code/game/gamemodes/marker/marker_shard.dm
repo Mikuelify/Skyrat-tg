@@ -112,7 +112,7 @@
 	if (isturf(loc))
 
 
-		var/turf/T = loc
+		//var/turf/T = loc
 		//Can only sink into corruption which is 25% health or more
 		//if (!turf_corrupted(T, FALSE, 0.25))
 			//return

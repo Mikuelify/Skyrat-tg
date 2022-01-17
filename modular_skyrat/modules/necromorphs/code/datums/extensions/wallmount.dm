@@ -158,7 +158,7 @@
 		RegisterSignal(mountpoint, src, COMSIG_PARENT_QDELETING, .proc/on_dismount)
 	if (isliving(mountpoint))
 		if (!WP.attach_mob_dead)
-		RegisterSignal(mountpoint, src, COMSIG_LIVING_DEATH, .proc/mountpoint_updated)
+			RegisterSignal(mountpoint, src, COMSIG_LIVING_DEATH, .proc/mountpoint_updated)
 
 
 	on_mount()

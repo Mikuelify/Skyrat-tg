@@ -133,6 +133,13 @@
 		message_admins("[N] single_icon is set to [N.single_icon]")
 		update_body(TRUE)
 
+
+
+/*
+
+	Control Individual Necromorph Icons. Currently it is not working.
+
+*/
 /*
 // #define DEBUG
 //Override all that complicated limb-displaying stuff, with singular icons

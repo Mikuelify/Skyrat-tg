@@ -2,10 +2,10 @@
 	Limb Code
 */
 /obj/item/organ/external/leg/right/simple/divider
-	can_regrow = FALSE
+	//can_regrow = FALSE
 
 /obj/item/organ/external/leg/simple/divider
-	can_regrow = FALSE
+	//can_regrow = FALSE
 
 /*
 	Leg
@@ -54,15 +54,15 @@
 		return FALSE
 
 	//And we're gonna do some knockback
-	var/turf/epicentre = get_turf(charge.last_obstacle)
-	if (istype(charge.last_obstacle, /atom/movable))
-		var/atom/movable/AM = charge.last_obstacle
+	//var/turf/epicentre = get_turf(charge.last_obstacle)
+	//if (istype(charge.last_obstacle, /atom/movable))
+		//var/atom/movable/AM = charge.last_obstacle
 		//AM.apply_push_impulse_from(src, 40)
 
 	//After getting kicked you stagger a bit
 	spawn(0.75 SECONDS)
-		if (isliving(charge.last_obstacle))
-			var/mob/living/L = charge.last_obstacle
+		//if (isliving(charge.last_obstacle))
+			//var/mob/living/L = charge.last_obstacle
 		//	L.lurch()
 
 	spawn()

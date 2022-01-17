@@ -40,20 +40,20 @@
 /mob/living/simple_animal/necromorph/Initialize()
 	.=..()
 	SSnecromorph.minor_vessels |= src
-	if (get_biomass())
+	if(get_biomass())
 		add_massive_atom(src)
-	if (lifespan)
+	if(lifespan)
 		var/time_per_tick = lifespan / maxHealth
 		addtimer(CALLBACK(src, /mob/living/simple_animal/necromorph/proc/decay), time_per_tick)
 
 //Take 1 point of lasting damage and queue another timer
 /mob/living/simple_animal/necromorph/proc/decay()
-	if (stat == DEAD)
+	if(stat == DEAD)
 		return
 	//adjustLastingDamage(1)
 
 
-	if (stat == DEAD)
+	if(stat == DEAD)
 		return
 
 	var/time_per_tick = lifespan / maxHealth
@@ -73,7 +73,7 @@
 */
 //Guaranteed sound on death, ignores cooldowns
 /mob/living/simple_animal/necromorph/death()
-	if (LAZYLEN(pain_sounds))
+	if(LAZYLEN(pain_sounds))
 		playsound(src, pick(pain_sounds), VOLUME_LOUD, TRUE)
 	SSnecromorph.minor_vessels -= src
 	remove_massive_atom(src)
@@ -94,14 +94,6 @@
 	remove_massive_atom(src)
 	.=..()
 
-
-
-
-
-
-
-
-
 //Parasite Extension: The mob latches onto another mob and periodically bites it for some constant damage
 /datum/extension/mount/parasite
 	var/damage = 5
@@ -113,11 +105,9 @@
 	.=..()
 	START_PROCESSING(SSprocessing, src)
 
-
-
 	var/mob/living/biter = mountee
 	spawn(0.5 SECONDS)
-		if (!QDELETED(biter) && !QDELETED(src) && mountpoint && mountee)
+		if(!QDELETED(biter) && !QDELETED(src) && mountpoint && mountee)
 			//Lets put the parasite somewhere nice looking on the mob
 			var/new_rotation = rand(-70, 70)
 			var/vector2/attach_offset = biter.get_icon_size()
@@ -149,43 +139,43 @@
 	.=..()
 	STOP_PROCESSING(SSprocessing, src)
 	var/mob/living/biter = mountee
-	if (biter)
+	if(biter)
 		biter.animate_to_default()
 
 /datum/extension/mount/parasite/proc/safety_check()
 	var/mob/living/biter = mountee
 	var/mob/living/victim = mountpoint
 
-	if (!istype(biter) || QDELETED(biter))
+	if(!istype(biter) || QDELETED(biter))
 		return FALSE
 
-	if (!istype(victim) || QDELETED(victim))
+	if(!istype(victim) || QDELETED(victim))
 		return FALSE
 
 	//Biter must be able bodied and alive
-	if (biter.incapacitated())
+	if(biter.incapacitated())
 		return FALSE
 
 	//Victim must not be dead yet
-	if (victim.stat == DEAD)
+	if(victim.stat == DEAD)
 		return FALSE
 
 	//We must still be on them
-	if (get_turf(victim) != get_turf(biter))
+	if(get_turf(victim) != get_turf(biter))
 		return FALSE
 
 	return TRUE
 
 /datum/extension/mount/parasite/Process()
-	if (!safety_check())
+	if(!safety_check())
 		dismount()
 		return PROCESS_KILL
 
 	var/mob/living/biter = mountee
-	var/mob/living/victim = mountpoint
+	//var/mob/living/victim = mountpoint
 
 	//If the biter is being grabbed, it doesnt fall off, but it can't bite either
-	if (biter.grabbed_by.len)
+	if(biter.grabbed_by.len)
 		return
 
 	if(prob(damage_chance))

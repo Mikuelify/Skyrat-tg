@@ -146,7 +146,7 @@
 			H = L
 
 		var/bad_speed_factor = 0.4
-		if (H)
+		//if (H)
 			//bad_speed_factor = H.species.lying_speed_factor
 
 
@@ -179,7 +179,7 @@
 
 	//If we are currently wallcrawling, stop it
 	user.unmount_from_wall()
-	if (ishuman(user))
+	//if (ishuman(user))
 	//	var/mob/living/carbon/human/H = user
 	//	cached_step_interval = H.step_interval
 	//	H.step_interval = src.step_interval
@@ -236,9 +236,9 @@
 
 
 /datum/extension/charge/proc/stop()
-	if (isliving(user))
-		if (ishuman(user))
-			var/mob/living/carbon/human/H = user
+	//if (isliving(user))
+		//if (ishuman(user))
+			//var/mob/living/carbon/human/H = user
 			//H.step_interval = cached_step_interval
 		//L.enable()
 
@@ -446,7 +446,7 @@
 		var/selfdamage = CHARGE_DAMAGE_BASE*TP + CHARGE_DAMAGE_DIST*distance_travelled
 		if (L.maxHealth)
 			selfdamage = min(L.maxHealth*0.15, selfdamage)
-		L.incapacitated() == L.incapacitated(TRUE, TRUE)
+		//L.incapacitated() = L.incapacitated(TRUE, TRUE)
 		L.take_overall_damage(selfdamage, 0,0,0, obstacle)
 		L.Stun(2*TP)
 	stop()
@@ -455,7 +455,7 @@
 //Drain the user's stamina?
 /datum/extension/charge/proc/stop_peter_out()
 	if (isliving(holder))
-		var/mob/living/L = holder
+		//var/mob/living/L = holder
 		//L.stunned_mob = 0
 		peter_out_effects()
 	stop()
@@ -463,8 +463,8 @@
 
 //We have ended the charge by successfully reaching our intended target. This is ideal
 /datum/extension/charge/proc/stop_success()
-	if (isliving(holder))
-		var/mob/living/carbon/L = holder
+	//if (isliving(holder))
+		//var/mob/living/carbon/L = holder
 		//L.stunned_mob = 0
 	var/TP = get_total_power()
 	//Screenshake everyone near the impact site
@@ -479,7 +479,10 @@
 
 //Visual Filters
 //------------------------
+
 /datum/extension/charge/proc/update_blur_filter(var/atom/mover,	var/atom/oldloc,	var/atom/newloc)
+	return
+/*
 	if (stopped_at || !blur_filter_strength)
 		return
 
@@ -493,7 +496,7 @@
 
 	blur:x = direction.x
 	blur:y = direction.y
-
+*/
 
 
 

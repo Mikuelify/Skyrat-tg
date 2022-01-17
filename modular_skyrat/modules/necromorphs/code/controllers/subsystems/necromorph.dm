@@ -5,12 +5,12 @@ SUBSYSTEM_DEF(necromorph)
 
 	//Necromorph Lists
 	var/list/major_vessels = list()	//Necromorphs that need a player to control them. they are inert husks without one.
-	var/list/minor_vessels	=	list()	//Necromorphs that have AI and don't need a player, but can be possessed anyway if someone wants to do manual control
+	var/list/minor_vessels = list()	//Necromorphs that have AI and don't need a player, but can be possessed anyway if someone wants to do manual control
 	var/list/shards = list()	//Marker shards in the world
 	var/list/spawned_necromorph_types = list() //Assoc list of typepath = quantity, tracks the number of necromorphs ever spawned this round
 
 	//Signal Lists
-	var/list/signals	=	list()	//List of all signal players
+	var/list/signals =	list()	//List of all signal players
 	var/list/necroqueue = list()	//This is a list of signal players who are waiting to be put into the first available major vessel
 
 	//Marker
@@ -162,7 +162,7 @@ SUBSYSTEM_DEF(necromorph)
 
 //Shard handling
 /datum/controller/subsystem/necromorph/proc/register_shard(var/obj/item/marker_shard/MS)
-	var/shardsbefore = shards.len
+	//var/shardsbefore = shards.len
 	shards |= MS
 
 	//When the number of shards in the world switches between zero and nonzero, we update ability lists
@@ -170,7 +170,7 @@ SUBSYSTEM_DEF(necromorph)
 		//update_all_ability_lists()
 
 /datum/controller/subsystem/necromorph/proc/unregister_shard(var/obj/item/marker_shard/MS)
-	var/shardsbefore = shards.len
+	//var/shardsbefore = shards.len
 	shards -= MS
 	//When the number of shards in the world switches between zero and nonzero, we update ability lists
 	//if((shardsbefore > 0) && (shards.len <= 0))

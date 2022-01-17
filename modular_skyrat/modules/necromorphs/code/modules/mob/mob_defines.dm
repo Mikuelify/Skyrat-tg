@@ -17,28 +17,28 @@
 
 
 //This proc tells how many legs we have
-/mob/proc/get_locomotion_limbs(var/include_stump = FALSE)
+/mob/proc/get_locomotion_limbs(include_stump = FALSE)
 	return list()
 
 /mob/living/carbon/human/species/necromorph
 	var/step_count
 	var/step_interval	= 2
 
-/mob/proc/get_organ(var/zone)
+/mob/proc/get_organ(zone)
 	return null
 
-/mob/living/carbon/human/get_organ(var/zone)
+/mob/living/carbon/human/get_organ(zone)
 	return organs_by_name[check_zone(zone)]
 
-/mob/proc/get_organ_by_type(var/type)
+/mob/proc/get_organ_by_type(type)
 
-/mob/living/carbon/human/get_organ_by_type(var/type)
+/mob/living/carbon/human/get_organ_by_type(type)
 	for (var/tag in organs_by_name)
 		var/obj/O = organs_by_name[tag]
 		if (istype(O, type))
 			return O
 
-/mob/living/carbon/human/get_locomotion_limbs(var/include_stump = FALSE)
+/mob/living/carbon/human/get_locomotion_limbs(include_stump = FALSE)
 	var/found = list()
 	for (var/organ_tag in species.locomotion_limbs)
 		var/obj/item/organ/external/E = get_organ(organ_tag)

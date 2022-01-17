@@ -106,6 +106,6 @@ Non-critical characters like any ghost-roles you may wish to add, or even antags
 
 //Marker gamemode can end when necros kill most of the crew
 /datum/game_mode/marker/check_finished()
-	if(marker_active)	//Marker must be active
+	//if(marker_active)	//Marker must be active
 
 	return ..() //Fallback to the default game end conditions like all antags dying, shuttles being docked, etc.

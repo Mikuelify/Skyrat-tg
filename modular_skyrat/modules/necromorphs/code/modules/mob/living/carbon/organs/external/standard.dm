@@ -6,7 +6,7 @@
 
 /obj/item/organ/external/chest
 	name = "upper body"
-	organ_tag = BP_CHEST
+	//organ_tag = BP_CHEST
 	icon_name = "torso"
 	max_damage = 90 //these damage values don't really do anything as organs can't be damaged through the bodypart nor can they be broken. maybe something cna be done here in future to make baycode function more like TG where once an organ takes this much damage, it spills what is inside - so torso drops internal organs or something.
 	min_broken_damage = 25
@@ -16,7 +16,7 @@
 	amputation_point = "spine"
 	joint = "neck"
 	dislocated = -1
-	parent_organ = null
+	//parent_organ = null
 	encased = "ribcage"
 	artery_name = "aorta"
 	cavity_name = "thoracic"
@@ -25,13 +25,13 @@
 
 /obj/item/organ/external/groin
 	name = "lower body"
-	organ_tag = BP_GROIN
+	//organ_tag = BP_GROIN
 	icon_name = "groin"
 	max_damage = 90
 	min_broken_damage = 50
 	//w_class = ITEM_SIZE_LARGE
 	//body_part = LOWER_TORSO
-	parent_organ = BP_CHEST
+	//parent_organ = BP_CHEST
 	amputation_point = "lumbar"
 	joint = "hip"
 	dislocated = -1
@@ -42,14 +42,14 @@
 	//defensive_group = LOWERBODY
 
 /obj/item/organ/external/arm
-	organ_tag = BP_L_ARM
+	//organ_tag = BP_L_ARM
 	name = "left arm"
 	icon_name = "l_arm"
 	max_damage = 60
 	min_broken_damage = 30
 	//w_class = ITEM_SIZE_NORMAL
 	body_part = ARM_LEFT
-	parent_organ = BP_CHEST
+	//parent_organ = BP_CHEST
 	joint = "left elbow"
 	amputation_point = "left shoulder"
 	tendon_name = "palmaris longus tendon"
@@ -62,7 +62,7 @@
 	defensive_group = null
 
 /obj/item/organ/external/arm/right
-	organ_tag = BP_R_ARM
+	//organ_tag = BP_R_ARM
 	name = "right arm"
 	icon_name = "r_arm"
 	body_part = ARM_RIGHT
@@ -71,7 +71,7 @@
 	best_direction	=	EAST
 
 /obj/item/organ/external/leg
-	organ_tag = BP_L_LEG
+	//organ_tag = BP_L_LEG
 	name = "left leg"
 	icon_name = "l_leg"
 	max_damage = 45
@@ -79,7 +79,7 @@
 	//w_class = ITEM_SIZE_NORMAL
 	body_part = LEG_LEFT
 	icon_position = WEST
-	parent_organ = BP_GROIN
+	//parent_organ = BP_GROIN
 	joint = "left knee"
 	amputation_point = "left hip"
 	tendon_name = "cruciate ligament"
@@ -93,7 +93,7 @@
 	divider_component_type = /mob/living/simple_animal/necromorph/divider_component/leg
 
 /obj/item/organ/external/leg/right
-	organ_tag = BP_R_LEG
+	//organ_tag = BP_R_LEG
 	name = "right leg"
 	icon_name = "r_leg"
 	body_part = LEG_RIGHT
@@ -103,7 +103,7 @@
 	best_direction	=	EAST
 
 /obj/item/organ/external/foot
-	organ_tag = BP_L_FOOT
+	//organ_tag = BP_L_FOOT
 	name = "left foot"
 	icon_name = "l_foot"
 	max_damage = 45
@@ -111,7 +111,7 @@
 	//w_class = ITEM_SIZE_SMALL
 	body_part = FOOT_LEFT
 	icon_position = WEST
-	parent_organ = BP_L_LEG
+	//parent_organ = BP_L_LEG
 	joint = "left ankle"
 	amputation_point = "left ankle"
 	tendon_name = "Achilles tendon"
@@ -123,24 +123,24 @@
 	divider_component_type = /mob/living/simple_animal/necromorph/divider_component/leg
 
 /obj/item/organ/external/foot/right
-	organ_tag = BP_R_FOOT
+	//organ_tag = BP_R_FOOT
 	name = "right foot"
 	icon_name = "r_foot"
 	body_part = FOOT_RIGHT
 	icon_position = EAST
-	parent_organ = BP_R_LEG
+	//parent_organ = BP_R_LEG
 	joint = "right ankle"
 	amputation_point = "right ankle"
 
 /obj/item/organ/external/hand
-	organ_tag = BP_L_HAND
+	//organ_tag = BP_L_HAND
 	name = "left hand"
 	icon_name = "l_hand"
 	max_damage = 60
 	min_broken_damage = 30
 	//w_class = ITEM_SIZE_SMALL
 	body_part = HAND_LEFT
-	parent_organ = BP_L_ARM
+	//parent_organ = BP_L_ARM
 	joint = "left wrist"
 	amputation_point = "left wrist"
 	tendon_name = "carpal ligament"
@@ -151,11 +151,11 @@
 	defensive_group = null
 
 /obj/item/organ/external/hand/right
-	organ_tag = BP_R_HAND
+	//organ_tag = BP_R_HAND
 	name = "right hand"
 	icon_name = "r_hand"
 	body_part = HAND_RIGHT
-	parent_organ = BP_R_ARM
+	//parent_organ = BP_R_ARM
 	joint = "right wrist"
 	amputation_point = "right wrist"
 

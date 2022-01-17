@@ -4,7 +4,7 @@
 /obj/item/organ/external
 	name = "external"
 	dir = SOUTH
-	organ_tag = "limb"
+	//organ_tag = "limb"
 	appearance_flags = PIXEL_SCALE
 
 	var/mob/living/simple_animal/necromorph/divider_component/divider_component_type = /mob/living/simple_animal/necromorph/divider_component/arm
