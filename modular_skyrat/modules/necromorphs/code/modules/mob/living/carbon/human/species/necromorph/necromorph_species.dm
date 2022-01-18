@@ -8,7 +8,6 @@
 	can_have_genitals = FALSE
 	default_color = "#FFF"
 	var/info_text = "You are a <span class='danger'>Vampire</span>. You will slowly but constantly lose blood if outside of a coffin. If inside a coffin, you will slowly heal. You may gain more blood by grabbing a live victim and using your drain ability."
-	biomass = 100
 	limbs_id = "slasher"
 	limbs_icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher.dmi'
 	eyes_icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher_enhanced_eyes.dmi'
@@ -18,23 +17,6 @@
 	nojumpsuit = 1
 	flavor_text = "Necromorphs are mutated corpses, reshaped into horrific new forms by a recombinant extraterrestrial infection derived from a genetic code etched into the skin of the Markers. The resulting creatures are extremely aggressive and will attack any uninfected organism on sight. The sole purpose of all Necromorphs is to acquire more bodies to convert and spread the infection. They are believed by some to be the heralds of humanity's ascension, but on a more practical level, they are the extremely dangerous result of exposure to the enigmatic devices known as the Markers."
 
-	//Single iconstates. These are somewhat of a hack
-	var/single_icon = FALSE
-	var/icon_template = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/48x48necros.dmi'
-	var/icon_normal = "slasher_d"
-	var/icon_lying = "slasher_d_lying"
-	var/icon_dead = "slasher_d_dead"
-
-	//Icon details. null out all of these, maybe someday they can be done
-	//deform 			=   null
-	//preview_icon 	= 	null
-	//husk_icon 		=   null
-	//damage_overlays =   null
-	//damage_mask 	=   null
-	//blood_mask 		=   null
-
-/*
-	//Spawning and biomass
 	var/marker_spawnable = TRUE	//Set this to true to allow the marker to spawn this type of necro. Be sure to unset it on the enhanced version unless desired
 	var/preference_settable = TRUE
 	biomass = 80	//This var is defined for all species
@@ -44,12 +26,31 @@
 	var/spawn_method = SPAWN_POINT	//What method of spawning from marker should be used? At a point or manual placement? check _defines/necromorph.dm
 	var/major_vessel = TRUE	//If true, we can fill this mob from the necroqueue
 	var/spawner_spawnable = FALSE	//If true, a nest can be upgraded to autospawn this unit
-	var/necroshop_item_type = /datum/necroshop_item //Give this a subtype if you want to have special behaviour for when this necromorph is spawned from the necroshop
+	//var/necroshop_item_type = /datum/necroshop_item //Give this a subtype if you want to have special behaviour for when this necromorph is spawned from the necroshop
 	var/global_limit = 0	//0 = no limit
 	var/ventcrawl = FALSE //Can this necromorph type ventcrawl?
 	var/ventcrawl_time = 4.5 SECONDS
-	lasting_damage_factor = 0.2	//Necromorphs take lasting damage based on incoming hits
-*/
+	//lasting_damage_factor = 0.2	//Necromorphs take lasting damage based on incoming hits
+
+	//Single iconstates. These are somewhat of a hack
+	var/single_icon = FALSE
+	var/icon_template = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/48x48necros.dmi'
+	var/icon_normal = "slasher_d"
+	var/icon_lying = "slasher_d_lying"
+	var/icon_dead = "slasher_d_dead"
+
+	//Icon details. null out all of these, maybe someday they can be done
+	var/deform 			=   null
+	var/preview_icon 	= 	null
+	var/husk_icon 		=   null
+	var/damage_overlays =   null
+	var/damage_mask 	=   null
+	var/blood_mask 		=   null
+	var/obj/effect/decal/cleanable/blood/tracks/move_trail = /obj/effect/decal/cleanable/blood/tracks// What marks are left when walking
+
+//	var/icon_template = 'icons/mob/human_races/species/template.dmi' // Used for mob icon generation for non-32x32 species.
+	var/pixel_offset_x = 0                    // Used for offsetting large icons.
+	var/pixel_offset_y = 0                    // Used for offsetting large icons.
 
 	/*
 		Necromorph customisation system
@@ -58,19 +59,12 @@
 		//If patron is true, this variant is not available by default
 	var/list/outfits		//Outfits the mob can spawn with, weighted.
 
-
 	var/can_vomit = TRUE		//Whether this mob can vomit, added to disable it on necromorphs
-
-	var/obj/effect/decal/cleanable/blood/tracks/move_trail = /obj/effect/decal/cleanable/blood/tracks// What marks are left when walking
 
 	locomotion_limbs = list(BP_L_LEG, BP_R_LEG)
 
 	var/list/defensive_limbs = list(UPPERBODY = list(BP_L_ARM, BP_L_HAND, BP_R_ARM, BP_R_HAND), //Arms and hands are used to shield the face and body
 	LOWERBODY = list(BP_L_LEG, BP_R_LEG))	//Legs, but not feet, are used to guard the groin
-
-//	var/icon_template = 'icons/mob/human_races/species/template.dmi' // Used for mob icon generation for non-32x32 species.
-	var/pixel_offset_x = 0                    // Used for offsetting large icons.
-	var/pixel_offset_y = 0                    // Used for offsetting large icons.
 
 /////////////////////////////////////////////////////////////////////////////
 	species_traits = list(
@@ -161,29 +155,45 @@
 	BODY_ZONE_CHEST = /obj/item/bodypart/chest/necromorph
 	)
 
-/*
+
 	//Audio
 	step_volume = 60 //Necromorphs can't wear shoes, so their base footstep volumes are louder
 	step_range = 1
 	pain_audio_threshold = 0.10
 	speech_chance = 100
+/*
+/datum/species/necromorph/on_species_gain(mob/living/carbon/human/H, datum/species/old_species)
+	// Missing Defaults in DNA? Randomize!
+	. = ..()
+	H.faction = FACTION_NECROMORPH
+	SSnecromorph.major_vessels += H
 */
 
-
+//Individual necromorphs are identified only by their species
+/datum/species/necromorph/random_name()
+	var/randname = "[src.name] [rand(0,999)]"
+	return randname
 
 /datum/species/necromorph/proc/setup_movement(var/mob/living/carbon/human/H)
 
-/*
-/datum/species/necromorph/psychosis_vulnerable()
-	return FALSE
-
-/datum/species/necromorph/New()
+/datum/species/necromorph/New(var/mob/living/carbon/human/H)
 	.=..()
-	breathing_organ = null //This is autoset to lungs in the parent if they exist.
+	H.faction = FACTION_NECROMORPH
+	SSnecromorph.major_vessels += H
+	//breathing_organ = null //This is autoset to lungs in the parent if they exist.
 	//We want it to be unset but we stil want to have our useless lungs
+/*
 
 /datum/species/necromorph/onDestroy(var/mob/living/carbon/human/H)
 	SSnecromorph.major_vessels -= H
+
+/datum/species/necromorph/setup_interaction(var/mob/living/carbon/human/H)
+	.=..()
+
+*/
+/*
+/datum/species/necromorph/psychosis_vulnerable()
+	return FALSE
 
 /datum/species/necromorph/get_blood_name()
 	return "ichor"
@@ -204,12 +214,6 @@
 
 /datum/species/necromorph/proc/make_scary(mob/living/carbon/human/H)
 	//H.set_traumatic_sight(TRUE) //All necrmorphs are scary. Some are more scary than others though
-
-/datum/species/necromorph/setup_interaction(var/mob/living/carbon/human/H)
-	.=..()
-	H.set_attack_intent(I_HURT)	//Don't start in help intent, we want to kill things
-	H.faction = FACTION_NECROMORPH
-	SSnecromorph.major_vessels += H
 
 //Add this necro as a vision node for the marker and signals
 /datum/species/necromorph/setup_interaction(var/mob/living/carbon/human/H)

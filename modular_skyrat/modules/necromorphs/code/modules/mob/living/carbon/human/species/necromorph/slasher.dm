@@ -10,6 +10,16 @@
 	id = SPECIES_NECROMORPH_SLASHER
 	can_have_genitals = FALSE
 	say_mod = "hisses"
+
+	//unarmed_types = list(/datum/unarmed_attack/blades, /datum/unarmed_attack/bite/weak) //Bite attack is a backup if blades are severed
+	//total_health = 100
+	biomass = 50
+	mass = 70
+
+	biomass_reclamation_time	=	7 MINUTES
+	//spawner_spawnable = TRUE
+
+
 /*
 	Slasher, Icon Controllers
 */
@@ -18,38 +28,34 @@
 //	icon_state = "horror"
 //	icon_living = "horror"
 //	icon_dead = "horror_dead"
-
+	pixel_offset_x = -8
 	limbs_id = "slasher"
 	limbs_icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher.dmi'
 	//body_position_pixel_x_offset = 0
 	//body_position_pixel_y_offset = 0
-//	icon_template = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher/fleshy.dmi'
-	//eyes_icon = 'modular_skyrat/master_files/icons/mob/species/vox_eyes.dmi'
-//	limbs_icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher/fleshy.dmi'
-//	mutant_bodyparts = list()
 
-	species_traits = list(
-		MUTCOLORS,
-		EYECOLOR,
-		LIPS,
-		HAS_FLESH,
-		HAS_BONE,
-		HAIR,
-		NO_UNDERWEAR,
-		FACEHAIR
-	)
-	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
+	//icon_template = 'icons/mob/necromorph/slasher/fleshy.dmi'
+	//damage_mask = 'icons/mob/necromorph/slasher/damage_mask.dmi'
+	//icon_lying = "_lying"
 
 /*
-	Slasher variant. Damage Calculation and Effects
+	Slasher Combat. Damage Calculation and Effects
 */
-
+	//evasion = 0	//No natural evasion
 	damage_overlay_type = "xeno"
-	attack_sound = 'sound/weapons/slice.ogg'
+	attack_sound = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_attack_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_attack_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_attack_3.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_attack_4.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_attack_5.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_attack_6.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_attack_7.ogg')
 	miss_sound = 'sound/weapons/slashmiss.ogg'
 	attack_verb = "slash"
-
 	attack_effect = ATTACK_EFFECT_CLAW
+	//ventcrawl = FALSE //temporarily disabled until rebalanced.
+	//ventcrawl_time = 10 SECONDS //They're huge....
+
 
 /*
 	Slasher variant. Traits
@@ -75,6 +81,17 @@
 		TRAIT_NOCLONELOSS,
 	)
 
+	species_traits = list(
+		MUTCOLORS,
+		EYECOLOR,
+		LIPS,
+		HAS_FLESH,
+		HAS_BONE,
+		HAIR,
+		NO_UNDERWEAR,
+		FACEHAIR
+	)
+	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
 
 /*
 	Slasher variant. Mutant Parts
@@ -102,10 +119,10 @@
 
 
 	//Slashers hold their arms up in an overhead pose, so they override height too
-	// mutant_bodyparts = list(
-	// BP_L_ARM =  list("path" = /obj/item/organ/external/arm/blade, "height" = new /vector2(1.6,2)),
-	// BP_R_ARM =  list("path" = /obj/item/organ/external/arm/blade/right, "height" = new /vector2(1.6,2))
-	// )
+	mutant_bodyparts = list(
+	BP_L_ARM =  list("path" = /obj/item/organ/external/arm/blade, "height" = new /vector2(1.6,2)),
+	BP_R_ARM =  list("path" = /obj/item/organ/external/arm/blade/right, "height" = new /vector2(1.6,2))
+	)
 
 
 	species_audio = list(
@@ -138,8 +155,45 @@
 	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher/slasher_speech_2.ogg')
 	)
 
+	//inherent_verbs = list(/atom/movable/proc/slasher_charge, /mob/living/proc/slasher_dodge, /mob/living/proc/slasher_fend, /mob/proc/shout)
+	//modifier_verbs = list(KEY_CTRLALT = list(/atom/movable/proc/slasher_charge),
+	//KEY_ALT = list(/mob/living/proc/slasher_dodge),
+	//KEY_MIDDLE = list(/mob/living/proc/slasher_dodge))
 
 
+	variants = list(SPECIES_NECROMORPH_SLASHER = list(WEIGHT = 8),
+	SPECIES_NECROMORPH_SLASHER_DESICCATED = list(WEIGHT = 2),
+	SPECIES_NECROMORPH_SLASHER_CARRION = list(WEIGHT = 0.1))
+
+	/*
+	outfits = list(/decl/hierarchy/outfit/naked = list(),
+	/decl/hierarchy/outfit/necromorph/planet_cracker = list(),
+	/decl/hierarchy/outfit/necromorph/security = list(),
+	/decl/hierarchy/outfit/necromorph/biosuit = list(),
+	/decl/hierarchy/outfit/necromorph/biosuit/earthgov = list( PATRON = TRUE),
+	/decl/hierarchy/outfit/necromorph/doctor = list(),
+	/decl/hierarchy/outfit/necromorph/command = list(),
+	/decl/hierarchy/outfit/necromorph/mining = list(),
+	/decl/hierarchy/outfit/necromorph/engi = list())
+	*/
+
+/datum/species/necromorph/slasher/desiccated
+	name = SPECIES_NECROMORPH_SLASHER_DESICCATED
+	//icon_template = 'icons/mob/necromorph/slasher/desiccated.dmi'
+	NECROMORPH_VISUAL_VARIANT
+
+/*
+/datum/species/necromorph/slasher/carrion
+	name = SPECIES_NECROMORPH_SLASHER_CARRION
+	//icon_template = 'icons/mob/necromorph/slasher/carrion.dmi'
+	NECROMORPH_VISUAL_VARIANT
+	//icon_lying = null
+	//lying_rotation = 90
+
+	outfits = list()	//This thing has a different shape and can't wear clothing
+	bodytype = SPECIES_NECROMORPH_SLASHER_CARRION	//Does NOT share the same base bodytype, cannot wear slasher outfits
+	hud_type = /datum/hud_data/necromorph
+*/
 /datum/species/necromorph/slasher/enhanced
 	name = SPECIES_NECROMORPH_SLASHER_ENHANCED
 
@@ -180,6 +234,42 @@
 	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/slasher_enhanced/eslasher_speech_4.ogg')
 	)
 
+/*
+	Blade Arm
+*/
+/obj/item/organ/external/arm/blade/slasher
+	//limb_height = new /vector2(1.6,2)	//Slashers hold their blade arms high
+
+/obj/item/organ/external/arm/blade/slasher/right
+	//organ_tag = BP_R_ARM
+	name = "right arm"
+	//icon_name = "r_arm"
+	//body_part = ARM_RIGHT
+	//joint = "right elbow"
+	//amputation_point = "right shoulder"
+
+
+
+/* Unarmed attacks*/
+/*
+/datum/unarmed_attack/blades
+	name = "Scything blades"
+	desc = "These colossal blades can cleave a man in half."
+	attack_verb = list("slashed", "scythed", "cleaved")
+	attack_noun = list("slash", "cut", "cleave", "chop", "stab")
+	eye_attack_text = "impales"
+	eye_attack_text_victim = "blade"
+	attack_sound = 'sound/weapons/slice.ogg'
+	miss_sound = 'sound/weapons/slashmiss.ogg'
+	sharp = TRUE
+	edge = TRUE
+	shredding = TRUE
+	damage = 16
+	delay = 15
+	airlock_force_power = 2
+	armor_penetration = 5
+*/
+
 #define SLASHER_CHARGE_DESC	"<h2>Charge:</h2><br>\
 <h3>Hotkey: Ctrl+Alt+Click </h3><br>\
 <h3>Cooldown: 20 seconds</h3><br>\
@@ -206,8 +296,156 @@ Weak melee attacks will provoke a devastating counterattack instead.\n\
 In addition, fend grants a 20% reduction to all incoming damage while active, but it halves your movespeed.\n\
 Fend automatically cancels when you perform a charge or a melee attack. Dodge will not interrupt it though, and those two can be comboed together to approach enemies."
 
+/*
+/datum/species/necromorph/slasher/get_ability_descriptions()
+	.= ""
+	. += SLASHER_CHARGE_DESC
+	. += "<hr>"
+	. += SLASHER_DODGE_DESC
+	. += "<hr>"
+	. += SLASHER_FEND_DESC
+*/
+/*
+//Can't slash things without arms
+/datum/unarmed_attack/blades/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
+	if(!user.has_organ(BP_R_ARM) && !user.has_organ(BP_L_ARM))
+		return FALSE
+	return TRUE
+
+/datum/unarmed_attack/blades/show_attack(var/datum/strike/strike)
+	//Fend is cancelled when you charge or attack
+	strike.user.toggle_extension(/datum/extension/ability/toggled/fend, FALSE, FALSE, TRUE)
+	.=..()
+
+/datum/unarmed_attack/blades/strong
+	damage = 22.4
+	delay = 14
+	airlock_force_power = 3
+	armor_penetration = 8
+
+/*
+	Abilities
+*/
+/atom/movable/proc/slasher_charge(var/mob/living/A)
+	set name = "Charge"
+	set category = "Abilities"
+
+	//Charge autotargets enemies within one tile of the clickpoint
+	if (!isliving(A))
+		A = autotarget_enemy_mob(A, 2, src, 999)
+
+	//Fend is cancelled when you charge or attack
+	toggle_extension(/datum/extension/ability/toggled/fend, FALSE, FALSE, TRUE)
+
+	.= charge_attack(A, _delay = 1 SECONDS, _speed = 5.0, _lifespan = 4 SECONDS)
+	if (.)
+		var/mob/H = src
+		if (istype(H))
+			H.face_atom(A)
+
+			//Long shout when targeting mobs, normal when targeting objects
+			if (ismob(A))
+				H.play_species_audio(src, SOUND_SHOUT_LONG, VOLUME_HIGH, 1, 3)
+			else
+				H.play_species_audio(src, SOUND_SHOUT, VOLUME_HIGH, 1, 3)
+		shake_animation(30)
+
+
+/atom/movable/proc/slasher_charge_enhanced(var/mob/living/A)
+	set name = "Charge"
+	set category = "Abilities"
+
+	//Charge autotargets enemies within one tile of the clickpoint
+	if (!isliving(A))
+		A = autotarget_enemy_mob(A, 2, src, 999)
+
+	.= charge_attack(A, _delay = 0.75 SECONDS, _speed = 5.5, _lifespan = 4 SECONDS)
+	if (.)
+		var/mob/H = src
+		if (istype(H))
+			H.face_atom(A)
+
+			//Long shout when targeting mobs, normal when targeting objects
+			if (ismob(A))
+				H.play_species_audio(src, SOUND_SHOUT_LONG, VOLUME_HIGH, 1, 3)
+			else
+				H.play_species_audio(src, SOUND_SHOUT, VOLUME_HIGH, 1, 3)
+		shake_animation(30)
+
+
+/mob/living/proc/slasher_dodge()
+	set name = "Dodge"
+	set category = "Abilities"
+
+
+	.= dodge_ability(_duration = SLASHER_DODGE_DURATION, _cooldown = 6 SECONDS, _power = SLASHER_DODGE_EVASION)
+
+
+/mob/living/proc/slasher_dodge_enhanced()
+	set name = "Dodge"
+	set category = "Abilities"
+
+
+	.= dodge_ability(_duration = SLASHER_DODGE_DURATION, _cooldown = 5 SECONDS, _power = SLASHER_DODGE_EVASION*1.2)
+
+/*
+	Slashers have a special charge impact. Each of their blade arms gets a free hit on impact with the primary target
+
+	However, to limit the power of this, these hits are mostly randomised in terms of where they land on the body.
+*/
+/datum/species/necromorph/slasher/charge_impact(var/datum/extension/charge/charge)
+	if (charge.last_target_type == CHARGE_TARGET_PRIMARY && isliving(charge.last_obstacle))
+		var/mob/living/carbon/human/H = charge.user
+		var/mob/living/L = charge.last_obstacle
+
+		var/current_target_zone = H.get_zone_sel()
+
+
+		//This is a bit of a hack because unarmed attacks are poorly coded:
+			//We'll set the user's last attack to some time in the past so they can attack again
+		if (H.has_organ(BP_R_ARM))
+			H.last_attack = 0
+
+			//50% chance to hit the zone you're targeting, otherwise random target zone
+			if (prob(50))
+				H.set_random_zone()
+			H.UnarmedAttack(L)
+
+		if (H.has_organ(BP_L_ARM))
+			H.last_attack = 0
+
+			//Second hit is always a random target
+			H.set_random_zone()
+			H.UnarmedAttack(L)
+
+		//Return the target zone to normal
+		H.set_zone_sel(current_target_zone)
+		return FALSE
+	else
+		return ..()
+
+
+
+/mob/living/proc/slasher_fend()
+	set name = "Fend"
+	set category = "Abilities"
+
+	toggle_extension(/datum/extension/ability/toggled/fend)
+
+
+
+//Special death condition: Slashers die when they lose both blade arms
+/datum/species/necromorph/slasher/handle_death_check(var/mob/living/carbon/human/H)
+	.=..()
+	if (!.)
+		if (!H.has_organ(BP_L_ARM) && !H.has_organ(BP_R_ARM))
+			return TRUE
+
 #undef SLASHER_DODGE_EVASION
 #undef SLASHER_DODGE_DURATION
+
+
+*/
 
 
 /*---------------------

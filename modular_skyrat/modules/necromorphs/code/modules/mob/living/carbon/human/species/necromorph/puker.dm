@@ -9,7 +9,7 @@
 	say_mod = "hisses"
 	limbs_id = "puker"
 	limbs_icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/puker.dmi'
-
+	//pixel_offset_x = -8
 //	icon_template = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/puker/fleshy.dmi'
 	//eyes_icon = 'modular_skyrat/master_files/icons/mob/species/vox_eyes.dmi'
 //	limbs_icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/puker/fleshy.dmi'

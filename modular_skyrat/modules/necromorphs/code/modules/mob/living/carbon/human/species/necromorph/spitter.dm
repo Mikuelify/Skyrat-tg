@@ -7,7 +7,7 @@
 	id = SPECIES_NECROMORPH_SPITTER
 	can_have_genitals = FALSE
 	say_mod = "hisses"
-	limbs_id = "spitter"
+	limbs_id = "splitter"
 	limbs_icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/spitter.dmi'
 
 //	icon_template = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/spitter/fleshy.dmi'

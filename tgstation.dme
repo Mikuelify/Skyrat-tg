@@ -5098,6 +5098,7 @@
 #include "modular_skyrat\modules\necromorphs\code\_helpers\_macros.dm"
 #include "modular_skyrat\modules\necromorphs\code\_helpers\detection.dm"
 #include "modular_skyrat\modules\necromorphs\code\_helpers\icons.dm"
+#include "modular_skyrat\modules\necromorphs\code\_helpers\lists.dm"
 #include "modular_skyrat\modules\necromorphs\code\_helpers\maths.dm"
 #include "modular_skyrat\modules\necromorphs\code\_helpers\matrices.dm"
 #include "modular_skyrat\modules\necromorphs\code\_helpers\pixels.dm"

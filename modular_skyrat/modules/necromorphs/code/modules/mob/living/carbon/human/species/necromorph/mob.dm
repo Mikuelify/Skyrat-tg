@@ -14,6 +14,7 @@
 /mob/living/carbon/human/species/necromorph/New(var/new_loc, var/new_species = SPECIES_NECROMORPH)
 	..(new_loc, new_species)
 
+
 /mob/living/carbon/human/species/necromorph/Initialize()
 	add_verb(src, /mob/living/proc/mob_sleep)
 	add_verb(src, /mob/living/proc/toggle_resting)
@@ -131,7 +132,7 @@
 	.=..()
 	if(N.single_icon == TRUE)
 		message_admins("[N] single_icon is set to [N.single_icon]")
-		update_body(TRUE)
+		update_appearance()
 
 
 
@@ -140,20 +141,18 @@
 	Control Individual Necromorph Icons. Currently it is not working.
 
 */
-/*
+
 // #define DEBUG
 //Override all that complicated limb-displaying stuff, with singular icons
-/mob/living/carbon/human/species/necromorph/update_body(var/update_icons=1)
-	var/datum/species/necromorph/N = species
+/mob/living/carbon/human/species/necromorph/update_appearance(updates)
 	.=..()
+	var/datum/species/necromorph/N = species
 	if(N.single_icon)
-	var/stand_icon = N.icon_template
-		icon = stand_icon
 		mutable_appearance('modular_skyrat/modules/necromorphs/icons/mob/necromorph/brute.dmi', "brute-d")
 
 
 	//If single icon is turned off, do the normal thing
-*/
+
 
 
 

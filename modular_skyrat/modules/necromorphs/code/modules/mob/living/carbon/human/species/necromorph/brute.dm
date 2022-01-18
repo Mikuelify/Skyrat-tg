@@ -165,7 +165,7 @@ It is certainly no use in close combat, and is generally easy to dodge due to be
 The user curls up into a ball, attempting to shield their vulnerable parts from damage, but becoming unable to turn, move or attack. While curled up, the strength of the brute's organic armor is massively increased (75% more!) and its coverage is increased to 100%<br>\
 This causes the brute to be practically invincible to attacks from the front and side, however the rear is still completely undefended.<br>\
 Brute will be forced into a reflexive curl under certain circumstances, but it can also be used manually. With the right timing, you can tank an entire firing squad while they waste ammo and deal no damage to you, leaving them vulnerable for your allies to attack from another angle."
-
+/*
 /datum/species/necromorph/brute/get_ability_descriptions()
 	.= ""
 	. += BRUTE_PASSIVE_1
@@ -179,7 +179,7 @@ Brute will be forced into a reflexive curl under certain circumstances, but it c
 	. += BRUTE_BOMB_DESC
 	. += "<hr>"
 	. += BRUTE_CURL
-
+*/
 /datum/species/necromorph/brute/fleshy
 	name = SPECIES_NECROMORPH_BRUTE_FLESH
 	//icon_normal = "brute-f"

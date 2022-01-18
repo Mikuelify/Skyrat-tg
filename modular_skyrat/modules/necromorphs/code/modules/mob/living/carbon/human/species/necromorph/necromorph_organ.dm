@@ -272,11 +272,11 @@
 	desc = "An electronic device that handles the hydraulic pumps, powering one's robotic limbs."
 	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/slasher/fleshy.dmi'
 	icon_state = "l_arm"
-//	limb_height = new /vector2(1.6,2)	//Slashers hold their blade arms high
+	//limb_height = new /vector2(1.6,2)	//Slashers hold their blade arms high
 
 /obj/item/organ/external/arm/blade/right
 	icon_state = "r_arm"
 /obj/item/organ/external/arm/blade/slasher
-//	limb_height = new /vector2(1.6,2)	//Slashers hold their blade arms high
+	//limb_height = new /vector2(1.6,2)	//Slashers hold their blade arms high
 
 /obj/item/organ/external/arm/blade/slasher/right
