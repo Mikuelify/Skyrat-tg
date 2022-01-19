@@ -34,18 +34,11 @@
 
 	//Single iconstates. These are somewhat of a hack
 	var/single_icon = FALSE
-	var/icon_template = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/48x48necros.dmi'
+	icon_template = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/48x48necros.dmi'
 	var/icon_normal = "slasher_d"
 	var/icon_lying = "slasher_d_lying"
 	var/icon_dead = "slasher_d_dead"
 
-	//Icon details. null out all of these, maybe someday they can be done
-	var/deform 			=   null
-	var/preview_icon 	= 	null
-	var/husk_icon 		=   null
-	var/damage_overlays =   null
-	var/damage_mask 	=   null
-	var/blood_mask 		=   null
 	var/obj/effect/decal/cleanable/blood/tracks/move_trail = /obj/effect/decal/cleanable/blood/tracks// What marks are left when walking
 
 //	var/icon_template = 'icons/mob/human_races/species/template.dmi' // Used for mob icon generation for non-32x32 species.

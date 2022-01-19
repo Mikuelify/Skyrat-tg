@@ -12,17 +12,86 @@
 	say_mod = "hisses"
 	limbs_id = "exploder"
 	limbs_icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/exploder.dmi'
-	//body_position_pixel_x_offset = 0
-	//body_position_pixel_y_offset = 0
-//	icon_template = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/exploder/fleshy.dmi'
-	//eyes_icon = 'modular_skyrat/master_files/icons/mob/species/vox_eyes.dmi'
-//	limbs_icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/exploder/fleshy.dmi'
-//	mutant_bodyparts = list()
+
+	name_plural =  "Exploders"
+	mob_type = /mob/living/carbon/human/species/necromorph/exploder
+	blurb = "An expendable suicide bomber, the exploder's sole purpose is to go out in a blaze of glory, and hopefully take a few people with it."
+	//unarmed_types = list(/datum/unarmed_attack/bite/weak/exploder) //Bite attack is a backup if blades are severed
+	total_health = 94	//It has high health for the sake of making it a bit harder to destroy without targeting the pustule. Exploding the pustule is always an instakill
+	biomass = 65
+	mass = 50
+
+	biomass_reclamation_time	=	5 MINUTES
+
+	//icon_template = 'icons/mob/necromorph/exploder/exploder.dmi'
+	icon_lying = "_lying"
+	pixel_offset_x = -8
+	single_icon = FALSE
+	evasion = 5	//Awkward movemetn makes it a tricky target
+	spawner_spawnable = TRUE
+
 
 	//Audio
 	step_volume = VOLUME_QUIET
 	step_range = 6	//We want to hear it coming
 	step_priority = 3
+
+	variants = list(SPECIES_NECROMORPH_EXPLODER = list(WEIGHT = 1),
+	SPECIES_NECROMORPH_EXPLODER_RIGHT = list(WEIGHT = 1),
+	SPECIES_NECROMORPH_EXPLODER_CLASSIC = list(WEIGHT = 0.5))
+
+	//The exploder has only one fused leg, but the right arm is also used to support movement
+	locomotion_limbs = list(BP_R_ARM, BP_L_LEG)
+
+	//Only one of the exploder's arms ends in a hand
+	grasping_limbs = list(BP_R_ARM)
+
+	species_audio = list(
+	SOUND_ATTACK = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_attack_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_attack_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_attack_3.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_attack_4.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_attack_5.ogg'),
+	SOUND_DEATH = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_death_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_death_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_death_3.ogg'),
+	SOUND_FOOTSTEP = list('modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_3.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_4.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_5.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_6.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_7.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_multi_1.ogg' = 0.4,	//These uncommon sounds play multiple footsteps in a single audio file
+	'modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_multi_2.ogg' = 0.4,
+	'modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_multi_3.ogg' = 0.4,
+	'modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_multi_4.ogg' = 0.4),
+	SOUND_PAIN = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_pain_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_pain_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_pain_3.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_pain_4.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_pain_5.ogg'),
+	SOUND_SHOUT = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_3.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_4.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_5.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_6.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_7.ogg'),
+	SOUND_SHOUT_LONG = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_long_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_long_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_long_3.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_long_4.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_long_5.ogg'),
+	SOUND_SPEECH = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_speech_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_speech_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_speech_3.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_speech_4.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_speech_5.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_speech_6.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_speech_7.ogg')
+	)
+
 
 	species_traits = list(
 		MUTCOLORS,
@@ -101,53 +170,6 @@
 	BODY_ZONE_L_LEG = /obj/item/bodypart/l_leg/necromorph,\
 	BODY_ZONE_R_LEG = /obj/item/bodypart/r_leg/necromorph,\
 	BODY_ZONE_CHEST = /obj/item/bodypart/chest/necromorph)
-
-	species_audio = list(
-	SOUND_ATTACK = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_attack_1.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_attack_2.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_attack_3.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_attack_4.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_attack_5.ogg'),
-	SOUND_DEATH = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_death_1.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_death_2.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_death_3.ogg'),
-	SOUND_FOOTSTEP = list('modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_1.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_2.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_3.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_4.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_5.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_6.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_7.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_multi_1.ogg' = 0.4,	//These uncommon sounds play multiple footsteps in a single audio file
-	'modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_multi_2.ogg' = 0.4,
-	'modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_multi_3.ogg' = 0.4,
-	'modular_skyrat/modules/necromorphs/sound/effects/footstep/exploder_footstep_multi_4.ogg' = 0.4),
-	SOUND_PAIN = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_pain_1.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_pain_2.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_pain_3.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_pain_4.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_pain_5.ogg'),
-	SOUND_SHOUT = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_1.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_2.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_3.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_4.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_5.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_6.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_7.ogg'),
-	SOUND_SHOUT_LONG = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_long_1.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_long_2.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_long_3.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_long_4.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_shout_long_5.ogg'),
-	SOUND_SPEECH = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_speech_1.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_speech_2.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_speech_3.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_speech_4.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_speech_5.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_speech_6.ogg',
-	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/exploder/exploder_speech_7.ogg')
-	)
-
 
 
 #define EXPLODER_PASSIVE	"<h2>PASSIVE: Explosive Pustule:</h2><br>\
