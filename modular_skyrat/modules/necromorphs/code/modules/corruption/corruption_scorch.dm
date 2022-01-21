@@ -35,7 +35,7 @@
 
 	color = "#808080"
 	anchored = TRUE
-	icon = 'modular_skyrat/modules/necromorphs/icons/turf/flooring/damage.dmi'
+	icon = 'icons/turf/flooring/damage.dmi'
 	icon_state = "burned1"
 
 /obj/effect/decal/scorch/Initialize()

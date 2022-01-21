@@ -102,6 +102,23 @@
 		var/mob/camera/marker/B = usr
 		B.createSpecial(MARKER_STRUCTURE_NODE_COST, /obj/structure/marker/special/node, MARKER_NODE_MIN_DISTANCE, FALSE)
 
+/atom/movable/screen/marker/bioluminescence
+	icon_state = "ui_node"
+	// Name and description get given their proper values on Initialize()
+	name = "Produce Node Marker (ERROR)"
+	desc = "Produces a node marker for ERROR resources.<br>Node markers will expand and activate nearby resource and factory markers."
+
+/atom/movable/screen/marker/bioluminescencer/Initialize()
+	. = ..()
+	name = "Produce Node Marker ([CORRUPTION_STRUCTURE_BIOLUMINESCENCE_COST])"
+	desc = "Produces a node marker for [CORRUPTION_STRUCTURE_BIOLUMINESCENCE_COST] resources.<br>Node markers will expand and activate nearby resource and factory markers."
+
+/atom/movable/screen/marker/bioluminescence/Click()
+	if(ismarkerovermind(usr))
+		var/mob/camera/marker/B = usr
+		B.createSpecial(CORRUPTION_STRUCTURE_BIOLUMINESCENCE_COST, /obj/structure/marker/special/bioluminescence, MARKER_NODE_MIN_DISTANCE, FALSE)
+
+
 /atom/movable/screen/marker/factory_marker
 	icon_state = "ui_factory"
 	// Name and description get given their proper values on Initialize()
@@ -182,6 +199,11 @@
 
 	using = new /atom/movable/screen/marker/factory_marker()
 	using.screen_loc = ui_hand_position(1)
+	using.hud = src
+	static_inventory += using
+
+	using = new /atom/movable/screen/marker/bioluminescence()
+	using.screen_loc = ui_storage1
 	using.hud = src
 	static_inventory += using
 

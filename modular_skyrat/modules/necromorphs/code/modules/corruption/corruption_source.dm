@@ -49,6 +49,16 @@
 
 	evaluate_existing()
 
+	//Corruption tiles add vision
+	source.visualnet_range = range
+	GLOB.necrovision.add_source(source)
+
+
+
+
+
+
+
 /datum/extension/corruption_source/Destroy()
 	GLOB.corruption_sources -= src
 	update_vines()

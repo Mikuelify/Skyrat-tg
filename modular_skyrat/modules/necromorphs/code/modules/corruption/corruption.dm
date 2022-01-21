@@ -8,43 +8,10 @@ GLOBAL_DATUM_INIT(corruption_seed, /datum/seed/corruption, new())
 
 #define CORRUPTION_SPREAD_HEALTH_THRESHOLD	0.3
 
-/obj/effect/vine
-	name = "vine"
-	anchored = 1
-	icon = 'icons/obj/hydroponics_growing.dmi'
-	icon_state = ""
-	mouse_opacity = 1
-
-	var/max_health = 10	//This is autocalculated based on size
-	var/health = 10
-	var/growth_threshold = 0
-	var/growth_type = 0
-	var/max_growth = 0
-	var/obj/effect/vine/parent
-	var/datum/seed/seed
-	var/floor = 0
-	var/possible_children = 20
-	var/spread_chance = 30
-	var/spread_distance = 4
-	var/evolve_chance = 2
-	var/mature_time	= 30 SECONDS	//minimum maturation time
-	var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/plant
-	var/list/neighbors
-	var/can_cut = TRUE
-
-	var/default_pixel_x = 0
-	var/default_pixel_y = 0
-	var/default_rotation = 0
-	var/default_alpha = 255
-	var/default_scale = 1
-
-/obj/effect/vine/single
-	spread_chance = 0
-
 //We'll be using a subtype in addition to a seed, becuase there's a lot of special case behaviour here
 /obj/effect/vine/corruption
 	name = "corruption"
-	icon = 'modular_skyrat/modules/necromorphs/icons/effects/corruption.dmi'
+	icon = 'icons/effects/corruption.dmi'
 	icon_state = ""
 
 	max_health = 30
@@ -67,6 +34,10 @@ GLOBAL_DATUM_INIT(corruption_seed, /datum/seed/corruption, new())
 	//This is only used for the uncommon edge case where this vine is on the border between multiple chunks
 	//Don't give it a value if unused, saves memory
 	var/list/chunks
+
+	//To remove corruption, destroy the nodes that are spreading it
+	can_cut = FALSE
+
 
 	//No clicking this
 	mouse_opacity = 0
@@ -314,15 +285,18 @@ GLOBAL_DATUM_INIT(corruption_seed, /datum/seed/corruption, new())
 /* Visualnet Handling */
 //-------------------
 /obj/effect/vine/corruption/get_visualnet_tiles(var/datum/visualnet/network)
+/*
 	return trange(1, src)
-
+*/
 /obj/effect/vine/corruption/watched_tile_updated(var/turf/T)
+/*
 	if (source)
 		source.needs_update = TRUE
 	.=..()
-
+*/
 //Finds all visualnet chunks that this vine could possibly infringe on.
 /obj/effect/vine/corruption/proc/get_chunks()
+/*
 	var/list/chunksfound = list(GLOB.necrovision.get_chunk(x, y, z))
 	for (var/direction in list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST))
 		var/turf/T = get_step(src, direction)
@@ -334,8 +308,9 @@ GLOBAL_DATUM_INIT(corruption_seed, /datum/seed/corruption, new())
 	//We only care if there's more than one chunk
 	if (chunksfound.len > 1)
 		chunks = chunksfound
-
+*/
 /obj/effect/vine/corruption/proc/update_chunks()
+/*
 	//Clear the necrovision cache
 	GLOB.necrovision.visibility_cache = list()
 	if (chunks)
@@ -344,7 +319,7 @@ GLOBAL_DATUM_INIT(corruption_seed, /datum/seed/corruption, new())
 	else
 		var/turf/T = get_turf(src)
 		T.update_chunk(FALSE)
-
+*/
 
 
 

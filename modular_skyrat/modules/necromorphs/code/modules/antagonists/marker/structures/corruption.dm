@@ -82,7 +82,7 @@ GLOBAL_LIST_INIT(valid_corruptions, subtypesof(/datum/corruption))
 	overmind.color = complementary_color
 
 	if(overmind.marker_core)
-		overmind.marker_core.max_spores += core_spore_bonus
+		overmind.marker_core.max_slashers += core_spore_bonus
 		overmind.marker_core.claim_range += core_range_bonus
 		overmind.marker_core.pulse_range += core_range_bonus
 		overmind.marker_core.expand_range += core_range_bonus
@@ -90,7 +90,7 @@ GLOBAL_LIST_INIT(valid_corruptions, subtypesof(/datum/corruption))
 		overmind.marker_core.reflector_reinforce_range += core_reflector_reinforcement_range_bonus
 
 	for(var/obj/structure/marker/special/node/N as anything in overmind.node_markers)
-		N.max_spores += node_spore_bonus
+		N.max_slashers += node_spore_bonus
 		N.claim_range += node_range_bonus
 		N.pulse_range += node_range_bonus
 		N.expand_range += node_range_bonus
@@ -98,7 +98,7 @@ GLOBAL_LIST_INIT(valid_corruptions, subtypesof(/datum/corruption))
 		N.reflector_reinforce_range += node_reflector_reinforcement_range_bonus
 
 	for(var/obj/structure/marker/special/factory/F as anything in overmind.factory_markers)
-		F.max_spores += factory_spore_bonus
+		F.max_slashers += factory_spore_bonus
 
 	for(var/obj/structure/marker/B as anything in overmind.all_markers)
 		B.modify_max_integrity(B.max_integrity * max_structure_health_multiplier)
@@ -113,7 +113,7 @@ GLOBAL_LIST_INIT(valid_corruptions, subtypesof(/datum/corruption))
 
 /datum/corruption/proc/on_lose()
 	if(overmind.marker_core)
-		overmind.marker_core.max_spores -= core_spore_bonus
+		overmind.marker_core.max_slashers -= core_spore_bonus
 		overmind.marker_core.claim_range -= core_range_bonus
 		overmind.marker_core.pulse_range -= core_range_bonus
 		overmind.marker_core.expand_range -= core_range_bonus
@@ -121,7 +121,7 @@ GLOBAL_LIST_INIT(valid_corruptions, subtypesof(/datum/corruption))
 		overmind.marker_core.reflector_reinforce_range -= core_reflector_reinforcement_range_bonus
 
 	for(var/obj/structure/marker/special/node/N as anything in overmind.node_markers)
-		N.max_spores -= node_spore_bonus
+		N.max_slashers -= node_spore_bonus
 		N.claim_range -= node_range_bonus
 		N.pulse_range -= node_range_bonus
 		N.expand_range -= node_range_bonus
@@ -129,7 +129,7 @@ GLOBAL_LIST_INIT(valid_corruptions, subtypesof(/datum/corruption))
 		N.reflector_reinforce_range -= node_reflector_reinforcement_range_bonus
 
 	for(var/obj/structure/marker/special/factory/F as anything in overmind.factory_markers)
-		F.max_spores -= factory_spore_bonus
+		F.max_slashers -= factory_spore_bonus
 
 	for(var/obj/structure/marker/B as anything in overmind.all_markers)
 		B.modify_max_integrity(B.max_integrity / max_structure_health_multiplier)

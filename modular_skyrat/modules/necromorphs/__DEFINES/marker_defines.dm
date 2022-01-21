@@ -77,13 +77,18 @@
 #define MARKER_UPGRADE_REFLECTOR_COST                 5
 #define MARKER_STRUCTURE_RESOURCE_COST                40
 #define MARKER_STRUCTURE_FACTORY_COST                 50
-#define MARKER_STRUCTURE_NODE_COST                    50
+#define MARKER_STRUCTURE_NODE_COST
+
+#define CORRUPTION_STRUCTURE_BIOLUMINESCENCE_COST     50
 
 #define MARKER_REFUND_STRONG_COST                     8           // Points refunded when destroying the structure
 #define MARKER_REFUND_REFLECTOR_COST                  4
 #define MARKER_REFUND_FACTORY_COST                    25
 #define MARKER_REFUND_NODE_COST                       25
 #define MARKER_REFUND_RESOURCE_COST 				  15
+
+#define CORRUPTION_REFUND_BIOLUMINESCENCE_COST     50
+
 // MARKER power properties
 
 #define MARKER_POWER_RELOCATE_COST                    25          // Resource cost to move your core to a different node

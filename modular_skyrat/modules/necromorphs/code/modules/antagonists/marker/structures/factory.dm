@@ -8,7 +8,7 @@
 	health_regen = MARKER_FACTORY_HP_REGEN
 	point_return = MARKER_REFUND_FACTORY_COST
 	resistance_flags = LAVA_PROOF
-	max_spores = MARKER_FACTORY_MAX_SLASHERS
+	max_slashers = MARKER_FACTORY_MAX_SLASHERS
 
 /obj/structure/marker/special/factory/scannerreport()
 	if(brute)

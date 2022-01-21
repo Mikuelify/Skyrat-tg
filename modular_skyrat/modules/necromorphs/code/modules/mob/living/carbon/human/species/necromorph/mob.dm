@@ -48,7 +48,7 @@
 /mob/living/carbon/human/species/necromorph/puker
 	race = /datum/species/necromorph/puker
 /mob/living/carbon/human/species/necromorph/spitter
-	race = /datum/species/necromorph/spitter
+	//race = /datum/species/necromorph/slasher/spitter
 /mob/living/carbon/human/species/necromorph/tripod
 	race = /datum/species/necromorph/tripod
 /mob/living/carbon/human/species/necromorph/ubermorph

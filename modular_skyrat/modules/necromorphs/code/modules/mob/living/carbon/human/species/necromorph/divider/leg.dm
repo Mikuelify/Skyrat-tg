@@ -2,11 +2,9 @@
 	Limb Code
 */
 /obj/item/organ/external/leg/right/simple/divider
-	//can_regrow = FALSE
-
+	can_regrow = FALSE
 /obj/item/organ/external/leg/simple/divider
-	//can_regrow = FALSE
-
+	can_regrow = FALSE
 /*
 	Leg
 	Kicks mobs and bounces off
@@ -36,6 +34,7 @@
 	leap_state = "leg_leap"
 	attack_state = "leg_attack"
 
+/*
 //The leg's leap impact is a dropkick, both victim and leg are propelled away from each other wildly
 //The victim recieves a heavy blunt hit
 /mob/living/simple_animal/necromorph/divider_component/leg/charge_impact(var/datum/extension/charge/leap/charge)
@@ -69,4 +68,4 @@
 		//And we ourselves also get knocked back
 		//We spawn it off to let the current stack finish first, otherwise we get hit twice
 		//apply_push_impulse_from(epicentre, 20)
-
+*/

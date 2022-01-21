@@ -18,7 +18,8 @@ GLOBAL_LIST_EMPTY(markers) //complete list of all markers made.
 GLOBAL_LIST_EMPTY(marker_cores)
 GLOBAL_LIST_EMPTY(marker_overminds)
 GLOBAL_LIST_EMPTY(marker_nodes)
-
+GLOBAL_LIST_EMPTY(corruption_special)
+GLOBAL_LIST_EMPTY(corruption)
 
 /mob/camera/marker
 	name = "Marker OVERMIND"
@@ -51,6 +52,8 @@ GLOBAL_LIST_EMPTY(marker_nodes)
 	var/list/resource_markers = list()
 	var/list/factory_markers = list()
 	var/list/node_markers = list()
+	var/list/bioluminescence_corruption = list()
+
 	var/last_reroll_time = 0 //time since we last rerolled, used to give free rerolls
 	var/nodes_required = TRUE //if the marker needs nodes to place resource and factory markers
 	var/placed = FALSE
@@ -153,6 +156,7 @@ GLOBAL_LIST_EMPTY(marker_nodes)
 	factory_markers = null
 	node_markers = null
 	marker_mobs = null
+	bioluminescence_corruption = null
 	GLOB.overminds -= src
 
 	SSshuttle.clearHostileEnvironment(src)

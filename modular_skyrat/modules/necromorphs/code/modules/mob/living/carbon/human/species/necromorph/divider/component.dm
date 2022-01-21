@@ -7,13 +7,9 @@
 */
 /datum/species/necromorph/divider_component
 	name = SPECIES_NECROMORPH_DIVIDER_COMPONENT
-	//marker_spawnable = FALSE
-	//spawner_spawnable = FALSE
+	marker_spawnable = FALSE
+	spawner_spawnable = FALSE
 	//preference_settable = TRUE
-
-
-
-
 /*
 	Component Mobs
 */
@@ -63,7 +59,7 @@
 	//SSnecromorph.fill_vessel_from_queue(src, SPECIES_NECROMORPH_DIVIDER_COMPONENT)
 
 /datum/extension/charge/leap/component
-	blur_filter_strength = 1
+	//blur_filter_strength = 1
 
 
 /mob/living/simple_animal/necromorph/divider_component/proc/leap(var/atom/A)
@@ -74,12 +70,11 @@
 	//if (!isliving(A))
 		//A = autotarget_enemy_mob(A, 2, src, 999)
 
-
-	if (!can_charge(A))
+	if(!can_charge(A))
 		return
 
 	//Starting a leap plays an attack sound which ignores cooldown
-	if (LAZYLEN(attack_sounds))
+	if(LAZYLEN(attack_sounds))
 		playsound(src, pick(attack_sounds), VOLUME_HIGH, TRUE)
 
 	//Do a chargeup animation. Pulls back and then launches forwards

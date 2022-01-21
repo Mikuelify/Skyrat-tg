@@ -42,29 +42,29 @@
 
 
 	species_audio = list(
-	SOUND_ATTACK = list('sound/effects/creatures/necromorph/divider/divider_attack_1.ogg',
-	'sound/effects/creatures/necromorph/divider/divider_attack_2.ogg',
-	'sound/effects/creatures/necromorph/divider/divider_attack_3.ogg'),
-	SOUND_DEATH = list('sound/effects/creatures/necromorph/divider/divider_death.ogg'),
-	SOUND_PAIN = list('sound/effects/creatures/necromorph/divider/divider_pain_1.ogg',
-	'sound/effects/creatures/necromorph/divider/divider_pain_2.ogg',
-	'sound/effects/creatures/necromorph/divider/divider_pain_3.ogg'),
-	SOUND_SHOUT = list('sound/effects/creatures/necromorph/divider/divider_shout_1.ogg',
-	'sound/effects/creatures/necromorph/divider/divider_shout_2.ogg',
-	'sound/effects/creatures/necromorph/divider/divider_shout_3.ogg',
-	'sound/effects/creatures/necromorph/divider/divider_shout_4.ogg'),
-	SOUND_SHOUT_LONG = list('sound/effects/creatures/necromorph/divider/divider_shout_long_1.ogg',
-	'sound/effects/creatures/necromorph/divider/divider_shout_long_2.ogg',
-	'sound/effects/creatures/necromorph/divider/divider_shout_long_3.ogg',
-	'sound/effects/creatures/necromorph/divider/divider_shout_long_4.ogg',
-	'sound/effects/creatures/necromorph/divider/divider_shout_long_5.ogg',
-	'sound/effects/creatures/necromorph/divider/divider_shout_long_6.ogg'),
-	SOUND_SPEECH = list('sound/effects/creatures/necromorph/divider/divider_shout_long_1.ogg',
-	'sound/effects/creatures/necromorph/divider/divider_shout_long_2.ogg',
-	'sound/effects/creatures/necromorph/divider/divider_shout_long_3.ogg',
-	'sound/effects/creatures/necromorph/divider/divider_shout_long_4.ogg',
-	'sound/effects/creatures/necromorph/divider/divider_shout_long_5.ogg',
-	'sound/effects/creatures/necromorph/divider/divider_shout_long_6.ogg')
+	SOUND_ATTACK = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_attack_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_attack_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_attack_3.ogg'),
+	SOUND_DEATH = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_death.ogg'),
+	SOUND_PAIN = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_pain_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_pain_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_pain_3.ogg'),
+	SOUND_SHOUT = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_shout_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_shout_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_shout_3.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_shout_4.ogg'),
+	SOUND_SHOUT_LONG = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_shout_long_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_shout_long_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_shout_long_3.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_shout_long_4.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_shout_long_5.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_shout_long_6.ogg'),
+	SOUND_SPEECH = list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_shout_long_1.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_shout_long_2.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_shout_long_3.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_shout_long_4.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_shout_long_5.ogg',
+	'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_shout_long_6.ogg')
 	)//Since it has so many of them and no speech sounds, the divider uses its long shouts for speech
 
 
@@ -171,14 +171,14 @@ Reanimate can be used to take control of any already-headless corpse on the grou
 
 	if (stat == DEAD)
 		return
-	playsound(src, 'sound/effects/creatures/necromorph/divider/divider_split.ogg', VOLUME_LOUD, TRUE)
+	playsound(src, 'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/divider/divider_split.ogg', VOLUME_LOUD, TRUE)
 	facedir(SOUTH)
 	root()
 
 	//Fall over
 	shake_animation(45)
 	spawn(1.25 SECONDS)
-		if (!lying)
+		if (!LYING_DOWN)
 			Weaken(99)
 		shake_animation(45)
 		sleep(0.75 SECONDS)
@@ -294,9 +294,9 @@ Reanimate can be used to take control of any already-headless corpse on the grou
 
 	if (.)
 		play_species_audio(src, SOUND_ATTACK, VOLUME_MID, 1, 2)
-		var/sound_effect = pick(list('sound/effects/attacks/big_swoosh_1.ogg',
-		'sound/effects/attacks/big_swoosh_2.ogg',
-		'sound/effects/attacks/big_swoosh_3.ogg',))
+		var/sound_effect = pick(list('modular_skyrat/modules/necromorphs/sound/effects/attacks/big_swoosh_1.ogg',
+		'modular_skyrat/modules/necromorphs/sound/effects/attacks/big_swoosh_2.ogg',
+		'modular_skyrat/modules/necromorphs/sound/effects/attacks/big_swoosh_3.ogg',))
 		playsound(src, sound_effect, VOLUME_LOW, TRUE)
 
 /datum/extension/swing/arm/divider/windup_animation()

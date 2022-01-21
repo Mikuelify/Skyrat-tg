@@ -112,6 +112,28 @@
 	//This is in kilograms, and is thus approximately the mass of an average human male adult
 	var/mass = 80	//Actual mass of the resulting mob
 
+	// Body/form vars.
+	var/list/inherent_verbs 	  // Species-specific verbs.
+	var/has_fine_manipulation = 1 // Can use small items.
+	var/can_pickup	=	TRUE	  // Can pickup items at all
+	var/siemens_coefficient = 1   // The lower, the thicker the skin and better the insulation.
+	var/species_flags = 0         // Various specific features.
+	var/appearance_flags = 0      // Appearance/display related features.
+	var/spawn_flags = 0           // Flags that specify who can spawn as this species
+	var/primitive_form            // Lesser form, if any (ie. monkey for humans)
+	var/greater_form              // Greater form, if any, ie. human for monkeys.
+	var/holder_type
+	var/gluttonous                // Can eat some mobs. Values can be GLUT_TINY, GLUT_SMALLER, GLUT_ANYTHING, GLUT_ITEM_TINY, GLUT_ITEM_NORMAL, GLUT_ITEM_ANYTHING, GLUT_PROJECTILE_VOMIT
+	var/stomach_capacity = 5      // How much stuff they can stick in their stomach
+	var/rarity_value = 1          // Relative rarity/collector value for this species.
+
+	//Vision
+	var/view_offset = 0			  //How far forward the mob's view is offset, in pixels.
+	var/view_range = 7		  //Mob's vision radius, in tiles. It gets buggy with values below 7, but anything 7+ is flawless
+	var/darksight_range = 2       // Native darksight distance.
+	var/darksight_tint = null // How shadows are tinted.
+	var/vision_flags = SEE_SELF               // Same flags as glasses.
+	var/short_sighted                         // Permanent weldervision.
 
 
 

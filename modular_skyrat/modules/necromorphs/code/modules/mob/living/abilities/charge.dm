@@ -43,6 +43,7 @@
 /*
 	The charge extension is attached to a mob and acts as a puppeteer to move it
 */
+
 /datum/extension/charge
 	name = "Charge"
 	var/verb_name = "Charging"

@@ -25,7 +25,7 @@
 	claim_range = MARKER_CORE_CLAIM_RANGE
 	pulse_range = MARKER_CORE_PULSE_RANGE
 	expand_range = MARKER_CORE_EXPAND_RANGE
-	max_spores = MARKER_CORE_MAX_SLASHERS
+	max_slashers = MARKER_CORE_MAX_SLASHERS
 	ignore_syncmesh_share = TRUE
 
 	pixel_x = -32

@@ -39,6 +39,22 @@
 	var/atmosblock = FALSE
 	var/mob/camera/marker/overmind
 
+
+	var/marker_spawnable = TRUE	//When true, this automatically shows in the necroshop
+	biomass = 10
+	var/biomass_reclamation = 0.9
+	var/reclamation_time = 10 MINUTES
+	var/requires_corruption = TRUE
+	var/random_rotation = TRUE	//If true, set rotation randomly on spawn
+
+	//var/placement_type = /datum/click_handler/placement/necromorph
+	//var/placement_location = PLACEMENT_FLOOR
+
+	var/regen = 1
+	var/degen = 0.5
+
+	var/randpixel = 0
+
 	//var/datum/corruption/corruption
 
 /obj/structure/marker/Initialize(mapload, owner_overmind)
@@ -58,6 +74,33 @@
 
 /obj/structure/marker/proc/creation_action() //When it's created by the overmind, do this.
 	return
+
+/*
+	Corruption Additions: BEGIN
+*/
+
+/obj/structure/marker/proc/get_blurb()
+
+/obj/structure/marker/proc/get_long_description()
+	.="<b>Health</b>: [max_integrity]<br>"
+	if (biomass)
+		.+="<b>Biomass</b>: [biomass]kg[biomass_reclamation ? " . If destroyed, reclaim [biomass_reclamation*100]% biomass over [reclamation_time/600] minutes" : ""]<br>"
+	if (requires_corruption)
+		.+= span_warning("Must be placed on a corrupted tile <br>")
+	.+= "<br><br>"
+	.+= get_blurb()
+	.+="<br><hr>"
+
+/obj/structure/corruption_node/get_biomass(var/who_is_asking)
+
+	//This is needed for invested biomass handling
+	if (istype(who_is_asking, /obj/machinery/marker))
+		return biomass
+	return 0	//This is not edible
+
+/*
+	Corruption Additions: END
+*/
 
 /obj/structure/marker/Destroy()
 	if(atmosblock)
@@ -388,6 +431,10 @@ Growth Expand Proc: OLD
 	return "A generic marker. Looks like someone forgot to override this proc, adminhelp this."
 
 
+
+
+
+
 /*
 
 This is the growth that eminates from the marker. Needs to be separated out and re-defined.
@@ -522,11 +569,6 @@ independently until the event is triggered.
 	var/mob/living/simple_animal/hostile/necromorph/slasher = null
 	var/mob/living/simple_animal/hostile/necromorph/brute = null
 
-	var/max_spores = 0
-	var/list/spores = list()
-	COOLDOWN_DECLARE(spore_delay)
-	var/spore_cooldown = MARKERMOB_SLASHER_SPAWN_COOLDOWN
-
 	var/max_slashers = 0
 	var/list/slashers = list()
 	COOLDOWN_DECLARE(slasher_delay)
@@ -537,8 +579,25 @@ independently until the event is triggered.
 	var/strong_reinforce_range = 0
 	/// Range this marker free upgrades to reflector markers at: for the core, and for s
 	var/reflector_reinforce_range = 0
+/*
+/obj/structure/marker/special/update_icon()
+	.=..()
+	var/matrix/M = matrix()
+	M = M.Scale(default_scale)	//We scale up the sprite so it slightly overlaps neighboring corruption tiles
+	M = turn(M, get_rotation())
+	if (randpixel)
+		pixel_x = default_pixel_x + rand_between(-randpixel, randpixel)
+		pixel_y = default_pixel_y + rand_between(-randpixel, randpixel)
+	transform = M
 
+//
+/obj/structure/marker/special/proc/get_rotation()
+	if (!random_rotation)
+		return 0
+	default_rotation = pick(list(0,45,90,135,180,225,270,315))//Randomly rotate it
 
+	return default_rotation
+*/
 /obj/structure/marker/special/proc/pulse_area(mob/camera/marker/pulsing_overmind, claim_range = 10, pulse_range = 3, expand_range = 2)
 	if(QDELETED(pulsing_overmind))
 		pulsing_overmind = overmind

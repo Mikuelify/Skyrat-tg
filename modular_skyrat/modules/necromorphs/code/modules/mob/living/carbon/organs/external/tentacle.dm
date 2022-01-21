@@ -8,7 +8,7 @@
 	icon_name = "tentacle"
 	max_damage = 30
 	min_broken_damage = 18
-	w_class = ITEM_SIZE_NORMAL
+	//w_class = ITEM_SIZE_NORMAL
 	body_part = ARM_LEFT
 	parent_organ = BP_CHEST
 	joint = "left elbow"
