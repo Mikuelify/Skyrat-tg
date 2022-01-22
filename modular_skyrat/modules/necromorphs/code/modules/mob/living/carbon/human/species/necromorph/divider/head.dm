@@ -17,7 +17,7 @@
 	attack_sound = 'sound/weapons/bite.ogg'
 	speed = 1.75
 	leap_range = 4
-	max_health = 60
+	maxHealth = 60
 
 	pain_sounds = list('sound/effects/creatures/necromorph/divider/component/head_pain_1.ogg',
 	'sound/effects/creatures/necromorph/divider/component/head_pain_2.ogg')

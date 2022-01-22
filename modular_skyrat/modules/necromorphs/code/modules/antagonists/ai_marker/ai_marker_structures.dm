@@ -161,11 +161,30 @@
 			if(WEST)
 				pixel_x = -32
 		var/obj/effect/overlay/vis/overlay3 = managed_vis_overlays[3]
-		var/matrix/M = matrix()
-		M = M.Scale(vine_scale)
+		var/matrix/RE = matrix()
+		RE = RE.Scale(vine_scale)
 		overlay3.icon_state = "corruption-edge"
 		overlay3.appearance_flags = PIXEL_SCALE | TILE_BOUND | RESET_COLOR | RESET_TRANSFORM
-		overlay3.transform = M
+		overlay3.transform = RE
+		overlay3.pixel_x = pixel_x
+		overlay3.pixel_y = pixel_y
+	if(floor)
+		SSvis_overlays.add_vis_overlay(src, icon, "corruption-edge", layer, plane, dir, alpha)
+		switch(dir) //offset to make it be on the wall rather than on the floor
+			if(NORTH)
+				pixel_y = 32
+			if(SOUTH)
+				pixel_y = -32
+			if(EAST)
+				pixel_x = 32
+			if(WEST)
+				pixel_x = -32
+		var/obj/effect/overlay/vis/overlay3 = managed_vis_overlays[3]
+		var/matrix/RE = matrix()
+		RE = RE.Scale(vine_scale)
+		overlay3.icon_state = "corruption-edge"
+		overlay3.appearance_flags = PIXEL_SCALE | TILE_BOUND | RESET_COLOR | RESET_TRANSFORM
+		overlay3.transform = RE
 		overlay3.pixel_x = pixel_x
 		overlay3.pixel_y = pixel_y
 

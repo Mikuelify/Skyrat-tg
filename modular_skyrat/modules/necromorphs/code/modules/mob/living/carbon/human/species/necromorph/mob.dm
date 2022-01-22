@@ -77,7 +77,14 @@
 
 /mob/living/carbon/human/species/necromorph/brute/Initialize()
 	. = ..()
-
+/*
+	Applies Icon to Single-Icon state mobs. Still needs overlays and support for dismemberment mask, damage mask, Blood Mask.
+*/
+/mob/living/carbon/human/species/necromorph/brute/update_body_parts()
+	. = ..()
+	remove_overlay(BODYPARTS_LAYER)
+	icon = 'modular_skyrat/modules/necromorphs/icons/mob/necromorph/brute.dmi'
+	icon_state = "brute-d"
 
 /mob/living/carbon/human/species/necromorph/slasher/New(var/new_loc, var/new_species = SPECIES_NECROMORPH_SLASHER)
 	..(new_loc, new_species)
@@ -140,19 +147,28 @@
 
 	Control Individual Necromorph Icons. Currently it is not working.
 
-*/
+update_body_parts()
+will use the icons from the limbs as a standing overlay
+you can remove that with remove_overlay(BODYPARTS_LAYER)
+on the human level
+and then you just set the icon and icon_state
+
+
 
 // #define DEBUG
 //Override all that complicated limb-displaying stuff, with singular icons
-/mob/living/carbon/human/species/necromorph/update_appearance(updates)
+/mob/living/carbon/human/species/necromorph/update_body_parts()
 	.=..()
 	var/datum/species/necromorph/N = species
-	if(N.single_icon)
-		mutable_appearance('modular_skyrat/modules/necromorphs/icons/mob/necromorph/brute.dmi', "brute-d")
+	if(!N.single_icon)
+		remove_overlay(BODYPARTS_LAYER)
+		icon = ""
+		icon-state = ""
+		//mutable_appearance('modular_skyrat/modules/necromorphs/icons/mob/necromorph/brute.dmi', "brute-d")
 
 
 	//If single icon is turned off, do the normal thing
-
+*/
 
 
 
