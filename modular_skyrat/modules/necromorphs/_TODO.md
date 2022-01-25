@@ -7,6 +7,11 @@
 	-  Kinesis support to remove limbs
 	-  Necromorphs die if all limbs are removed
 
+- Flavor Items
+	- Newscaster Reports
+	- Paperwork / Documents
+	- Logos
+	- New Clothing
 
 -  Necromorphs
 	-  Abilites
@@ -17,6 +22,7 @@
 		-  Attack Sounds
 	-  Wallrun
 	-  Ventcrawling
+		- Time to make bigger vents ideally with support for people climbing.
 	-  Biomass
 	-  Dismemberment
 		-  Death on limb removal 
@@ -65,6 +71,15 @@
 		-  Needs to be refactored specifically for Necromorph Master
 		-  Remove all prior reference to blob.
 		-  Biomass generation 
+	- Engine Status
+		- Containment
+		- Power Generation
+		- Required
+			- R&D
+				- Can operate the activation and management tools.
+			- Engineering
+				- Can build the containment system.
+		- Causes hallucinations.
 
 
 -  Marker (AI)
