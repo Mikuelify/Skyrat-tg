@@ -177,6 +177,7 @@
 	//We want it to be unset but we stil want to have our useless lungs
 /*
 
+
 /datum/species/necromorph/onDestroy(var/mob/living/carbon/human/H)
 	SSnecromorph.major_vessels -= H
 
