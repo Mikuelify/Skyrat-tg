@@ -43,8 +43,6 @@
 			-  Removed Limbs
 	-  Simple Mobs
 
-
-
 -  Abilities
 	-  Need to adjust /datum/extensions to /datum/action
 
