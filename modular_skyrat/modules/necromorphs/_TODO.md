@@ -23,6 +23,8 @@
 	-  Wallrun
 	-  Ventcrawling
 		- Time to make bigger vents ideally with support for people climbing.
+		- Global Var to Enable people ventcrawling
+		- Faction Checker to enable vent crawling
 	-  Biomass
 	-  Dismemberment
 		-  Death on limb removal 
@@ -46,42 +48,72 @@
 -  Abilities
 	-  Need to adjust /datum/extensions to /datum/action
 
--  Corruption / Growth
-	-  Mechanics
-		-  Movement Slowdown
-	-  Sprites
-		-  Need to add animation to the sprite. 
-		-  Need damaged states.
-		-  Needs Edge state overlay.
-		-  Needs wall state overlay
-		-  Need vent, door overlay.
-		-  Need to add slow opacity forming
-		-  Need to add early stage vine- like growth
-	-  Sounds
-		-  Growth Sounds
 
--  Marker (Player)
-	-  Need to finalize all marker extra structures
-	-  Need Necroshop
-	-  Needs abilities
-	-  Needs Signals
-	-  Blob Code
-		-  Needs to be refactored specifically for Necromorph Master
-		-  Remove all prior reference to blob.
-		-  Biomass generation 
-	- Engine Status
-		- Containment
-		- Power Generation
-		- Required
-			- R&D
-				- Can operate the activation and management tools.
-			- Engineering
-				- Can build the containment system.
-		- Causes hallucinations.
 
+- Marker Gamemode (Player Controlled)
+
+	- Link the Gamemode Marker to the Blob Marker Core, When active, the marker should act as the blob core and continue.  It shouldnt just appear like blob can. It requires the machine/obj form to trigger, the AI Core can have more options. The player controlled should be more of a gamemode then random event. 
+		- On activation whether by the timer, or by admin, it should poll ghost to find someone to be the master. If no master can be found, then it should remain dormant resetting its activation timer. 
+		- Requires spawn points on map creation, whether it can spawn as one of the following
+			- Lavaland Loot
+			- Station Storage
+			- Station Engine
+			- Cargo Crate
+			- Shard Spawn
+			- Construction
+		- Needs to be able to move before activation.
+			- Once activated it is anchored and can no longer move.
+
+	-  Marker[Master] (Player)
+		-  Need to finalize all marker extra structures
+		-  Need Necroshop
+		-  Needs abilities
+		-  Needs Signals
+		-  Blob Code
+			-  Needs to be refactored specifically for Necromorph Master
+			-  Remove all prior reference to blob.
+			-  Biomass generation 
+		- Engine Status
+			- Containment
+			- Power Generation
+			- Required
+				- R&D
+					- Can operate the activation and management tools.
+				- Engineering
+					- Can build the containment system.
+			- Causes hallucinations.
+		
+		- Admin Controls
+			- Activate
+			- Deactivate
+			- Toggle Activation Timer
+			- Set Timer
+				- Adjust Timer
+			- Change Biomass
+			- Max number of Necromorphs
+
+	-  Corruption / Growth
+		-  Mechanics
+			-  Movement Slowdown
+			- Necromorph Spawn points
+		-  Sprites
+			-  Need to add animation to the sprite. 
+			-  Need damaged states.
+			-  Needs Edge state overlay.
+			-  Needs wall state overlay
+			-  Need vent, door overlay.
+			-  Need to add slow opacity forming
+			-  Need to add early stage vine- like growth
+		-  Sounds
+			-  Growth Sounds
+		- Statistics
+			- Growth Tracking
+			- Structure Tracking
+			
 
 -  Marker (AI)
 	-  Need to finalize all marker extra structures
+	- Create Marker shard version, that can trigger a minor outbreak similar to the blob core setup now. 
 
 
 ideally you'd want to get rid of the human subtype
