@@ -8590,6 +8590,21 @@
 	},
 /turf/open/floor/iron/grimy,
 /area/service/chapel/office)
+"bwU" = (
+/obj/structure/destructible/cult/item_dispenser/archives,
+/obj/item/book/codex_gigas,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/service/library)
 "bwY" = (
 /obj/structure/closet/wardrobe/botanist,
 /obj/effect/decal/cleanable/dirt,
@@ -10218,30 +10233,31 @@
 /area/security/detectives_office)
 "bJh" = (
 /obj/structure/closet/secure_closet/detective,
-/obj/item/clothing/head/fedora/det_hat{
-	icon_state = "curator"
+/obj/item/tape,
+/obj/item/tape,
+/obj/item/tape,
+/obj/item/taperecorder,
+/obj/item/folder/yellow{
+	name = "Detective's Findings"
 	},
-/obj/item/clothing/suit/det_suit{
-	icon_state = "curator"
+/obj/item/clothing/glasses/sunglasses,
+/obj/item/camera/detective,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
 	},
-/obj/item/clothing/under/rank/security/detective,
-/obj/structure/cable,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
+/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/security/detectives_office)
 "bJi" = (
 /obj/structure/table/wood,
 /obj/item/book/manual/wiki/security_space_law,
-/obj/item/camera/detective,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -10256,7 +10272,6 @@
 /area/security/detectives_office)
 "bJj" = (
 /obj/structure/table/wood,
-/obj/item/taperecorder,
 /obj/item/restraints/handcuffs,
 /obj/structure/cable,
 /obj/effect/turf_decal/tile/neutral{
@@ -11097,6 +11112,7 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
+/obj/item/gun/grenadelauncher,
 /turf/open/floor/iron/dark,
 /area/ai_monitored/security/armory)
 "bNu" = (
@@ -11505,24 +11521,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/ai_monitored/security/armory)
-"bPA" = (
-/obj/structure/closet/secure_closet/contraband/armory,
-/obj/machinery/light/directional/east,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
-/obj/item/gun/ballistic/rifle/boltaction,
-/obj/effect/spawner/random/maintenance/three,
-/obj/effect/spawner/random/contraband/armory,
-/turf/open/floor/iron/dark,
-/area/ai_monitored/security/armory)
 "bPC" = (
 /turf/closed/wall/r_wall,
 /area/ai_monitored/turret_protected/aisat_interior)
@@ -11815,28 +11813,6 @@
 /area/ai_monitored/security/armory)
 "bRw" = (
 /obj/structure/rack,
-/obj/item/clothing/suit/armor/vest{
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/clothing/suit/armor/vest,
-/obj/item/clothing/suit/armor/vest{
-	pixel_x = 3;
-	pixel_y = -3
-	},
-/obj/item/clothing/head/helmet{
-	layer = 3.00001;
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/clothing/head/helmet{
-	layer = 3.00001
-	},
-/obj/item/clothing/head/helmet{
-	layer = 3.00001;
-	pixel_x = 3;
-	pixel_y = -3
-	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -11846,6 +11822,24 @@
 	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
+	},
+/obj/item/clothing/head/helmet/sec{
+	pixel_x = -3;
+	pixel_y = 3
+	},
+/obj/item/clothing/head/helmet/sec,
+/obj/item/clothing/head/helmet/sec{
+	pixel_x = 3;
+	pixel_y = -3
+	},
+/obj/item/clothing/suit/armor/vest/security{
+	pixel_x = 3;
+	pixel_y = -3
+	},
+/obj/item/clothing/suit/armor/vest/security,
+/obj/item/clothing/suit/armor/vest/security{
+	pixel_x = -3;
+	pixel_y = 3
 	},
 /turf/open/floor/iron/dark,
 /area/ai_monitored/security/armory)
@@ -12159,6 +12153,14 @@
 	dir = 8
 	},
 /obj/machinery/airalarm/directional/west,
+/obj/item/stamp/denied{
+	pixel_x = 8;
+	pixel_y = 6
+	},
+/obj/item/stamp{
+	pixel_x = 8;
+	pixel_y = 2
+	},
 /turf/open/floor/iron/dark,
 /area/security/warden)
 "bTh" = (
@@ -12180,25 +12182,6 @@
 /turf/open/floor/iron/dark,
 /area/security/warden)
 "bTi" = (
-/obj/structure/rack,
-/obj/item/storage/box/rubbershot{
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/storage/box/rubbershot{
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/storage/box/rubbershot,
-/obj/item/storage/box/rubbershot,
-/obj/item/storage/box/rubbershot{
-	pixel_x = 3;
-	pixel_y = -3
-	},
-/obj/item/storage/box/rubbershot{
-	pixel_x = 3;
-	pixel_y = -3
-	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -12210,6 +12193,7 @@
 	dir = 8
 	},
 /obj/machinery/firealarm/directional/west,
+/obj/machinery/flasher/portable,
 /turf/open/floor/iron/dark,
 /area/ai_monitored/security/armory)
 "bTk" = (
@@ -12632,7 +12616,6 @@
 /turf/open/floor/iron/dark,
 /area/security/warden)
 "bVp" = (
-/obj/vehicle/ridden/secway,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -12643,7 +12626,11 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
-/obj/item/key/security,
+/obj/structure/closet/ammunitionlocker/useful,
+/obj/item/storage/box/lethalshot,
+/obj/item/storage/box/lethalshot,
+/obj/item/storage/box/lethalshot,
+/obj/item/storage/box/lethalshot,
 /turf/open/floor/iron/dark,
 /area/ai_monitored/security/armory)
 "bVr" = (
@@ -13952,7 +13939,6 @@
 /area/security/warden)
 "cbF" = (
 /obj/structure/closet/secure_closet/warden,
-/obj/item/clothing/under/rank/security/warden/grey,
 /obj/effect/turf_decal/tile/red,
 /obj/effect/turf_decal/tile/red{
 	dir = 4
@@ -13960,6 +13946,7 @@
 /obj/effect/turf_decal/tile/red{
 	dir = 8
 	},
+/obj/item/gun/energy/laser,
 /turf/open/floor/iron/dark,
 /area/security/warden)
 "cbG" = (
@@ -13977,6 +13964,7 @@
 	name = "Armoury Access";
 	req_access_txt = "3"
 	},
+/obj/item/key/security,
 /turf/open/floor/iron/dark,
 /area/ai_monitored/security/armory)
 "cbI" = (
@@ -13984,6 +13972,7 @@
 /obj/effect/turf_decal/tile/red{
 	dir = 8
 	},
+/mob/living/simple_animal/bot/secbot/beepsky/armsky,
 /turf/open/floor/iron/dark,
 /area/ai_monitored/security/armory)
 "cbJ" = (
@@ -41420,25 +41409,6 @@
 /obj/structure/dresser,
 /turf/open/floor/iron/grimy,
 /area/commons/dorms)
-"fQj" = (
-/obj/structure/rack,
-/obj/item/restraints/handcuffs,
-/obj/item/restraints/handcuffs,
-/obj/item/restraints/handcuffs,
-/obj/item/assembly/flash/handheld,
-/obj/structure/cable,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
-/turf/open/floor/iron/dark,
-/area/space)
 "fQp" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -42089,6 +42059,15 @@
 	dir = 8
 	},
 /obj/structure/rack/gunrack,
+/obj/item/gun/energy/disabler{
+	pixel_x = 3;
+	pixel_y = -3
+	},
+/obj/item/gun/energy/disabler,
+/obj/item/gun/energy/disabler{
+	pixel_x = -3;
+	pixel_y = 3
+	},
 /turf/open/floor/iron/dark,
 /area/ai_monitored/security/armory)
 "fZP" = (
@@ -50898,6 +50877,24 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/security/brig)
+"iFP" = (
+/obj/structure/closet/secure_closet/contraband/armory,
+/obj/machinery/light/directional/east,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/obj/item/gun/ballistic/rifle/boltaction,
+/obj/effect/spawner/random/maintenance/three,
+/obj/effect/spawner/random/contraband/armory,
+/turf/open/floor/iron/dark,
+/area/ai_monitored/security/armory)
 "iFY" = (
 /obj/structure/chair/office{
 	dir = 1
@@ -55436,6 +55433,13 @@
 /obj/machinery/bluespace_vendor/directional/north,
 /turf/open/floor/iron,
 /area/hallway/primary/central/aft)
+"jZH" = (
+/obj/structure/destructible/cult/item_dispenser/archives,
+/obj/effect/decal/cleanable/cobweb,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/plating,
+/area/service/library/abandoned)
 "jZK" = (
 /obj/structure/window/reinforced{
 	dir = 8
@@ -56024,24 +56028,6 @@
 	},
 /turf/open/floor/iron/grimy,
 /area/commons/dorms)
-"khq" = (
-/obj/structure/table/reinforced,
-/obj/item/paper_bin,
-/obj/item/pen,
-/obj/structure/reagent_dispensers/wall/peppertank/directional/south,
-/obj/machinery/light/small/directional/west,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
-/turf/open/floor/iron/dark,
-/area/space)
 "khr" = (
 /obj/effect/turf_decal/tile/yellow{
 	dir = 4
@@ -63549,11 +63535,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/security/prison)
-"miv" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/structure/cable,
-/turf/open/floor/plating,
-/area/space)
 "mix" = (
 /obj/structure/table_frame,
 /obj/effect/decal/cleanable/dirt,
@@ -63880,26 +63861,6 @@
 /obj/machinery/computer/cargo,
 /turf/open/floor/iron,
 /area/cargo/storage)
-"mnH" = (
-/obj/structure/table/reinforced,
-/obj/item/storage/box/bodybags{
-	pixel_x = 3;
-	pixel_y = 3
-	},
-/obj/item/storage/box/prisoner,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
-/obj/structure/extinguisher_cabinet/directional/south,
-/turf/open/floor/iron/dark,
-/area/space)
 "mnM" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/disposalpipe/segment{
@@ -66538,21 +66499,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/command/heads_quarters/ce)
-"nbt" = (
-/obj/structure/destructible/cult/item_dispenser/archives,
-/obj/item/book/codex_gigas,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
-/turf/open/floor/iron/dark,
-/area/service/library)
 "nbv" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -81309,13 +81255,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/wood,
 /area/command/meeting_room/council)
-"qXG" = (
-/obj/structure/destructible/cult/item_dispenser/archives,
-/obj/effect/decal/cleanable/cobweb,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/blood/old,
-/turf/open/floor/plating,
-/area/service/library/abandoned)
 "qXO" = (
 /obj/machinery/camera/directional/north{
 	c_tag = "Atmospherics - Aft";
@@ -87433,6 +87372,17 @@
 /turf/open/floor/iron/grimy,
 /area/service/library/abandoned)
 "sIg" = (
+/obj/vehicle/ridden/secway,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
 /obj/machinery/computer/security/telescreen/entertainment/directional/south,
 /obj/effect/turf_decal/tile/red{
 	dir = 8
@@ -90312,13 +90262,15 @@
 /area/medical/medbay/central)
 "tAc" = (
 /obj/structure/closet/secure_closet/detective,
-/obj/item/clothing/head/fedora/det_hat{
-	icon_state = "curator"
+/obj/item/tape,
+/obj/item/tape,
+/obj/item/tape,
+/obj/item/taperecorder,
+/obj/item/folder/yellow{
+	name = "Detective's Findings"
 	},
-/obj/item/clothing/suit/det_suit{
-	icon_state = "curator"
-	},
-/obj/item/clothing/under/rank/security/detective,
+/obj/item/clothing/glasses/sunglasses,
+/obj/item/camera/detective,
 /turf/open/floor/carpet,
 /area/security/detectives_office)
 "tAu" = (
@@ -92335,9 +92287,6 @@
 	},
 /turf/open/floor/iron,
 /area/security/brig)
-"udC" = (
-/turf/closed/wall,
-/area/space)
 "udD" = (
 /obj/machinery/light/directional/west,
 /obj/effect/turf_decal/tile/neutral{
@@ -138326,7 +138275,7 @@ lVS
 elW
 fHw
 ert
-qXG
+jZH
 oof
 ewK
 reb
@@ -139557,7 +139506,7 @@ fVp
 qGH
 nJo
 ssD
-nbt
+bwU
 pAm
 nJo
 tHl
@@ -161124,7 +161073,7 @@ aaa
 aad
 bLs
 bNt
-bPA
+iFP
 bRw
 bTk
 bVr
@@ -168811,8 +168760,8 @@ aaa
 aaa
 aaa
 aaa
-khq
-eMf
+aaa
+aaa
 aaa
 aaa
 aaa
@@ -169068,8 +169017,8 @@ aaa
 aaa
 aaa
 aaa
-fQj
-miv
+aaa
+aaa
 aaa
 aaa
 aaa
@@ -169325,8 +169274,8 @@ aaa
 aaa
 aaa
 aaa
-mnH
-eMf
+aaa
+aaa
 aaa
 aaa
 aaa
@@ -169582,8 +169531,8 @@ aaa
 aaa
 aaa
 aaa
-udC
-eMf
+aaa
+aaa
 aaa
 aaa
 aaa
