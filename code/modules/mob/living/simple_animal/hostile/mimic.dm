@@ -1,7 +1,7 @@
 /mob/living/simple_animal/hostile/mimic
 	name = "crate"
 	desc = "A rectangular steel crate."
-	icon = 'icons/obj/crates.dmi'
+	icon = 'modular_skyrat/modules/aesthetics/crates/icons/crates.dmi'
 	icon_state = "crate"
 	icon_living = "crate"
 
@@ -107,7 +107,7 @@ GLOBAL_LIST_INIT(mimic_blacklist, list(/obj/structure/table, /obj/structure/cabl
 	var/mob/living/creator = null // the creator
 	var/destroy_objects = 0
 	var/knockdown_people = 0
-	var/static/mutable_appearance/googly_eyes = mutable_appearance('icons/mob/mob.dmi', "googly_eyes")
+	var/static/mutable_appearance/googly_eyes = mutable_appearance('modular_skyrat/modules/aesthetics/crates/icons/crates.dmi', "googly_eyes")
 	var/overlay_googly_eyes = TRUE
 	var/idledamage = TRUE
 
