@@ -35,7 +35,6 @@
 		"micro_mani",
 		"oven_tray",
 		"packagewrap",
-		"paystand",
 		"plasmaglass",
 		"plasmareinforcedglass",
 		"plasteel",
@@ -248,6 +247,7 @@
 		"comp_decimal_convert",
 		"comp_delay",
 		"comp_direction",
+		"comp_element_find",
 		"comp_filter_list",
 		"comp_foreach",
 		"comp_get_column",
@@ -262,8 +262,11 @@
 		"comp_index_table",
 		"comp_length",
 		"comp_light",
-		"comp_list_literal",
+		"comp_list_add",
 		"comp_list_assoc_literal",
+		"comp_list_clear",
+		"comp_list_literal",
+		"comp_list_remove",
 		"comp_logic",
 		"comp_matscanner",
 		"comp_mmi",
@@ -839,16 +842,6 @@
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
 
-/datum/techweb_node/dex_robotics
-	id = "dex_robotics"
-	display_name = "Dexterous Robotics Research"
-	description = "The fine art of opposable thumbs."
-	prereq_ids = list("adv_engi", "adv_robotics", "biotech")
-	design_ids = list(
-		"maint_drone",
-	)
-	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
-
 /datum/techweb_node/neural_programming
 	id = "neural_programming"
 	display_name = "Neural Programming"
@@ -1176,7 +1169,7 @@
 		"dna_disk",
 		"dnascanner",
 		"scan_console",
-		"oc_donut_steel_restoration_device", // SKYRAT EDIT ADDITION: Added the Self-Actualization Device
+		"self_actualization_device", // SKYRAT EDIT ADDITION: Added the Self-Actualization Device
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
 
@@ -2087,6 +2080,14 @@
 
 /datum/techweb_node/syndicate_basic/New() //Crappy way of making syndicate gear decon supported until there's another way.
 	. = ..()
+	if(!SStraitor.initialized)
+		RegisterSignal(SStraitor, COMSIG_SUBSYSTEM_POST_INITIALIZE, .proc/register_uplink_items)
+	else
+		register_uplink_items()
+
+/datum/techweb_node/syndicate_basic/proc/register_uplink_items()
+	SIGNAL_HANDLER
+	UnregisterSignal(SStraitor, COMSIG_SUBSYSTEM_POST_INITIALIZE)
 	boost_item_paths = list()
 	for(var/datum/uplink_item/item_path as anything in SStraitor.uplink_items_by_type)
 		var/datum/uplink_item/item = SStraitor.uplink_items_by_type[item_path]
@@ -2181,6 +2182,18 @@
 	design_ids = list(
 		"tackle_dolphin",
 		"tackle_rocket",
+	)
+	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
+	hidden = TRUE
+	experimental = TRUE
+
+/datum/techweb_node/mod_experimental
+	id = "mod_experimental"
+	display_name = "Experimental Modular Suits"
+	description = "Applications of experimentality when creating MODsuits has created these..."
+	prereq_ids = list("base")
+	design_ids = list(
+		"mod_disposal",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
 	hidden = TRUE
