@@ -5211,7 +5211,6 @@
 #include "modular_skyrat\modules\necromorphs\code\modules\mob\living\abilities\leaper_tailstrike.dm"
 #include "modular_skyrat\modules\necromorphs\code\modules\mob\living\abilities\wallrun.dm"
 #include "modular_skyrat\modules\necromorphs\code\modules\mob\living\abilities\resource\resource.dm"
-#include "modular_skyrat\modules\necromorphs\code\modules\mob\living\carbon\carbon_defines.dm"
 #include "modular_skyrat\modules\necromorphs\code\modules\mob\living\carbon\bodyparts\head.dm"
 #include "modular_skyrat\modules\necromorphs\code\modules\mob\living\carbon\bodyparts\necromorph_bodyparts.dm"
 #include "modular_skyrat\modules\necromorphs\code\modules\mob\living\carbon\human\species\species.dm"
