@@ -142,7 +142,7 @@
 		if (L == target)
 			return L
 
-		if (L.is_lying)
+		if (L.body_position == LYING_DOWN)
 			possible += L
 		else
 			possible_standing += L
