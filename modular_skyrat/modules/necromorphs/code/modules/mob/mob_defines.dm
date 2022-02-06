@@ -66,3 +66,15 @@
 		found |= E
 
 	return found
+
+
+/mob/living/carbon/human/proc/has_organ(name)
+	var/obj/item/organ/external/O = organs_by_name[name]
+	return (O && !O.is_stump())
+
+
+/mob/living/carbon/human/proc/has_organ_or_replacement(var/organ_tag)
+	if (organ_tag in species.organ_substitutions)
+		organ_tag = species.organ_substitutions[organ_tag]
+
+	return has_organ(organ_tag)

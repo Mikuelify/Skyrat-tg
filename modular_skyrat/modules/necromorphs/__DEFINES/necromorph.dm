@@ -1,3 +1,12 @@
+// Darkvision Levels these are inverted from normal so pure white is the darkest
+// possible and pure black is none
+#define DARKTINT_NONE      "#ffffff"
+#define DARKTINT_POOR  		"#cccccc"
+#define DARKTINT_MODERATE      "#aaaaaa"
+#define DARKTINT_GOOD			"#8C8C8C"
+#define DARKTINT_EXCEPTIONAL	"#666666"
+
+
 // Colors
 #define COLOR_KINESIS_INDIGO	"#4d59db"
 #define COLOR_KINESIS_INDIGO_PALE	"#9fa6f5"
@@ -150,6 +159,7 @@ variants = list();
 #define BP_HEAD   "head"
 #define BP_CHEST  "chest"
 #define BP_GROIN  "groin"
+#define BP_TAIL   "tail"
 #define BP_UPPER_BODY	list(BP_CHEST, BP_HEAD, BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND)	//Everything above the waist
 #define BP_LOWER_BODY	list(BP_GROIN, BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT, BP_TAIL)	//Everything below	 the waist
 #define BP_ALL_LIMBS list(BP_CHEST, BP_GROIN, BP_HEAD, BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT, BP_TAIL)

@@ -224,3 +224,185 @@ Brute will be forced into a reflexive curl under certain circumstances, but it c
 		var/mob/living/carbon/human/H = src
 		H.play_species_audio(H, SOUND_SHOUT, VOLUME_HIGH, 1, 3)
 */
+
+/*
+/*
+	Brute punch, heavy damage, slow
+*/
+/datum/unarmed_attack/punch/brute
+	name = "Heavy punch"
+	desc = "A powerful punch that hits like a truck. Human-sized creatures will be sent flying and stunnned. Deals massive damage to airlocks and structures."
+	delay = 25
+	damage = 28
+	airlock_force_power = 5
+	airlock_force_speed = 2.5
+	structure_damage_mult = 2.5	//Wrecks obstacles
+	shredding = TRUE //Better environment interactions, even if not sharp
+
+//Brute punch causes knockback on any mob smaller than itself
+/datum/unarmed_attack/punch/brute/apply_effects(var/datum/strike/strike)
+	if (istype(strike.target, /atom/movable))
+		var/mob/living/carbon/human/user = strike.user
+		var/atom/movable/AM = strike.target
+		AM.apply_push_impulse_from(strike.user, user.mass, 0)
+		return TRUE
+
+	//Return parent as a fallback if something went wrong
+	return ..()
+
+
+/*
+	Brute Armor
+*/
+
+//The brute takes less damage from front and side attacks.
+/datum/species/necromorph/brute/handle_organ_external_damage(var/obj/item/organ/external/organ, brute, burn, damage_flags, used_weapon)
+	//First of all, we need to figure out where the attack is coming from
+	var/atom/source
+	var/penetration = 0
+	if (isatom(used_weapon))	//Its possible used weapon might be a string, useless to us
+
+		source = get_turf(used_weapon)
+
+		if (isitem(used_weapon))
+			var/obj/item/I = used_weapon
+			penetration = I.armor_penetration
+
+
+	if (!source)
+		return ..() //If we can't figure out where the attack came from, we'll just let it through
+
+	//Now that we know where it came from, lets figure out who we are
+	var/mob/living/L = organ.owner
+
+	//If its a projectile inour turf, we'll check the turf it came from instead
+	if (isprojectile(used_weapon))
+		var/obj/item/projectile/P = used_weapon
+		if (P.loc == L.loc)
+			source = get_turf(P.last_loc)
+
+	//Lastly, if the source is ourselves, or on the same tile as us, we'll let it through
+	if (used_weapon == L || source == L.loc)
+		return ..()
+
+	//Now lets check if we're curled up
+	var/curled = FALSE
+	var/datum/extension/curl/E = get_extension(L, /datum/extension/curl)
+	if(istype(E) && E.status == 2) //Status 2 is curled up
+		curled = TRUE
+
+	//Ok, how much can we take off this damage
+	var/reduction = 0
+
+	//First of all lets factor in the possibility of the hit striking a gap in our armor
+	//Note: The gaps are covered up when curled
+	if (curled || prob(armor_coverage))
+		if (target_in_frontal_arc(L, source, 45)) //If its within 45 degrees, we use front armor
+			reduction = armor_front
+		else if (target_in_frontal_arc(L, source, 90)) //If its >45 but within 90, we use the weaker flank armor
+			reduction = armor_flank
+
+		if (curled)
+			reduction *= curl_armor_mult
+
+	//Armor penetration on attacks goes through the armor
+	reduction -= penetration
+
+	if (!reduction)
+		//The target must be behind us or hit a gap, the attack will go through unhindered
+		if(!curled && L.curl_ability(_automatic = TRUE, _force_time = 5 SECONDS))
+			to_chat(L, SPAN_DANGER("You reflexively curl up in panic"))
+		return ..()
+
+	//Ok lets reduce that damage!
+	//Brute first
+	if (brute > 0)
+		var/minus = min(reduction, brute)
+		brute -= minus
+		reduction -= minus
+	//Then burn if theres any
+	if (burn > 0 && reduction > 0)
+		var/minus = min(reduction, burn)
+		burn -= minus
+		reduction -= minus
+
+	//Now lets see if we got it all
+	if (burn <= 0 && brute <= 0)
+		//We blocked it! Lets do any effects related to bouncing off
+		handle_armor_bounceoff(L, used_weapon)
+
+	return ..()
+
+//Brute armor does various neat effects if it fully blocks a hit
+/datum/species/necromorph/brute/proc/handle_armor_bounceoff(var/mob/user, var/atom/A)
+	if (isprojectile(A))
+		//Projectiles will ricochet off in a random direction
+		var/obj/item/projectile/P = A
+		P.last_result = PROJECTILE_DEFLECT
+		return
+
+	//Mobs striking the armor with melee attacks will be rattled
+	var/mob/living/M
+	if (ismob(A))
+		M=A
+	else
+		M = A.get_holding_mob()
+
+	if (M)
+		//We found a mob
+		M.Stun(3)
+		M.shake_animation(40)
+		shake_camera(M, duration = 4 SECONDS, strength = 5)
+		return
+
+/datum/species/necromorph/brute/make_scary(mob/living/carbon/human/H)
+	//H.set_traumatic_sight(TRUE, 5) //All necrmorphs are scary. Some are more scary than others though
+
+
+
+/*
+	Bio-bomb
+*/
+/mob/living/carbon/human/proc/biobomb(var/atom/A)
+	set name = "Bio-bomb"
+	set category = "Abilities"
+	set desc = "A moderate-strength projectile for longrange shooting. HK: Middleclick"
+
+	//Don't do anything unless we're sure we can fire
+	if (!can_shoot(FALSE))
+		return
+
+	var/firesound = pick(list('sound/effects/creatures/necromorph/cyst/cyst_fire_1.ogg',
+	'sound/effects/creatures/necromorph/cyst/cyst_fire_2.ogg',
+	'sound/effects/creatures/necromorph/cyst/cyst_fire_3.ogg',
+	'sound/effects/creatures/necromorph/cyst/cyst_fire_4.ogg'))
+
+	face_atom(A)
+	.= shoot_ability(/datum/extension/shoot/brute_biobomb, A , /obj/item/projectile/bullet/biobomb/weak, accuracy = 50, dispersion = 0, num = 1, windup_time = 1.25 SECONDS, fire_sound = firesound, nomove = 2 SECOND, cooldown = 12 SECONDS)
+	if (.)
+		play_species_audio(src, SOUND_ATTACK, VOLUME_MID, 1, 3)
+
+
+/datum/extension/shoot/brute_biobomb/windup_animation()
+	var/mob/living/L = user
+	var/x_direction
+	if (target.x > L.x)
+		x_direction = 1
+	else if (target.x < L.x)
+		x_direction = -1
+
+
+	//We do the windup animation. This involves the user slowly rising into the air, and tilting back if striking horizontally
+	animate(L, transform=turn(matrix(), L.default_rotation + (25*(x_direction*-1))),pixel_x = L.default_pixel_x + 8*(x_direction*-1), time = windup_time, flags = ANIMATION_PARALLEL)
+	sleep(windup_time)
+
+/datum/extension/shoot/brute_biobomb/fire_animation()
+	spawn(4)
+		var/mob/living/L = user
+		animate(L, transform=L.get_default_transform(),pixel_x = L.default_pixel_x, time = 0.8 SECOND, flags = ANIMATION_PARALLEL)
+
+/obj/item/projectile/bullet/biobomb/weak
+	blast_power = BRUTE_BIOBOMB_BLAST_DAMAGE
+	damage = BRUTE_BIOBOMB_IMPACT_DAMAGE
+
+*/

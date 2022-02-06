@@ -7,6 +7,9 @@
 	-  Kinesis support to remove limbs
 	-  Necromorphs die if all limbs are removed
 
+
+- Replace /datum/extension with /datum/component
+
 - Flavor Items
 	- Newscaster Reports
 	- Paperwork / Documents
@@ -92,6 +95,9 @@
 			- Change Biomass
 			- Max number of Necromorphs
 
+		- Refactor / Remove
+			- Remove all reference to multiple blob strains and blobs from the marker. The marker does not need the functionality of blobstrains nor does it need that hard coded it. The controller should act regardless of any future variations of the marker.
+
 	-  Corruption / Growth
 		-  Mechanics
 			-  Movement Slowdown
@@ -109,7 +115,7 @@
 		- Statistics
 			- Growth Tracking
 			- Structure Tracking
-			
+
 
 -  Marker (AI)
 	-  Need to finalize all marker extra structures

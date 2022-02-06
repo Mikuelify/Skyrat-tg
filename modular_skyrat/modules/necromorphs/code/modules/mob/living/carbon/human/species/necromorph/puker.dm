@@ -26,6 +26,28 @@
 	blurb = "A tough and flexible elite who fights by dousing enemies in acid, and is effective at all ranges. Good for crowd control and direct firefights"
 	evasion = -10	//Not agile
 //	unarmed_types = list(/datum/unarmed_attack/claws/puker)
+
+	//Acid has long since burned out its eyes, somehow the puker sees without them
+	//override_organ_types = list(BP_EYES = null)
+	//vision_organ = null
+
+	//The puker has functional arms to grapple with
+	grasping_limbs = list(BP_R_ARM, BP_L_ARM)
+/*
+	mob_type = /mob/living/carbon/human/necromorph/puker
+
+	inherent_verbs = list(/mob/living/proc/puker_snapshot, /mob/living/proc/puker_longshot, /mob/living/carbon/human/proc/puker_vomit, /mob/proc/shout, /mob/proc/shout_long)
+	modifier_verbs = list(KEY_MIDDLE = list(/mob/living/proc/puker_snapshot),
+	KEY_ALT = list(/mob/living/proc/puker_longshot),
+	KEY_CTRLALT = list(/mob/living/carbon/human/proc/puker_vomit))
+
+	//Slightly slow than a slasher
+	slowdown = 3.75
+
+	//This actually determines what clothing we can wear
+	hud_type = /datum/hud_data/necromorph/slasher
+*/
+
 	step_priority = 2
 	step_volume = 10
 

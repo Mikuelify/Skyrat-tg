@@ -103,10 +103,10 @@
 
 	//Lets play a whiplash sound, just before impact
 	spawn(windup_time - 5)
-		playsound(user, pick(list('sound/effects/creatures/necromorph/leaper/leaper_tailswing_1.ogg',
-		'sound/effects/creatures/necromorph/leaper/leaper_tailswing_2.ogg',
-		'sound/effects/creatures/necromorph/leaper/leaper_tailswing_3.ogg',
-		'sound/effects/creatures/necromorph/leaper/leaper_tailswing_4.ogg')), 40, 1, -1)
+		playsound(user, pick(list('modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/leaper/leaper_tailswing_1.ogg',
+		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/leaper/leaper_tailswing_2.ogg',
+		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/leaper/leaper_tailswing_3.ogg',
+		'modular_skyrat/modules/necromorphs/sound/effects/creatures/necromorph/leaper/leaper_tailswing_4.ogg')), 40, 1, -1)
 
 	//Start a timer to do the finishing hit
 	tailstrike_timer = addtimer(CALLBACK(src, .proc/finish), windup_time, TIMER_STOPPABLE)
@@ -130,7 +130,7 @@
 	else
 		victim.ex_act(3)
 
-	user.visible_message(SPAN_DANGER("[user] [attack_verb] [victim] with their tail!"))
+	user.visible_message(span_danger("[user] [attack_verb] [victim] with their tail!"))
 
 //This proc figures out which one thing we will hit in the target turf
 /datum/extension/tailstrike/proc/find_victim(var/turf/search)
@@ -142,7 +142,7 @@
 		if (L == target)
 			return L
 
-		if (L.lying)
+		if (L.is_lying)
 			possible += L
 		else
 			possible_standing += L
@@ -184,7 +184,7 @@
 /datum/extension/tailstrike/proc/stop()
 	deltimer(tailstrike_timer)
 	stopped_at = world.time
-	user.stunned = 0
+	//user.stunned = 0
 
 	//When we finish, we go on cooldown
 	if (cooldown && cooldown > 0)

@@ -195,7 +195,7 @@
 
 		//Removing the head kills the divider's main body
 		//We do a spawn then some checks here to prevent infinite loops
-		spawn(1 SECOND)
+		spawn(1 SECONDS)
 			if (!QDELETED(H) && H.stat != DEAD)
 				H.death()
 

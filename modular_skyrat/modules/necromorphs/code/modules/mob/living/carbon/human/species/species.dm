@@ -80,7 +80,7 @@
 	var/reach = 1	//How many tiles away can this mob grab and hit things. Only partly implemented
 	//Any number of extra arguments allowed. Only key and proc path are mandatory. Default priority is 1 and will be used if none is supplied.
 	//Key must be one of the KEY_XXX defines in defines/client.dm
-
+	var/list/organ_substitutions = list()
 
 
 	var/list/natural_armour_values            // Armour values used if naked.

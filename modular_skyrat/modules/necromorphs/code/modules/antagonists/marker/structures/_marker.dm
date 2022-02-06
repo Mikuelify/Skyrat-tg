@@ -4,6 +4,12 @@
 	TODO: FIX GROWTH COLOR AND ICONS
 	TODO: Growth doesnt take all at once, it has three stages.
 
+	I would like to refactor and split this code into its own structure tree. Old blob code had alot of
+	parenting involved in its structures, creating a challenge with implementing new ones and tracking
+	structures properly as well as allowing individual utilization of them.
+
+	All
+
 */
 
 //I will need to recode parts of this but I am way too tired atm //I don't know who left this comment but they never did come back

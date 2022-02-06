@@ -3,6 +3,12 @@ SUBSYSTEM_DEF(necromorph)
 	init_order = SS_INIT_NECROMORPH	//Initializes before atoms
 	flags = SS_NO_FIRE
 
+	//Player Controlled - Corruption Growth Tracking
+	var/list/corruption_growth = list()
+	var/list/corruption_structures = list()
+
+	//AI Controlled - Corruption Growth Tracking
+
 	//Necromorph Lists
 	var/list/major_vessels = list()	//Necromorphs that need a player to control them. they are inert husks without one.
 	var/list/minor_vessels = list()	//Necromorphs that have AI and don't need a player, but can be possessed anyway if someone wants to do manual control
@@ -15,6 +21,7 @@ SUBSYSTEM_DEF(necromorph)
 
 	//Marker
 	var/obj/machinery/marker/marker
+
 	var/list/marker_spawns_ishimura = list()	//Possible spawn locations aboard ishimura
 	var/list/marker_spawns_aegis = list()	//Possible spawn locations on Aegis VII
 	var/marker_activated_at = 0	//World time when the marker was activated

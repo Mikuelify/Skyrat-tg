@@ -1,3 +1,24 @@
+/*
+	This will become the marker gamemode setup and controller. Its purpose should be to
+	configure, determine and allow the marker to activate. The marker itself should
+	function independly when activated vs in-active. When activated it will start the
+	blob (Master Eye) and enable the marker necromorph features and expansion features.
+	This gamemode will ensure that a marker spawns with the intention of auto activating aboard
+	the station.
+
+	Otherwise, the marker can be found and used without the gamemode activating it. Allowing multiple
+	options for activation.
+		- Automatic (Gamemode)
+		- Player Activated
+		- Staff Spawned and Activated
+	[/obj/machinery/marker] Is not currently the controller of the hordes. All marker player control functions
+	are now under [/obj/structure/marker/special/core] and the antagonist datum.
+
+	Changes to the core will be made later as we ideally want the marker to act as a powersource
+	if maintained properly giving players outside of the consistent DS gameplay more content to use from it
+	while still keeping the inherit risk active.
+
+*/
 
 /*
 	Main gamemode. Marker starts aboard ishimura
