@@ -125,7 +125,7 @@
 	victim.shake_animation(damage)
 	if (isliving(victim))
 		var/mob/living/L = victim
-		user.launch_strike(L, damage, user.get_organ(BP_TAIL), damage_flags = DAM_SHARP | DAM_EDGE)
+		//user.launch_strike(L, damage, user.get_organ(BP_TAIL), damage_flags = DAM_SHARP | DAM_EDGE)
 
 	else
 		victim.ex_act(3)

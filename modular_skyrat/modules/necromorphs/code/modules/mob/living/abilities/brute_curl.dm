@@ -26,9 +26,9 @@
 
 	var/status = 0
 	var/force_time	=	0				//How long are we forced to stay curled up? There should always be a minimum on this to prevent spam. It shouldn't be
-	var/forced_cooldown = 1.5 MINUTE		//After an automatic curl, how long before we can be forced to do it again?
+	var/forced_cooldown = 1.5 MINUTES		//After an automatic curl, how long before we can be forced to do it again?
 	var/automatic = FALSE				//Did we curl up manually or automatically
-	var/animtime = 1 SECOND //How long the animation to curl/uncurl actually takes
+	var/animtime = 1 SECONDS //How long the animation to curl/uncurl actually takes
 
 	//Extra runtime vars
 	var/started_at	=	0				//When did we curl up
@@ -68,7 +68,7 @@
 	//Lets cache some data too
 	cached_pixels = get_new_vector(user.pixel_x, user.pixel_y)
 	cached_transform = user.transform
-	cached_view_range = user.view_range
+	//cached_view_range = user.view_range
 	cached_view_offset = user.view_offset
 
 	user.default_rotation = rotation
@@ -82,9 +82,9 @@
 	animate(user, transform = user.get_default_transform(), pixel_x = user.pixel_x + offset_dir.x, pixel_y = user.pixel_y + offset_dir.y, time = animtime)
 
 	//Reduce the user's vision
-	user.view_range -= 1
-	user.view_offset = 32
-	user.reset_view()
+	//user.view_range -= 1
+	//user.view_offset = 32
+	//user.reset_view()
 
 	user.visible_message("[user] curls up, protecting their front")
 
@@ -120,11 +120,11 @@
 	user.default_rotation = 0
 	user.default_scale = 1
 	animate(user, transform = user.get_default_transform(), pixel_x = cached_pixels.x, pixel_y = cached_pixels.y, time = animtime)
-	user.view_range = cached_view_range
+	//user.view_range = cached_view_range
 	user.view_offset = cached_view_offset
-	user.reset_view()
+	//user.reset_view()
 	spawn(animtime)
-		user.stunned = 0 //The user is now no longer stunned
+		//user.stunned = 0 //The user is now no longer stunned
 		status = FORCE_COOLDOWN
 
 	release_vector(cached_pixels)
@@ -179,7 +179,7 @@
 
 	return FALSE
 
-/atom/movable/proc/curl_ability(var/_automatic = FALSE, var/_force_time = 2 SECONDS, var/_animtime = 0.8 SECOND)
+/atom/movable/proc/curl_ability(var/_automatic = FALSE, var/_force_time = 2 SECONDS, var/_animtime = 0.8 SECONDS)
 	//First of all, uncurling
 	if (can_uncurl())
 		var/datum/extension/curl/E = get_extension(src, /datum/extension/curl)

@@ -3,6 +3,7 @@
 
 /mob
 	var/list/grabbed_by = list()
+	var/view_range = 1
 
 //Returns what percentage of the limbs we use for movement, are still attached
 /mob/living/carbon/human/proc/get_locomotive_limb_percent()

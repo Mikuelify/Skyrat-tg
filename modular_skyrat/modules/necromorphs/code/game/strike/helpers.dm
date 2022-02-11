@@ -21,7 +21,7 @@
 			return null
 		else
 			H.last_attack = world.time
-			H.set_click_cooldown(I.get_delay(H))
+			//H.set_click_cooldown(I.get_delay(H))
 	//user.do_attack_animation(M)
 	var/datum/strike/implement/strike = new /datum/strike/implement(src, target, I)
 	strike.start()
