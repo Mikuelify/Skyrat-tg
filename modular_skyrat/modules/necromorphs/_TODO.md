@@ -51,7 +51,10 @@
 -  Abilities
 	-  Need to adjust /datum/extensions to /datum/action
 
-
+The marker has three current locations in this file. There is a variation in mob/dead/observer/freelook/marker
+The other two are stored in code/modules/antagonists
+Need to decide which version we want to utilize. 
+The gamemode is just there to activate the marker and set tracking for necromorphs. The marker should only be able to activate on station z-level and by random chance or by player interaction. 
 
 - Marker Gamemode (Player Controlled)
 
@@ -70,13 +73,17 @@
 	-  Marker[Master] (Player)
 		-  Need to finalize all marker extra structures
 		-  Need Necroshop
+			- Structures
+			- Upgrades
+			- Necromorph Spawning
 		-  Needs abilities
 		-  Needs Signals
 		-  Blob Code
 			-  Needs to be refactored specifically for Necromorph Master
 			-  Remove all prior reference to blob.
 			-  Biomass generation 
-		- Engine Status
+	
+		- Engine Variation Status
 			- Containment
 			- Power Generation
 			- Required
@@ -121,7 +128,3 @@
 	-  Need to finalize all marker extra structures
 	- Create Marker shard version, that can trigger a minor outbreak similar to the blob core setup now. 
 
-
-ideally you'd want to get rid of the human subtype
-and just have carbons support all functions of humans
-and then have all carbons use species
