@@ -128,3 +128,26 @@ The gamemode is just there to activate the marker and set tracking for necromorp
 	-  Need to finalize all marker extra structures
 	- Create Marker shard version, that can trigger a minor outbreak similar to the blob core setup now. 
 
+
+- SPRITES
+	- MOBS
+		- NECROMORPHS
+			- Brute
+				- Needs individual limbs
+				- 
+	- STRUCTURES
+		- MARKER
+		- CORRUPTION
+			- Growth (Animated)
+				- Wall
+				- Door
+				- Vent
+				- Variants
+					- Heavy Growth
+					- Normal Growth
+					- Light Growth
+					- Seeding
+
+	- OBJECTS
+	- ITEMS
+	- EFFECTS
