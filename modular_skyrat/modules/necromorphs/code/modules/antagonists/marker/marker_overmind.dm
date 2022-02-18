@@ -5,7 +5,7 @@
 	TODO: ADD PROPER STRUCTURES
 	TODO: ADD SIGNAL
 	TODO: ADD OVERMIND ABILITIES
-	TODO: RENAME MARKER OVERMIND to OVERMIND
+	TODO: RENAME MARKER OVERMIND to MASTER
 	TODO: TRACK ALL NECROMORPHS
 		- TRACK ALL SPAWNED & DEAD NECROMORPHS
 
@@ -67,10 +67,6 @@ GLOBAL_LIST_EMPTY(corruption)
 	var/announcement_size = OVERMIND_ANNOUNCEMENT_MIN_SIZE // Announce the biohazard when this size is reached
 	var/announcement_time
 	var/has_announced = FALSE
-
-/mob/camera/marker/verb/shop_verb()
-	set name = "Spawning Menu"
-	set category = SPECIES_NECROMORPH
 
 /mob/camera/marker/Initialize(mapload, starting_points = OVERMIND_STARTING_POINTS)
 	validate_location()
@@ -256,3 +252,50 @@ GLOBAL_LIST_EMPTY(corruption)
 	if(!B)
 		mind.add_antag_datum(/datum/antagonist/marker)
 
+/*
+	Verbs
+*/
+
+
+/mob/camera/marker/verb/shop_verb()
+	set name = "Spawning Menu"
+	set category = SPECIES_NECROMORPH
+
+	SSnecromorph.marker.open_shop(src)
+
+/*
+//Finds out if the passed thing is the marker player.
+//The thing can be a mob, client, or ckey. They will all work
+/proc/is_marker_master(var/check)
+	if (!istype(SSnecromorph.marker) || !SSnecromorph.marker.player)
+		return FALSE	//If theres no marker there cant be a master
+
+	if (istype(check, /mob/dead/observer/eye/signal/master))
+		return TRUE	//If it is the master mob then it is the master mob. We only need to do farther checks in the case of master inhabiting a necromorph
+
+	//This all works on key checking anyways, so lets start by finding the key
+	var/check_key
+	if (ismob(check))
+		var/mob/M = check
+		if (!M.key)
+			//If theres no key its not the master
+			return FALSE
+		check_key = ckey(M.key)
+	else if (ismob(check))
+		var/client/C = check
+		check_key = C.ckey
+	else
+		check_key = ckey(check)
+
+	if (!check_key)
+		return FALSE
+
+	//Okay we have a key, lets see if it matches
+	//Possible future todo: Support for multiple markers here. For now, just one
+	if (SSnecromorph.marker.player == check_key)
+		//It matches! At last,
+		return TRUE
+
+	else
+		return FALSE
+*/

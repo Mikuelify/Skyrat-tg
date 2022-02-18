@@ -31,15 +31,39 @@
 
 /*
 	Alternate Gamemode: Marker starts on aegis, unitologists start with a shard
-*/
 
 /datum/game_mode/marker/enemy_within
+	name = "Enemy Within"
+	round_description = "The USG Ishimura has discovered a strange artifact on Aegis VII, but it is not whole. Some piece of it has been broken off and smuggled aboard"
+	extended_round_description = "The crew must holdout until help arrives"
+	config_tag = "enemy_within"
+	votable = TRUE
+	antag_tags = list(MODE_UNITOLOGIST_SHARD, MODE_EARTHGOV_AGENT)
+	latejoin_antag_tags = list(MODE_UNITOLOGIST_SHARD)
 
 /datum/game_mode/marker/enemy_within/get_marker_location()
-	return
+	return pick(SSnecromorph.marker_spawns_aegis)
+
+*/
+
 /datum/game_mode/marker
+	// name = "unnamed"
+	// round_description = "The USG Ishimura has unearthed a strange artifact and is tasked with discovering what its purpose is."
+	// extended_round_description = "The crew must holdout until help arrives"
+	// config_tag = "unnamed"
+	// required_players = 0
+	// required_enemies = 0
+	// end_on_antag_death = 0
+	// round_autoantag = TRUE
+	// auto_recall_shuttle = FALSE
+	// antag_tags = list(MODE_UNITOLOGIST, MODE_EARTHGOV_AGENT)
+	// latejoin_antag_tags = list(MODE_UNITOLOGIST, MODE_EARTHGOV_AGENT)
+	// antag_templates = list(/datum/antagonist/unitologist, /datum/antagonist/earthgov_agent)
+	// require_all_templates = FALSE
+	// votable = FALSE
 	var/marker_setup_time = 60 MINUTES
 	var/marker_active = FALSE
+	//antag_scaling_coeff = 8
 
 	//Auto End condition stuff. To make the round auto end when necromorphs kill everyone
 
@@ -127,6 +151,11 @@ Non-critical characters like any ghost-roles you may wish to add, or even antags
 
 //Marker gamemode can end when necros kill most of the crew
 /datum/game_mode/marker/check_finished()
-	//if(marker_active)	//Marker must be active
+	if(marker_active)	//Marker must be active
+		if (get_historic_crew_total() >= minimum_historic_crew)	//We need to have had a minimum total crewcount
+			var/minimum_living_crew = Ceiling(get_historic_crew_total() * minimum_alive_percentage)	//This many crew players at least, need to be left alive
+			if (get_living_active_crew_aboard_ship() < minimum_living_crew)
+				return TRUE
 
 	return ..() //Fallback to the default game end conditions like all antags dying, shuttles being docked, etc.
+

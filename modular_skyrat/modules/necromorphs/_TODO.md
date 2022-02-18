@@ -6,7 +6,7 @@
 -  Add Dismemberment
 	-  Kinesis support to remove limbs
 	-  Necromorphs die if all limbs are removed
-
+-  Biomass Needs its own system all organic objects have biomass
 
 - Replace /datum/extension with /datum/component
 
